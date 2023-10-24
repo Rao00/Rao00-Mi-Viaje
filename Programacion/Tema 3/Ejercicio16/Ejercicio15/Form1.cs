@@ -21,13 +21,16 @@ namespace Ejercicio15
         private void bInputBox_Click(object sender, EventArgs e)
         {
             int salida = 0;
-            int numeroUsuario = int.Parse(Interaction.InputBox("Introduce un numero entre 1 y 9", "Numero del usuario", "Introduce un numero")); ;
-            while (numeroUsuario>=0 && numeroUsuario<=9)
+            for (int i = 1; i=<5; i++)
             {
-                salida += numeroUsuario;
-                numeroUsuario = int.Parse(Interaction.InputBox("Introduce un numero entre 1 y 9", "Numero del usuario", "Introduce un numero"));
+                int nombreUsuario = int.Parse(Interaction.InputBox("Introduce tu usuario", "Nombre del usuario", "Introduce un usuario"));
+                int passUsuario = int.Parse(Interaction.InputBox("Introduce tu contraseña", "Contraseña del usuario", "Introduce una contraseña"));
+                if (nombreUsuario == "root" && passUsuario == "1234")
+                {
+                    break;
+                }
             }
-            MessageBox.Show("Suma total = "+salida);
+                
         }
     }
 }
