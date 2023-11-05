@@ -2,7 +2,7 @@ name: Push Programado
 
 on:
   schedule:
-    - cron: '0 0,14,21 * * *' # Ejecutar a medianoche (0), 2:30 PM (14), y 9 PM (21) en UTC
+    - cron: '0 0,13,20 * * *' # Ejecutar a medianoche (0), 2:30 PM (14), y 9 PM (21) en UTC
 
 jobs:
   push:
