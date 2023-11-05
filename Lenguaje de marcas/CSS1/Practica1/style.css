@@ -1,0 +1,43 @@
+body{
+    background-color: red;
+    border: 3px;
+}
+h1 {
+    font-style: bold;
+}
+h2:first-letter{
+    font-size: 22;
+}
+p {
+    color: red;
+    font-size: 8pt;
+    border: inherit;
+}
+p:first-letter{
+    font-size: 18;
+}
+#p1 {
+    color: green;
+    font-size: 15pt;
+}
+#p4 {
+    color: orange;
+    font-size: 15pt;
+}
+.pX {
+    color: blue;
+    font-size: 7pt;
+}
+
+a {
+    color: red;
+}
+a:visited{
+    color: green;
+}
+a:hover{
+    color: blue;
+}
+a:active{
+    color: yellow;
+}

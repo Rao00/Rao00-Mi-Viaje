@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(235, 235, 235);
+    margin-left: 0%;
+    margin-right: 0%;
+    transition: background-color 1s;
+}
+#encabezado{
+    font-size: 15pt;
+    text-align: center;
+}
+.title{
+    font-size: 20pt;
+}
+button{
+    position: relative;
+    left: 12%;
+    width: 15%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    color: white;
+    transition: background-color 1s;
+}
+button:hover{
+    background-color: rgba(255, 255, 255, 100);
+    color: black;
+}
+#full-button{
+    width: 12%;
+}
+#menu{
+    background-color: rgb(0, 60, 150);
+    height: 50pt;
+    width: 100%;
+
+}
+#perfil-p{
+    margin-left: 15%;
+    margin-right: 15%;
+}
+#listas{
+    font-size: 20pt;
+}
+#listas-full{
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 20pt;
+    margin-top: 15%;
+    overflow: scroll;
+    height: 60%;
+}
+#exp-list{
+    margin-left: 10%;
+    margin-right: 10%;
+}
