@@ -3,6 +3,9 @@ name: Push Programado
 on:
   schedule:
     - cron: '0 0,13,20 * * *' # Ejecutar a medianoche (0), 2:00 PM (13), y 9 PM (20) en UTC
+  push:
+    paths:
+      - '.github/workflows/trigger.txt'
 
 jobs:
   push:
@@ -11,8 +14,8 @@ jobs:
     steps:
       - name: Configurar Git
         run: |
-          git config --global user.name "Rao00"
-          git config --global user.email "carlesmorales.mcv00@gmail.com"
+          git config --global user.name "Tu Nombre"
+          git config --global user.email "tu@email.com"
 
       - name: Verificar cambios
         id: cambios
