@@ -39,8 +39,8 @@ namespace Ejercicio18
 
         double calcular(double m, double n)
         {
-            double suma = 0;
-            for (double i = 1; i <= n; i++)
+            double suma = m;
+            for (double i = 2; i <= n; i++)
             {
                 suma += pot(m, i)/fac(i);
             }

@@ -1,12 +1,12 @@
 body{
-    background-color: rgb(235, 235, 235);
     margin-left: 0%;
     margin-right: 0%;
-    transition: background-color 1s;
-}
+    background-color: rgba(31,31,31,255);
+}   
 #encabezado{
-    font-size: 15pt;
+    font-size: 30pt;
     text-align: center;
+    margin: 2%;
 }
 .title{
     font-size: 20pt;
@@ -22,8 +22,7 @@ button{
     transition: background-color 1s;
 }
 button:hover{
-    background-color: rgba(255, 255, 255, 100);
-    color: black;
+    background-color: rgba(31,31,31,255);
 }
 #full-button{
     width: 12%;
@@ -32,7 +31,7 @@ button:hover{
     background-color: rgb(0, 60, 150);
     height: 50pt;
     width: 100%;
-
+    margin-top: 3%;
 }
 #perfil-p{
     margin-left: 15%;
@@ -40,6 +39,8 @@ button:hover{
 }
 #listas{
     font-size: 20pt;
+    border-radius: 20px;
+    margin-top: 20%;
 }
 #listas-full{
     margin-left: 5%;
@@ -47,11 +48,30 @@ button:hover{
     padding-left: 2%;
     padding-right: 2%;
     font-size: 20pt;
-    margin-top: 15%;
-    overflow: scroll;
-    height: 60%;
+    margin-top: 20%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 50%;
+    background-color: rgba(31,31,31,255);
+    border-color: white;
 }
-#exp-list{
-    margin-left: 10%;
-    margin-right: 10%;
+h3, h1, h2{
+   color: rgb(189, 157, 52)
+}
+li, p, ul{
+    color: rgb(230, 230, 230);
+    border-color: white;
+    list-style: none;
+}
+ul, p{
+    padding: 20px;
+}
+.fondoletras{
+    background-color: rgba(31,31,31,255);
+}
+#magua{
+    margin-top: 15%;
+    font-size: 20pt;
+    color: white;
+    white-space: nowrap;
 }
