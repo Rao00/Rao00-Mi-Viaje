@@ -2,24 +2,27 @@ name: Push Programado
 
 on:
   schedule:
-    - cron: '0 0,13,20 * * *' # Ejecutar a medianoche (0), 2:30 PM (14), y 9 PM (21) en UTC
+    - cron: '0 0,13,20 * * *' # Ejecutar a medianoche (0), 2:00 PM (13), y 9 PM (20) en UTC
 
 jobs:
   push:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Configurar Git
         run: |
-          git config --global user.name "Tu Nombre"
-          git config --global user.email "tu@email.com"
+          git config --global user.name "Rao00"
+          git config --global user.email "carlesmorales.mcv00@gmail.com"
+
+      - name: Verificar cambios
+        id: cambios
+        run: |
+          git diff --exit-code || echo "No hay cambios para hacer commit."
+          echo "::set-output name=changes::$(git status --porcelain)"
+        shell: bash
 
       - name: Realizar Push
+        if: steps.cambios.outputs.changes != ''
         run: |
-          current_hour=$(date +'%H')
-          if [ $current_hour -eq 0 ] || [ $current_hour -eq 14 ] || [ $current_hour -eq 21 ]; then
-            git commit -am "Push programado"
-            git push
-          else
-            echo "No es una hora programada para push."
-          fi
+          git commit -am "Push programado"
+          git push
