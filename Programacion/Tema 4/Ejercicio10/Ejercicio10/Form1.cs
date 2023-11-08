@@ -39,7 +39,7 @@ namespace Ejercicio10
             string salida = "El resultado es: ";
             foreach(int numElevado in numElevar(num, exponentes))
             {
-                salida += numElevado + " ";
+                salida += numElevado + ", ";
             }
             MessageBox.Show(salida);
         }
