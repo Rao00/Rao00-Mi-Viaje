@@ -17,51 +17,41 @@ namespace Ejercicio09
             InitializeComponent();
         }
 
-        string calcularPesetas(int numPesetas)
+        (int dinero, int cantidad, string salida) CalcularBilletes(int dinero, int tamaño, string salida, string type, int billeteMinimo)
         {
-            int num10k = numPesetas/10000;
-            numPesetas -= num10k*10000;
-            int num5k = numPesetas/5000;
-            numPesetas -= num5k*5000;
-            int num2k = numPesetas/2000;
-            numPesetas -= num2k*2000;
-            int num1k = numPesetas/1000;
-            numPesetas -= num1k*1000;
-            int num100 = numPesetas/100;
-            numPesetas -= num100*100;
-            int num25 = numPesetas/25;
-            string output = "Resultado";
-            if (num10k > 0)
+            int num = dinero/tamaño;
+
+            if (dinero > 0)
             {
-                output += "\n" + num10k + " billetes de 10000";
+                if(tamaño <= billeteMinimo)
+                {
+                    salida = "\n" + num + " monedas de " + tamaño + " " + type;
+                }
+                else
+                {
+                    salida = "\n" + num + " billetes de " + tamaño + " " + type;
+                }
+                dinero -= num*tamaño;
             }
-            if (num5k > 0)
-            {
-                output += "\n" + num5k + " billetes de 5000";
-            }
-            if (num2k > 0)
-            {
-                output += "\n" + num2k + " billetes de 2000";
-            }
-            if (num1k > 0)
-            {
-                output += "\n" + num1k + " billetes de 1000";
-            }
-            if (num100 > 0)
-            {
-                output += "\n" + num100 + " monedas de 100";
-            }
-            if (num25 > 0)
-            {
-                output += "\n" + num25 + " monedas de 25";
-            }
-            return output;
+            return (dinero, num, salida);
         }
 
         private void bCalcular_Click(object sender, EventArgs e)
         {
-            int numPesetas = int.Parse(txtPesetas.Text); 
-            lResultado.Text = calcularPesetas(numPesetas);
+            string salida = "";
+            string type = txtType.Text;
+            int billeteMin = int.Parse(txtBilleteMin.Text);
+            int numPesetas = int.Parse(txtPesetas.Text);
+            List<int> billetes = new List<int> {5000, 1000, 500, 200, 100, 50, 25, 10, 5, 2, 1};
+            foreach (int tamaño in billetes)
+            {
+                if (CalcularBilletes(numPesetas, tamaño, salida, type, billeteMin).cantidad > 0)
+                {
+                    salida += CalcularBilletes(numPesetas, tamaño, salida, type, billeteMin).salida;
+                    numPesetas = CalcularBilletes(numPesetas, tamaño, salida, type, billeteMin).dinero;
+                }
+            }
+            lResultado.Text = salida;
         }
     }
 }
