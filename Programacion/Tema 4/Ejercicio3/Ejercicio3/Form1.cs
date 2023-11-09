@@ -29,7 +29,6 @@ namespace Ejercicio3
             int num2 = int.Parse(txtValor2.Text);
             cambiar(num1, num2);
             MessageBox.Show("Los datos de valor1 y valor2, ahora son = " + num1 + ", " + num2);
-
         }
     }
 }
