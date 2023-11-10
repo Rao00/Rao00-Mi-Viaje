@@ -54,7 +54,7 @@ namespace Ejercicio11
                     diaMax = 28;
                 }
             }
-            else if (mes < 8 && mes != 2)
+            else if (mes < 8)
             {
                 if (mes % 2 == 0)
                 {
@@ -65,7 +65,7 @@ namespace Ejercicio11
                     diaMax = 31;
                 }
             }
-            else if (mes >= 8 && mes != 2)
+            else if (mes >= 8)
             {
                 if (mes % 2 == 0)
                 {

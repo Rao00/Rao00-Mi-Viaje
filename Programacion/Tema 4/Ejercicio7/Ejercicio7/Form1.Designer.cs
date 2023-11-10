@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.bCalcular = new System.Windows.Forms.Button();
-            this.txtNum = new System.Windows.Forms.TextBox();
+            this.txtNum1 = new System.Windows.Forms.TextBox();
+            this.txtNum2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // bCalcular
@@ -40,20 +41,29 @@
             this.bCalcular.TabIndex = 0;
             this.bCalcular.Text = "Calcular";
             this.bCalcular.UseVisualStyleBackColor = true;
+            this.bCalcular.Click += new System.EventHandler(this.bCalcular_Click);
             // 
-            // txtNum
+            // txtNum1
             // 
-            this.txtNum.Location = new System.Drawing.Point(259, 139);
-            this.txtNum.Name = "txtNum";
-            this.txtNum.Size = new System.Drawing.Size(100, 20);
-            this.txtNum.TabIndex = 1;
+            this.txtNum1.Location = new System.Drawing.Point(259, 129);
+            this.txtNum1.Name = "txtNum1";
+            this.txtNum1.Size = new System.Drawing.Size(100, 20);
+            this.txtNum1.TabIndex = 1;
+            // 
+            // txtNum2
+            // 
+            this.txtNum2.Location = new System.Drawing.Point(259, 155);
+            this.txtNum2.Name = "txtNum2";
+            this.txtNum2.Size = new System.Drawing.Size(100, 20);
+            this.txtNum2.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtNum);
+            this.Controls.Add(this.txtNum2);
+            this.Controls.Add(this.txtNum1);
             this.Controls.Add(this.bCalcular);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -65,7 +75,8 @@
         #endregion
 
         private System.Windows.Forms.Button bCalcular;
-        private System.Windows.Forms.TextBox txtNum;
+        private System.Windows.Forms.TextBox txtNum1;
+        private System.Windows.Forms.TextBox txtNum2;
     }
 }
 
