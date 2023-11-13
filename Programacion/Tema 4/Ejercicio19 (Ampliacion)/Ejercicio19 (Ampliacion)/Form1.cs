@@ -23,17 +23,13 @@ namespace Ejercicio19__Ampliacion_
         {
             
             int input = int.Parse(Interaction.InputBox("Introduce numeros, cuando quieras ver el resultado introduce un 0", "Pestaña Principal", "Introduce un numero"));
-            int secGrande = input;
+            int secGrande = 0;
             int cantidadGrande = 0;
             int secNueva = 0;
             int cantidadNueva = 0;
             while (input != 0)
             {
-                if (input == secGrande)
-                {
-                    cantidadGrande++;
-                }
-                else if (input == secNueva)
+                if (input == secNueva)
                 {
                     cantidadNueva++;
                     if (cantidadNueva > cantidadGrande)
