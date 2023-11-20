@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0051BE50-99C6-4CE4-A9C8-9A0C51EA3564}</ProjectGuid>
+    <ProjectGuid>{E974C3A4-79C3-48B9-94A6-A8E451D1261A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Ejercicio01</RootNamespace>
-    <AssemblyName>Ejercicio01</AssemblyName>
+    <RootNamespace>Ejercicio22</RootNamespace>
+    <AssemblyName>Ejercicio22</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

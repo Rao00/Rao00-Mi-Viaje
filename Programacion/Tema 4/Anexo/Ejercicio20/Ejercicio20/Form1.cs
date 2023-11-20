@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ejercicio19
+namespace Ejercicio20
 {
     public partial class Form1 : Form
     {
@@ -17,27 +18,22 @@ namespace Ejercicio19
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        int calcularExp(int numbase, int exp)
         {
-            
-
-        }
-
-        int calcularFac(int num)
-        {
-            int output = num;
-            if (num == 1)
+            if(exp == 1)
             {
-                return 1;
+                return numbase;
             }
-            output *= calcularFac(num-1);
-            return output;
+            int salida = numbase;
+            salida *= calcularExp(numbase, exp-1);
+            return salida;
         }
 
         private void bCalcular_Click(object sender, EventArgs e)
         {
-            int fac = int.Parse(txtFac.Text);
-            MessageBox.Show("Resultado = " + calcularFac(fac));
+            int numbase = int.Parse(txtBase.Text);
+            int numexp = int.Parse(txtExponente.Text);
+            MessageBox.Show("Resultado = " + calcularExp(numbase, numexp));
         }
     }
 }

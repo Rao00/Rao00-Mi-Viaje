@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ejercicio19
+namespace Ejercicio22
 {
     public partial class Form1 : Form
     {
@@ -17,27 +17,24 @@ namespace Ejercicio19
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        int length(int num)
         {
-            
-
-        }
-
-        int calcularFac(int num)
-        {
-            int output = num;
-            if (num == 1)
+            int salida = 1;
+            if (num<=10)
             {
                 return 1;
             }
-            output *= calcularFac(num-1);
-            return output;
+            else
+            {
+                return salida += length(num /= 10);
+            }
+            
         }
 
         private void bCalcular_Click(object sender, EventArgs e)
         {
-            int fac = int.Parse(txtFac.Text);
-            MessageBox.Show("Resultado = " + calcularFac(fac));
+            int num = int.Parse(txtNum.Text);
+            MessageBox.Show("Cantidad = " + length(num));
         }
     }
 }
