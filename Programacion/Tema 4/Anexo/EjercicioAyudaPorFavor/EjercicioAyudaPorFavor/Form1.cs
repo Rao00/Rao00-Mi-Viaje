@@ -16,38 +16,32 @@ namespace EjercicioAyudaPorFavor
         {
             InitializeComponent();
         }
-        string CalcularBilletes(int dinero, List<int> tamaño, string salida, string type, int billeteMinimo, int tempLista = 0)
+        string CalcularBilletes(double dinero, List<double> tamaño, string salida, string type, int billeteMinimo, int tempLista = 0)
         {
-            if (dinero % tamaño.Last() == 0)
+            if (dinero > 0)
             {
-                if (dinero > 0)
+                double num = dinero/tamaño[tempLista];
+                num = Math.Round(num, 0);
+                if(num > 0)
                 {
-                    int num = dinero/tamaño[tempLista];
-                    if(num > 0)
+                    if (tamaño[tempLista] < billeteMinimo)
                     {
-                        if (tamaño[tempLista] <= billeteMinimo)
-                        {
-                            salida += "\n" + num + " monedas de " + tamaño[tempLista] + " " + type;
-                        }
-                        else
-                        {
-                            salida += "\n" + num + " billetes de " + tamaño[tempLista] + " " + type;
-                        }
-                        dinero -= num*tamaño[tempLista];
-                        return CalcularBilletes(dinero, tamaño, salida, type, billeteMinimo, tempLista+=1);
+                        salida += "\n" + num + " monedas de " + tamaño[tempLista] + " " + type;
                     }
+                    else
+                    {
+                        salida += "\n" + num + " billetes de " + tamaño[tempLista] + " " + type;
+                    }
+                    dinero -= num*tamaño[tempLista];
+                    return CalcularBilletes(dinero, tamaño, salida, type, billeteMinimo, tempLista+=1);
                 }
-                else
-                {
-                    string salidaTemp = "";
-                    salidaTemp += "\n"+salida;
-                    return salidaTemp;
-                }
+                else return CalcularBilletes(dinero, tamaño, salida, type, billeteMinimo, tempLista+=1);
             }
             else
             {
-                MessageBox.Show("No se puede realizar el calculo con los digitos disponibles, agrega más monedas en la lista para solucionar el error");
-                return "error";
+                string salidaTemp = "";
+                salidaTemp += "\n"+salida;
+                return salidaTemp;
             }
         }
 
@@ -56,8 +50,8 @@ namespace EjercicioAyudaPorFavor
             string salida = "";
             string type = txtType.Text;
             int billeteMin = int.Parse(txtBilleteMin.Text);
-            int numPesetas = int.Parse(txtPesetas.Text);
-            List<int> billetes = new List<int> { 500, 200, 100, 50, 20, 10, 5, 2, 1 };
+            double numPesetas = double.Parse(txtPesetas.Text);
+            List<double> billetes = new List<double> { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
             lResultado.Text = CalcularBilletes(numPesetas, billetes, salida, type, billeteMin);
         }
     }
