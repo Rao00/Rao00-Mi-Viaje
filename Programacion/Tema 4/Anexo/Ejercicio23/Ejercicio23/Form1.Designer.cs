@@ -1,4 +1,4 @@
-﻿namespace Ejercicio2__Ampliacion_
+﻿namespace Ejercicio23
 {
     partial class Form1
     {
