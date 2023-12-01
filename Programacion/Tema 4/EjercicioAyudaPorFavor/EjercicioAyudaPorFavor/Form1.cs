@@ -18,12 +18,12 @@ namespace EjercicioAyudaPorFavor
         }
         string CalcularBilletes(double dinero, List<double> tamaño, string salida, string type, int billeteMinimo, int tempLista = 0)
         {
-            if (dinero > 0)
+            if (dinero > 0 && tempLista <= tamaño.Count()-1)
             {
                 double num = dinero/tamaño[tempLista];
-                num = Math.Round(num, 0);
-                if(num > 0)
+                if(num >= 1)
                 {
+                    num = Math.Floor(num);
                     if (tamaño[tempLista] < billeteMinimo)
                     {
                         salida += "\n" + num + " monedas de " + tamaño[tempLista] + " " + type;
@@ -39,8 +39,7 @@ namespace EjercicioAyudaPorFavor
             }
             else
             {
-                string salidaTemp = "";
-                salidaTemp += "\n"+salida;
+                string salidaTemp = "\n"+salida;
                 return salidaTemp;
             }
         }
@@ -51,7 +50,7 @@ namespace EjercicioAyudaPorFavor
             string type = txtType.Text;
             int billeteMin = int.Parse(txtBilleteMin.Text);
             double numPesetas = double.Parse(txtPesetas.Text);
-            List<double> billetes = new List<double> { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
+            List<double> billetes = new List<double> { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01 };
             lResultado.Text = CalcularBilletes(numPesetas, billetes, salida, type, billeteMin);
         }
     }
