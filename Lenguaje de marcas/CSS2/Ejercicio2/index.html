@@ -9,101 +9,192 @@
 <style>
     body, html{
         margin-left: 12.5%;
-        margin-top: 5%;
-        height: 75%;
+        height: 85%;
         width: 75%;
     }
-    h1{
-        color: white;
-        margin-top: 0%;
-        margin-left: 1%;
+    h2, h3{
+        margin: 10px 10px;
     }
-    #title{
-        background-color:rgb(175, 0, 35);
+    .content{
+        float: left;
+        margin-top: 20px;
+        height: 45%;
         width: 100%;
-        height: 7%;
-        padding: 1em;
+        margin-right: 0px;
+        padding-right: 0px;
     }
-    #main{
-        text-align:justify;
-        width: 100%;
-        height: 40%;
-        margin: 0%;
+    .LeftColor{
+        background-color: rgb(173, 182, 230);
     }
-    #leftData{
+    .hitbox{
+        background-color: red;
+    }
+    .hitbox2{
+        background-color: green;
+    }
+    .main{
         float: left;
-        width: 65%;
-        height: 100%;
-        border-right: 1px lightgrey solid;
-        padding: 50px;
+        height:100%;
+        width: 75%;
+        padding: 2%;
+        padding-right: 0%;
     }
-    #rightData{
-        width: 35%;
-        float: left;
-    }
-    .data{
-        clear: left;
-    }
-    #tabs *, .principaltabs *{
-        float: left;
-        margin: 20px;
-    }
-    #tabs *{
-        color: rgb(101, 208, 243);
-        text-decoration: underline;
-    }
-    #principaltabs *{
-        color: white;
+    .menu{
+        height:8%;
         background-color: darkblue;
     }
-    #menu{
-        background-color: blue;
-
+    .submenu{
+        height:50px;
+        border-bottom: 1px solid gray;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 10px;
+        margin-top: 0%;
     }
-    #endPage{
-        clear: left;
-        text-align: center;
-        height: 10%;
-        background-color: rgb(22, 22, 22);
+    .Tab, .subtab{
+        float: left;
+        padding: 10px;
+        margin-left: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .Tab{
         color: white;
-        width: 100%;
-        border-top: 4px lightgrey solid;
+        background-color: rgb(45, 45, 146);
+    }
+    .subtab{
+        color: rgb(93, 151, 218);
+        padding-top: 0px;
+        text-decoration: underline;
+    }
+    .title, titleLeftBar{
+        background-color: orange;
+        text-decoration: underline;
+        height: 3em;
+        padding: 2px;
+        padding-right: 0px;
+        margin-right: 0%;
+    }
+    .textDiv{
+        height: 45%;
+        margin: 20px;
+        padding: 2%;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    .text{
+        word-spacing: 10px;
+        text-align: justify;
+        text-decoration: none;
+    }
+    .LBar{
+        float: left;
+        height: 98%;
+        width: 20%;
+        padding-top: 41px;
+        background-color: rgb(165, 191, 248);
+    }
+    .titleLeftBar{
+        padding: 5px;
+        background-color: rgb(118, 153, 250);
+        margin-bottom: 20px;
+    }
+    .aboutMe{
+        padding-left: 20px;
+    }
+    .categoria{
+        padding-left: 20px;
+        height: 25px;
+        padding-top: 7px;
+    }
+    p.categoria{
+        margin: 0%;
+        padding: 0%;
+    }
+    .textLeftBar{
+        margin-bottom: 20px;
+    }
+    .categoria:hover{
+        background-color: rgb(206, 220, 250);
+        font-weight:bold;
     }
 </style>
 <body>
-    <div id="title">
-        <h1>Lorem ipsum</h1>
-    </div>
-    <div id="main">
-        <div id="Menu" class="principaltabs">
-            <p>Inicio</p>
-            <p>Blog</p>
-            <p>Sobre mi</p>
-            <p>Fotos</p>
-            <p>Portfolio</p>
-            <p>Contacto</p>
-            <p>Enlaces</p>
+    <h1>Mi sitio Web</h1>
+        <div id="pTab" class="menu">
+            <p class="Tab">Inicio</p>
+            <p class="Tab">Blog</p>
+            <p class="Tab">Sobre mi</p>
+            <p class="Tab">Fotos</p>
+            <p class="Tab">Portfolios</p>
+            <p class="Tab">Contacto</p>
+            <p class="Tab">Enlaces</p>
         </div>
-        <div id="leftData">
-            <h2 class="title">Lorem ipsum dolor sit amet</h2>
-            <div id="dataFirst">
-                <div id="tabs">
-                    <p style="text-decoration: none;">dd-mm-aaaa 00:00</p>
-                    <p>Diseño</p>
-                    <p>Nombre Apellido</p>
-                    <p>Añadir comentario</p>
+        <div id="main" class="main">
+            <div id="part1" class="content">
+                <div id="title1" class="title">
+                    <h2>Lorem ipsum dolor sit amet</h2>
                 </div>
-                <p class="data">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur minima voluptates officiis cumque modi qui vero! Incidunt repudiandae labore, harum ex voluptatum, saepe soluta maxime nulla magnam beatae totam laborum.</p>
-                <a href="">Seguir Leyendo</a>
+                <div id="submenu1" class="submenu">
+                    <p class="subtab">dd-mm-aaaa 00:00</p>
+                    <p class="subtab">diseño</p>
+                    <p class="subtab">Nombre Apellido</p>
+                    <p class="subtab">Añadir comentario</p>
+                </div>
+                <div id="text1" class="textDiv">
+                    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum nam amet suscipit. Illum perferendis quidem facilis cupiditate, placeat voluptatem? Perspiciatis exercitationem quo pariatur aspernatur ab dolor nam voluptates cupiditate.</p>
+                    <br>
+                    <a href="">Seguir leyendo...</a>
+                </div>
             </div>
-            
-
+            <div id="part2" class="content">
+                <div id="title2" class="title">
+                    <h2>Lorem ipsum dolor sit amet</h2>
+                </div>
+                <div id="submenu2" class="submenu">
+                    <p class="subtab">dd-mm-aaaa 00:00</p>
+                    <p class="subtab">diseño</p>
+                    <p class="subtab">Nombre Apellido</p>
+                    <p class="subtab">Añadir comentario</p>
+                </div>
+                <div id="text2" class="textDiv">
+                    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum nam amet suscipit. Illum perferendis quidem facilis cupiditate, placeat voluptatem? Perspiciatis exercitationem quo pariatur aspernatur ab dolor nam voluptates cupiditate.</p>
+                    <br>
+                    <a href="">Seguir leyendo...</a>
+                </div>
+            </div>
         </div>
-        <div id="rightData">
+        <div id="lateralBar" class="LBar">
+            <div class="titleLeftBar">
+                <h3>Sobre mi</h3>
+            </div>
+            <div id="text" class="textLeftBar">
+                <p class="aboutMe"><b>Nombre Apellidos</b></p>
+                <p class="aboutMe">Edad</p>
+                <p class="aboutMe">Ciudad de residencia</p>
+                <a href="" class="aboutMe">Mi perfil Publico</a>
+            </div>
+            <div class="titleLeftBar">
+                <h3>Categorias</h3>
+            </div>
+            <div id="text2" class="textLeftBar">
+                <div class="categoria"><p class="categoria">Categoria 1</p></div>
+                <div class="categoria"><p class="categoria">Categoria 2</p></div>
+                <div class="categoria"><p class="categoria">Categoria 3</p></div>
+                <div class="categoria"><p class="categoria">Categoria 4</p></div>
+                <div class="categoria"><p class="categoria">Categoria 5</p></div>
+            </div>
+            <div class="titleLeftBar">
+                <h3>Enlaces</h3>
+            </div>
+            <div id="text3" class="textLeftBar">
+                <div class="categoria"><a href="">Enlace 1</a></div>
+                <div class="categoria"><a href="">Enlace 2</a></div>
+                <div class="categoria"><a href="">Enlace 3</a></div>
+                <div class="categoria"><a href="">Enlace 4</a></div>
+                <div class="categoria"><a href="">Enlace 5</a></div>
+            </div>
         </div>
-    </div>
-    <div id="endPage">
-        <p style="margin-top:2%;">2005 - 2016. Pagina web de Carles Morales Amat</p>
     </div>
 </body>
 </html>

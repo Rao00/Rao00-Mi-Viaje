@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <style>
+        .main{
+            background-color: rgb(200, 217, 222);
+            margin-left: 50px;
+            margin-right: 50px;
+            height: 800px;
+            border: solid black 1px;
+            padding: 10px;
+        }
+        .divLeft{
+            float: left;
+            width: 35%;
+            text-align: right;
+            margin-right: 1%;
+        }
+        .divRight{
+            float: left;
+            width: 40%;
+        }
+        .divNext{
+            clear: left;
+            padding-top: 5px;
+        }
+        .divSpace{
+            clear: both;
+            height: 20px;
+        }
+        .white{
+            color: rgba(245, 245, 220, 0);
+        }
+        .FinalSpace{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>INDUSTRIAS ACME. FORMULARIO DE PEDIDO</h1></center>
+    <div class="main">
+        <form>
+            <div class="divNext">
+                <div class="divLeft"><label><b>Datos Clientes</b></label></div>
+                <div class="divRight"> </div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label>Nombre:</label></div>
+                <div class="divRight"><input id="name"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="email">Correo Electronico: </label></div>
+                <div class="divRight"><input id="email" type="email"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label>Tipo de cliente: </label></div>
+                <div class="divRight">
+                    <input id="client_type1" type="radio" name="tipo-cliente"><label for="client_type1">Particular</label><br>
+                    <input id="client_type2" type="radio" name="tipo-cliente"><label for="client_type2">Asociacion</label><br>
+                    <input id="client_type3" type="radio" name="tipo-cliente"><label for="client_type3">Empresa</label><br>
+                </div>
+            </div>
+            
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft"><label><b>Datos de los Producto:</b></label></div>
+            <div class="divNext">
+                <div class="divLeft"><label>Productos Solicitados</label></div>
+                <div class="divRight">
+                    <select size="5">
+                        <option value="1">AR001 Oro Reluciente</option>
+                        <option value="2">AR002 Plata Pulida</option>
+                        <option value="3">AR003 Bronze Reforzado</option>
+                        <option value="4">EX001 Escudo</option>
+                        <option value="5">EX002 Invisibilidad</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft"><b>Datos de Envio</b></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="direccion">Direccion</label></div>
+                <div class="divRight"><input id="direccion" type="text"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="city">Ciudad</label></div>
+                <div class="divRight"><input id="city" type="text"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="cp">Codigo Postal </label></div>
+                <div class="divRight"><input id="cp" type="text" maxlength="5"></div>
+            </div>   
+
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft"><label>Datos Bancarios</label></div>
+                <div class="divSpace"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="nombre-entidad">Nombre de la Entidad</label></div>
+                <div class="divRight"><input id="nombre-entidad" type="text"></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="n-cuenta">Nº de Cuenta</label></div>
+                <div class="divRight"><input id="n-cuenta" type="text"></div>
+            </div>
+    
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft"><b>Informacion de Interes</b></div>
+            </div>
+            <div class="divNext">
+                <div class="divLeft"><label for="coments">Comantarios</label></div>
+                <div class="divRight"><input id="comments" type="text" size="50" style="height: 3cm;"></div>
+            </div>
+            
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft"><label for="info"> Acepto recibir informacion publicitaria</label></div>
+                <div class="divRight"><input id="info" type="checkbox"></div>
+            </div>
+
+            <div class="divSpace"></div>
+
+            <div class="divNext">
+                <div class="divLeft white"> . </div>
+                <div class="divRight FinalSpace">
+                    <input type="submit" value="Enviar pedido">
+                    <input type="reset" value="Cancelar">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
