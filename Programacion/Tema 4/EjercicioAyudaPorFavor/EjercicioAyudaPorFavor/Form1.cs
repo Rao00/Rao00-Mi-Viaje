@@ -50,7 +50,7 @@ namespace EjercicioAyudaPorFavor
             string type = txtType.Text;
             int billeteMin = int.Parse(txtBilleteMin.Text);
             double numPesetas = double.Parse(txtPesetas.Text);
-            List<double> billetes = new List<double> { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01 };
+            List<double> billetes = new List<double> { 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01 };
             lResultado.Text = CalcularBilletes(numPesetas, billetes, salida, type, billeteMin);
         }
     }
