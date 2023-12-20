@@ -1,0 +1,42 @@
+
+CREATE TABLE DEUDORES(
+    idDeudor    INT IDENTITY    NOT NULL,
+    nombre      VARCHAR(100)    NOT NULL,
+    apellidos   VARCHAR(200),
+
+    CONSTRAINT PK_DEUDORES PRIMARY KEY (idDeudor)
+)
+
+GO
+
+CREATE TABLE COMISIONES(
+    idComision          INT IDENTITY    NOT NULL,
+    cantidadDias        INT             NOT NULL,
+    porcentajeComision  INT             NOT NULL,
+
+    CONSTRAINT PK_COMISIONES PRIMARY KEY (idComision)
+)
+
+GO
+
+CREATE TABLE TOTAL_DEUDAS(
+    idDeudor        INT             NOT NULL,
+    idComision      INT             NOT NULL,
+    fecha_incio     SMALLDATETIME   NOT NULL,
+    cantidad        INT             NOT NULL,
+
+    CONSTRAINT PK_TOTAL_DEUDAS PRIMARY KEY (idDeudor, idComision),
+    CONSTRAINT FK_DEUDAS_DEUDORES FOREIGN KEY (idDeudor) REFERENCES DEUDORES(idDeudor),
+    CONSTRAINT FK_DEUDAS_COMISIONES FOREIGN KEY (idComision) REFERENCES COMISIONES(idComision),
+)
+
+GO
+
+SELECT DISTINCT TD.idDeudor AS idDeudor, 
+                UPPER(D.nombre) AS Nombre, 
+                SUM(TD.cantidad+TD.cantidad*C.porcentajeComision) AS TOTAL
+                FROM TOTAL_DEUDAS TD,
+                     DEUDORES D,
+                     COMISIONES C
+                WHERE D.nombre = UPPER('Poxi')
+                GROUP BY D.nombre
