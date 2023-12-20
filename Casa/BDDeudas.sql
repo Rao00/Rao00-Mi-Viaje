@@ -1,4 +1,12 @@
 
+CREATE DATABASE DEUDAS
+
+GO
+
+USE DEUDAS
+
+GO
+
 CREATE TABLE DEUDORES(
     idDeudor    INT IDENTITY    NOT NULL,
     nombre      VARCHAR(100)    NOT NULL,
@@ -20,23 +28,34 @@ CREATE TABLE COMISIONES(
 GO
 
 CREATE TABLE TOTAL_DEUDAS(
+	idPrestamo		INT	IDENTITY	NOT NULL,
     idDeudor        INT             NOT NULL,
     idComision      INT             NOT NULL,
     fecha_incio     SMALLDATETIME   NOT NULL,
-    cantidad        INT             NOT NULL,
+    cantidad		DECIMAL(9,2)    NOT NULL,
 
-    CONSTRAINT PK_TOTAL_DEUDAS PRIMARY KEY (idDeudor, idComision),
+    CONSTRAINT PK_TOTAL_DEUDAS PRIMARY KEY (idPrestamo),
     CONSTRAINT FK_DEUDAS_DEUDORES FOREIGN KEY (idDeudor) REFERENCES DEUDORES(idDeudor),
     CONSTRAINT FK_DEUDAS_COMISIONES FOREIGN KEY (idComision) REFERENCES COMISIONES(idComision),
 )
 
 GO
 
-SELECT DISTINCT TD.idDeudor AS idDeudor, 
-                UPPER(D.nombre) AS Nombre, 
-                SUM(TD.cantidad+TD.cantidad*C.porcentajeComision) AS TOTAL
-                FROM TOTAL_DEUDAS TD,
-                     DEUDORES D,
-                     COMISIONES C
+SELECT DISTINCT 
+                FROM TOTAL_DEUDAS TD INNER JOIN DEUDORES D ON TD.idDeudor = D.idDeudor,
+					COMISIONES C
                 WHERE D.nombre = UPPER('Poxi')
-                GROUP BY D.nombre
+                GROUP BY TD.idDeudor
+
+
+INSERT INTO COMISIONES(min, max)
+	VALUES	(0, 6),
+			(7, 13),
+			(14, 20),
+			(21, 365)
+
+DELETE COMISIONES
+	VALUES *
+
+SELECT *
+	FROM COMISIONES
