@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 id="titulo">Hola</h1>
+    <button onclick="alteranteColor()" id="boton">Haz click</button>
+
+    <script>
+        var temp = 1
+        function changeTitle()
+        {            
+            titulo.innerHTML = "Tu mama"
+            titulo.style.color = "blue"
+            titulo.style.fontSize = "50pt"
+            titulo.style.textAlign = "center"
+        }
+        
+        function changeColor()
+        {
+            titulo.innerHTML = "Tu papa"
+            titulo.style.color = "red"
+            titulo.style.fontSize = "50pt"
+            titulo.style.textAlign = "center"
+        }
+        
+        function drawCanvas()
+        {
+            const canvas = document.getElementById("canvas")
+            const ctx = canvas.getContext("2d")
+
+            ctx.fillStyle = "#000000"
+            ctx.fillRect(120, 100, 160, 75)
+            
+            ctx.beginPath()
+            ctx.arc(150, 50, 40, 0, 2 * Math.PI)
+            ctx.arc(250, 50, 40, 0, 2 * Math.PI)
+            ctx.stroke()
+        }
+
+        function alteranteColor()
+        {
+            drawCanvas()
+            let titulo = document.getElementById("titulo")
+            if(temp === 1)
+            {
+                changeTitle()
+                temp = 0
+            }
+            else if(temp === 0)
+            {
+                changeColor()
+                temp = 1
+            }
+        }
+        
+
+    </script>
+
+    <canvas id="canvas" width="400" height="400" style="border: solid 1px black;"></canvas>
+
+</body>
+</html>
