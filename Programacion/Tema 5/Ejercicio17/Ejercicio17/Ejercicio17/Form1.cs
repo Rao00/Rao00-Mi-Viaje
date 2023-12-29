@@ -16,7 +16,6 @@ namespace Ejercicio17
             bMul.Click += OperacionesFilas_TextChanged;
             bDiv.Click += OperacionesFilas_TextChanged;
 
-
             //Relaciona el metodo de manejo de eventos con cada TextBox de la seleccion de lineas a operar//
             txtFila1.TextChanged += OperacionesFilas_TextChanged;
             txtFila2.TextChanged += OperacionesFilas_TextChanged;
@@ -123,9 +122,9 @@ namespace Ejercicio17
                         {
                             for (int y = 1; y < TAMX; y++)
                             {
-                                if (outputArray[x, y] == 0)
+                                if (outputArray[y, x] == 0)
                                 {
-                                    outputArray[x, y] = array[i];
+                                    outputArray[y, x] = array[i];
                                     break;
                                 }
                             }
@@ -184,10 +183,9 @@ namespace Ejercicio17
                     for (int i = 1; i < TAMY; i++)
                     {
                         salida += $"{i}.- ";
-                        for (int j = 0; j < TAMX; j++)
+                        for (int j = 0; j < TAMX-1; j++)
                         {
-                            if (j != TAMX - 2)
-                                salida += array[i, j] + ", ";
+                            salida += array[i, j] + ", ";
                         }
                         salida += $"{array[i, TAMX - 1]}\n";
                     }
@@ -264,8 +262,8 @@ namespace Ejercicio17
         /// <summary>
         /// Especifica un nuevo texto en base al indice del objeto del formulario
         /// </summary>
-        /// <param name="indexBoton">I</param>
-        /// <param name="textoBoton"></param>
+        /// <param name="indexBoton">Indice del objecto a buscar</param>
+        /// <param name="textoBoton">Texto a establecer en el objeto</param>
         void CambiarTextoBotones(int indexBoton, string textoBoton)
         {
             foreach (Control elementos in this.Controls)
@@ -289,7 +287,7 @@ namespace Ejercicio17
                 sorted = 0.0f;
                 for (int i = 0; i < TAMX; i++)
                 {
-                    vglobal[0, i] = rand.Next(1, 10);
+                    vglobal[0, i] = rand.Next(50, 400);
                 }
                 EscribirArray(vglobal, WhereSave, vglobal);
                 MessageBox.Show($"Matriz de {TAMX} numeros ha sido creado con exito!");
@@ -372,7 +370,7 @@ namespace Ejercicio17
                 sorted = 0.1f;
             }
             EscribirArray(vglobal, WhereSave, vglobal);
-            LeerArray(vglobal, true, WhereRead);
+            LeerArray(vglobal, true, WhereSave);
         }
 
         //Ordena la Matriz descendentemente//
@@ -391,7 +389,7 @@ namespace Ejercicio17
                 sorted = 0.2f;
             }
             EscribirArray(vglobal, WhereSave, vglobal);
-            LeerArray(vglobal, true, WhereRead);
+            LeerArray(vglobal, true, WhereSave);
         }
 
         //Realiza una operacion con los datos de la Matriz 1//
