@@ -289,6 +289,7 @@ namespace Ejercicio17
                 if (elementos.TabIndex == indexBoton)
                 {
                     elementos.Text = textoBoton;
+                    break;
                 }
             }
         }
@@ -314,13 +315,14 @@ namespace Ejercicio17
             try
             {
                 int WhereSave = int.Parse(txtSaveArray.Text);
+                if(WhereSave >= TAMY || WhereSave < 0) { throw new IndexOutOfRangeException("Fila no valida"); }
                 if (MBSobreescribir(WhereSave))
                 {
                     var rand = new Random();
                     sorted = 0.0f;
                     for (int i = 0; i < TAMX; i++)
                     {
-                        vglobal[0, i] = rand.Next(50, 400);
+                        vglobal[0, i] = rand.Next(1, 9);
                     }
                     EscribirArray(vglobal, WhereSave, vglobal);
                 }
@@ -329,6 +331,7 @@ namespace Ejercicio17
             {
                 MessageBox.Show($"Selecciona donde guardar la Matriz");
             }
+            catch (IndexOutOfRangeException iex) { MessageBox.Show(iex.Message); }
 
         }
 
@@ -409,11 +412,11 @@ namespace Ejercicio17
             try
             {
                 int WhereRead = int.Parse(txtReadArray.Text);
-                if (MBSobreescribir(WhereRead))
+                int WhereSave = int.Parse(txtSaveArray.Text);
+                if (MBSobreescribir(WhereSave))
                 {
-                    int WhereSave = int.Parse(txtSaveArray.Text);
                     if (WhereRead > TAMY) { throw new Exception("Fila a leer no valida"); }
-                    if (WhereSave > TAMY) { throw new Exception("Fila a escribir no vaida"); }
+                    if (WhereSave > TAMY) { throw new Exception("Fila a escribir no valida"); }
                     if (SeleccionarArray(vglobal, WhereRead)[0] != 0)
                     {
                         if (sorted == 0.0f)
@@ -433,6 +436,7 @@ namespace Ejercicio17
                     else { MessageBox.Show($"No existe array en la posicion {WhereRead}"); }
                 }
             }
+            catch (FormatException) { MessageBox.Show("Introduce una fila valida"); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
@@ -442,9 +446,9 @@ namespace Ejercicio17
             try
             {
                 int WhereRead = int.Parse(txtReadArray.Text);
-                if (MBSobreescribir(WhereRead))
+                int WhereSave = int.Parse(txtSaveArray.Text);
+                if (MBSobreescribir(WhereSave))
                 {
-                    int WhereSave = int.Parse(txtSaveArray.Text);
                     if (WhereRead > TAMY - 1) { throw new Exception("Fila a leer no valida"); }
                     if (WhereSave > TAMY - 1) { throw new Exception("Fila a escribir no vaida"); }
                     if (SeleccionarArray(vglobal, WhereRead)[0] != 0)
