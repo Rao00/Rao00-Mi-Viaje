@@ -23,7 +23,7 @@ namespace Ejercicio17
 
         //------------------------------Parametros Globales------------------------------//
 
-        public const int TAMX = 10;
+        public const int TAMX = 1000;
         public const int TAMY = 5;
         public int[,] vglobal = new int[TAMY, TAMX];
         public float sorted = 0.0f;
@@ -287,7 +287,7 @@ namespace Ejercicio17
                 sorted = 0.0f;
                 for (int i = 0; i < TAMX; i++)
                 {
-                    vglobal[0, i] = rand.Next(50, 400);
+                    vglobal[0, i] = rand.Next(1, 10000);
                 }
                 EscribirArray(vglobal, WhereSave, vglobal);
                 MessageBox.Show($"Matriz de {TAMX} numeros ha sido creado con exito!");
