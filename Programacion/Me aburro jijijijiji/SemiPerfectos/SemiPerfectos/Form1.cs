@@ -30,33 +30,24 @@ namespace SemiPerfectos
         bool NumSemiPerfecto(List<int> divisores, int num)
         {
             int total;
-            for(int m = 0; m > 0; m++)
-            {
-                //for(int i = 0; i < divisores.Count(); i++)
-                //{
-                //    total = divisores[i];
-                //    for (int j = 0; j < divisores.Count(); j++)
-                //    {
-                //        for (int k = 0; k <= j; k++)
-                //        {
-                //            if (divisores[i] != divisores[k]) { total += divisores[k]; }
-                //            if (total == num) { salida = true; break; }
-                //            MessageBox.Show(total.ToString());
-                //        }
-                //        if (total == num) { salida = true; break; }
-                //        total = divisores[i];
-                //    }
-                //    if (total == num) { break; }
-                //}
-            }
             for(int i = 0; i < divisores.Count(); i++) //Numero principal
             {
+                total = divisores[i];
                 for(int j = i; j < divisores.Count(); j++) //Tamaño suma
                 {
-                    for(int k = 0; k < ) //
+                    for(int k = 0; k < divisores.Count(); k++) //Num a saltar
+                    {
+                        for(int l = k; l <= j; l++) //Suma principal
+                        {
+                            if (divisores[i] != divisores[l]) { total += divisores[l]; }
+                            if (total == num) { return true; }
+                        }
+                        total = divisores[i];
+                    }
+                    total = divisores[i];
                 }
             }
-            return salida;
+            return false;
         }
 
         private void bIniciar_Click(object sender, EventArgs e)
