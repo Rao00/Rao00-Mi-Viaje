@@ -140,7 +140,7 @@
             // 
             // bSum
             // 
-            this.bSum.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bSum.BackColor = System.Drawing.SystemColors.ControlLight;
             this.bSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bSum.Location = new System.Drawing.Point(576, 116);
             this.bSum.Name = "bSum";
@@ -151,7 +151,7 @@
             // 
             // bRes
             // 
-            this.bRes.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bRes.BackColor = System.Drawing.SystemColors.ControlLight;
             this.bRes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bRes.Location = new System.Drawing.Point(576, 185);
             this.bRes.Name = "bRes";
@@ -162,7 +162,7 @@
             // 
             // bMul
             // 
-            this.bMul.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bMul.BackColor = System.Drawing.SystemColors.ControlLight;
             this.bMul.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bMul.Location = new System.Drawing.Point(662, 116);
             this.bMul.Name = "bMul";
@@ -173,7 +173,7 @@
             // 
             // bDiv
             // 
-            this.bDiv.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bDiv.BackColor = System.Drawing.SystemColors.ControlLight;
             this.bDiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bDiv.Location = new System.Drawing.Point(662, 185);
             this.bDiv.Name = "bDiv";
