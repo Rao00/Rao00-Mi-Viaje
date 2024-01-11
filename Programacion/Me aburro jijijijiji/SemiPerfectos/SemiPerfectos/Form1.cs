@@ -17,36 +17,44 @@ namespace SemiPerfectos
             InitializeComponent();
         }
 
-        int[] CalcularDivisores(int num)
+        List<int> CalcularDivisores(int num)
         {
-            int[] array = new int[num / 2];
-            int a = 0;
+            List<int> lista = new List<int>();
             for (int i = 1; i < num; i++)
             {
-                if(num % i == 0) { array[a] = i; a++ ; }
+                if(num % i == 0) { lista.Add(i); }
             }
-            return array;
+            return lista;
         }
 
-        bool NumSemiPerfecto(int[] divisores, int num)
+        bool NumSemiPerfecto(List<int> divisores, int num)
         {
-            bool salida = false;
-            int total = 0;
-            for(int i = 0; i < divisores.Length; i++)
+            int total;
+            for(int m = 0; m > 0; m++)
             {
-                total = divisores[i];
-                for (int j = 0; j < divisores.Length; j++)
+                //for(int i = 0; i < divisores.Count(); i++)
+                //{
+                //    total = divisores[i];
+                //    for (int j = 0; j < divisores.Count(); j++)
+                //    {
+                //        for (int k = 0; k <= j; k++)
+                //        {
+                //            if (divisores[i] != divisores[k]) { total += divisores[k]; }
+                //            if (total == num) { salida = true; break; }
+                //            MessageBox.Show(total.ToString());
+                //        }
+                //        if (total == num) { salida = true; break; }
+                //        total = divisores[i];
+                //    }
+                //    if (total == num) { break; }
+                //}
+            }
+            for(int i = 0; i < divisores.Count(); i++) //Numero principal
+            {
+                for(int j = i; j < divisores.Count(); j++) //Tamaño suma
                 {
-                    for (int k = 0; k <= j; k++)
-                    {
-                        if(divisores[i] != divisores[k])
-                            total += divisores[k];
-                        if(total == num) { salida = true; break; }
-                    }
-                    if (total == num) { salida = true; break; }
-                    total = 0;
+                    for(int k = 0; k < ) //
                 }
-                if (total == num) { break; }
             }
             return salida;
         }
