@@ -42,15 +42,22 @@ SELECT SUM(precio) AS totalPrecios
 
 SELECT codigo_fabricante, MIN(precio) AS precioMinimo
   FROM PRODUCTO
- WHERE codigo_fabricante = 1
+ WHERE codigo_fabricante IN (SELECT codigo
+                               FROM FABRICANTE
+                              WHERE nombre = 'Asus')
  GROUP BY codigo_fabricante
 
 -- 8. Calcula la suma de todos los productos del fabricante Asus.
 
 SELECT codigo_fabricante, SUM(precio) AS precioTotal
   FROM PRODUCTO
- WHERE codigo_fabricante = 1
+ WHERE codigo_fabricante IN (SELECT codigo
+                               FROM FABRICANTE
+                              WHERE nombre = 'Asus')
  GROUP BY codigo_fabricante
+
+SELECT *
+  FROM FABRICANTE
 
 -- 9. Muestra el precio m�ximo, precio m�nimo, precio medio y el n�mero total de productos que tiene el fabricante Crucial.
 
@@ -73,19 +80,25 @@ SELECT codigo,
 
 -- 11. Calcula el n�mero de productos que tiene cada fabricante con un precio mayor o igual a 180�.
 
-SELECT codigo_fabricante, 
-       COUNT(codigo) AS nProductos
-  FROM PRODUCTO
+SELECT p.codigo_fabricante, 
+       f.nombre,
+       COUNT(p.codigo) AS nProductos
+  FROM PRODUCTO p,
+       FABRICANTE f
  WHERE precio >= 180
- GROUP BY codigo_fabricante
+   AND p.codigo_fabricante = f.codigo
+ GROUP BY p.codigo_fabricante, f.nombre
 
 
 -- 12. Lista el precio medio los productos de cada fabricante.
 
-SELECT codigo_fabricante, 
-       AVG(precio) AS precioMedio
-  FROM PRODUCTO
- GROUP BY codigo_fabricante
+SELECT p.codigo_fabricante,
+       f.nombre,
+       AVG(p.precio) AS precioMedio
+  FROM PRODUCTO p,
+       FABRICANTE f
+ WHERE p.codigo_fabricante = f.codigo
+ GROUP BY codigo_fabricante, f.nombre
 
 -- 13. Lista el c�digo de los fabricantes cuyos productos tienen un precio medio mayor o igual a 150�.
 
@@ -97,11 +110,14 @@ HAVING AVG(precio) >= 150
 
 -- 14. Devuelve un listado con los c�digos de los fabricantes que tienen 2 o m�s productos.
 
-SELECT codigo_fabricante, 
-       COUNT(codigo) AS nProductos
-  FROM PRODUCTO
- GROUP BY codigo_fabricante
-HAVING COUNT(codigo) >= 2
+SELECT p.codigo_fabricante,
+       f.nombre,
+       COUNT(p.codigo) AS nProductos
+  FROM PRODUCTO p,
+       FABRICANTE f
+ WHERE p.codigo_fabricante = f.codigo
+ GROUP BY p.codigo_fabricante, f.nombre
+HAVING COUNT(p.codigo) >= 2
 
 -- 15. Devuelve un listado con los c�digos de los fabricantes y el n�mero de productos que tiene cada uno con un precio superior o igual a 220 �. No es necesario mostrar el nombre de los fabricantes que no tienen productos que cumplan la condici�n.
 -- Ejemplo del resultado esperado.
