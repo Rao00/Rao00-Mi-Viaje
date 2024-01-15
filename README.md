@@ -1,7 +1,12 @@
-# Presentacion HTML DAW
+# 💫 Sobre Mi:
+Bienvenido a mi perfil de GitHub 🚀<br>Sobre mí 🧑‍💻<br>Actualmente estoy inmerso en el emocionante mundo del Desarrollo de Aplicaciones Web, con un enfoque en mejorar constantemente y expandir mis habilidades. Soy un apasionado de la tecnología y me encuentro en un viaje de aprendizaje constante.<br><br>Objetivos y áreas de interés 🚀<br>Mi camino de aprendizaje incluye explorar campos como Inteligencia Artificial 🤖 y Big Data 📊. Estoy fascinado por las posibilidades que estas tecnologías ofrecen y estoy ansioso por profundizar en su estudio para contribuir a soluciones innovadoras.<br><br>Tecnologías actuales 🛠️<br>En la actualidad, me encuentro inmerso en el aprendizaje de C# and JavaScript, buscando construir una base sólida en el desarrollo de aplicaciones. Además, tengo una pequeña pero creciente habilidad en Python 🐍, y cada día me desafío a mejorar mis habilidades.<br><br>Actitud y metas 🎯<br>Soy una persona ambiciosa, apasionada y adaptable. Mi enfoque diario es convertirme en el mejor programador que puedo ser. La programación no es solo una habilidad para mí, es una obsesión. Mi deseo constante de aprender y mejorar me impulsa a buscar oportunidades para crecer como programador BackEnd.<br><br>En resumen 🌟<br>Estoy aquí para aprender, colaborar y crecer. Siempre estoy abierto a nuevas oportunidades y ansioso por conectarme con personas que comparten mi pasión por la programación. ¡Vamos a construir cosas increíbles juntos! 🚀✨
 
------------------------------------------------------------------------------
-Carles Morales Amat
------------------------------------------------------------------------------
 
-<p> Manuel la chupa </p>
+## 🌐 Redes Sociales:
+[![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/Rao00) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/Rao00_aaa) 
+
+# 💻 Tech Stack:
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white) ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%2300000f.svg?style=for-the-badge&logo=mysql&logoColor=white) ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+
+## 🏆 GitHub Trophies
+![](https://github-profile-trophy.vercel.app/?username=Rao00&theme=radical&no-frame=false&no-bg=false&margin-w=4)
