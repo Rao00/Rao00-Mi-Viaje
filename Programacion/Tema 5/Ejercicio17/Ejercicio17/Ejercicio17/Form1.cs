@@ -318,9 +318,6 @@ namespace Ejercicio17
                 if(WhereSave >= TAMY || WhereSave < 0) { throw new IndexOutOfRangeException("Fila no valida"); }
                 if (MBSobreescribir(WhereSave))
                 {
-<<<<<<< HEAD
-                    vglobal[0, i] = rand.Next(1, 10000);
-=======
                     var rand = new Random();
                     sorted = 0.0f;
                     for (int i = 0; i < TAMX; i++)
@@ -328,7 +325,6 @@ namespace Ejercicio17
                         vglobal[0, i] = rand.Next(1, 9);
                     }
                     EscribirArray(vglobal, WhereSave, vglobal);
->>>>>>> 9c96df2032b553211545734dc2f46bd043c70750
                 }
             }
             catch (FormatException)

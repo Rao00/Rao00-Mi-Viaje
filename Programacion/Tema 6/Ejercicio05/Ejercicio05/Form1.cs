@@ -75,15 +75,19 @@ namespace Ejercicio05
 
         private void bList3_Click(object sender, EventArgs e)
         {
-            foreach(int value in list1)
+            list3.Clear();
+            int i = 0;
+            int j = 0;
+            while(i < list1.Count())
             {
-                list3.Add(value);
+                while(j < list2.Count() && list2[j] <= list1[i])
+                {
+                    list3.Add(list2[j]);
+                    j++;
+                }
+                list3.Add(list1[i]);
+                i++;
             }
-            foreach (int value in list2)
-            {
-                list3.Add(value);
-            }
-            list3.Sort();
             ReadList(list3);
         }
 

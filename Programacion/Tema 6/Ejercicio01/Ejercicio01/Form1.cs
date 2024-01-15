@@ -126,12 +126,9 @@ namespace Ejercicio01
             try
             {
                 int value = int.Parse(Interaction.InputBox("", "Element to clean", "Insert your element"));
-                if (PData.Count > 0) 
+                if (PData.Count > 0 && PData.Contains(value)) 
                 {
-                    while ( PData.Contains(value))
-                    {
-                        PData.Remove(value);
-                    }
+                    PData.RemoveAll(i => i == value);
                     Confirmation();
                 }
                 else { throw new Exception("List already empty"); }

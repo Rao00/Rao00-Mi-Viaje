@@ -37,7 +37,7 @@ namespace Ejercicio02
             }
             while (i < values.Count()) 
             {
-                if (values[i] % 2 == 0) { even.Add(values[i]); values.Remove(values[i]); }
+                if (values[i] % 2 == 0) { even.Add(values[i]); values.RemoveAt(i); }
                 else { i++; }
             }
             foreach (int value in even) { output += value + ","; }
