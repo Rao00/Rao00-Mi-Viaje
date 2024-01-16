@@ -31,12 +31,22 @@ namespace Ejercicio07
         List<string> AddValuesInOrder(List<string> list, string WordToAdd)
         {
             bool execute = true;
+            if(list.Count()<1)
+            {
+                list.Add(WordToAdd);
+                execute = false;
+            }
             for (int i = 0; i < list.Count() && execute; i++) 
             {
                 int result = String.Compare(list[i], WordToAdd);
-                if (result > 0)
+                if (result >= 0)
                 {
                     list.Insert(i, WordToAdd);
+                    execute = false;
+                }
+                else if(i+1 == list.Count())
+                { 
+                    list.Add(WordToAdd);
                     execute = false;
                 }
             }
