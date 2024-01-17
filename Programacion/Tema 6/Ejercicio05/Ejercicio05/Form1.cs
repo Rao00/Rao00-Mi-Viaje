@@ -18,7 +18,7 @@ namespace Ejercicio05
             InitializeComponent();
         }
 
-        const int TAM = 10;
+        const int TAM = 3;
 
         List<int> list1 = new List<int>();
         List<int> list2 = new List<int>();
@@ -31,44 +31,44 @@ namespace Ejercicio05
             MessageBox.Show(output);
         }
 
-        //void AddNum(List<int> list)
-        //{
-        //    int value = int.Parse(Interaction.InputBox("", $"Value to add in {list}"));
-        //    list.Add(value);
-        //}
+        void AddNum(List<int> list)
+        {
+            int value = int.Parse(Interaction.InputBox("", $"Value to add in {list}"));
+            list.Add(value);
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //DialogResult MoreValues = DialogResult.Yes;
-            //while (MoreValues == DialogResult.Yes)
-            //{
-            //    AddNum(list1);
-            //    MoreValues = MessageBox.Show("Do you want more values?", "", MessageBoxButtons.YesNo);
-            //}
+            DialogResult MoreValues = DialogResult.Yes;
+            while (MoreValues == DialogResult.Yes)
+            {
+                AddNum(list1);
+                MoreValues = MessageBox.Show("Do you want more values?", "", MessageBoxButtons.YesNo);
+            }
 
-            Random rand = new Random();
+            /*Random rand = new Random();
             for(int i = 0; i < TAM; i++)
             {
                 list1.Add(rand.Next(0, 40));
-            }
+            }*/
             list1.Sort();
             ReadList(list1);
         }
 
         private void bNewList2_Click(object sender, EventArgs e)
         {
-            //DialogResult MoreValues = DialogResult.Yes;
-            //while (MoreValues == DialogResult.Yes)
-            //{
-            //    AddNum(list2);
-            //    MoreValues = MessageBox.Show("Do you want more values?", "", MessageBoxButtons.YesNo);
-            //}
-
+            DialogResult MoreValues = DialogResult.Yes;
+            while (MoreValues == DialogResult.Yes)
+            {
+                AddNum(list2);
+                MoreValues = MessageBox.Show("Do you want more values?", "", MessageBoxButtons.YesNo);
+            }
+            /*
             Random rand = new Random();
             for (int i = 0; i < TAM; i++)
             {
                 list2.Add(rand.Next(0, 40));
-            }
+            }*/
             list2.Sort();
             ReadList(list2);
         }
@@ -78,17 +78,34 @@ namespace Ejercicio05
             list3.Clear();
             int i = 0;
             int j = 0;
-            while(i < list1.Count())
+            while (i < list1.Count() && j < list2.Count())
             {
-                while(j < list2.Count() && list2[j] <= list1[i])
+                if (list2[j] < list1[i])
                 {
                     list3.Add(list2[j]);
                     j++;
                 }
-                list3.Add(list1[i]);
-                i++;
+                if (list2[j] > list1[i])
+                {
+                    list3.Add(list1[i]);
+                    i++;
+                }
             }
-            ReadList(list3);
+            if (i == list1.Count())
+            {
+                for (int t = j; j < list2.Count(); j++) 
+                { 
+                    list3.Add(list2[j]); 
+                }
+            }
+            if (j == list2.Count())
+            {
+                for (int t = i; i < list1.Count(); i++)
+                {
+                    list3.Add(list1[i]);
+                }
+                ReadList(list3);
+            }
         }
 
         private void bCleanList_Click(object sender, EventArgs e)
