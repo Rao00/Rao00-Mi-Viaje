@@ -1,5 +1,4 @@
 # 💫 Sobre Mi:
-Bienvenido a mi perfil de GitHub 🚀
 Aqui empeiza mi viaje por el mundo de la programacion💻🚀🌟
 
 <details>   
