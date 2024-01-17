@@ -27,11 +27,19 @@ SELECT pe.codPedido, pe.fecha_pedido,
    AND d.codProducto = pr.codProducto
    AND pr.codCategoria = cp.codCategoria
 
-/* pedidos de cada clientes */
-
 SELECT c.codCliente,
        c.nombre_cliente, 
-       COUNT(p.codPedido) cantidadPedidos
+       ISNULL(COUNT(p.codPedido), 0) cantidadPedidos
   FROM PEDIDOS p RIGHT JOIN CLIENTES c
+    ON p.codCliente = c.codCliente
+ GROUP BY c.codCliente, c.nombre_cliente
+
+SELECT * FROM PAGOS
+
+SELECT c.codCLiente,
+       c.nombre_cliente,
+       COUNT(p.codPedido) cantidadPedidos,
+       ISNULL(SUM(p.importe_pago), 0) AS importeTotal
+  FROM CLIENTES c LEFT JOIN PAGOS p
     ON p.codCliente = c.codCliente
  GROUP BY c.codCliente, c.nombre_cliente
