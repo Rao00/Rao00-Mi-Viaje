@@ -92,18 +92,21 @@ namespace Ejercicio05
                     i++;
                 }
             }
-            if (i == list1.Count())
+            for (int t = j; j < list2.Count(); j++) 
             {
-                for (int t = j; j < list2.Count(); j++) { if (!list3.Contains(list2[j])) { list3.Add(list2[j]); } }
+                if (!list3.Contains(list2[j])) 
+                { 
+                    list3.Add(list2[j]); 
+                } 
             }
-            if (j == list2.Count())
+            for (int t = i; i < list1.Count(); i++)
             {
-                for (int t = i; i < list1.Count(); i++)
+                if (!list3.Contains(list1[i]))
                 {
-                    if (!list3.Contains(list1[i])) { list3.Add(list1[i]); }
+                    list3.Add(list1[i]);
                 }
-                ReadList(list3);
             }
+            ReadList(list3);
         }
 
         private void bCleanList_Click(object sender, EventArgs e)
