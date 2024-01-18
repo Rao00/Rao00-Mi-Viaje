@@ -72,35 +72,76 @@ SELECT c.nombre_cliente,
  GROUP BY c.nombre_cliente, p.fecha_pedido
 ;
 -- 9. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo.
-SELECT 
+SELECT p.codPedido,
+       p.codCliente,
+       p.fecha_esperada,
+       p.fecha_entrega
+  FROM PEDIDOS p
+ WHERE p.fecha_entrega > p.fecha_esperada
 ;
 -- 10. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los 
 -- pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada.
-
+SELECT p.codPedido,
+       p.codCliente,
+       p.fecha_esperada,
+       p.fecha_entrega
+  FROM PEDIDOS p
+ WHERE p.fecha_entrega > p.fecha_esperada
+;
 -- Utilizando la función DATEADD
-SELECT ;
-
+SELECT p.codPedido,
+       p.codCliente,
+       p.fecha_esperada,
+       p.fecha_entrega
+  FROM PEDIDOS p
+ WHERE p.fecha_entrega >= DATEADD("D",2, p.fecha_esperada)
+;
 -- 11. Misma consulta pero utilizando la función DATEDIFF
-SELECT ;
-
+SELECT p.codPedido,
+       p.codCliente,
+       p.fecha_esperada,
+       p.fecha_entrega
+  FROM PEDIDOS p
+ WHERE DATEDIFF("D", p.fecha_esperada, p.fecha_entrega) >= 2
+;
 -- 12. Devuelve un listado de todos los pedidos que fueron rechazados en 2022
-SELECT ;
-
+SELECT *
+  FROM PEDIDOS p
+ WHERE YEAR(p.fecha_pedido) = 2022
+   AND codEstado = 'R'
+;
 -- 13. Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año
-SELECT ;
-
+SELECT *
+  FROM PEDIDOS p
+ WHERE MONTH(p.fecha_pedido) = 1
+   AND p.codEstado = 'E'
+;
 -- 14. Devuelve un listado con todos los pagos que se realizaron en el año 2022 mediante Paypal. Ordena el resultado de mayor a menor
-SELECT ;
-
+SELECT *
+  FROM PAGOS p
+ WHERE p.codFormaPago = 'P'
+   AND YEAR(p.fechaHora_pago) = 2022
+ ORDER BY codCliente DESC
+;
 -- 15. Devuelve un listado con todas las formas de pago que aparecen en la tabla PAGOS. Ten en cuenta que no deben aparecer formas de pago repetidas.
-SELECT ;
-
+SELECT p.codFormaPago
+  FROM PAGOS p
+ GROUP BY p.codFormaPago
+;
 -- 16. Devuelve un listado con todos los productos que pertenecen a la categoría Ornamentales y que tienen más de 100 unidades en stock.
 -- El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.
-SELECT ;
-
+SELECT *
+  FROM PRODUCTOS
+ WHERE codCategoria = 'OR'
+   AND cantidad_en_stock > 100
+ ORDER BY precio_venta DESC
+;
 -- 17. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30
-SELECT ;
+SELECT *
+  FROM CLIENTES
+ WHERE ciudad = 'Madrid'
+   AND (codEmpl_ventas = 11 OR codEmpl_ventas = 30)
+;
 
 ----------------------------------------------------------------
 -- B) Consultas de agrupación o de funciones de agregado (18) --
