@@ -56,9 +56,8 @@ SELECT c.nombre_cliente,
  WHERE c.pais = 'Spain'
 ;
 -- 7. Devuelve un listado con los distintos estados por los que puede pasar un pedido.
-SELECT ep.codEstado,
-       ep.descripcion
-  FROM ESTADOS_PEDIDO ep
+SELECT DISTINCT(p.codEstado)
+  FROM PEDIDOS p
 ;
 -- 8. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2023.
 -- Ten en cuenta que deberás eliminar aquellos códigos de cliente que aparezcan repetidos.
@@ -81,20 +80,13 @@ SELECT p.codPedido,
 ;
 -- 10. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los 
 -- pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada.
-SELECT p.codPedido,
-       p.codCliente,
-       p.fecha_esperada,
-       p.fecha_entrega
-  FROM PEDIDOS p
- WHERE p.fecha_entrega > p.fecha_esperada
-;
 -- Utilizando la función DATEADD
 SELECT p.codPedido,
        p.codCliente,
        p.fecha_esperada,
        p.fecha_entrega
   FROM PEDIDOS p
- WHERE p.fecha_entrega >= DATEADD("D",2, p.fecha_esperada)
+ WHERE p.fecha_entrega <= DATEADD(DAY, -2, p.fecha_esperada)
 ;
 -- 11. Misma consulta pero utilizando la función DATEDIFF
 SELECT p.codPedido,
@@ -102,7 +94,7 @@ SELECT p.codPedido,
        p.fecha_esperada,
        p.fecha_entrega
   FROM PEDIDOS p
- WHERE DATEDIFF("D", p.fecha_esperada, p.fecha_entrega) >= 2
+ WHERE DATEDIFF(DAY, p.fecha_entrega, p.fecha_esperada) >= 2
 ;
 -- 12. Devuelve un listado de todos los pedidos que fueron rechazados en 2022
 SELECT *
@@ -148,48 +140,84 @@ SELECT *
 ----------------------------------------------------------------
 
 -- 18. ¿Cuántos empleados hay en la compañía?
-SELECT ;
+SELECT COUNT(codEmpleado) TotalEmpleados
+  FROM EMPLEADOS
+;
 
 -- 19. ¿Cuántos clientes tiene cada país?
-SELECT ;
-
+SELECT pais, COUNT(codCliente) TotalClientes
+  FROM CLIENTES
+ GROUP BY pais
+;
 -- 20. ¿Cuál fue el pago medio de 2022?
-SELECT ;
-
+SELECT AVG(importe_pago) Media2022
+  FROM PAGOS
+ WHERE YEAR(fechaHora_pago) <> 2022
+;
 -- 21. ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos.
-SELECT ;
-
+SELECT codEstado, COUNT(codPedido) Cantidad
+  FROM PEDIDOS
+ GROUP BY codEstado
+ ORDER BY COUNT(codPedido) DESC
+;
 -- 22. Calcula el precio de venta del producto más caro y más barato en una misma consulta.
-SELECT ;
-
+SELECT MIN(precio_venta) Minimo, MAX(precio_venta) Maximo
+  FROM PRODUCTOS
+;
 -- 23. ¿Cuántos clientes tiene la ciudad de Madrid?
-SELECT ;
-
+SELECT COUNT(codCliente) CantidadClientes, ciudad
+  FROM CLIENTES
+ WHERE ciudad = 'Madrid'
+ GROUP BY ciudad
+;
 -- 24. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por M?
-SELECT ;
-
+SELECT COUNT(codCliente) CantidadClientes, ciudad
+  FROM CLIENTES
+ WHERE ciudad LIKE 'M%'
+ GROUP BY ciudad
+;
 -- 25. Devuelve el código de los representantes de ventas y el número de clientes al que atiende cada uno.
-SELECT ;
-
+SELECT codEmpl_ventas, COUNT(codCliente) CantidadClientes
+  FROM CLIENTES
+ GROUP BY codEmpl_ventas
+;
 -- 26. Calcula el número de clientes que no tiene asignado representante de ventas.
-SELECT ;
-
+SELECT codEmpl_ventas, COUNT(codCliente) CantidadClientes
+  FROM CLIENTES
+ WHERE codEmpl_ventas IS NULL
+ GROUP BY codEmpl_ventas
+;
 -- 27. Calcula el número de productos diferentes que hay en cada uno de los pedidos.
-SELECT ;
-
+SELECT codPedido, COUNT(DISTINCT(codProducto)) ProductosDistintos
+  FROM DETALLE_PEDIDOS
+ GROUP BY codPedido
+;
 -- 28. Calcula la suma de la cantidad total de todos los productos que aparecen en cada uno de los pedidos
-SELECT ;
-
+SELECT codPedido, SUM(DISTINCT(cantidad)) SumaTotal
+  FROM DETALLE_PEDIDOS
+ GROUP BY codPedido
+;
 -- 29. Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno.
 -- El listado deberá estar ordenado por el número total de unidades vendidas.
-SELECT ;
-
+SELECT TOP 20 codProducto, SUM(cantidad) cantidadVendidas
+  FROM DETALLE_PEDIDOS
+ GROUP BY codProducto
+ ORDER BY SUM(cantidad) DESC
+;
 -- 30. Obtener el número de empleados por oficina, siempre que el número de empleados sea mayor que 4.
-SELECT ;
-
+SELECT codOficina, COUNT(codEmpleado) numEmpleados
+  FROM EMPLEADOS
+ GROUP BY codOficina
+HAVING COUNT(codEmpleado) > 4
+;
 -- 31. Obtener los clientes que hayan realizado más de dos pagos de mínimo 1000 euros.
 -- Mostrar también el número de pagos realizados.
-SELECT ;
+SELECT codCliente, COUNT(codPedido) numPagos, SUM(importe_pago) importeTotal
+  FROM PAGOS
+ GROUP BY codCliente
+HAVING SUM(importe_pago) >= 1000
+   AND COUNT(codPedido) > 2
+;
 
 ----------------------------------------------------------------
 --				C) Consultas multitabla (10)				  --
