@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AFB794FB-CB07-41BA-854D-D4AE806C54FF}</ProjectGuid>
+    <ProjectGuid>{A40E49DA-C861-4E7D-BB3B-CF236596B4F9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MeQuieroMorirBaseDeDatos</RootNamespace>
-    <AssemblyName>MeQuieroMorirBaseDeDatos</AssemblyName>
+    <RootNamespace>Ejercicio03</RootNamespace>
+    <AssemblyName>Ejercicio03</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fecha.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
