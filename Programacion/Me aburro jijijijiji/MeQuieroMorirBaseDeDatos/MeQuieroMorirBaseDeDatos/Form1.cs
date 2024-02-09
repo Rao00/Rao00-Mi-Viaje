@@ -31,72 +31,62 @@ namespace MeQuieroMorirBaseDeDatos
         }
 
         List<string> ListaPrincipal = new List<string>();//Lista de bases de datos
-        string[,] tabla = new string[0,0];
 
-        float TipoDeDato(string linea)
-        {
-            if (linea.Contains("/s")) { return 0.0f; }
-            if (linea.Contains("/b")) { return 0.1f; }
-            if (linea.Contains("/t")) { return 0.2f; }
-            if (linea.Contains("/c")) { return 0.3f; }
-            if (linea.Contains("/f")) { return 0.4f; }
-            return -0.1f;
-        }
+        string DataBase = null;
+        string Table = null;
 
-        string[] AddDatastring<T>(string[] matriz, T data, bool fila = true)
+        private void initTreeView(object sender, EventArgs e)
         {
-            matriz.CountDimension();
-            return matriz;
-        }
+            StreamReader sr = new StreamReader(".\\data\\JARDINERIA.txt");
 
-        void LeerDatos(string ruta, string BD)
-        {
-            try
+            string line = sr.ReadLine();
+
+            while (line != null)
             {
-                StreamReader sr = new StreamReader($"C:\\Users\\Carles\\source\\repos\\DAW_1-_rep\\Programacion\\Me aburro jijijijiji\\MeQuieroMorirBaseDeDatos\\data\\{BD}.txt");
-                string line = sr.ReadLine();
-                while (line != null)
+                string[] split = line.Split('~');
+                switch (split[0])
                 {
-                    if (TipoDeDato(line) == 0.1f)
-                    {
-                        continue;
-                    }
+                    case "/bd":
+                        NewDataBase(split[1]);
+                        break;
+                    case "/t":
+                        NewTable(DataBase, split[1]); 
+                        break;
+                    case "/c":
+                        switch(split.Length)
+                        {
+                            case 3:
+                                NewColumn(DataBase, Table, split[1], split[2]);
+                                break;
+                            case 4:
+                                NewColumn(DataBase, Table, split[1], split[2], int.Parse(split[3]));
+                                break;
+                            default:
+                                NewColumn(DataBase, Table, split[1]);
+                                break;
+                        }
+                        break;
+                    case "/f":
+                        
+                    case "/s":
+                        Table = split[1];
+                        break;
                 }
+                line = sr.ReadLine();
             }
             catch { }
         }
 
-        private void bAñadirDatos_Click(object sender, EventArgs e)
-        {
-
+        private void NewDataBase(string dataBase) 
+        { 
+            trV.Nodes.Add(dataBase);
+            DataBase = dataBase;
         }
-    }
-
-    public static class ListExtensions
-    {
-        public static (int x, int y, int z) CountDimension(this string[] list)
+        private void NewTable(string dataBase, string table) 
         {
-            int countX = 0;
-            int countY = 0;
-            int countZ = 0;
-            try
-            {
-                while (list != null)
-                {
-                    countX++;
-                }
-            }
-            catch { }
-            try
-            {
-                while (list != null)
-                {
-                    countY++;
-                }
-            }
-            catch { }
-            return (countX, countY, countZ);
+            trV.Nodes[0].Nodes.Add(table);
+            Table = table;
         }
-        
+        private void NewColumn(string dataBase, string table, string column, string typeColumn = "null", int autoAdd = 0) { }
     }
 }

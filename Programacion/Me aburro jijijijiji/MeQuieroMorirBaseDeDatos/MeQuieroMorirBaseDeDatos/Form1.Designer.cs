@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Clientes");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Productos");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Puntos de Venta");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Relaciones");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("JARDINERIA", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Clientes");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Productos");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Puntos de Venta");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Relaciones");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("JARDINERIA", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.trV = new System.Windows.Forms.TreeView();
             this.bAñadirDatos = new System.Windows.Forms.Button();
             this.bEliminarDatos = new System.Windows.Forms.Button();
             this.bAñadirTabla = new System.Windows.Forms.Button();
@@ -48,31 +48,31 @@
             this.rbFilas = new System.Windows.Forms.RadioButton();
             this.rbColumnas = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.bModSelec = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // treeView1
+            // trV
             // 
-            this.treeView1.Location = new System.Drawing.Point(-1, -1);
-            this.treeView1.Name = "treeView1";
-            treeNode6.Name = "tabla_clientes";
-            treeNode6.Text = "Clientes";
-            treeNode7.Name = "tabla_productos";
-            treeNode7.Text = "Productos";
-            treeNode8.Name = "tabla_puntosVenta";
-            treeNode8.Text = "Puntos de Venta";
-            treeNode9.Name = "relaciones";
-            treeNode9.Text = "Relaciones";
-            treeNode10.Name = "BaseDatos";
-            treeNode10.Text = "JARDINERIA";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            this.treeView1.Size = new System.Drawing.Size(165, 588);
-            this.treeView1.TabIndex = 0;
+            this.trV.Location = new System.Drawing.Point(-1, -1);
+            this.trV.Name = "trV";
+            treeNode1.Name = "tabla_clientes";
+            treeNode1.Text = "Clientes";
+            treeNode2.Name = "tabla_productos";
+            treeNode2.Text = "Productos";
+            treeNode3.Name = "tabla_puntosVenta";
+            treeNode3.Text = "Puntos de Venta";
+            treeNode4.Name = "relaciones";
+            treeNode4.Text = "Relaciones";
+            treeNode5.Name = "BaseDatos";
+            treeNode5.Text = "JARDINERIA";
+            this.trV.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode5});
+            this.trV.Size = new System.Drawing.Size(165, 588);
+            this.trV.TabIndex = 0;
             // 
             // bAñadirDatos
             // 
@@ -84,7 +84,7 @@
             this.bAñadirDatos.TabIndex = 1;
             this.bAñadirDatos.Text = "Añadir Datos (Selecciona tabla)";
             this.bAñadirDatos.UseVisualStyleBackColor = false;
-            this.bAñadirDatos.Click += new System.EventHandler(this.bAñadirDatos_Click);
+            this.bAñadirDatos.Click += new System.EventHandler(this.initTreeView);
             // 
             // bEliminarDatos
             // 
@@ -160,24 +160,6 @@
             this.panel1.Size = new System.Drawing.Size(231, 73);
             this.panel1.TabIndex = 8;
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(12, -1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Fila Inicial --> - - - - - - - - ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(12, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 37);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Fila Final --> - - - - - - - - - ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // bModSelec
             // 
             this.bModSelec.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -188,6 +170,24 @@
             this.bModSelec.TabIndex = 9;
             this.bModSelec.Text = "Modificar Seleccion";
             this.bModSelec.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(12, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Fila Final --> - - - - - - - - - ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(12, -1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 37);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Fila Inicial --> - - - - - - - - ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -203,7 +203,7 @@
             this.Controls.Add(this.bAñadirTabla);
             this.Controls.Add(this.bEliminarDatos);
             this.Controls.Add(this.bAñadirDatos);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.trV);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
@@ -216,7 +216,7 @@
         #endregion
 
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView trV;
         private System.Windows.Forms.Button bAñadirDatos;
         private System.Windows.Forms.Button bEliminarDatos;
         private System.Windows.Forms.Button bAñadirTabla;
