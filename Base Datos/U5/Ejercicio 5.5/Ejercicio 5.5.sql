@@ -79,7 +79,7 @@ SELECT p.nombre
 ;
 
 -- 3. Devuelve el producto que más unidades tiene en stock. Si salen varios, quédate solo con uno.
-SELECT p.codProducto, p.nombre
+SELECT p.*
   FROM PRODUCTOS p
  WHERE p.codProducto = (SELECT MIN(p.codProducto)
 					            	  FROM PRODUCTOS p
@@ -88,7 +88,7 @@ SELECT p.codProducto, p.nombre
 ;
 
 -- 4. Devuelve el producto que menos unidades tiene en stock.
-SELECT p.codProducto, p.nombre
+SELECT p.*
   FROM PRODUCTOS p
  WHERE p.codProducto = (SELECT MIN(p.codProducto)
 						              FROM PRODUCTOS p
@@ -150,7 +150,7 @@ SELECT p.nombre
 ;
 
 -- 3. Devuelve el producto que menos unidades tiene en stock.
-SELECT p.nombre
+SELECT p.*
   FROM PRODUCTOS p
  WHERE p.cantidad_en_stock <= ALL(SELECT pl.cantidad_en_stock
                                     FROM PRODUCTOS pl)
@@ -162,23 +162,23 @@ SELECT p.nombre
 ----------------------------------
 
 -- 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-SELECT codCliente, nombre_cliente
+SELECT *
   FROM CLIENTES
  WHERE codCliente NOT IN (SELECT codCliente
                             FROM PAGOS)
 ;
 
 -- 2. Devuelve un listado que muestre solamente los clientes que han realizado algún pago.
-SELECT codCliente, nombre_cliente
+SELECT *
   FROM CLIENTES
  WHERE codCliente IN (SELECT codCliente
                         FROM PAGOS)
 ;
 -- 3. Devuelve un listado de los productos que nunca han aparecido en un pedido.
-SELECT codCliente, nombre_cliente
-  FROM CLIENTES
- WHERE codCliente NOT IN (SELECT codCliente
-                            FROM PEDIDOS)
+SELECT *
+  FROM PRODUCTOS
+ WHERE codProducto NOT IN (SELECT codProducto
+                            FROM DETALLE_PEDIDOS)
 ;
 
 -- 4. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
@@ -191,7 +191,7 @@ SELECT e.nombre, e.apellido1, e.apellido2, e.puesto_cargo, o.telefono
 ;
 
 -- 5. Devuelve las oficinas donde trabajan alguno de los empleados.
-SELECT o.codOficina
+SELECT o.*
   FROM OFICINAS o
  WHERE o.codOficina IN (SELECT e.codOficina
                           FROM EMPLEADOS e)
@@ -212,7 +212,7 @@ SELECT c.codCliente
 ------------------------------------------
 
 -- 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-SELECT c.codCliente
+SELECT c.*
   FROM CLIENTES c
  WHERE NOT EXISTS (SELECT p.codCliente
                      FROM PAGOS p
@@ -220,7 +220,7 @@ SELECT c.codCliente
 ;
 
 -- 2. Devuelve un listado que muestre solamente los clientes que han realizado algún pago.
-SELECT c.codCliente
+SELECT c.*
   FROM CLIENTES c
  WHERE EXISTS (SELECT p.codCliente
                  FROM PAGOS p
@@ -228,7 +228,7 @@ SELECT c.codCliente
 ;
 
 -- 3. Devuelve un listado de los productos que nunca han aparecido en un pedido.
-SELECT p.codProducto
+SELECT p.*
   FROM PRODUCTOS p
  WHERE NOT EXISTS(SELECT dp.codProducto
                     FROM DETALLE_PEDIDOS dp
@@ -236,7 +236,7 @@ SELECT p.codProducto
 ;
 
 -- 4. Devuelve un listado de los productos que han aparecido en un pedido alguna vez.
-SELECT p.codProducto
+SELECT p.*
   FROM PRODUCTOS p
  WHERE EXISTS(SELECT dp.codProducto
                 FROM DETALLE_PEDIDOS dp

@@ -64,23 +64,5 @@ namespace Ejercicio03
                 else { fDay = 0; }
             }
         }
-
-        public int orderList(bool asc)
-        {
-            List<Fecha> salida = new List<Fecha>();
-            bool cont = true;
-            salida.Add()
-            for (int i = 1; i < ; i++)
-            {
-                for (int k = salida.Count() - 1; k > 0 && cont; k--)
-                {
-                    if (fechaList[i] > salida[k])
-                    {
-
-                    }
-                }
-            }
-            
-        }
     }
 }

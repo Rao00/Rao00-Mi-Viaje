@@ -31,6 +31,16 @@ namespace Ejercicio03
             fecha.Month = month;
             fecha.Day = day;
             fechaList.Add(fecha);
+            if (fechaList.Last().Day == 0)
+            {
+                fechaList.Remove(fechaList.Last());
+                MessageBox.Show("Dia no valido");
+            }
+            if (fechaList.Last().Month == 0)
+            {
+                fechaList.Remove(fechaList.Last());
+                MessageBox.Show("Mes no valido");
+            }
         }
 
         private void btnLeer_Click(object sender, EventArgs e)
@@ -45,13 +55,39 @@ namespace Ejercicio03
 
         private void btnSortFechas_Click(object sender, EventArgs e)
         {
-            List<Fecha> salida = new List<Fecha>();
             bool cont = true;
-            salida.Add(fechaList[0]); 
-            for (int i = 1; i < fechaList.Count(); i++)
+            for (int i = 0; i < fechaList.Count(); i++)
             {
-                
+                for (int j = 0; j < fechaList.Count() && cont; j++)
+                {
+                    if (fechaList[j].Year < fechaList[i].Year) 
+                    {
+                        fechaList = MoveFechas(fechaList, i, j);
+                        cont = false;
+                    }
+                    else if (fechaList[j].Month < fechaList[i].Month)
+                    {
+                        fechaList = MoveFechas(fechaList, i, j);
+                        cont = false;
+                    }
+                    else if (fechaList[j].Day < fechaList[i].Day)
+                    {
+                        fechaList = MoveFechas(fechaList, i, j);
+                        cont = false;
+                    }
+                }
+                cont = true;
             }
+            MessageBox.Show("Fechas ordenadas");
+        }
+
+        private List<Fecha> MoveFechas(List<Fecha>fechaList, int i, int j)
+        {
+            Fecha fechaTemp;
+            fechaTemp = fechaList[j];
+            fechaList[j] = fechaList[i];
+            fechaList[i] = fechaTemp;
+            return fechaList;
         }
     }
 }
