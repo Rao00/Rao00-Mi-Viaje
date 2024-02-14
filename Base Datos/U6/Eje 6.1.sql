@@ -71,53 +71,129 @@ DELETE FROM CLIENTES WHERE codCliente = 39
 --6. Actualiza la cantidad de unidades solicitadas en el pedido que has creado del siguiente modo:
 -- para el 1er producto serán 3 unidades, para el producto 2 serán 2 unidades y el tercero 1 unidad.
 
+UPDATE DETALLE_PEDIDOS
+   SET cantidad = 3
+ WHERE codPedido = 129
+   AND numeroLinea = 1
 
+GO
+
+UPDATE DETALLE_PEDIDOS
+   SET cantidad = 2
+ WHERE codPedido = 129
+   AND numeroLinea = 2
+
+GO
+
+UPDATE DETALLE_PEDIDOS
+   SET cantidad = 1
+ WHERE codPedido = 129
+   AND numeroLinea = 3
 
 --7. Modifica la fecha del pedido que hemos creado a la fecha y hora actuales.
 
+UPDATE PEDIDOS
+   SET fecha_pedido = GETDATE()
+ WHERE codPedido = 129
 
 --8. Incrementa en un 5% el precio de los productos que están incluidos en el pedido que has creado.
 -- Recuerda que puede que tengas que redondear y/o utilizar la función CAST (XXX as FLOAT)
 
+SELECT * FROM PRODUCTOS
+
+UPDATE PRODUCTOS
+   SET precio_venta += precio_venta * 0.05
+ WHERE codProducto = ANY(SELECT codProducto
+                           FROM DETALLE_PEDIDOS
+                          WHERE codPedido = 129)
 
 --9. Vuelve a dejar el precio de dichos productos como estaba anteriormente.
 
+UPDATE PRODUCTOS
+   SET precio_venta = CEILING(precio_venta - precio_venta * 0.05) 
+ WHERE codProducto = ANY(SELECT codProducto
+                           FROM DETALLE_PEDIDOS
+                          WHERE codPedido = 129)
 
 --10. ¿Cuál sería la secuencia de borrado de registros de tablas hasta que finalmente se pueda borrar la oficina de Alicante que creamos en el ejercicio 1? Una vez tengas el script, comprueba que se puede eliminar.
 
+DELETE FROM DETALLE_PEDIDOS
+ WHERE codPedido = 129
+GO
+DELETE FROM PEDIDOS
+ WHERE codPedido = 129
+GO
+DELETE FROM CLIENTES 
+ WHERE codCliente = 39
+GO
+DELETE FROM EMPLEADOS
+ WHERE codEmpleado = 32
+GO
+DELETE FROM OFICINAS
+ WHERE codOficina = 'ALI-ES'
 
 --11. Incrementa en un 20% el precio de los productos que NO estén incluidos en ningún pedido.
 -- Recuerda que puede que tengas que redondear y/o utilizar la función CAST (XXX as FLOAT)
 
-
+UPDATE PRODUCTOS
+   SET precio_venta += precio_venta*0.2
+ WHERE codProducto NOT IN (SELECT codProducto
+                             FROM DETALLE_PEDIDOS)
 
 --12. Vuelve a dejar el precio de los productos como estaba anteriormente.
 
-
+UPDATE PRODUCTOS
+   SET precio_venta -= precio_venta*0.2
+ WHERE codProducto NOT IN (SELECT codProducto
+                             FROM DETALLE_PEDIDOS)
 
 --13. Elimina los clientes que no hayan realizado ningún pago.
 
-
+DELETE FROM CLIENTES
+ WHERE codCliente NOT IN (SELECT codCliente
+                            FROM PAGOS)
 
 --14. Elimina los clientes que no hayan realizado un mínimo de 2 pedidos (NOTA: al ejecutar la sentencia fallará por la integridad referencial, es decir, porque hay tablas que tiene relacionado el idCliente como FK).
 
-
+DELETE FROM CLIENTES
+ WHERE codCliente NOT IN (SELECT codCliente
+                            FROM PEDIDOS
+                           GROUP BY codCliente
+                          HAVING COUNT(codPedido) >= 2) 
 
 --15. Borra los pagos del cliente con menor límite de crédito.
 
-
+DELETE FROM PAGOS
+ WHERE codCliente = (SELECT TOP 1 codCliente
+                       FROM CLIENTES
+                      ORDER BY limite_credito ASC)
 
 --16. Actualiza la ciudad a Alicante para aquellos clientes que tengan un límite de crédito inferior a TODOS los precios de los productos de la categoría Ornamentales (puede que no haya ninguno).
 
+UPDATE CLIENTES
+   SET ciudad = 'Alicante'
+ WHERE limite_credito < ALL(SELECT precio_venta
+                              FROM PRODUCTOS
+                             WHERE codCategoria = 'OR')
 
 
 --17. Actualiza la ciudad a Madrid para aquellos clientes que tengan un límite de crédito mensual inferior a ALGUNO de los precios de los productos de la categoría Ornamentales.
 
-
+UPDATE CLIENTES
+   SET ciudad = 'Madrid'
+ WHERE limite_credito/12 < ANY(SELECT precio_venta
+                                 FROM PRODUCTOS
+                                WHERE codCategoria = 'OR')
 
 --18. Establece a 0 el límite de crédito del cliente que menos unidades pedidas del producto OR-179.
 
-
+UPDATE CLIENTES
+   SET limite_credito = 0
+ WHERE codCliente = (SELECT TOP 1 codCliente
+                       FROM PEDIDOS p,
+                            DETALLE_PEDIDOS dp,
+                            PRODUCTOS pr
+                      WHERE )
 
 --19. Modifica la tabla detalle_pedido para insertar un campo numérico llamado IVA. Establece el
 --valor de ese campo a 18 para aquellos registros cuyo pedido tenga fecha a partir de Enero de
@@ -134,6 +210,6 @@ DELETE FROM CLIENTES WHERE codCliente = 39
 --Deberás insertar en una única sentencia los clientes cuyo nombre contenga la letra ‘s’ e informar el campo fechaAlta como la fecha/hora del momento en el que se inserta.
 
 
---22. Actualiza a NULL los campos region, pais y codigo_postal en la tabla CLIENTES para todos los registros. Utiliza una sentencia de actualización en la que se actualicen estos 3 campos a partir de los datos existentes en la tabla HISTORICO_CLIENTES. Comprueba que los datos se han trasladado correctamente.
+--22. Actualiza a NULL los campos pais y codigo_postal en la tabla CLIENTES para todos los registros. Utiliza una sentencia de actualización en la que se actualicen estos 3 campos a partir de los datos existentes en la tabla HISTORICO_CLIENTES. Comprueba que los datos se han trasladado correctamente.
 
 
