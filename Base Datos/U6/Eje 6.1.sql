@@ -205,25 +205,77 @@ UPDATE CLIENTES
 --2009. A continuación, actualiza el resto de pedidos estableciendo el IVA al 21.
 
 ALTER TABLE DETALLE_PEDIDOS
-  ADD IVA TINYINT
+  ADD IVA VARCHAR(3)
 
 SELECT * FROM DETALLE_PEDIDOS
 
 UPDATE DETALLE_PEDIDOS
-   SET IVA = 21
- WHERE 
+   SET IVA = 18
+ WHERE YEAR(2009) >= ANY(SELECT YEAR(fecha_pedido)
+                        FROM PEDIDOS)
 
- ??
+UPDATE DETALLE_PEDIDOS
+   SET IVA = 21
+ WHERE YEAR(2009) <= ANY(SELECT YEAR(fecha_pedido)
+                        FROM PEDIDOS)
 
 --20. Modifica la tabla detalle_pedido para incorporar un campo numérico llamado total_linea y
 --actualiza todos sus registros para calcular su valor con la fórmula:
 --total_linea = precio_unidad*cantidad * (1 + (iva/100));
 
+SELECT * FROM DETALLE_PEDIDOS
+
+ALTER TABLE DETALLE_PEDIDOS
+  ADD total_linea DECIMAL(9,2)
+
+UPDATE DETALLE_PEDIDOS
+   SET total_linea = (precio_unidad * cantidad * ( 1 + (IVA/100)))
+SELECT * FROM DETALLE_PEDIDOS
 
 --21. Crea una tabla llamada HISTORICO_CLIENTES que tenga la misma estructura que CLIENTES y además un campo llamado fechaAlta de tipo DATE.
 --Deberás insertar en una única sentencia los clientes cuyo nombre contenga la letra ‘s’ e informar el campo fechaAlta como la fecha/hora del momento en el que se inserta.
 
+SELECT * FROM HISTORICO_CLIENTES
 
---22. Actualiza a NULL los campos pais y codigo_postal en la tabla CLIENTES para todos los registros. Utiliza una sentencia de actualización en la que se actualicen estos 3 campos a partir de los datos existentes en la tabla HISTORICO_CLIENTES. Comprueba que los datos se han trasladado correctamente.
+DROP TABLE HISTORICO_CLIENTES
+
+CREATE TABLE HISTORICO_CLIENTES(
+    codCliente        INT,
+    nombre_cliente    VARCHAR(100),
+    nombre_contacto   VARCHAR(100),
+    apellido_contacto VARCHAR(200),
+    telefono          VARCHAR(15),
+    email             VARCHAR(200),
+    linea_direccion1  VARCHAR(200),
+    linea_direccion2  VARCHAR(200),
+    ciudad            VARCHAR(100),
+    pais              VARCHAR(50),
+    codPostal         VARCHAR(5),
+    codEmpl_ventas    INT,
+    limite_credito    DECIMAL(9,2),
+    fecha_alta        DATE
+)
+
+INSERT INTO HISTORICO_CLIENTES (codCliente, nombre_cliente, nombre_contacto,
+                                apellido_contacto, telefono, email,
+                                linea_direccion1, linea_direccion2, ciudad,
+                                pais, codPostal, codEmpl_ventas,
+                                limite_credito, fecha_alta)
+SELECT codCliente, nombre_cliente, nombre_contacto,
+        apellido_contacto, telefono, email,
+        linea_direccion1, linea_direccion2, ciudad,
+        pais, codPostal, codEmpl_ventas,
+        limite_credito, GETDATE()
+FROM CLIENTES
 
 
+--22. Actualiza a NULL los campos pais y codigo_postal en la tabla CLIENTES para todos los registros. Utiliza una sentencia de actualización en la que se actualicen estos 2 campos a partir de los datos existentes en la tabla HISTORICO_CLIENTES. Comprueba que los datos se han trasladado correctamente.
+
+SELECT * FROM CLIENTES
+
+UPDATE CLIENTES
+   SET pais = NULL, codPostal = NULL
+
+UPDATE CLIENTES
+   SET pais = 
+ WHERE codCliente = (SELECT codCliente)
