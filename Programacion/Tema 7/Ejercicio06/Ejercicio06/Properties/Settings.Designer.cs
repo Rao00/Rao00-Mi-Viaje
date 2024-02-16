@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Imagenes.Properties
+namespace Ejercicio06.Properties
 {
 
 

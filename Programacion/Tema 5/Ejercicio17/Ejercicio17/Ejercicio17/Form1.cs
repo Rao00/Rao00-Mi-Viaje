@@ -25,7 +25,7 @@ namespace Ejercicio17
 
         //------------------------------Parametros Globales------------------------------//
 
-        public const int TAMX = 1000;
+        public const int TAMX = 3000;
         public const int TAMY = 5;
         public int[,] vglobal = new int[TAMY, TAMX];
         public float sorted = 0.0f;
@@ -117,7 +117,7 @@ namespace Ejercicio17
             int[,] outputArray = new int[TAMX, MaxValue(array) + 1];
             int numDigitos = (int)Math.Floor(Math.Log10(MaxValue(array)) + 1);
             int indexNum;
-            int r = 1;
+            int r = numDigitos;
 
             while (r <= numDigitos)
             {
@@ -128,7 +128,7 @@ namespace Ejercicio17
                     {
                         if (indexNum == x)
                         {
-                            for (int y = 1; y < TAMX; y++)
+                            for (int y = 1; y < outputArray.GetLength(0); y++)
                             {
                                 if (outputArray[y, x] == 0)
                                 {
@@ -322,7 +322,7 @@ namespace Ejercicio17
                     sorted = 0.0f;
                     for (int i = 0; i < TAMX; i++)
                     {
-                        vglobal[0, i] = rand.Next(1, 9);
+                        vglobal[0, i] = rand.Next(1, 999);
                     }
                     EscribirArray(vglobal, WhereSave, vglobal);
                 }

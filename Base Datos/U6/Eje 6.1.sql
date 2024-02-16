@@ -187,19 +187,33 @@ UPDATE CLIENTES
 
 --18. Establece a 0 el límite de crédito del cliente que menos unidades pedidas del producto OR-179.
 
+SELECT * FROM PRODUCTOS
+
 UPDATE CLIENTES
    SET limite_credito = 0
- WHERE codCliente = (SELECT TOP 1 codCliente
+ WHERE codCliente = (SELECT TOP 1 p.codCliente
                        FROM PEDIDOS p,
                             DETALLE_PEDIDOS dp,
                             PRODUCTOS pr
-                      WHERE )
+                      WHERE pr.refInterna = 'OR-179'
+                        AND p.codPedido = dp.codPedido
+                        AND dp.codProducto = pr.codProducto
+                      ORDER BY cantidad ASC)
 
 --19. Modifica la tabla detalle_pedido para insertar un campo numérico llamado IVA. Establece el
 --valor de ese campo a 18 para aquellos registros cuyo pedido tenga fecha a partir de Enero de
 --2009. A continuación, actualiza el resto de pedidos estableciendo el IVA al 21.
 
+ALTER TABLE DETALLE_PEDIDOS
+  ADD IVA TINYINT
 
+SELECT * FROM DETALLE_PEDIDOS
+
+UPDATE DETALLE_PEDIDOS
+   SET IVA = 21
+ WHERE 
+
+ ??
 
 --20. Modifica la tabla detalle_pedido para incorporar un campo numérico llamado total_linea y
 --actualiza todos sus registros para calcular su valor con la fórmula:
