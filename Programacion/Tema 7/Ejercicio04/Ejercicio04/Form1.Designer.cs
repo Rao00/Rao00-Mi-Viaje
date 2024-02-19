@@ -42,6 +42,7 @@
             this.btnNewEmpleado.TabIndex = 0;
             this.btnNewEmpleado.Text = "Nuevo empleado";
             this.btnNewEmpleado.UseVisualStyleBackColor = true;
+            this.btnNewEmpleado.Click += new System.EventHandler(this.btnNewEmpleado_Click);
             // 
             // btnMostrarLista
             // 
@@ -51,6 +52,7 @@
             this.btnMostrarLista.TabIndex = 1;
             this.btnMostrarLista.Text = "Ver Lista empleados";
             this.btnMostrarLista.UseVisualStyleBackColor = true;
+            this.btnMostrarLista.Click += new System.EventHandler(this.btnMostrarLista_Click);
             // 
             // btnAddVenta
             // 
@@ -60,6 +62,7 @@
             this.btnAddVenta.TabIndex = 3;
             this.btnAddVenta.Text = "Añadir Venta";
             this.btnAddVenta.UseVisualStyleBackColor = true;
+            this.btnAddVenta.Click += new System.EventHandler(this.btnAddVenta_Click);
             // 
             // btnAddEdad
             // 
@@ -69,6 +72,7 @@
             this.btnAddEdad.TabIndex = 2;
             this.btnAddEdad.Text = "Cumpleaños de un Empleado";
             this.btnAddEdad.UseVisualStyleBackColor = true;
+            this.btnAddEdad.Click += new System.EventHandler(this.btnAddEdad_Click);
             // 
             // Form1
             // 

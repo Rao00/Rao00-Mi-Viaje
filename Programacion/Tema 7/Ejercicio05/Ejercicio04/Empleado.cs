@@ -96,9 +96,5 @@ namespace Ejercicio04
                 listaVentas.Add(venta);
             }
         }
-        public void Cumple()
-        {
-            edad++;
-        }
     }
 }
