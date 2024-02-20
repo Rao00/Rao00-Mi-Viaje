@@ -1,6 +1,6 @@
 ﻿namespace Ejercicio04
 {
-    partial class Form1
+    partial class EmpleadosVentas
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -32,10 +32,15 @@
             this.btnMostrarLista = new System.Windows.Forms.Button();
             this.btnAddVenta = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDeleteEmpl = new System.Windows.Forms.Button();
-            this.btnSortAlphOrder = new System.Windows.Forms.Button();
             this.btnShowEmpl = new System.Windows.Forms.Button();
+            this.btnSortAlphOrder = new System.Windows.Forms.Button();
+            this.btnDeleteEmpl = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDeleteVentas = new System.Windows.Forms.Button();
+            this.btnShowMostSells = new System.Windows.Forms.Button();
+            this.btnSortVentas = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnNewEmpleado
@@ -60,11 +65,11 @@
             // 
             // btnAddVenta
             // 
-            this.btnAddVenta.Location = new System.Drawing.Point(551, 306);
+            this.btnAddVenta.Location = new System.Drawing.Point(23, 48);
             this.btnAddVenta.Name = "btnAddVenta";
-            this.btnAddVenta.Size = new System.Drawing.Size(176, 56);
+            this.btnAddVenta.Size = new System.Drawing.Size(344, 40);
             this.btnAddVenta.TabIndex = 3;
-            this.btnAddVenta.Text = "Añadir Venta";
+            this.btnAddVenta.Text = "Añadir Venta a un Empleado";
             this.btnAddVenta.UseVisualStyleBackColor = true;
             this.btnAddVenta.Click += new System.EventHandler(this.btnAddVenta_Click);
             // 
@@ -84,14 +89,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Empleados";
             // 
-            // btnDeleteEmpl
+            // btnShowEmpl
             // 
-            this.btnDeleteEmpl.Location = new System.Drawing.Point(258, 36);
-            this.btnDeleteEmpl.Name = "btnDeleteEmpl";
-            this.btnDeleteEmpl.Size = new System.Drawing.Size(225, 40);
-            this.btnDeleteEmpl.TabIndex = 2;
-            this.btnDeleteEmpl.Text = "Eliminar empleado";
-            this.btnDeleteEmpl.UseVisualStyleBackColor = true;
+            this.btnShowEmpl.Location = new System.Drawing.Point(375, 87);
+            this.btnShowEmpl.Name = "btnShowEmpl";
+            this.btnShowEmpl.Size = new System.Drawing.Size(344, 40);
+            this.btnShowEmpl.TabIndex = 4;
+            this.btnShowEmpl.Text = "Mostrar empleado";
+            this.btnShowEmpl.UseVisualStyleBackColor = true;
+            this.btnShowEmpl.Click += new System.EventHandler(this.btnShowEmpl_Click);
             // 
             // btnSortAlphOrder
             // 
@@ -101,26 +107,74 @@
             this.btnSortAlphOrder.TabIndex = 3;
             this.btnSortAlphOrder.Text = "Ordenar empleados por orden alfabetico";
             this.btnSortAlphOrder.UseVisualStyleBackColor = true;
+            this.btnSortAlphOrder.Click += new System.EventHandler(this.btnSortAlphOrder_Click);
             // 
-            // btnShowEmpl
+            // btnDeleteEmpl
             // 
-            this.btnShowEmpl.Location = new System.Drawing.Point(375, 87);
-            this.btnShowEmpl.Name = "btnShowEmpl";
-            this.btnShowEmpl.Size = new System.Drawing.Size(344, 40);
-            this.btnShowEmpl.TabIndex = 4;
-            this.btnShowEmpl.Text = "Mostrar empleado";
-            this.btnShowEmpl.UseVisualStyleBackColor = true;
+            this.btnDeleteEmpl.Location = new System.Drawing.Point(258, 36);
+            this.btnDeleteEmpl.Name = "btnDeleteEmpl";
+            this.btnDeleteEmpl.Size = new System.Drawing.Size(225, 40);
+            this.btnDeleteEmpl.TabIndex = 2;
+            this.btnDeleteEmpl.Text = "Eliminar empleado";
+            this.btnDeleteEmpl.UseVisualStyleBackColor = true;
+            this.btnDeleteEmpl.Click += new System.EventHandler(this.btnDeleteEmpl_Click);
             // 
-            // Form1
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnSortVentas);
+            this.groupBox2.Controls.Add(this.btnDeleteVentas);
+            this.groupBox2.Controls.Add(this.btnAddVenta);
+            this.groupBox2.Controls.Add(this.btnShowMostSells);
+            this.groupBox2.Location = new System.Drawing.Point(29, 204);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(20);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(20);
+            this.groupBox2.Size = new System.Drawing.Size(742, 217);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Ventas";
+            // 
+            // btnDeleteVentas
+            // 
+            this.btnDeleteVentas.Location = new System.Drawing.Point(23, 129);
+            this.btnDeleteVentas.Name = "btnDeleteVentas";
+            this.btnDeleteVentas.Size = new System.Drawing.Size(344, 40);
+            this.btnDeleteVentas.TabIndex = 3;
+            this.btnDeleteVentas.Text = "Elminiar las ventas de un empleado";
+            this.btnDeleteVentas.UseVisualStyleBackColor = true;
+            this.btnDeleteVentas.Click += new System.EventHandler(this.btnDeleteVentas_Click);
+            // 
+            // btnShowMostSells
+            // 
+            this.btnShowMostSells.Location = new System.Drawing.Point(375, 48);
+            this.btnShowMostSells.Name = "btnShowMostSells";
+            this.btnShowMostSells.Size = new System.Drawing.Size(344, 40);
+            this.btnShowMostSells.TabIndex = 0;
+            this.btnShowMostSells.Text = "Empleado con mayores Ventas";
+            this.btnShowMostSells.UseVisualStyleBackColor = true;
+            this.btnShowMostSells.Click += new System.EventHandler(this.btnShowMostSells_Click);
+            // 
+            // btnSortVentas
+            // 
+            this.btnSortVentas.Location = new System.Drawing.Point(375, 129);
+            this.btnSortVentas.Name = "btnSortVentas";
+            this.btnSortVentas.Size = new System.Drawing.Size(344, 40);
+            this.btnSortVentas.TabIndex = 4;
+            this.btnSortVentas.Text = "Ordenar empleados por Ventas";
+            this.btnSortVentas.UseVisualStyleBackColor = true;
+            this.btnSortVentas.Click += new System.EventHandler(this.btnSortVentas_Click);
+            // 
+            // EmpleadosVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnAddVenta);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "EmpleadosVentas";
+            this.Text = "Empleados y Ventas";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -134,6 +188,10 @@
         private System.Windows.Forms.Button btnDeleteEmpl;
         private System.Windows.Forms.Button btnShowEmpl;
         private System.Windows.Forms.Button btnSortAlphOrder;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnSortVentas;
+        private System.Windows.Forms.Button btnDeleteVentas;
+        private System.Windows.Forms.Button btnShowMostSells;
     }
 }
 

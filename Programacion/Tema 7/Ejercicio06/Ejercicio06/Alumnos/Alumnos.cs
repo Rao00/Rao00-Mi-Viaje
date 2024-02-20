@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using System.Xml.Schema;
 using System.Text.RegularExpressions;
 
-namespace Ejercicio06
+namespace Ejercicio06.Alumnos
 {
-    internal class Alumnos
+    public class Alumnos
     {
         public string dni;
         public string nombre;
         public string apellido1;
         public string apellido2;
         public string telefono;
+        public double? media;
         public List<double> notas;
+        public Cursos.Cursos codigoCurso;
 
         public string DNI
         {
@@ -66,11 +68,22 @@ namespace Ejercicio06
             get { return telefono; }
             set
             {
-                if (Regex.IsMatch(value, @"^[0-9]{}"))
+                if (Regex.IsMatch(value, @"^[0-9]{9}"))
                 {
-                    nombre = value;
+                    telefono = value;
                 }
             }
+        }
+
+        public double Media
+        {
+            get { return notas.Average(); }
+        }
+
+        public Cursos.Cursos CodigoCurso
+        {
+            get { return codigoCurso; }
+            set { codigoCurso = value; }
         }
 
         public Alumnos()
@@ -80,10 +93,9 @@ namespace Ejercicio06
             apellido1 = string.Empty;
             apellido2 = string.Empty;
             telefono = string.Empty;
+            media = null;
             notas = new List<double>();
+            codigoCurso = new Cursos.Cursos();
         }
     }
 }
-
-
-pito

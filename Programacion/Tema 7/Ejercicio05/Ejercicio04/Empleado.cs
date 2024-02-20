@@ -54,26 +54,7 @@ namespace Ejercicio04
         }
         public int TotalVentas
         {
-            get { return totalVentas; }
-            set
-            {
-                try
-                {
-                    if (value >= 0)
-                    {
-                        totalVentas = value;
-                    }
-                    else { throw new IndexOutOfRangeException(); }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new IndexOutOfRangeException("Parameter must be more than 0");
-                }
-                catch (FormatException)
-                {
-                    throw new IndexOutOfRangeException("Parameter must be an integer");
-                }
-            }
+            get { return totalVentas = ListaVentas.Count(); ; }
         }
         public List<double> ListaVentas
         {
@@ -89,12 +70,13 @@ namespace Ejercicio04
             totalVentas = 0;
             listaVentas = new List<double>();
         }
-        public void AddVenta(List<double>ventas)
+        public void AddVenta(double venta)
         {
-            foreach(double venta in ventas)
-            {
-                listaVentas.Add(venta);
-            }
+            listaVentas.Add(venta);
+        }
+        public void RemoveVenta()
+        {
+            listaVentas.Clear();
         }
     }
 }

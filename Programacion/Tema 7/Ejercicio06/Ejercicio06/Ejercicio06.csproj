@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,17 +47,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumnos.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Alumnos\Alumnos.cs" />
+    <Compile Include="Alumnos\fAlumnos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Alumnos\fAlumnos.Designer.cs">
+      <DependentUpon>fAlumnos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cursos\Cursos.cs" />
+    <Compile Include="Cursos\fCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cursos\fCursos.Designer.cs">
+      <DependentUpon>fCursos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos\ListaCursos.cs" />
+    <Compile Include="index.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="index.Designer.cs">
+      <DependentUpon>index.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alumnos\ListaAlumnos.cs" />
+    <Compile Include="Profesores\fProfesores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profesores\fProfesores.Designer.cs">
+      <DependentUpon>fProfesores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Profesores\ListaProfesores.cs" />
+    <Compile Include="Profesores\Profesores.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="index.resx">
+      <DependentUpon>index.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
