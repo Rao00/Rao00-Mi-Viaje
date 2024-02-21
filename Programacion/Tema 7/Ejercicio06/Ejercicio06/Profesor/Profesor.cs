@@ -8,13 +8,13 @@ using Ejercicio06.Cursos;
 
 namespace Ejercicio06.Profesores
 {
-    public class Profesores
+    public class Profesor
     {
         public string dni;
         public string nombre;
         public string telefono;
         public List<string> asignaturas;
-        public Cursos.Cursos tutorCurso;
+        public Curso tutorCurso;
 
         public string DNI
         {
@@ -52,19 +52,19 @@ namespace Ejercicio06.Profesores
             }
         }
 
-        public Cursos.Cursos TutorCurso
+        public Cursos.Curso TutorCurso
         {
             get { return tutorCurso; }
             set { tutorCurso = value; }
         }
 
-        public Profesores()
+        public Profesor()
         {
             dni = string.Empty;
             nombre = string.Empty;
             telefono = string.Empty;
             asignaturas = new List<string>();
-            tutorCurso = new Cursos.Cursos();
+            tutorCurso = new Cursos.Curso();
         }
     }
 }

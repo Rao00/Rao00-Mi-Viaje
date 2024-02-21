@@ -14,6 +14,7 @@ FK: codTematica  TEMATICAS
 */
 
 CREATE DATABASE REPASO
+
 USE REPASO
 
 DROP TABLE STREAMERS_TEMATICAS
@@ -131,15 +132,54 @@ VALUES (2, 3, 'Español', 'YouTube', 29200),
 -----------------
 -- 01. Nombre de las temáticas que tenemos almacenadas, ordenadas alfabéticamente.
 
+SELECT nombre
+  FROM TEMATICAS
+ ORDER BY nombre
+
 -- 02. Cantidad de streamers cuyo país es "España".
+
+SELECT COUNT(codStreamer)
+  FROM STREAMERS
+ WHERE pais = 'España'
 
 -- 03, 04, 05. Nombres de streamers cuya segunda letra no sea una "B" (quizá en minúsculas), de 3 formas distintas.
 
+SELECT nombre
+  FROM STREAMERS
+ WHERE SUBSTRING(nombre, 2, 1) NOT IN ('b', 'B')
+
+SELECT nombre
+  FROM STREAMERS
+ WHERE SUBSTRING(nombre, 2, 1) <> 'b'
+   AND SUBSTRING(nombre, 2, 1) <> 'B'
+
+SELECT nombre
+  FROM STREAMERS
+EXCEPT
+SELECT nombre
+  FROM STREAMERS
+ WHERE SUBSTRING(nombre, 2, 1) IN ('b', 'B')
+
 -- 06. Media de suscriptores para los canales cuyo idioma es "Español".
+
+SELECT DISTINCT milesSeguidores
+  FROM STREAMERS_TEMATICAS
+ WHERE idioma = 'Español'
 
 -- 07. Media de seguidores para los canales cuyo streamer es del país "España".
 
+SELECT DISTINCT s.nombre, SUM(st.milesSeguidores)
+  FROM STREAMERS_TEMATICAS st INNER JOIN STREAMERS s
+    ON st.codStreamer = s.codStreamer
+ WHERE s.pais = 'España'
+ GROUP BY s.nombre
+
 -- 08. Nombre de cada streamer y medio en el que habla, para aquellos que tienen entre 5.000 y 15.000 miles de seguidores, usando BETWEEN.
+
+SELECT s.nombre, st.media
+  FROM STREAMERS_TEMATICAS st INNER JOIN STREAMERS s
+    ON st.codStreamer = s.codStreamer
+ WHERE st.milesSeguidores BETWEEN 5000 AND 15000
 
 -- 09. Nombre de cada streamer y medio en el que habla, para aquellos que tienen entre 5.000 y 15.000 miles de seguidores, sin usar BETWEEN.
 
@@ -176,14 +216,47 @@ VALUES (2, 3, 'Español', 'YouTube', 29200),
 
 -- 31. Crea una tabla de "juegos". Para cada juego querremos un código (clave primaria), un nombre (hasta 20 letras, no nulo) y una referencia al streamer que más habla de él (clave ajena a la tabla "streamers").
 
+CREATE TABLE JUEGOS(
+    codJuego            INT IDENTITY(1000,1) NOT NULL,
+    nombre              VARCHAR(20) NOT NULL,
+    codStreamer_Juego   INT
+
+CONSTRAINT PK_JUEGO PRIMARY KEY (codJuego), 
+CONSTRAINT FK_STREAMES_JUEGOS FOREIGN KEY (codStreamer_Juego) REFERENCES STREAMERS(codStreamer)
+)
+
 -- 32. Añade a la tabla de juegos la restricción de que el código debe ser 1000 o superior.
+
+ALTER TABLE JUEGOS
+ADD CONSTRAINT CK_JUEGOS_CODJUEGO CHECK (codJuego >= 1000)
+
+ALTER TABLE JUEGOS
+ALTER COLUMN codJuego INT IDENTITY(1000, 1) NOT NULL
+DROP TABLE JUEGOS
 
 -- 33. Añade 3 datos de ejemplo en la tabla de juegos. Para uno indicarás todos los campos, para otro no indicarás el streamer, ayudándote de NULL, y para el tercero no indicarás el streamer porque no detallarás todos los nombres de los campos.
 
+INSERT INTO JUEGOS(nombre, codStreamer_Juego)
+VALUES ('God of War', 1)
+
+INSERT INTO JUEGOS(nombre)
+VALUES ('League of Legends')
+
+INSERT INTO JUEGOS(nombre)
+VALUES ('GTAV')
+
 -- 34. Borra el segundo dato de ejemplo que has añadido en la tabla de juegos, a partir de su código.
 
+--TONTERIA
 
 -- 35. Muestra el nombre de cada juego junto al nombre del streamer que más habla de él, si existe. Los datos aparecerán ordenados por nombre de juego y, en caso de coincidir éste, por nombre de streamer.
+
+SELECT j.nombre, s.codStreamer
+  FROM JUEGOS j LEFT JOIN STREAMERS s
+    ON j.codStreamer_Juego = s.codStreamer
+ ORDER BY j.nombre ASC
+
+-- BAITEADA DEL PROFE MAYUSUCULA (NO SE PUEDE HACER)
 
 -- 36. Modifica el último dato de ejemplo que has añadido en la tabla de juegos, para que sí tenga asociado un streamer que hable de él.
 

@@ -11,18 +11,18 @@ namespace Ejercicio06.Profesores
 {
     internal class ListaProfesores
     {
-        List<Profesores> listaProfesores;
+        List<Profesor> listaProfesores;
         ListaCursos listaCursos;
 
         public ListaProfesores()
         {
-            listaProfesores = new List<Profesores>();
+            listaProfesores = new List<Profesor>();
             
         }
 
         public void New()
         {
-            Profesores profesor = new Profesores();
+            Profesor profesor = new Profesor();
             profesor.DNI = Interaction.InputBox("Documento nacional de identidad del alumno");
             profesor.Nombre = Interaction.InputBox("Nombre del alumno");
             profesor.telefono = Interaction.InputBox("Numero de contacto del alumno");

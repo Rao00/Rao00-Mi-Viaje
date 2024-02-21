@@ -29,24 +29,19 @@ namespace Fechas
                 Console.WriteLine("Fecha 1: " + fecha1.ToString());
             }
             else
-            {
                 Console.WriteLine("Fecha 1 incorrecta");
-            }
 
-            if (fecha1.Bisiesto(anyo))
-            {
+            if (fecha1.EsBisiesto(anyo))
                 Console.WriteLine("El año " + anyo + " es bisiesto");
-            }
             else
-            {
                 Console.WriteLine("El año " + anyo + " no es bisiesto");
-            }
+
 
             //Fecha correcta, año no bisiesto
             Fecha fecha2 = new Fecha();
-            dia = 4;
-            mes = 10;
-            anyo = 2013;
+            int dia = 4;
+            int mes = 10;
+            int anyo = 2013;
 
             if (fecha2.ValidarFecha(dia, mes, anyo))
             {
@@ -56,36 +51,29 @@ namespace Fechas
                 Console.WriteLine("Fecha 2: " + fecha2.ToString());
             }
             else
-            {
                 Console.WriteLine("Fecha 2 incorrecta");
-            }
 
-            if (fecha2.Bisiesto(anyo))
-            {
+            if (fecha2.EsBisiesto(anyo))
                 Console.WriteLine("El año " + anyo + " es bisiesto");
-            }
             else
-            {
                 Console.WriteLine("El año " + anyo + " no es bisiesto");
-            }
-                
+
+
             //Fecha con valores incorrectos
             Fecha fecha3 = new Fecha();
-            dia = 4;
-            mes = 13;
-            anyo = -4;
+            int dia = 4;
+            int mes = 13;
+            int anyo = -4;
 
             if (fecha3.ValidarFecha(dia, mes, anyo))
             {
                 fecha3.Dia = dia;
                 fecha3.Mes = mes;
                 fecha3.Anyo = anyo;
-                Console.WriteLine("Fecha 4: " + fecha1.ToString());
+                Console.WriteLine("Fecha 3: " + fecha1.ToString());
             }
             else
-            {
-                Console.WriteLine("Fecha 4 incorrecta");
-            } 
+                Console.WriteLine("Fecha 3 incorrecta");
         }
     }
 }

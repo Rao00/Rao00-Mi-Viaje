@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fechas
+namespace Fecha
 {
     internal class Fecha
     {
@@ -12,16 +12,27 @@ namespace Fechas
         private int mes;
         private int anyo;
 
+        /// <summary>
+        /// Propiedad que devuelve o modifica el dia de una fecha
+        /// </summary>
         public int Dia
         {
             get { return dia; }
             set { dia = value; }
         }
+
+        /// <summary>
+        /// Propiedad que devuelve o modifica el mes de una fecha
+        /// </summary>
         public int Mes
         {
             get { return mes; }
             set { mes = value; }
         }
+
+        /// <summary>
+        /// Propiedad que devuelve o modifica el anyo de una fecha
+        /// </summary>
         public int Anyo
         {
             get { return anyo; }
@@ -48,34 +59,34 @@ namespace Fechas
         /// <returns>Devuelve "true" si la fecha es valida y "false" si la fecha es incorrecta</returns>
         public bool ValidarFecha(int dia, int mes, int anyo)
         {
-            bool valida = true;
+            bool fechaValida = true;
 
             if (dia <= 0 || dia > 31 || mes <= 0 || mes > 12 || anyo <= 0)
             {
-                valida = false;
+                fechaValida = false;
             }
 
             if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30)
             {
-                valida = false;
+                fechaValida = false;
             }
 
-            if (Bisiesto(anyo) == true)
+            if (EsBisiesto(anyo) == true)
             {
                 if (mes == 2 && dia > 29)
                 {
-                    valida = false;
+                    fechaValida = false;
                 }
             }
             else
             {
                 if (mes == 2 && dia > 28)
                 {
-                    valida = false;
+                    fechaValida = false;
                 }
             }
 
-            return valida;
+            return fechaValida;
         }
 
 
@@ -84,17 +95,34 @@ namespace Fechas
         /// </summary>
         /// <param name="anyo"></param>
         /// <returns>Devolvera "true" si el año es bisiesto y "false" si no lo es</returns>
-        public bool Bisiesto(int anyo)
+        public bool EsBisiesto(int anyo)
         {
-            bool bisiesto = true;
+            bool esBisiesto = true;
+
             if (anyo % 4 == 0)
             {
-                if (anyo % 100 == 0 && anyo % 400 != 0)
+                if (anyo % 100 == 0)
                 {
-                    bisiesto = false;
+                    if (anyo % 400 == 0)
+                    {
+                        esBisiesto =  true;
+                    }
+                    else
+                    {
+                        esBisiesto = false;
+                    }
+                }
+                else
+                {
+                    esBisiesto = true;
                 }
             }
-            return bisiesto;
+            else
+            {
+                esBisiesto = false;
+            }
+
+            return esBisiesto;
         }
 
 

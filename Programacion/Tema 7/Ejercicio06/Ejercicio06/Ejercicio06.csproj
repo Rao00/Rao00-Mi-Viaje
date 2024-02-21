@@ -47,21 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumnos\Alumnos.cs" />
+    <Compile Include="Alumnos\Alumno.cs" />
     <Compile Include="Alumnos\fAlumnos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Alumnos\fAlumnos.Designer.cs">
       <DependentUpon>fAlumnos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cursos\Cursos.cs" />
-    <Compile Include="Cursos\fCursos.cs">
+    <Compile Include="Curso\Curso.cs" />
+    <Compile Include="Curso\fCursos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cursos\fCursos.Designer.cs">
+    <Compile Include="Curso\fCursos.Designer.cs">
       <DependentUpon>fCursos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cursos\ListaCursos.cs" />
+    <Compile Include="Curso\ListaCursos.cs" />
     <Compile Include="index.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,14 +69,14 @@
       <DependentUpon>index.cs</DependentUpon>
     </Compile>
     <Compile Include="Alumnos\ListaAlumnos.cs" />
-    <Compile Include="Profesores\fProfesores.cs">
+    <Compile Include="Profesor\fProfesores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Profesores\fProfesores.Designer.cs">
+    <Compile Include="Profesor\fProfesores.Designer.cs">
       <DependentUpon>fProfesores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profesores\ListaProfesores.cs" />
-    <Compile Include="Profesores\Profesores.cs" />
+    <Compile Include="Profesor\ListaProfesores.cs" />
+    <Compile Include="Profesor\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="index.resx">

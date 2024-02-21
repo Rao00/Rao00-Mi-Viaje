@@ -7,18 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ejercicio06.Alumnos;
 
 namespace Ejercicio06.Cursos
 {
     public partial class fCursos : Form
     {
-        Cursos cursos;
-        ListaCursos listaCursos;
-        public fCursos(Cursos cursos)
+        public fCursos(Curso cursos)
         {
             InitializeComponent();
-            this.cursos = cursos;
-            Eje06.listaCursos = listaCursos;
         }
     }
 }

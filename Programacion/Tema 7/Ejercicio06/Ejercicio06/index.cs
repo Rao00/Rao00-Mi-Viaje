@@ -15,17 +15,21 @@ namespace Ejercicio06
 {
     public partial class Eje06 : Form
     {
-        Alumnos.Alumnos alumnos;
-        Profesores.Profesores profesores;
         ListaCursos listaCursos;
+        ListaAlumnos listaAlumnos;
+        ListaProfesores listaProfesores;
 
-        public Eje06(Alumnos.Alumnos alumnos, Profesores.Profesores profesores)
+        public Eje06(Alumno alumnos, Profesor profesores)
         {
             InitializeComponent();
-            this.alumnos = alumnos;
-            this.profesores = profesores;
+            this.listaAlumnos = new ListaAlumnos();
+            this.listaProfesores = new ListaProfesores();
+            this.listaCursos = new ListaCursos();
         }
 
-
+        private void btnGestionarCursos_Click(object sender, EventArgs e)
+        {
+            fCursos FormCursos = new fCursos();
+        }
     }
 }

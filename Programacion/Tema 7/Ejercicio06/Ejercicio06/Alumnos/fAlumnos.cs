@@ -8,15 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Ejercicio06.Alumnos
 {
     public partial class fAlumnos : Form
     {
-        Alumnos alumnos;
-        public fAlumnos(Alumnos alumnos)
+        public fAlumnos(Alumno alumno)
         {
             InitializeComponent();
-            this.alumnos = alumnos;
         }
     }
 }

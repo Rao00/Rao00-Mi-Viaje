@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Ejercicio06.Cursos;
 
 namespace Ejercicio06.Alumnos
 {
-    public class Alumnos
+    public class Alumno
     {
         public string dni;
         public string nombre;
@@ -17,7 +17,7 @@ namespace Ejercicio06.Alumnos
         public string telefono;
         public double? media;
         public List<double> notas;
-        public Cursos.Cursos codigoCurso;
+        public Curso codigoCurso;
 
         public string DNI
         {
@@ -80,13 +80,13 @@ namespace Ejercicio06.Alumnos
             get { return notas.Average(); }
         }
 
-        public Cursos.Cursos CodigoCurso
+        public Cursos.Curso CodigoCurso
         {
             get { return codigoCurso; }
             set { codigoCurso = value; }
         }
 
-        public Alumnos()
+        public Alumno()
         {
             DNI = string.Empty;
             nombre = string.Empty;
@@ -95,7 +95,7 @@ namespace Ejercicio06.Alumnos
             telefono = string.Empty;
             media = null;
             notas = new List<double>();
-            codigoCurso = new Cursos.Cursos();
+            codigoCurso = new Curso();
         }
     }
 }

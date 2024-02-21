@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 
-namespace Ejercicio06
+namespace Ejercicio06.Alumnos
 {
-    internal class ListaAlumnos
+    public class ListaAlumnos
     {
 
-        List<Alumnos.Alumnos> listaAlumnos;
+        List<Alumno> listaAlumnos;
 
         public ListaAlumnos()
         {
-            listaAlumnos = new List<Alumnos.Alumnos>();
+            listaAlumnos = new List<Alumno>();
         }
 
         public void New()
         {
-            Alumnos.Alumnos alumno = new Alumnos.Alumnos();
+            Alumno alumno = new Alumno();
             alumno.DNI = Interaction.InputBox("Documento nacional de identidad del alumno");
             alumno.Nombre = Interaction.InputBox("Nombre del alumno");
             string apellidos = Interaction.InputBox("Apellidos del alumno");

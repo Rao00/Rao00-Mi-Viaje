@@ -8,16 +8,16 @@ using System.Windows.Forms;
 
 namespace Ejercicio06.Cursos
 {
-    internal class ListaCursos
+    public class ListaCursos
     {
-        List<Cursos> listaCursos;
+        List<Curso> listaCursos;
 
         public ListaCursos()
         {
-             listaCursos = new List<Cursos>();
+             listaCursos = new List<Curso>();
         }
 
-        public List<Cursos> List
+        public List<Curso> List
         {
             get { return listaCursos; }
         }
@@ -26,9 +26,9 @@ namespace Ejercicio06.Cursos
         {
             try 
             {
-                Cursos cursos = new Cursos();
-                cursos.nombre = Interaction.InputBox("Nombre de la asignatura");
-                cursos.codigo = int.Parse(Interaction.InputBox("Codigo de la asignatura"));
+                Curso cursos = new Curso();
+                cursos.nombre = Interaction.InputBox("Nombre del curso");
+                cursos.codigo = int.Parse(Interaction.InputBox("Codigo del curso"));
                 listaCursos.Add(cursos);
             }
             catch { MessageBox.Show("Inserta un parametro correcto"); }
