@@ -45,32 +45,70 @@ namespace Ejercicio04
         private void btnDeleteEmpl_Click(object sender, EventArgs e)
         {
             string nombre = Interaction.InputBox("Inserta empleado a eliminar");
-            listaEmpleados.DeleteEmpleado(nombre);
+            if (listaEmpleados.DeleteEmpleado(nombre))
+            {
+                MessageBox.Show($"Empleado {nombre} a sido eliminado");
+            }
+            else
+            {
+                MessageBox.Show("Empleado no encontrado");
+            }
+
         }
 
         private void btnMostrarLista_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(listaEmpleados.VerEmpleados());
+            string txtEmpleados = listaEmpleados.VerEmpleados();
+            if (txtEmpleados != null)
+            {
+                MessageBox.Show(txtEmpleados);
+            }
+            else { MessageBox.Show($"No existen empleados"); }   
+            
         }
 
         private void btnSortAlphOrder_Click(object sender, EventArgs e)
         {
+            string txtEmpleados = listaEmpleados.VerEmpleados();
             listaEmpleados.SortEmpleados();
-            MessageBox.Show("Empleados ordenados");
-            listaEmpleados.VerEmpleados();
+            if (txtEmpleados != null)
+            {
+                MessageBox.Show(txtEmpleados);
+            }
+            else { MessageBox.Show($"No existen empleados"); }
         }
 
         private void btnShowEmpl_Click(object sender, EventArgs e)
         {
             string nombre = Interaction.InputBox("Inserta empleado a buscar");
-            MessageBox.Show(listaEmpleados.VerEmpleados(nombre));
+            string txtEmpleados = listaEmpleados.VerEmpleados(nombre);
+            if (txtEmpleados != null)
+            {
+                MessageBox.Show(txtEmpleados);
+            }
+            else { MessageBox.Show($"No existen empleados"); }  
         }
 
 /*------------------------------------------------------------------------------------------------*/
 
         private void btnAddVenta_Click(object sender, EventArgs e)
         {
-            listaEmpleados.AñadirVentas();
+            double venta;
+            bool cont = true;
+            string nombre = Interaction.InputBox("Nombre Empleado", "Nombre Empleado");
+            while (cont)
+            {
+                if (MessageBox.Show("Quieres añadir mas ventas?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    venta = double.Parse(Interaction.InputBox("Nueva venta", "Nueva venta"));
+                    if(!listaEmpleados.AñadirVentas(nombre, venta))
+                    {
+                        cont = false;
+                    }
+                }
+                else { cont = false; }
+            }
+            
         }
 
         private void btnShowMostSells_Click(object sender, EventArgs e)
@@ -80,14 +118,25 @@ namespace Ejercicio04
 
         private void btnDeleteVentas_Click(object sender, EventArgs e)
         {
-            listaEmpleados.DeleteVentas();
+            string nombre = Interaction.InputBox("Empleado al que limpiar las ventas");
+            if (listaEmpleados.DeleteVentas(nombre))
+            {
+                MessageBox.Show($"Las ventas de {nombre} han sido eliminadas");
+            }
+            else { MessageBox.Show("El empleado no existe"); }
+            
         }
 
         private void btnSortVentas_Click(object sender, EventArgs e)
         {
             listaEmpleados.SortEmpleadosVentas();
-            MessageBox.Show("Empleados ordenados");
-            listaEmpleados.VerEmpleados();
+            string txtEmpleados = listaEmpleados.VerEmpleados();
+            listaEmpleados.SortEmpleados();
+            if (txtEmpleados != null)
+            {
+                MessageBox.Show(txtEmpleados);
+            }
+            else { MessageBox.Show($"No existen empleados"); }
         }
 
 /*------------------------------------------------------------------------------------------------*/

@@ -61,7 +61,7 @@ namespace Ejercicio04
                     }
                     else { salida += "Empleado sin ventas\n\n"; }
                 }
-                else { MessageBox.Show($"Empleado {empleado} no existe"); }
+                else { salida = null; }
                 if(!bucle) { init_bucle = false; }
                 i++;
             }
@@ -73,59 +73,52 @@ namespace Ejercicio04
             return ListaPrincipal.Count();
         }
 
-        public void AñadirVentas()
+        public bool AñadirVentas(string nombre, double venta)
         {
-            bool sigo = true;
-            double venta;
-            int indice = 0;
-            string nombre = Interaction.InputBox("Nombre Empleado", "Nombre Empleado");
-            while (indice < ListaPrincipal.Count() && sigo)
+            bool encotrado = false;
+            for (int i = 0; i < ListaPrincipal.Count(); i++)
             {
-                if (ListaPrincipal[indice].Nombre == nombre)
+                if (ListaPrincipal[i].Nombre == nombre)
                 {
-                    sigo = false;
-                }
-                else { indice++; }
-            }
-            sigo = true;
-            while (sigo)
-            {
-                venta = double.Parse(Interaction.InputBox("Nueva venta", "Nueva venta"));
-                ListaPrincipal[indice].AddVenta(venta);
-                if (MessageBox.Show("Quieres añadir mas ventas?", "", MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    sigo = false;
+                    ListaPrincipal[i].AddVenta(venta);
+                    encotrado = true;
                 }
             }
+            return encotrado;
         }
 
-        public void DeleteVentas()
+        public bool DeleteVentas(string nombre)
         {
-            int indice = LookForEmpleado(Interaction.InputBox("Empleado al que limpiar las ventas"));
+            bool eliminado;
+            int indice = LookForEmpleado(nombre);
             if(indice >= 0)
             {
                 ListaPrincipal[indice].RemoveVenta();
+                eliminado = true;
             }
-            else { MessageBox.Show("El empleado no existe"); }
+            else { eliminado = false; }
+            return eliminado;
         }
 
-        public void DeleteEmpleado(string nombre)
+        public bool DeleteEmpleado(string nombre)
         {
+            bool eliminado;
             int indexEmpleado = LookForEmpleado(nombre);
             if (LookForEmpleado(nombre) >= 0)
             {
                 ListaPrincipal.RemoveAt(indexEmpleado);
-                MessageBox.Show($"Empleado {nombre} a sido eliminado");
+                eliminado = true;
             }
-            else { MessageBox.Show("Empleado no encontrado"); }
+            else { eliminado = false; }
+            return eliminado;
         }
 
         public void SortEmpleados()
         {
             bool cont = true;
-            for (int i = 0; i < ListaPrincipal.Count(); i++)
+            for (int i = 0; i < ListaPrincipal.Count() - 1; i++)
             {
-                for (int j = 0; j < ListaPrincipal.Count() && cont; j++)
+                for (int j = i + 1; j < ListaPrincipal.Count() && cont; j++)
                 {
                     if (String.Compare(ListaPrincipal[j].Nombre, ListaPrincipal[i].Nombre) > 0)
                     {
