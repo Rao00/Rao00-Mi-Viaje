@@ -183,32 +183,128 @@ SELECT s.nombre, st.media
 
 -- 09. Nombre de cada streamer y medio en el que habla, para aquellos que tienen entre 5.000 y 15.000 miles de seguidores, sin usar BETWEEN.
 
+SELECT s.nombre, st.media
+  FROM STREAMERS_TEMATICAS st INNER JOIN STREAMERS s
+    ON st.codStreamer = s.codStreamer
+ WHERE st.milesSeguidores >= 5000 
+   AND st.milesSeguidores <= 15000
+
 -- 10. Nombre de cada temática y nombre de los idiomas en que tenemos canales de esa temática 
 --(quizá ninguno), sin duplicados.
 
+SELECT DISTINCT t.nombre, st.idioma
+  FROM TEMATICAS t LEFT JOIN STREAMERS_TEMATICAS st
+    ON t.codTematica = st.codTematica
+
 -- 11. Nombre de cada streamer, nombre de la temática de la que habla y del medio en el que habla de esa temática, usando INNER JOIN.
+
+SELECT s.nombre, t.nombre, st.media
+  FROM STREAMERS_TEMATICAS st
+ INNER JOIN STREAMERS s ON st.codStreamer = s.codStreamer
+ INNER JOIN TEMATICAS t ON st.codTematica = t.codTematica
 
 -- 12. Nombre de cada streamer, nombre de la temática de la que habla y del medio en el que habla de esa temática, usando WHERE.
 
+SELECT s.nombre, t.nombre, st.media
+  FROM STREAMERS_TEMATICAS st,
+       STREAMERS s,
+       TEMATICAS t
+ WHERE st.codStreamer = s.codStreamer
+   AND st.codTematica = t.codTematica
+
 -- 13. Nombre de cada streamer, del medio en el que habla y de la temática de la que habla en ese medio, incluso si de algún streamer no tenemos dato del medio o de la temática.
 
+SELECT s.nombre, t.nombre, st.media
+  FROM STREAMERS_TEMATICAS st
+ RIGHT JOIN STREAMERS s ON st.codStreamer = s.codStreamer
+  LEFT JOIN TEMATICAS t ON st.codTematica = t.codTematica
+
 -- 14. Nombre de cada medio y cantidad de canales que tenemos anotados en él, ordenado alfabéticamente por el nombre del medio.
+
+SELECT st.media, COUNT(codStreamer)
+  FROM STREAMERS_TEMATICAS st
+ GROUP BY st.media
+ ORDER BY st.media
 
 -- 15, 16, 17, 18. Medio en el que se emite el canal de más seguidores, de 4 formas distintas.
 
 -- 19. Categorías de las que tenemos 2 o más canales.
 
+SELECT DISTINCT st.codTematica
+  FROM STREAMERS_TEMATICAS st
+ WHERE 2 < (SELECT COUNT(codStreamer)
+              FROM STREAMERS_TEMATICAS st)
+
+
 -- 20. Categorías de las que no tenemos anotado ningún canal, ordenadas alfabéticamente, empleando COUNT.
+
+SELECT t.nombre
+  FROM TEMATICAS t LEFT JOIN STREAMERS_TEMATICAS st
+    ON t.codTematica = st.codTematica
+ GROUP BY t.nombre
+HAVING COUNT(st.codTematica) = 0
+ ORDER BY t.nombre 
+
 
 -- 21. Categorías de las que no tenemos anotado ningún canal, ordenadas alfabéticamente, empleando IN / NOT IN.
 
+SELECT t.nombre
+  FROM TEMATICAS t
+ WHERE t.codTematica NOT IN (SELECT t.codTematica
+                               FROM TEMATICAS t LEFT JOIN STREAMERS_TEMATICAS st
+                                 ON t.codTematica = st.codTematica
+                              WHERE st.codTematica IS NULL)
+ ORDER BY t.nombre
+
 -- 22. Categorías de las que no tenemos anotado ningún canal, ordenadas alfabéticamente, empleando ALL / ANY.
+
+SELECT t.nombre
+  FROM TEMATICAS t
+ WHERE t.codTematica = ANY (SELECT t.codTematica
+                              FROM TEMATICAS t LEFT JOIN STREAMERS_TEMATICAS st
+                                ON t.codTematica = st.codTematica
+                             WHERE st.codTematica IS NULL)
+ ORDER BY t.nombre
 
 -- 23. Categorías de las que no tenemos anotado ningún canal, ordenadas alfabéticamente, empleando EXISTS / NOT EXISTS.
 
+SELECT t.codTematica
+  FROM TEMATICAS t
+ WHERE EXISTS (SELECT t.codTematica
+                 FROM TEMATICAS t LEFT JOIN STREAMERS_TEMATICAS st ---Preguntar---
+                   ON t.codTematica = st.codTematica
+                WHERE st.codTematica IS NULL)
+ ORDER BY t.nombre
+
 -- 24. Tres primeras letras de cada país y tres primeras letras de cada idioma, en una misma lista.
 
+SELECT DISTINCT SUBSTRING(s.pais, 1, 3)
+  FROM STREAMERS s
+ WHERE s.pais IS NOT NULL
+UNION
+SELECT DISTINCT SUBSTRING(st.idioma, 1, 3)
+  FROM STREAMERS_TEMATICAS st
+
 -- 25, 26, 27, 28. Tres primeras letras de países que coincidan con las tres primeras letras de un idioma, sin duplicados, de cuatro formas distintas.
+
+SELECT DISTINCT SUBSTRING(s.pais, 1, 3)
+  FROM STREAMERS s
+ WHERE s.pais IS NOT NULL
+INTERSECT
+SELECT DISTINCT SUBSTRING(st.idioma, 1, 3)
+  FROM STREAMERS_TEMATICAS st
+
+SELECT DISTINCT SUBSTRING(s.pais, 1, 3)
+  FROM STREAMERS s
+ WHERE s.pais IS NOT NULL
+   AND SUBSTRING(s.pais, 1, 3) = ANY (SELECT DISTINCT SUBSTRING(st.idioma, 1, 3)
+                                                 FROM STREAMERS_TEMATICAS st)
+
+SELECT DISTINCT SUBSTRING(s.pais, 1, 3)
+  FROM STREAMERS s
+ WHERE s.pais IS NOT NULL
+   AND SUBSTRING(s.pais, 1, 3) IN (SELECT DISTINCT SUBSTRING(st.idioma, 1, 3)
+                                              FROM STREAMERS_TEMATICAS st)
 
 -- 29. Nombre de streamer, nombre de medio y nombre de temática, para los canales que están por encima de la media de suscriptores.
 
