@@ -30,40 +30,42 @@ namespace Ejercicio04
         public string VerEmpleados(string empleado = null)
         {
             string salida = string.Empty;
-            int i;
-            bool bucle = true;
-            bool init_bucle = true;
-            if (!string.IsNullOrEmpty(empleado))
+            if (ListaPrincipal.Count() > 0)
             {
-                i = LookForEmpleado(empleado);
-                bucle = false;
-            }
-            else { i = 0; }
-            while (i < ListaPrincipal.Count() && init_bucle)
-            {
-                if (i >= 0)
+                int i;
+                bool bucle = true;
+                bool init_bucle = true;
+                if (!string.IsNullOrEmpty(empleado))
                 {
-                    salida += $"Nombre: {ListaPrincipal[i].Nombre}\nEdad: {ListaPrincipal[i].Edad}\n";
-                    if (ListaPrincipal[i].ListaVentas.Count() > 0)
+                    i = LookForEmpleado(empleado);
+                    bucle = false;
+                }
+                else { i = 0; }
+                while (i < ListaPrincipal.Count() && init_bucle)
+                {
+                    if (i >= 0)
                     {
-                        salida += $"Ventas:\n";
-                        for (int j = 0; j < ListaPrincipal[i].ListaVentas.Count(); j++)
+                        salida += $"Nombre: {ListaPrincipal[i].Nombre}\nEdad: {ListaPrincipal[i].Edad}\n";
+                        if (ListaPrincipal[i].ListaVentas.Count() > 0)
                         {
-                            if (j == ListaPrincipal[i].ListaVentas.Count() - 1 && bucle)
+                            salida += $"Ventas:\n";
+                            for (int j = 0; j < ListaPrincipal[i].ListaVentas.Count(); j++)
                             {
-                                salida += $"{j + 1}.- {ListaPrincipal[i].ListaVentas[j]} €\n\n";
-                            }
-                            else 
-                            {
-                                salida += $"{j + 1}.- {ListaPrincipal[i].ListaVentas[j]} €\n";
+                                if (j == ListaPrincipal[i].ListaVentas.Count() - 1 && bucle)
+                                {
+                                    salida += $"{j + 1}.- {ListaPrincipal[i].ListaVentas[j]} €\n\n";
+                                }
+                                else
+                                {
+                                    salida += $"{j + 1}.- {ListaPrincipal[i].ListaVentas[j]} €\n";
+                                }
                             }
                         }
+                        else { salida += "Empleado sin ventas\n\n"; }
                     }
-                    else { salida += "Empleado sin ventas\n\n"; }
+                    if (!bucle) { init_bucle = false; }
+                    i++;
                 }
-                else { salida = null; }
-                if(!bucle) { init_bucle = false; }
-                i++;
             }
             return salida;
         }
@@ -87,17 +89,31 @@ namespace Ejercicio04
             return encotrado;
         }
 
-        public bool DeleteVentas(string nombre)
+        public bool? DeleteVentas(string nombre = null)
         {
-            bool eliminado;
-            int indice = LookForEmpleado(nombre);
-            if(indice >= 0)
+            bool? eliminado = false;
+            try
             {
-                ListaPrincipal[indice].RemoveVenta();
-                eliminado = true;
+                if(nombre == null)
+                {
+                    foreach (Empleado empleado in ListaPrincipal)
+                    {
+                        if (empleado.TotalVentas > 0) { eliminado = true; }
+                    }
+                }
+                else
+                {
+                    int indice = LookForEmpleado(nombre);
+                    if (ListaPrincipal[indice].TotalVentas > 0)
+                    {
+                        ListaPrincipal[indice].RemoveVenta();
+                        eliminado = true;
+                    }
+                    else { eliminado = null; }
+                }
+                return eliminado;
             }
-            else { eliminado = false; }
-            return eliminado;
+            catch (Exception) { return null; }
         }
 
         public bool DeleteEmpleado(string nombre)
@@ -149,15 +165,39 @@ namespace Ejercicio04
 
         public string MostSells()
         {
-            int indiceMayor = 0;
-            for (int i = 1; i < ListaPrincipal.Count(); i++)
+            string salida = string.Empty;
+            bool algunaVenta = false;
+            if (ListaPrincipal.Count() > 0)
             {
-                if (ListaPrincipal[i].TotalVentas > ListaPrincipal[indiceMayor].TotalVentas)
+                int i = 0;
+                while (i < ListaPrincipal.Count())
                 {
-                    indiceMayor = i;
+                    int j = 0;
+                    if (ListaPrincipal[i].TotalVentas > 0)
+                    {
+                        while (j < ListaPrincipal.Count())
+                        {
+                            if (ListaPrincipal[i].TotalVentas < ListaPrincipal[j].TotalVentas)
+                            {
+                                j = ListaPrincipal.Count();
+                            }
+                            j++;
+                        }
+                    }
+                    else { algunaVenta = true; }
+                    if (j == ListaPrincipal.Count())
+                    {
+                        salida += VerEmpleados(ListaPrincipal[i].Nombre);
+                    }
+                    i++;
+                }
+                if (salida == string.Empty || !algunaVenta)
+                {
+                    salida = "Ningun empleado ha realizado ventas";
                 }
             }
-            return VerEmpleados(ListaPrincipal[indiceMayor].Nombre);
+            else { salida = "No existen empleados"; }
+            return salida;
         }
 
         public int LookForEmpleado(string nombre)
@@ -188,7 +228,7 @@ namespace Ejercicio04
             empleadoTemp = lista[j];
             lista[j] = lista[i];
             lista[i] = empleadoTemp;
-            return lista;
+            return lista; 
         }
     }
 }
