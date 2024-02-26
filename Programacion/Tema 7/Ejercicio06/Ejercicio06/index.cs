@@ -19,17 +19,18 @@ namespace Ejercicio06
         ListaAlumnos listaAlumnos;
         ListaProfesores listaProfesores;
 
-        public Eje06(Alumno alumnos, Profesor profesores)
+        public Eje06()
         {
             InitializeComponent();
             this.listaAlumnos = new ListaAlumnos();
-            this.listaProfesores = new ListaProfesores();
             this.listaCursos = new ListaCursos();
+            this.listaProfesores = new ListaProfesores();
         }
 
         private void btnGestionarCursos_Click(object sender, EventArgs e)
         {
-            fCursos FormCursos = new fCursos();
+            fCursos FormCursos = new fCursos(listaCursos, listaAlumnos);
+            FormCursos.ShowDialog();
         }
     }
 }

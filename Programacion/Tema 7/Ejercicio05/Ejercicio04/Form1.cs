@@ -88,8 +88,7 @@ namespace Ejercicio04
             }
             else
             {
-                txtEmpleados = listaEmpleados.VerEmpleados();
-                MessageBox.Show(txtEmpleados);
+                MessageBox.Show("No hay sufiencientes empleados para ordenar");
             }
         }
 
@@ -122,22 +121,30 @@ namespace Ejercicio04
                     double venta;
                     bool cont = true;
                     string nombre = Interaction.InputBox("Nombre Empleado", "Nombre Empleado");
-                    while (cont)
+                    int existe = listaEmpleados.LookForEmpleado(nombre);
+                    if (existe != -1)
                     {
-                        venta = double.Parse(Interaction.InputBox("Nueva venta", "Nueva venta"));
-                        if (listaEmpleados.AñadirVentas(nombre, venta))
+                        while (cont)
                         {
-                            MessageBox.Show("Venta añadida");
-                            if (MessageBox.Show("Quieres añadir mas ventas?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                            venta = double.Parse(Interaction.InputBox("Nueva venta", "Nueva venta"));
+                            if (listaEmpleados.AñadirVentas(nombre, venta))
                             {
+                                MessageBox.Show("Venta añadida");
+                                if (MessageBox.Show("Quieres añadir mas ventas?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                                {
+                                    cont = false;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Empleado no encontrado");
                                 cont = false;
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Empleado no encontrado");
-                            cont = false;
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El empleado no existe");
                     }
                 }
                 else
@@ -180,14 +187,19 @@ namespace Ejercicio04
 
         private void btnSortVentas_Click(object sender, EventArgs e)
         {
-            listaEmpleados.SortEmpleadosVentas();
-            string txtEmpleados = listaEmpleados.VerEmpleados();
-            listaEmpleados.SortEmpleados();
-            if (txtEmpleados != string.Empty)
+            if(listaEmpleados.Count() > 1)
             {
-                MessageBox.Show(txtEmpleados);
+                listaEmpleados.SortEmpleadosVentas();
+                string txtEmpleados = listaEmpleados.VerEmpleados();
+                if (txtEmpleados != string.Empty)
+                {
+                    MessageBox.Show(txtEmpleados);
+                }
             }
-            else { MessageBox.Show($"No existen empleados"); }
+            else
+            {
+                MessageBox.Show("No hay sufiencientes empleados");
+            }
         }
 
 /*------------------------------------------------------------------------------------------------*/

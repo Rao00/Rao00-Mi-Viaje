@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Ejercicio06.Alumnos;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Ejercicio06.Cursos
 
         public ListaCursos()
         {
-             listaCursos = new List<Curso>();
+            listaCursos = new List<Curso>();
         }
 
         public List<Curso> List
@@ -22,17 +23,64 @@ namespace Ejercicio06.Cursos
             get { return listaCursos; }
         }
 
-        public void New()
+        public void Add(string nombre, string codigo)
         {
-            try 
+            Curso curso = new Curso();
+            curso.nombre = nombre;
+            curso.codigo = codigo;
+            listaCursos.Add(curso);
+        }
+
+        public bool Remove(string codigo) 
+        {
+            for(int i = 0; i < listaCursos.Count(); i++)
             {
-                Curso cursos = new Curso();
-                cursos.nombre = Interaction.InputBox("Nombre del curso");
-                cursos.codigo = int.Parse(Interaction.InputBox("Codigo del curso"));
-                listaCursos.Add(cursos);
+                if(listaCursos[i].codigo == codigo)
+                {
+                    listaCursos.RemoveAt(i);
+                    return true;
+                }
             }
-            catch { MessageBox.Show("Inserta un parametro correcto"); }
-            
+            return false;
+        }
+
+        override
+        public string ToString()
+        {
+            string salida = string.Empty;
+            foreach(Curso curso in listaCursos)
+            {
+                salida += "Codigo del curso:" + curso.Codigo + "\n";
+                salida += "Nombre del curso:" + curso.Nombre + "\n\n";
+            }
+            return salida;
+        }
+
+        public string ToString(ListaAlumnos listaAlumnos, string codigo)
+        {
+            string salida = string.Empty;
+            List<Alumno> lista = listaAlumnos.List();
+            for(int i = 0; i < listaAlumnos.Count(); i++)
+            {
+                if (lista[i].codigoCurso == codigo)
+                {
+                    salida += lista[i].ToString() + "\n";
+                }
+            }
+            return salida;
+        }
+
+        public bool Contains(string nombreCurso)
+        {
+            for (int i = 0; i < listaCursos.Count(); i++)
+            {
+                if (nombreCurso == listaCursos[i].Nombre)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
+

@@ -12,26 +12,24 @@ namespace Ejercicio06.Profesores
     internal class ListaProfesores
     {
         List<Profesor> listaProfesores;
-        ListaCursos listaCursos;
 
         public ListaProfesores()
         {
             listaProfesores = new List<Profesor>();
-            
         }
 
         public void New()
         {
             Profesor profesor = new Profesor();
-            profesor.DNI = Interaction.InputBox("Documento nacional de identidad del alumno");
-            profesor.Nombre = Interaction.InputBox("Nombre del alumno");
-            profesor.telefono = Interaction.InputBox("Numero de contacto del alumno");
+            profesor.DNI = Interaction.InputBox("Documento nacional de identidad del profesor");
+            profesor.Nombre = Interaction.InputBox("Nombre del profesor");
+            profesor.telefono = Interaction.InputBox("Numero de contacto del profesor");
             var asignaturas = Interaction.InputBox("Asiganturas del profesor, separalas con ';'").Split(';');
             profesor.asignaturas = asignaturas.ToList<string>();
-            string curso = Interaction.InputBox("Numero de contacto del alumno");
-            for(int i = 0; i < listaCursos.List.Count(); i++)
+            string tutor = Interaction.InputBox("Curso del que el profesor es tutor");
+            if (tutor != null && listaCursos.Contains(tutor))
             {
-                if (curso == listaCursos[i].Nombre)
+                profesor.tutorCurso = tutor;
             }
             listaProfesores.Add(profesor);
         }

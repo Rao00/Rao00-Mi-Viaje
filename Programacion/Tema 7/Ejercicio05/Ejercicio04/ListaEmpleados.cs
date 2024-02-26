@@ -63,6 +63,10 @@ namespace Ejercicio04
                         }
                         else { salida += "Empleado sin ventas\n\n"; }
                     }
+                    else
+                    {
+                        salida = "El empleado no existe";
+                    }
                     if (!bucle) { init_bucle = false; }
                     i++;
                 }
@@ -136,7 +140,7 @@ namespace Ejercicio04
             {
                 for (int j = i + 1; j < ListaPrincipal.Count() && cont; j++)
                 {
-                    if (String.Compare(ListaPrincipal[j].Nombre, ListaPrincipal[i].Nombre) > 0)
+                    if (String.Compare(ListaPrincipal[j].Nombre, ListaPrincipal[i].Nombre) < 0)
                     {
                         ListaPrincipal = MoveEmpleado(ListaPrincipal, i, j);
                         cont = false;
@@ -153,7 +157,7 @@ namespace Ejercicio04
             {
                 for (int j = 0; j < ListaPrincipal.Count() && cont; j++)
                 {
-                    if (ListaPrincipal[j].TotalVentas > ListaPrincipal[i].TotalVentas)
+                    if (ListaPrincipal[j].TotalVentas < ListaPrincipal[i].TotalVentas)
                     {
                         ListaPrincipal = MoveEmpleado(ListaPrincipal, i, j);
                         cont = false;
@@ -166,6 +170,7 @@ namespace Ejercicio04
         public string MostSells()
         {
             string salida = string.Empty;
+            bool añadir = true;
             bool algunaVenta = false;
             if (ListaPrincipal.Count() > 0)
             {
@@ -173,6 +178,7 @@ namespace Ejercicio04
                 while (i < ListaPrincipal.Count())
                 {
                     int j = 0;
+                    añadir = true;
                     if (ListaPrincipal[i].TotalVentas > 0)
                     {
                         while (j < ListaPrincipal.Count())
@@ -180,18 +186,22 @@ namespace Ejercicio04
                             if (ListaPrincipal[i].TotalVentas < ListaPrincipal[j].TotalVentas)
                             {
                                 j = ListaPrincipal.Count();
+                                añadir = false;
                             }
-                            j++;
+                            else
+                            {
+                                j++;
+                            }
                         }
                     }
-                    else { algunaVenta = true; }
-                    if (j == ListaPrincipal.Count())
+                    else { algunaVenta = false; }
+                    if (j == ListaPrincipal.Count() && añadir)
                     {
                         salida += VerEmpleados(ListaPrincipal[i].Nombre);
                     }
                     i++;
                 }
-                if (salida == string.Empty || !algunaVenta)
+                if (salida == string.Empty && !algunaVenta)
                 {
                     salida = "Ningun empleado ha realizado ventas";
                 }

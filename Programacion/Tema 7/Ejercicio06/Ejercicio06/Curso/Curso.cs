@@ -11,8 +11,7 @@ namespace Ejercicio06.Cursos
     public class Curso
     {
         public string nombre;
-        public int codigo;
-        public Alumno alumno;
+        public string codigo;
 
         public string Nombre 
         {
@@ -26,7 +25,7 @@ namespace Ejercicio06.Cursos
             }
         }
         
-        public int Codigo 
+        public string Codigo 
         {
             get { return codigo; }
             set { codigo = value; }
@@ -35,7 +34,7 @@ namespace Ejercicio06.Cursos
         public Curso() 
         { 
             nombre = string.Empty;
-            codigo = 0;
+            codigo = string.Empty;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Ejercicio06.Profesores
         public string nombre;
         public string telefono;
         public List<string> asignaturas;
-        public Curso tutorCurso;
+        public string tutorCurso;
 
         public string DNI
         {
@@ -52,7 +52,7 @@ namespace Ejercicio06.Profesores
             }
         }
 
-        public Cursos.Curso TutorCurso
+        public string TutorCurso
         {
             get { return tutorCurso; }
             set { tutorCurso = value; }
@@ -64,7 +64,7 @@ namespace Ejercicio06.Profesores
             nombre = string.Empty;
             telefono = string.Empty;
             asignaturas = new List<string>();
-            tutorCurso = new Cursos.Curso();
+            tutorCurso = string.Empty;
         }
     }
 }

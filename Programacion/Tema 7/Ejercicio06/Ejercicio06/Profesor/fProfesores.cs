@@ -12,7 +12,7 @@ namespace Ejercicio06.Profesores
 {
     public partial class fProfesores : Form
     {
-        public fProfesores(Profesor profesores)
+        public fProfesores()
         {
             InitializeComponent();
         }

@@ -29,5 +29,15 @@ namespace Ejercicio06.Alumnos
             alumno.telefono = Interaction.InputBox("Numero de contacto del alumno");
             listaAlumnos.Add(alumno);
         }
+
+        public int Count()
+        {
+            return listaAlumnos.Count;
+        }
+
+        public List<Alumno> List()
+        {
+            return listaAlumnos;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Ejercicio06.Alumnos
         public string telefono;
         public double? media;
         public List<double> notas;
-        public Curso codigoCurso;
+        public string codigoCurso;
 
         public string DNI
         {
@@ -80,7 +80,7 @@ namespace Ejercicio06.Alumnos
             get { return notas.Average(); }
         }
 
-        public Cursos.Curso CodigoCurso
+        public string CodigoCurso
         {
             get { return codigoCurso; }
             set { codigoCurso = value; }
@@ -95,7 +95,18 @@ namespace Ejercicio06.Alumnos
             telefono = string.Empty;
             media = null;
             notas = new List<double>();
-            codigoCurso = new Curso();
+            codigoCurso = string.Empty;
+        }
+
+        override
+        public string ToString()
+        {
+            string salida = string.Empty;
+            salida += "DNI: " + dni + "\n";
+            salida += "Nombre: " + nombre + "\n";
+            salida += "Apellidos: " + apellido1 + " " + apellido2 + "\n";
+            salida += "Telefono: " + telefono + "\n";
+            return salida;
         }
     }
 }

@@ -79,8 +79,14 @@
     <Compile Include="Profesor\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Curso\fCursos.resx">
+      <DependentUpon>fCursos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="index.resx">
       <DependentUpon>index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profesor\fProfesores.resx">
+      <DependentUpon>fProfesores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
