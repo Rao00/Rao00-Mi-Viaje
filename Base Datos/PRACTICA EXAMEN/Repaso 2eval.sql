@@ -308,8 +308,23 @@ SELECT DISTINCT SUBSTRING(s.pais, 1, 3)
 
 -- 29. Nombre de streamer, nombre de medio y nombre de temática, para los canales que están por encima de la media de suscriptores.
 
+SELECT s.nombre, st.media, t.nombre
+  FROM STREAMERS s,
+       STREAMERS_TEMATICAS st,
+       TEMATICAS t
+ WHERE st.codStreamer = s.codStreamer
+   AND st.codTematica = t.codTematica
+   AND st.milesSeguidores > (SELECT AVG(st.milesSeguidores)
+                               FROM STREAMERS_TEMATICAS st)
+
 -- 30. Nombre de streamer y medio, para los canales que hablan de la temática "Bricolaje".
 
+SELECT s.nombre, st.media
+  FROM STREAMERS_TEMATICAS st
+ INNER JOIN STREAMERS s ON st.codStreamer = s.codStreamer
+ INNER JOIN TEMATICAS t ON st.codTematica = t.codTematica
+ WHERE t.nombre = 'Bricolaje'
+   
 -- 31. Crea una tabla de "juegos". Para cada juego querremos un código (clave primaria), un nombre (hasta 20 letras, no nulo) y una referencia al streamer que más habla de él (clave ajena a la tabla "streamers").
 
 CREATE TABLE JUEGOS(
@@ -352,31 +367,79 @@ SELECT j.nombre, s.codStreamer
     ON j.codStreamer_Juego = s.codStreamer
  ORDER BY j.nombre ASC
 
--- BAITEADA DEL PROFE MAYUSUCULA (NO SE PUEDE HACER)
+-- BAITEADA MAYUSUCULA DEL PROFE  (NO SE PUEDE HACER)
 
 -- 36. Modifica el último dato de ejemplo que has añadido en la tabla de juegos, para que sí tenga asociado un streamer que hable de él.
 
+SELECT * FROM JUEGOS
+
+UPDATE JUEGOS
+   SET codStreamer_Juego = 2
+ WHERE codJuego = 1002
+
 -- 37. Crea una tabla "juegosStreamers", volcando en ella el nombre de cada juego (con el alias "juego") y el nombre del streamer que habla de él (con el alias "streamer").
+
+SELECT j.nombre juego, s.nombre streamer
+  INTO juegosStreamers
+  FROM JUEGOS j INNER JOIN STREAMERS s ON j.codStreamer_Juego = s.codStreamer
+
+SELECT * FROM juegosStreamers
 
 -- 38. Añade a la tabla "juegosStreamers" un campo "fechaPrueba".
 
+ALTER TABLE juegosStreamers
+  ADD fechaPrueba SMALLDATETIME
+
 -- 39. Pon la fecha de hoy (prefijada, sin usar GetDate) en el campo "fechaPrueba" de todos los registros de la tabla "juegosStreamers".
+
+UPDATE juegosStreamers
+   SET fechaPrueba = '2024-02-22'
+SELECT * FROM juegosStreamers
 
 -- 40. Muestra juego, streamer y fecha de ayer (día anterior al valor del campo "fechaPrueba") para todos los registros de la tabla "juegosStreamers".
 
+SELECT juego, streamer, (fechaPrueba) - 1
+  FROM juegosStreamers
+
 -- 41. Muestra todos los datos de los registros de la tabla "juegosStreamers" que sean del año actual de 2 formas distintas (por ejemplo, usando comodines o funciones de cadenas).
+
+SELECT CONCAT(juego, '-', streamer, '-', fechaPrueba)
+  FROM juegosStreamers
+ WHERE YEAR(fechaPrueba) = YEAR(GETDATE())
 
 -- 42. Elimina la columna "streamer" de la tabla "juegosStreamers".
 
+ALTER TABLE juegosStreamers
+DROP COLUMN streamer
+
 -- 43. Vacía la tabla de "juegosStreamers", conservando su estructura.
+
+TRUNCATE TABLE juegosStreamers
 
 -- 44. Elimina por completo la tabla de "juegosStreamers".
 
+DROP TABLE juegosStreamers
+
 -- 45. Borra los canales del streamer "Caddac Tech".
+
+DELETE FROM STREAMERS_TEMATICAS
+ WHERE codStreamer = 8
+DELETE FROM STREAMERS
+WHERE nombre = 'Caddac'
+  AND apellidos = 'Tech'
+
+SELECT * FROM STREAMERS
 
 -- 46. Muestra la diferencia entre el canal con más seguidores y la media, mostrada en millones de seguidores. Usa el alias "diferenciaMillones".
 
+SELECT DIFFERENCE((SELECT TOP 1 milesSeguidores
+                     FROM STREAMERS_TEMATICAS
+                    ORDER BY milesSeguidores DESC), (SELECT AVG(milesSeguidores)
+                                                       FROM STREAMERS_TEMATICAS))
+
 -- 47. Medios en los que tienen canales los creadores de código "ill", "ng" y "ltt", sin duplicados, usando IN (pero no en una subconsulta).
+
+
 
 -- 48. Medios en los que tienen canales los creadores de código "ill", "ng" y "ltt", sin duplicados, sin usar IN.
 
