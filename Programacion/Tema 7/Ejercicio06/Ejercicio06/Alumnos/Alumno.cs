@@ -28,6 +28,7 @@ namespace Ejercicio06.Alumnos
                 {
                     dni = value;
                 }
+                else { throw new ArgumentException("No es un DNI valido"); }
             }
         }
         public string Nombre
@@ -39,6 +40,7 @@ namespace Ejercicio06.Alumnos
                 {
                     nombre = value;
                 }
+                else { throw new ArgumentException("No es un nombre valido"); }
             }
         }
         public string Apellido1
@@ -50,6 +52,7 @@ namespace Ejercicio06.Alumnos
                 {
                     apellido1 = value;
                 }
+                else { throw new ArgumentException("No es un apellido valido"); }
             }
         }
         public string Apellido2
@@ -61,6 +64,7 @@ namespace Ejercicio06.Alumnos
                 {
                     apellido2 = value;
                 }
+                else { throw new ArgumentException("No es un segundo apellido valido"); }
             }
         }
         public string Telefono
@@ -72,6 +76,7 @@ namespace Ejercicio06.Alumnos
                 {
                     telefono = value;
                 }
+                else { throw new ArgumentException("No es un telefono valido"); }
             }
         }
 

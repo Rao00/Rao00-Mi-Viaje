@@ -17,17 +17,25 @@ namespace Ejercicio06.Alumnos
             listaAlumnos = new List<Alumno>();
         }
 
-        public void New()
+        public int New(string dni, string nombre, string apellidos, string telefono)
         {
             Alumno alumno = new Alumno();
-            alumno.DNI = Interaction.InputBox("Documento nacional de identidad del alumno");
-            alumno.Nombre = Interaction.InputBox("Nombre del alumno");
-            string apellidos = Interaction.InputBox("Apellidos del alumno");
+            alumno.DNI = dni;
+            alumno.Nombre = nombre;
             var apellidosSplit = apellidos.Split(' ');
-            alumno.Apellido1 = apellidosSplit[0];
-            alumno.Apellido2 = apellidosSplit[1];
-            alumno.telefono = Interaction.InputBox("Numero de contacto del alumno");
+            if(apellidosSplit.Length == 1)
+            {
+                alumno.Apellido1 = apellidosSplit[0];
+            }
+            else if(apellidosSplit.Length == 2)
+            {
+                alumno.Apellido1 = apellidosSplit[0];
+                alumno.Apellido2 = apellidosSplit[1];
+            }
+            else { throw new ArgumentException("Minimo un apellido, maximo dos"); }
+            alumno.telefono = telefono;
             listaAlumnos.Add(alumno);
+            return 1;
         }
 
         public int Count()
