@@ -52,6 +52,7 @@
             this.btnGestionarAlumnos.TabIndex = 1;
             this.btnGestionarAlumnos.Text = "Gestion de Alumnos";
             this.btnGestionarAlumnos.UseVisualStyleBackColor = true;
+            this.btnGestionarAlumnos.Click += new System.EventHandler(this.btnGestionarAlumnos_Click);
             // 
             // btnGestionarProfesores
             // 

@@ -79,6 +79,7 @@
     <Compile Include="Profesor\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilidadesListas.cs" />
     <EmbeddedResource Include="Alumnos\fAlumnos.resx">
       <DependentUpon>fAlumnos.cs</DependentUpon>
     </EmbeddedResource>

@@ -17,25 +17,40 @@ namespace Ejercicio06.Alumnos
             listaAlumnos = new List<Alumno>();
         }
 
-        public int New(string dni, string nombre, string apellidos, string telefono)
+        public int New(string dni, string nombre, string telefono)
         {
             Alumno alumno = new Alumno();
             alumno.DNI = dni;
             alumno.Nombre = nombre;
-            var apellidosSplit = apellidos.Split(' ');
-            if(apellidosSplit.Length == 1)
-            {
-                alumno.Apellido1 = apellidosSplit[0];
-            }
-            else if(apellidosSplit.Length == 2)
-            {
-                alumno.Apellido1 = apellidosSplit[0];
-                alumno.Apellido2 = apellidosSplit[1];
-            }
-            else { throw new ArgumentException("Minimo un apellido, maximo dos"); }
-            alumno.telefono = telefono;
+            alumno.Telefono = telefono;
             listaAlumnos.Add(alumno);
             return 1;
+        }
+
+        public int Delete(string dni)
+        {
+            foreach(Alumno alumno in listaAlumnos)
+            {
+                if (alumno.DNI == dni)
+                {
+                    listaAlumnos.Remove(alumno);
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        public string Show()
+        {
+            string salida = string.Empty;
+            if (listaAlumnos.Count > 0)
+            {
+                foreach (Alumno alumno in listaAlumnos)
+                {
+                    salida += alumno.ToString() + "\n\n";
+                }
+            }
+            return salida;
         }
 
         public int Count()

@@ -12,10 +12,12 @@ namespace Ejercicio06.Cursos
     public class ListaCursos
     {
         List<Curso> listaCursos;
+        ListaAlumnos listaAlumnos;
 
-        public ListaCursos()
+        public ListaCursos(ListaAlumnos listaAlumnos)
         {
             listaCursos = new List<Curso>();
+            listaAlumnos = this.listaAlumnos;
         }
 
         public List<Curso> List
@@ -56,13 +58,13 @@ namespace Ejercicio06.Cursos
             return salida;
         }
 
-        public string ToString(ListaAlumnos listaAlumnos, string codigo)
+        public string ToString(string codigo)
         {
             string salida = string.Empty;
             List<Alumno> lista = listaAlumnos.List();
             for(int i = 0; i < listaAlumnos.Count(); i++)
             {
-                if (lista[i].codigoCurso == codigo)
+                if (lista[i].CodigoCurso == codigo)
                 {
                     salida += lista[i].ToString() + "\n";
                 }

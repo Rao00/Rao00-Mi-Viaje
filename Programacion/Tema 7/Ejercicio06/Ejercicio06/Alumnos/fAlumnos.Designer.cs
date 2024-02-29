@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnSortVentas = new System.Windows.Forms.Button();
             this.btnDeleteVentas = new System.Windows.Forms.Button();
             this.btnAddVenta = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAlumnosEnCurso = new System.Windows.Forms.Button();
             this.btnShowAlumno = new System.Windows.Forms.Button();
             this.btnSortAlphOrderAlumnos = new System.Windows.Forms.Button();
             this.btnDeleteAlumno = new System.Windows.Forms.Button();
             this.btnMostrarAlumnos = new System.Windows.Forms.Button();
             this.btnNewAlumno = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnAlumnosEnCurso = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,15 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ventas";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(23, 107);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(344, 40);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Mostrar profesores que imparten asigantura";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnSortVentas
             // 
@@ -103,6 +112,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alumnos";
             // 
+            // btnAlumnosEnCurso
+            // 
+            this.btnAlumnosEnCurso.Location = new System.Drawing.Point(198, 137);
+            this.btnAlumnosEnCurso.Name = "btnAlumnosEnCurso";
+            this.btnAlumnosEnCurso.Size = new System.Drawing.Size(344, 40);
+            this.btnAlumnosEnCurso.TabIndex = 5;
+            this.btnAlumnosEnCurso.Text = "Mostrar Alumnos pertenecientes a un curso";
+            this.btnAlumnosEnCurso.UseVisualStyleBackColor = true;
+            // 
             // btnShowAlumno
             // 
             this.btnShowAlumno.Location = new System.Drawing.Point(375, 87);
@@ -120,6 +138,7 @@
             this.btnSortAlphOrderAlumnos.TabIndex = 3;
             this.btnSortAlphOrderAlumnos.Text = "Ordenar Alumnos por orden alfabetico";
             this.btnSortAlphOrderAlumnos.UseVisualStyleBackColor = true;
+            this.btnSortAlphOrderAlumnos.Click += new System.EventHandler(this.btnSortAlphOrderAlumnos_Click);
             // 
             // btnDeleteAlumno
             // 
@@ -129,6 +148,7 @@
             this.btnDeleteAlumno.TabIndex = 2;
             this.btnDeleteAlumno.Text = "Eliminar Alumno";
             this.btnDeleteAlumno.UseVisualStyleBackColor = true;
+            this.btnDeleteAlumno.Click += new System.EventHandler(this.btnDeleteAlumno_Click);
             // 
             // btnMostrarAlumnos
             // 
@@ -138,6 +158,7 @@
             this.btnMostrarAlumnos.TabIndex = 1;
             this.btnMostrarAlumnos.Text = "Ver Lista Alumnos";
             this.btnMostrarAlumnos.UseVisualStyleBackColor = true;
+            this.btnMostrarAlumnos.Click += new System.EventHandler(this.btnMostrarAlumnos_Click);
             // 
             // btnNewAlumno
             // 
@@ -148,24 +169,6 @@
             this.btnNewAlumno.Text = "Nuevo Alumno";
             this.btnNewAlumno.UseVisualStyleBackColor = true;
             this.btnNewAlumno.Click += new System.EventHandler(this.btnNewAlumno_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(23, 107);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(344, 40);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Mostrar profesores que imparten asigantura";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnAlumnosEnCurso
-            // 
-            this.btnAlumnosEnCurso.Location = new System.Drawing.Point(198, 137);
-            this.btnAlumnosEnCurso.Name = "btnAlumnosEnCurso";
-            this.btnAlumnosEnCurso.Size = new System.Drawing.Size(344, 40);
-            this.btnAlumnosEnCurso.TabIndex = 5;
-            this.btnAlumnosEnCurso.Text = "Mostrar Alumnos pertenecientes a un curso";
-            this.btnAlumnosEnCurso.UseVisualStyleBackColor = true;
             // 
             // fAlumnos
             // 

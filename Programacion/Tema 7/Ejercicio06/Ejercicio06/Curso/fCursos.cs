@@ -66,7 +66,7 @@ namespace Ejercicio06.Cursos
         private void btnShowCursoContent_Click(object sender, EventArgs e)
         {
             string codigo = Interaction.InputBox("Codigo del curso a mostrar");
-            string salida = listaCursos.ToString(listaAlumnos, codigo);
+            string salida = listaCursos.ToString(codigo);
             if(salida == string.Empty)
             {
                 MessageBox.Show("No hay alumnos en ese curso");

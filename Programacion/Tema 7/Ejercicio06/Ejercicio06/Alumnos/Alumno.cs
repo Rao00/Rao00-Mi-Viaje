@@ -10,27 +10,26 @@ namespace Ejercicio06.Alumnos
 {
     public class Alumno
     {
-        public string dni;
-        public string nombre;
-        public string apellido1;
-        public string apellido2;
-        public string telefono;
-        public double? media;
-        public List<double> notas;
-        public string codigoCurso;
+        private string dni;
+        private string nombre;
+        private string telefono;
+        private double? media;
+        private List<double> notas;
+        private string codigoCurso;
 
         public string DNI
         {
             get { return dni; }
             set 
             {
-                if (Regex.IsMatch(value, @"^[0-9]{8}[a-zA-Z]{1}"))
+                if (Regex.IsMatch(value, @"^[0-9]{8}[a-zA-Z]$"))
                 {
                     dni = value;
                 }
                 else { throw new ArgumentException("No es un DNI valido"); }
             }
         }
+
         public string Nombre
         {
             get { return nombre; }
@@ -43,30 +42,7 @@ namespace Ejercicio06.Alumnos
                 else { throw new ArgumentException("No es un nombre valido"); }
             }
         }
-        public string Apellido1
-        {
-            get { return apellido1; }
-            set
-            {
-                if (Regex.IsMatch(value, @"^[a-zA-ZñÑ]+"))
-                {
-                    apellido1 = value;
-                }
-                else { throw new ArgumentException("No es un apellido valido"); }
-            }
-        }
-        public string Apellido2
-        {
-            get { return apellido2; }
-            set
-            {
-                if (Regex.IsMatch(value, @"^[a-zA-ZñÑ]+"))
-                {
-                    apellido2 = value;
-                }
-                else { throw new ArgumentException("No es un segundo apellido valido"); }
-            }
-        }
+        
         public string Telefono
         {
             get { return telefono; }
@@ -93,11 +69,6 @@ namespace Ejercicio06.Alumnos
 
         public Alumno()
         {
-            DNI = string.Empty;
-            nombre = string.Empty;
-            apellido1 = string.Empty;
-            apellido2 = string.Empty;
-            telefono = string.Empty;
             media = null;
             notas = new List<double>();
             codigoCurso = string.Empty;
@@ -109,7 +80,6 @@ namespace Ejercicio06.Alumnos
             string salida = string.Empty;
             salida += "DNI: " + dni + "\n";
             salida += "Nombre: " + nombre + "\n";
-            salida += "Apellidos: " + apellido1 + " " + apellido2 + "\n";
             salida += "Telefono: " + telefono + "\n";
             return salida;
         }

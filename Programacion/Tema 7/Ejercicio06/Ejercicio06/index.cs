@@ -23,14 +23,20 @@ namespace Ejercicio06
         {
             InitializeComponent();
             this.listaAlumnos = new ListaAlumnos();
-            this.listaCursos = new ListaCursos();
+            this.listaCursos = new ListaCursos(listaAlumnos);
             this.listaProfesores = new ListaProfesores();
         }
 
         private void btnGestionarCursos_Click(object sender, EventArgs e)
         {
-            fCursos FormCursos = new fCursos(listaCursos, listaAlumnos);
-            FormCursos.ShowDialog();
+            fCursos formCursos = new fCursos(listaCursos, listaAlumnos);
+            formCursos.ShowDialog();
+        }
+
+        private void btnGestionarAlumnos_Click(object sender, EventArgs e)
+        {
+            fAlumnos formAlumnos = new fAlumnos(listaAlumnos);
+            formAlumnos.ShowDialog();
         }
     }
 }

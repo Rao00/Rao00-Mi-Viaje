@@ -33,7 +33,6 @@ namespace Ejercicio06.Cursos
 
         public Curso() 
         { 
-            nombre = string.Empty;
             codigo = string.Empty;
         }
     }

@@ -27,11 +27,11 @@ namespace Ejercicio06.Profesores
             var asignaturas = Interaction.InputBox("Asiganturas del profesor, separalas con ';'").Split(';');
             profesor.asignaturas = asignaturas.ToList<string>();
             string tutor = Interaction.InputBox("Curso del que el profesor es tutor");
-            if (tutor != null && listaCursos.Contains(tutor))
+            /*if (tutor != null && listaCursos.Contains(tutor))
             {
                 profesor.tutorCurso = tutor;
             }
-            listaProfesores.Add(profesor);
+            listaProfesores.Add(profesor);*/
         }
     }
 }
