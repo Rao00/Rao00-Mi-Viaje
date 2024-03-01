@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ejercicio06.Cursos;
 using Microsoft.VisualBasic;
 
 namespace Ejercicio06.Alumnos
 {
     public class ListaAlumnos
     {
-
         List<Alumno> listaAlumnos;
 
         public ListaAlumnos()
@@ -76,6 +76,30 @@ namespace Ejercicio06.Alumnos
         public List<Alumno> List()
         {
             return listaAlumnos;
+        }
+
+        public bool Contains(string dni)
+        {
+            foreach (Alumno alumno in listaAlumnos)
+            {
+                if (alumno.DNI == dni)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int FindIndex(string dni)
+        {
+            for (int i = 0; i < listaAlumnos.Count(); i++)
+            {
+                if (listaAlumnos[i].DNI == dni)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Ejercicio06.Cursos
         public ListaCursos(ListaAlumnos listaAlumnos)
         {
             listaCursos = new List<Curso>();
-            listaAlumnos = this.listaAlumnos;
+            this.listaAlumnos = listaAlumnos;
         }
 
-        public List<Curso> List
+        public List<Curso> List()
         {
-            get { return listaCursos; }
+            return listaCursos;
         }
 
         public void Add(string nombre, string codigo)
@@ -52,8 +52,8 @@ namespace Ejercicio06.Cursos
             string salida = string.Empty;
             foreach(Curso curso in listaCursos)
             {
-                salida += "Codigo del curso:" + curso.Codigo + "\n";
-                salida += "Nombre del curso:" + curso.Nombre + "\n\n";
+                salida += "Codigo del curso: " + curso.Codigo + "\n";
+                salida += "Nombre del curso: " + curso.Nombre + "\n\n";
             }
             return salida;
         }
@@ -66,17 +66,17 @@ namespace Ejercicio06.Cursos
             {
                 if (lista[i].CodigoCurso == codigo)
                 {
-                    salida += lista[i].ToString() + "\n";
+                    salida += lista[i].ToString() + "\n\n";
                 }
             }
             return salida;
         }
 
-        public bool Contains(string nombreCurso)
+        public bool Contains(string codigoCurso)
         {
             for (int i = 0; i < listaCursos.Count(); i++)
             {
-                if (nombreCurso == listaCursos[i].Nombre)
+                if (codigoCurso == listaCursos[i].codigo)
                 {
                     return true;
                 }

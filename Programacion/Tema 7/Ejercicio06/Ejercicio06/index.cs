@@ -35,7 +35,7 @@ namespace Ejercicio06
 
         private void btnGestionarAlumnos_Click(object sender, EventArgs e)
         {
-            fAlumnos formAlumnos = new fAlumnos(listaAlumnos);
+            fAlumnos formAlumnos = new fAlumnos(listaAlumnos, listaCursos);
             formAlumnos.ShowDialog();
         }
     }

@@ -44,3 +44,44 @@ SELECT @codCategoria = cp.nombre
                         ORDER BY COUNT(p.codProducto) DESC)       
 
 PRINT @codCategoria
+
+DECLARE @nombre VARCHAR(50)
+DECLARE @apellido1 VARCHAR(50)
+DECLARE @apellido2 VARCHAR(50)
+
+SELECT @nombre = nombre,
+       @apellido1 = apellido1,
+       @apellido2 = apellido2
+  FROM EMPLEADOS
+ WHERE codEmpleado = 9
+
+PRINT CONCAT(@nombre, ' ', @apellido1, ' ', @apellido2)
+
+SELECT * FROM EMPLEADOS
+
+
+DECLARE @idCliente VARCHAR(100)
+DECLARE @codCliente INT
+DECLARE @numPagos INT
+
+SELECT TOP(1) @codCliente = c.codCliente,
+              @idCliente = c.nombre_cliente, 
+              @numPagos = COUNT(p.codCliente)
+  FROM CLIENTES c,
+       PAGOS p
+ WHERE c.codCliente = p.codCliente
+ GROUP BY c.nombre_cliente, c.codCliente
+ ORDER BY NEWID()
+ 
+IF @numPagos > 0
+BEGIN 
+  PRINT CONCAT('El cliente ', @idCliente, ' ha realizado ', @numPagos, ' pagos')
+END
+ELSE
+BEGIN
+  DECLARE @numPedidos INT
+  SELECT @numPedidos = COUNT(codCliente)
+    FROM PEDIDOS
+   WHERE codCliente = @codCliente
+  PRINT CONCAT('El cliente ', @idCliente, ' no ha realizado pagos pero ha realizado ', @numPedidos)
+END

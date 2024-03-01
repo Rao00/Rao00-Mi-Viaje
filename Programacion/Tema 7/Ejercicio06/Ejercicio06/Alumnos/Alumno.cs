@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -14,9 +15,14 @@ namespace Ejercicio06.Alumnos
         private string dni;
         private string nombre;
         private string telefono;
-        private double? media;
         private List<double> notas;
         private string codigoCurso;
+
+        public Alumno()
+        {
+            notas = new List<double>();
+            codigoCurso = string.Empty;
+        }
 
         public string DNI
         {
@@ -57,6 +63,12 @@ namespace Ejercicio06.Alumnos
             }
         }
 
+        public List<double> Notas
+        {
+            get { return notas; }
+            set { notas = value; }
+        }
+
         public double Media
         {
             get { return notas.Average(); }
@@ -68,13 +80,6 @@ namespace Ejercicio06.Alumnos
             set { codigoCurso = value; }
         }
 
-        public Alumno()
-        {
-            media = null;
-            notas = new List<double>();
-            codigoCurso = string.Empty;
-        }
-
         override
         public string ToString()
         {
@@ -82,6 +87,7 @@ namespace Ejercicio06.Alumnos
             salida += "DNI: " + dni + "\n";
             salida += "Nombre: " + nombre + "\n";
             salida += "Telefono: " + telefono + "\n";
+            salida += "Codigo curso: " + codigoCurso;
             return salida;
         }
 
