@@ -69,6 +69,7 @@
       <DependentUpon>index.cs</DependentUpon>
     </Compile>
     <Compile Include="Alumnos\ListaAlumnos.cs" />
+    <Compile Include="Persona.cs" />
     <Compile Include="Profesor\fProfesores.cs">
       <SubType>Form</SubType>
     </Compile>

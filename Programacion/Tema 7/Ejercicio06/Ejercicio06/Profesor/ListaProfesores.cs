@@ -18,7 +18,8 @@ namespace Ejercicio06.Profesores
             listaProfesores = new List<Profesor>();
         }
 
-        public void New()
+        
+        /*public void New()
         {
             Profesor profesor = new Profesor();
             profesor.DNI = Interaction.InputBox("Documento nacional de identidad del profesor");
@@ -31,7 +32,7 @@ namespace Ejercicio06.Profesores
             {
                 profesor.tutorCurso = tutor;
             }
-            listaProfesores.Add(profesor);*/
-        }
+            listaProfesores.Add(profesor);
+        }*/
     }
 }

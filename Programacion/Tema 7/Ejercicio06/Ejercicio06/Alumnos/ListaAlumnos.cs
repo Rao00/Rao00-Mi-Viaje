@@ -17,12 +17,10 @@ namespace Ejercicio06.Alumnos
             listaAlumnos = new List<Alumno>();
         }
 
-        public int New(string dni, string nombre, string telefono)
+        public int New(string dni)
         {
             Alumno alumno = new Alumno();
             alumno.DNI = dni;
-            alumno.Nombre = nombre;
-            alumno.Telefono = telefono;
             listaAlumnos.Add(alumno);
             return 1;
         }
@@ -51,6 +49,23 @@ namespace Ejercicio06.Alumnos
                 }
             }
             return salida;
+        }
+
+        public string LookFor(string dni)
+        {
+            foreach(Alumno alumno in listaAlumnos)
+            {
+                if (alumno.DNI == dni)
+                {
+                    return alumno.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public void Sort()
+        {
+            listaAlumnos = UtilidadesListas.Sort(listaAlumnos);
         }
 
         public int Count()

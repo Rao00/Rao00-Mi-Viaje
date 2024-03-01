@@ -129,6 +129,7 @@
             this.btnShowAlumno.TabIndex = 4;
             this.btnShowAlumno.Text = "Mostrar Alumno por nombre";
             this.btnShowAlumno.UseVisualStyleBackColor = true;
+            this.btnShowAlumno.Click += new System.EventHandler(this.btnShowAlumno_Click);
             // 
             // btnSortAlphOrderAlumnos
             // 

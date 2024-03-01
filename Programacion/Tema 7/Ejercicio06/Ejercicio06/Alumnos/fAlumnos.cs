@@ -24,17 +24,26 @@ namespace Ejercicio06.Alumnos
 
         private void btnNewAlumno_Click(object sender, EventArgs e)
         {
+            int i;
+            List<Alumno> tempListaAlumnos = listaAlumnos.List();
+            string dni = Interaction.InputBox("Documento nacional de identidad del alumno");
             try
             {
-                string dni = Interaction.InputBox("Documento nacional de identidad del alumno");
-                string nombre = Interaction.InputBox("Nombre del alumno");
-                string telefono = Interaction.InputBox("Numero de contacto del alumno");
-                if (listaAlumnos.New(dni, nombre, telefono) == 1)
+                if (listaAlumnos.New(dni) == 1)
                 {
+                    string nombre = Interaction.InputBox("Nombre del alumno");
+                    i = listaAlumnos.List().Count-1;
+                    tempListaAlumnos[i].Nombre = nombre;
+                    string telefono = Interaction.InputBox("Telefono del alumno");
+                    tempListaAlumnos[i].Telefono = telefono;
                     MessageBox.Show("Alumno añadido");
                 }
             }
-            catch (ArgumentException aex) { MessageBox.Show(aex.Message); }   
+            catch (ArgumentException aex) 
+            {
+                listaAlumnos.Delete(dni);
+                MessageBox.Show(aex.Message); 
+            }   
         }
 
         private void btnDeleteAlumno_Click(object sender, EventArgs e)
@@ -66,21 +75,18 @@ namespace Ejercicio06.Alumnos
         
         private void btnSortAlphOrderAlumnos_Click(object sender, EventArgs e)
         {
-            /*string txtEmpleados;
-            if (listaEmpleados.Count() > 1)
+            listaAlumnos.Sort();
+            MessageBox.Show("Lista ordenada");
+        }
+
+        private void btnShowAlumno_Click(object sender, EventArgs e)
+        {
+            string alumno = listaAlumnos.LookFor(Interaction.InputBox("Introduce el DNI del alumno a buscar"));
+            if (alumno == string.Empty)
             {
-                listaEmpleados.SortEmpleados();
-                txtEmpleados = listaEmpleados.VerEmpleados();
-                if (txtEmpleados != string.Empty)
-                {
-                    MessageBox.Show(txtEmpleados);
-                }
-                else { MessageBox.Show($"No existen empleados"); }
+                MessageBox.Show("El alumno no existe");
             }
-            else
-            {
-                MessageBox.Show("No hay sufiencientes empleados para ordenar");
-            }*/
+            else { MessageBox.Show(alumno) ; }
         }
     }
 }

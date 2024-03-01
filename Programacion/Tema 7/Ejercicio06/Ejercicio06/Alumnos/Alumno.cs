@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using Ejercicio06.Cursos;
 
 namespace Ejercicio06.Alumnos
 {
-    public class Alumno
+    public class Alumno : IPersona
     {
         private string dni;
         private string nombre;
@@ -20,13 +21,13 @@ namespace Ejercicio06.Alumnos
         public string DNI
         {
             get { return dni; }
-            set 
+            set
             {
-                if (Regex.IsMatch(value, @"^[0-9]{8}[a-zA-Z]$"))
+                if (Regex.IsMatch(value, @"^[0-9]{8}[a-zA-Z]{1}"))
                 {
                     dni = value;
                 }
-                else { throw new ArgumentException("No es un DNI valido"); }
+                else { throw new ArgumentException("El DNI no es valido"); }
             }
         }
 
@@ -39,10 +40,10 @@ namespace Ejercicio06.Alumnos
                 {
                     nombre = value;
                 }
-                else { throw new ArgumentException("No es un nombre valido"); }
+                else { throw new ArgumentException("El nombre no es valido"); }
             }
         }
-        
+
         public string Telefono
         {
             get { return telefono; }
@@ -52,7 +53,7 @@ namespace Ejercicio06.Alumnos
                 {
                     telefono = value;
                 }
-                else { throw new ArgumentException("No es un telefono valido"); }
+                else { throw new ArgumentException("El telefono no es valido"); }
             }
         }
 
@@ -83,5 +84,9 @@ namespace Ejercicio06.Alumnos
             salida += "Telefono: " + telefono + "\n";
             return salida;
         }
+
+        public bool SetDNI(string dni) { DNI = this.dni; return true; }
+        public bool SetNombre(string nombre) { Nombre = this.nombre; return true; }
+        public bool SetTelefono(string telefono) { Telefono = this.telefono; return true; }
     }
 }

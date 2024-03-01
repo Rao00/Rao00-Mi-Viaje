@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ using Ejercicio06.Cursos;
 
 namespace Ejercicio06.Profesores
 {
-    public class Profesor
+    public class Profesor : IPersona
     {
-        public string dni;
-        public string nombre;
-        public string telefono;
-        public List<string> asignaturas;
-        public string tutorCurso;
+        private string dni;
+        private string nombre;
+        private string telefono;
+        private List<string> asignaturas;
+        private string tutorCurso;
 
         public string DNI
         {
@@ -37,6 +38,7 @@ namespace Ejercicio06.Profesores
                 {
                     nombre = value;
                 }
+                else { throw new ArgumentException("El nombre no es valido"); }
             }
         }
 
@@ -49,6 +51,7 @@ namespace Ejercicio06.Profesores
                 {
                     telefono = value;
                 }
+                else { throw new ArgumentException("El telefono no es valido"); }
             }
         }
 
@@ -60,11 +63,12 @@ namespace Ejercicio06.Profesores
 
         public Profesor()
         {
-            dni = string.Empty;
-            nombre = string.Empty;
-            telefono = string.Empty;
             asignaturas = new List<string>();
             tutorCurso = string.Empty;
         }
+
+        public bool SetDNI(string dni) { DNI = this.dni; return true; }
+        public bool SetNombre(string nombre) { Nombre = this.nombre; return true; }
+        public bool SetTelefono(string telefono) { Telefono = this.telefono; return true; }
     }
 }
