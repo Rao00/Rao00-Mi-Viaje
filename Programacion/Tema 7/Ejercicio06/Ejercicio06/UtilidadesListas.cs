@@ -21,7 +21,7 @@ namespace Ejercicio06
                 {
                     if (String.Compare(ListaPrincipal[j].Nombre, ListaPrincipal[i].Nombre) < 0)
                     {
-                        ListaPrincipal = MoveEmpleado(ListaPrincipal, i, j);
+                        ListaPrincipal = Move(ListaPrincipal, i, j);
                         cont = false;
                     }
                 }
@@ -30,7 +30,17 @@ namespace Ejercicio06
             return ListaPrincipal;
         }
 
-        private static List<T> MoveEmpleado<T>(List<T> lista, int i, int j) where T : IPersona
+        public static List<double> StringToDouble(List<string> list)
+        {
+            List<double> listDouble = new List<double>();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                listDouble.Add(double.Parse(list[i]));
+            }
+            return listDouble;
+        }
+
+        private static List<T> Move<T>(List<T> lista, int i, int j) where T : IPersona
         {
             var empleadoTemp = lista[j];
             lista[j] = lista[i];

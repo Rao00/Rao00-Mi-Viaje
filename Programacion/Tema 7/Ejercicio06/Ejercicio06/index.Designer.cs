@@ -62,6 +62,7 @@
             this.btnGestionarProfesores.TabIndex = 2;
             this.btnGestionarProfesores.Text = "Gestion de Profesores";
             this.btnGestionarProfesores.UseVisualStyleBackColor = true;
+            this.btnGestionarProfesores.Click += new System.EventHandler(this.btnGestionarProfesores_Click);
             // 
             // Eje06
             // 

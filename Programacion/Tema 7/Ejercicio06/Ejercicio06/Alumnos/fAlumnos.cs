@@ -158,20 +158,23 @@ namespace Ejercicio06.Alumnos
                 string dni = Interaction.InputBox("DNI del alumno");
                 if (listaAlumnos.Contains(dni))
                 {
+                    bool continuar = true;
                     int indice = listaAlumnos.FindIndex(dni);
                     string notas = Interaction.InputBox("Notas a eliminar separadas con ';'");
-                    List<string> listaNotasTemp = notas.Split(';').ToList();
-                    List<double> listaNotas = new List<double>();
-                    for (int i = 0; i < listaAlumnos.List()[indice].Notas.Count(); i++)
+                    List<double> listaNotasTemp = UtilidadesListas.StringToDouble(notas.Split(';').ToList());
+                    for (int i = 0; i < listaNotasTemp.Count(); i++)
                     {
-                        if (!listaNotasTemp.Contains(double.Parse(listaAlumnos.List()[indice].Notas[i]))) 
-                        { 
-                            listaNotas.Add(double.Parse(listaAlumnos.List()[indice].Notas[i])); 
+                        for (int j = 0; j < listaAlumnos.List()[indice].Notas.Count() && continuar; j++)
+                        {
+                            if (listaNotasTemp.Contains(listaAlumnos.List()[indice].Notas[i]))
+                            {
+                                listaAlumnos.List()[indice].Notas.Remove(listaNotasTemp[i]);
+                                continuar = false;
+                            }
                         }
+                        continuar = true;
                     }
-                        
-                    
-                    MessageBox.Show("Notas añadidas");
+                    MessageBox.Show("Notas eliminadas");
                 }
                 else { MessageBox.Show("Ningun alumno coincide con ese DNI"); }
             }

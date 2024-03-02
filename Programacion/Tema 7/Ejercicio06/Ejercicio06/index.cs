@@ -38,5 +38,11 @@ namespace Ejercicio06
             fAlumnos formAlumnos = new fAlumnos(listaAlumnos, listaCursos);
             formAlumnos.ShowDialog();
         }
+
+        private void btnGestionarProfesores_Click(object sender, EventArgs e)
+        {
+            fProfesores formProfesores = new fProfesores(listaProfesores, listaCursos);
+            formProfesores.ShowDialog();
+        }
     }
 }

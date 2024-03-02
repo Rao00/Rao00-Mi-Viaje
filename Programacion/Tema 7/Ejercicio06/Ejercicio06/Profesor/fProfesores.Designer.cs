@@ -29,67 +29,70 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSortVentas = new System.Windows.Forms.Button();
-            this.btnDeleteVentas = new System.Windows.Forms.Button();
-            this.btnAddVenta = new System.Windows.Forms.Button();
+            this.btnShowProfesoresAsinatura = new System.Windows.Forms.Button();
+            this.btnDeleteAsignaturas = new System.Windows.Forms.Button();
+            this.btnAddAsignatura = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnShowEmpl = new System.Windows.Forms.Button();
-            this.btnSortAlphOrder = new System.Windows.Forms.Button();
-            this.btnDeleteEmpl = new System.Windows.Forms.Button();
-            this.btnMostrarLista = new System.Windows.Forms.Button();
-            this.btnNewEmpleado = new System.Windows.Forms.Button();
+            this.btnShowProfesor = new System.Windows.Forms.Button();
+            this.btnSortAlphOrderProfesor = new System.Windows.Forms.Button();
+            this.btnDeleteProfesor = new System.Windows.Forms.Button();
+            this.btnMostrarListaProfesores = new System.Windows.Forms.Button();
+            this.btnNewProfesor = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnSortVentas);
-            this.groupBox2.Controls.Add(this.btnDeleteVentas);
-            this.groupBox2.Controls.Add(this.btnAddVenta);
+            this.groupBox2.Controls.Add(this.btnShowProfesoresAsinatura);
+            this.groupBox2.Controls.Add(this.btnDeleteAsignaturas);
+            this.groupBox2.Controls.Add(this.btnAddAsignatura);
             this.groupBox2.Location = new System.Drawing.Point(29, 204);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(20);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(20);
-            this.groupBox2.Size = new System.Drawing.Size(742, 217);
+            this.groupBox2.Size = new System.Drawing.Size(742, 197);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ventas";
+            this.groupBox2.Text = "Asignaturas";
             // 
-            // btnSortVentas
+            // btnShowProfesoresAsinatura
             // 
-            this.btnSortVentas.Location = new System.Drawing.Point(193, 114);
-            this.btnSortVentas.Name = "btnSortVentas";
-            this.btnSortVentas.Size = new System.Drawing.Size(344, 40);
-            this.btnSortVentas.TabIndex = 4;
-            this.btnSortVentas.Text = "Mostrar profesores que imparten asigantura";
-            this.btnSortVentas.UseVisualStyleBackColor = true;
+            this.btnShowProfesoresAsinatura.Location = new System.Drawing.Point(193, 102);
+            this.btnShowProfesoresAsinatura.Name = "btnShowProfesoresAsinatura";
+            this.btnShowProfesoresAsinatura.Size = new System.Drawing.Size(344, 60);
+            this.btnShowProfesoresAsinatura.TabIndex = 4;
+            this.btnShowProfesoresAsinatura.Text = "Mostrar profesores que imparten asigantura";
+            this.btnShowProfesoresAsinatura.UseVisualStyleBackColor = true;
+            this.btnShowProfesoresAsinatura.Click += new System.EventHandler(this.btnShowProfesoresAsinatura_Click);
             // 
-            // btnDeleteVentas
+            // btnDeleteAsignaturas
             // 
-            this.btnDeleteVentas.Location = new System.Drawing.Point(373, 48);
-            this.btnDeleteVentas.Name = "btnDeleteVentas";
-            this.btnDeleteVentas.Size = new System.Drawing.Size(344, 40);
-            this.btnDeleteVentas.TabIndex = 3;
-            this.btnDeleteVentas.Text = "Elminiar las ventas de un empleado";
-            this.btnDeleteVentas.UseVisualStyleBackColor = true;
+            this.btnDeleteAsignaturas.Location = new System.Drawing.Point(373, 36);
+            this.btnDeleteAsignaturas.Name = "btnDeleteAsignaturas";
+            this.btnDeleteAsignaturas.Size = new System.Drawing.Size(344, 40);
+            this.btnDeleteAsignaturas.TabIndex = 3;
+            this.btnDeleteAsignaturas.Text = "Elminiar asignaturas de un profesor";
+            this.btnDeleteAsignaturas.UseVisualStyleBackColor = true;
+            this.btnDeleteAsignaturas.Click += new System.EventHandler(this.btnDeleteAsignaturas_Click);
             // 
-            // btnAddVenta
+            // btnAddAsignatura
             // 
-            this.btnAddVenta.Location = new System.Drawing.Point(23, 48);
-            this.btnAddVenta.Name = "btnAddVenta";
-            this.btnAddVenta.Size = new System.Drawing.Size(344, 40);
-            this.btnAddVenta.TabIndex = 3;
-            this.btnAddVenta.Text = "Añadir asignatura a un Profesor";
-            this.btnAddVenta.UseVisualStyleBackColor = true;
+            this.btnAddAsignatura.Location = new System.Drawing.Point(23, 36);
+            this.btnAddAsignatura.Name = "btnAddAsignatura";
+            this.btnAddAsignatura.Size = new System.Drawing.Size(344, 40);
+            this.btnAddAsignatura.TabIndex = 3;
+            this.btnAddAsignatura.Text = "Añadir asignatura a un Profesor";
+            this.btnAddAsignatura.UseVisualStyleBackColor = true;
+            this.btnAddAsignatura.Click += new System.EventHandler(this.btnAddAsignatura_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnShowEmpl);
-            this.groupBox1.Controls.Add(this.btnSortAlphOrder);
-            this.groupBox1.Controls.Add(this.btnDeleteEmpl);
-            this.groupBox1.Controls.Add(this.btnMostrarLista);
-            this.groupBox1.Controls.Add(this.btnNewEmpleado);
+            this.groupBox1.Controls.Add(this.btnShowProfesor);
+            this.groupBox1.Controls.Add(this.btnSortAlphOrderProfesor);
+            this.groupBox1.Controls.Add(this.btnDeleteProfesor);
+            this.groupBox1.Controls.Add(this.btnMostrarListaProfesores);
+            this.groupBox1.Controls.Add(this.btnNewProfesor);
             this.groupBox1.Location = new System.Drawing.Point(29, 29);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(20);
             this.groupBox1.Name = "groupBox1";
@@ -97,52 +100,57 @@
             this.groupBox1.Size = new System.Drawing.Size(742, 150);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Empleados";
+            this.groupBox1.Text = "Profesores";
             // 
-            // btnShowEmpl
+            // btnShowProfesor
             // 
-            this.btnShowEmpl.Location = new System.Drawing.Point(375, 87);
-            this.btnShowEmpl.Name = "btnShowEmpl";
-            this.btnShowEmpl.Size = new System.Drawing.Size(344, 40);
-            this.btnShowEmpl.TabIndex = 4;
-            this.btnShowEmpl.Text = "Mostrar empleado";
-            this.btnShowEmpl.UseVisualStyleBackColor = true;
+            this.btnShowProfesor.Location = new System.Drawing.Point(375, 87);
+            this.btnShowProfesor.Name = "btnShowProfesor";
+            this.btnShowProfesor.Size = new System.Drawing.Size(344, 40);
+            this.btnShowProfesor.TabIndex = 4;
+            this.btnShowProfesor.Text = "Mostrar profesor";
+            this.btnShowProfesor.UseVisualStyleBackColor = true;
+            this.btnShowProfesor.Click += new System.EventHandler(this.btnShowProfesor_Click);
             // 
-            // btnSortAlphOrder
+            // btnSortAlphOrderProfesor
             // 
-            this.btnSortAlphOrder.Location = new System.Drawing.Point(23, 87);
-            this.btnSortAlphOrder.Name = "btnSortAlphOrder";
-            this.btnSortAlphOrder.Size = new System.Drawing.Size(344, 40);
-            this.btnSortAlphOrder.TabIndex = 3;
-            this.btnSortAlphOrder.Text = "Ordenar empleados por orden alfabetico";
-            this.btnSortAlphOrder.UseVisualStyleBackColor = true;
+            this.btnSortAlphOrderProfesor.Location = new System.Drawing.Point(23, 87);
+            this.btnSortAlphOrderProfesor.Name = "btnSortAlphOrderProfesor";
+            this.btnSortAlphOrderProfesor.Size = new System.Drawing.Size(344, 40);
+            this.btnSortAlphOrderProfesor.TabIndex = 3;
+            this.btnSortAlphOrderProfesor.Text = "Ordenar profesores por orden alfabetico";
+            this.btnSortAlphOrderProfesor.UseVisualStyleBackColor = true;
+            this.btnSortAlphOrderProfesor.Click += new System.EventHandler(this.btnSortAlphOrderProfesor_Click);
             // 
-            // btnDeleteEmpl
+            // btnDeleteProfesor
             // 
-            this.btnDeleteEmpl.Location = new System.Drawing.Point(258, 36);
-            this.btnDeleteEmpl.Name = "btnDeleteEmpl";
-            this.btnDeleteEmpl.Size = new System.Drawing.Size(225, 40);
-            this.btnDeleteEmpl.TabIndex = 2;
-            this.btnDeleteEmpl.Text = "Eliminar empleado";
-            this.btnDeleteEmpl.UseVisualStyleBackColor = true;
+            this.btnDeleteProfesor.Location = new System.Drawing.Point(258, 36);
+            this.btnDeleteProfesor.Name = "btnDeleteProfesor";
+            this.btnDeleteProfesor.Size = new System.Drawing.Size(225, 40);
+            this.btnDeleteProfesor.TabIndex = 2;
+            this.btnDeleteProfesor.Text = "Eliminar profesor";
+            this.btnDeleteProfesor.UseVisualStyleBackColor = true;
+            this.btnDeleteProfesor.Click += new System.EventHandler(this.btnDeleteProfesor_Click);
             // 
-            // btnMostrarLista
+            // btnMostrarListaProfesores
             // 
-            this.btnMostrarLista.Location = new System.Drawing.Point(499, 36);
-            this.btnMostrarLista.Name = "btnMostrarLista";
-            this.btnMostrarLista.Size = new System.Drawing.Size(220, 40);
-            this.btnMostrarLista.TabIndex = 1;
-            this.btnMostrarLista.Text = "Ver Lista empleados";
-            this.btnMostrarLista.UseVisualStyleBackColor = true;
+            this.btnMostrarListaProfesores.Location = new System.Drawing.Point(499, 36);
+            this.btnMostrarListaProfesores.Name = "btnMostrarListaProfesores";
+            this.btnMostrarListaProfesores.Size = new System.Drawing.Size(220, 40);
+            this.btnMostrarListaProfesores.TabIndex = 1;
+            this.btnMostrarListaProfesores.Text = "Ver Lista profesores";
+            this.btnMostrarListaProfesores.UseVisualStyleBackColor = true;
+            this.btnMostrarListaProfesores.Click += new System.EventHandler(this.btnMostrarListaProfesores_Click);
             // 
-            // btnNewEmpleado
+            // btnNewProfesor
             // 
-            this.btnNewEmpleado.Location = new System.Drawing.Point(23, 36);
-            this.btnNewEmpleado.Name = "btnNewEmpleado";
-            this.btnNewEmpleado.Size = new System.Drawing.Size(220, 40);
-            this.btnNewEmpleado.TabIndex = 0;
-            this.btnNewEmpleado.Text = "Nuevo empleado";
-            this.btnNewEmpleado.UseVisualStyleBackColor = true;
+            this.btnNewProfesor.Location = new System.Drawing.Point(23, 36);
+            this.btnNewProfesor.Name = "btnNewProfesor";
+            this.btnNewProfesor.Size = new System.Drawing.Size(220, 40);
+            this.btnNewProfesor.TabIndex = 0;
+            this.btnNewProfesor.Text = "Nuevo profesor";
+            this.btnNewProfesor.UseVisualStyleBackColor = true;
+            this.btnNewProfesor.Click += new System.EventHandler(this.btnNewProfesor_Click);
             // 
             // fProfesores
             // 
@@ -162,14 +170,14 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnSortVentas;
-        private System.Windows.Forms.Button btnDeleteVentas;
-        private System.Windows.Forms.Button btnAddVenta;
+        private System.Windows.Forms.Button btnShowProfesoresAsinatura;
+        private System.Windows.Forms.Button btnDeleteAsignaturas;
+        private System.Windows.Forms.Button btnAddAsignatura;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnShowEmpl;
-        private System.Windows.Forms.Button btnSortAlphOrder;
-        private System.Windows.Forms.Button btnDeleteEmpl;
-        private System.Windows.Forms.Button btnMostrarLista;
-        private System.Windows.Forms.Button btnNewEmpleado;
+        private System.Windows.Forms.Button btnShowProfesor;
+        private System.Windows.Forms.Button btnSortAlphOrderProfesor;
+        private System.Windows.Forms.Button btnDeleteProfesor;
+        private System.Windows.Forms.Button btnMostrarListaProfesores;
+        private System.Windows.Forms.Button btnNewProfesor;
     }
 }

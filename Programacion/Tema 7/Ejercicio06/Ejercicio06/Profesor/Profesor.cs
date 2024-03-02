@@ -61,10 +61,27 @@ namespace Ejercicio06.Profesores
             set { tutorCurso = value; }
         }
 
+        public List<string> Asignaturas
+        {
+            get { return asignaturas; }
+            set { asignaturas = value; }
+        }
+
         public Profesor()
         {
             asignaturas = new List<string>();
             tutorCurso = string.Empty;
+        }
+
+        override
+        public string ToString()
+        {
+            string salida = string.Empty;
+            salida += "DNI: " + dni + "\n";
+            salida += "Nombre: " + nombre + "\n";
+            salida += "Telefono: " + telefono + "\n";
+            salida += "Codigo curso: " + tutorCurso;
+            return salida;
         }
 
         public bool SetDNI(string dni) { DNI = this.dni; return true; }
