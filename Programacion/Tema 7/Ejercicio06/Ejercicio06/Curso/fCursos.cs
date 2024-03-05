@@ -29,28 +29,44 @@ namespace Ejercicio06.Cursos
             try
             {
                 string nombre = Interaction.InputBox("Nombre del curso");
-                string codigo = Interaction.InputBox("Codigo del curso");
-                listaCursos.Add(nombre, codigo);
+                string codigo = "";
+                if (nombre != "") 
+                {
+                    codigo = Interaction.InputBox("Codigo del curso");
+                }
+                else { throw new Exception("Inserta un nombre valido"); }
+                if (nombre != "" && codigo != "")
+                {
+                    listaCursos.Add(nombre, codigo);
+                }
+                else { throw new Exception("Inserta un codigo valido"); }
             }
-            catch(Exception) { MessageBox.Show("Inserta un parametro correcto"); }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (listaCursos.List().Count() > 0)
             {
-                string codigo = Interaction.InputBox("Codigo del curso a eliminar");
-                bool removed = listaCursos.Remove(codigo);
-                if (removed)
+                try
                 {
-                    MessageBox.Show("Curso eliminado con exito");
+                    string codigo = Interaction.InputBox("Codigo del curso a eliminar");
+                    bool removed = listaCursos.Remove(codigo);
+                    if (removed)
+                    {
+                        MessageBox.Show("Curso eliminado con exito");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Curso no encontrado");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Curso no encontrado");
-                }
+                catch { MessageBox.Show("Introduce un codigo valido"); }
             }
-            catch { MessageBox.Show("Introduce un codigo valido"); }
+            else
+            {
+                MessageBox.Show("No hay cursos para eliminar");
+            }
         }
 
         private void btnShowCursos_Click(object sender, EventArgs e)
@@ -65,20 +81,27 @@ namespace Ejercicio06.Cursos
 
         private void btnShowCursoContent_Click(object sender, EventArgs e)
         {
-            string codigo = Interaction.InputBox("Codigo del curso a mostrar");
-            if (listaCursos.Contains(codigo))
+            if (listaCursos.List().Count() > 1)
             {
-                string salida = listaCursos.ToString(codigo);
-                if (salida == string.Empty)
+                string codigo = Interaction.InputBox("Codigo del curso a mostrar");
+                if (listaCursos.Contains(codigo))
                 {
-                    MessageBox.Show("No hay alumnos en ese curso");
+                    string salida = listaCursos.ToString(codigo);
+                    if (salida == string.Empty)
+                    {
+                        MessageBox.Show("No hay alumnos en ese curso");
+                    }
+                    else
+                    {
+                        MessageBox.Show(salida);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(salida);
-                }
+                else { MessageBox.Show("No existe ese curso"); }
             }
-            else { MessageBox.Show("No existe ese curso"); }
+            else
+            {
+                MessageBox.Show("No hay cursos suficientes para ordenar");
+            }   
         }
     }
 }

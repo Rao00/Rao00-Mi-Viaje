@@ -44,6 +44,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.btnShowProfesoresAsinatura);
             this.groupBox2.Controls.Add(this.btnDeleteAsignaturas);
             this.groupBox2.Controls.Add(this.btnAddAsignatura);
@@ -88,6 +90,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.btnShowProfesor);
             this.groupBox1.Controls.Add(this.btnSortAlphOrderProfesor);
             this.groupBox1.Controls.Add(this.btnDeleteProfesor);
@@ -164,6 +168,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

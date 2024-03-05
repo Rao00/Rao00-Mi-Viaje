@@ -4,9 +4,11 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ejercicio06.Profesores
 {
@@ -136,6 +138,37 @@ namespace Ejercicio06.Profesores
                 }
             }
             return salida;
+        }
+
+        public Profesor RemoveSubjects(Profesor profesor, List<string> lAsignaturas)
+        {
+            bool continuar = true;
+            for (int i = 0; i < lAsignaturas.Count(); i++)
+            {
+                for (int j = 0; j < profesor.Asignaturas.Count() && continuar; j++)
+                {
+                    if (lAsignaturas.Contains(profesor.Asignaturas[j]))
+                    {
+                        profesor.Asignaturas.Remove(lAsignaturas[i]);
+                        continuar = false;
+                    }
+                }
+                continuar = true;
+            }
+            return profesor;
+        }
+
+        public Profesor AddSubjects(Profesor profesor, List<string> lAsignaturas)
+        {
+            foreach (string asignatura in lAsignaturas)
+            {
+                if (!profesor.Asignaturas.Contains(asignatura))
+                {
+                    profesor.Asignaturas.Add(asignatura);
+                }
+                else { MessageBox.Show($"El profesor con DNI {profesor.DNI} ya tiene asignada la asignatura de {asignatura}"); }
+            }
+            return profesor;
         }
     }
 }

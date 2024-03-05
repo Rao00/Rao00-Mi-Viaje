@@ -125,14 +125,7 @@ namespace Ejercicio06.Profesores
                 {
                     string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas separadas con ';'");
                     List<string> listaAsignaturasTemp = asignaturas.Split(';').ToList();
-                    foreach (string asignatura in listaAsignaturasTemp)
-                    {
-                        if (!listaProfesores.List()[indiceProfesor].Asignaturas.Contains(asignatura))
-                        {
-                            listaProfesores.List()[indiceProfesor].Asignaturas.Add(asignatura);
-                        }
-                        else { MessageBox.Show($"El profesor con DNI {dni} ya tiene asignada la asignatura de {asignatura}"); continue; } 
-                    }
+                    listaProfesores.List()[indiceProfesor] = listaProfesores.AddSubjects(listaProfesores.List()[indiceProfesor], listaAsignaturasTemp);
                     MessageBox.Show("Asignaturas añadidas");
                 }
                 else { MessageBox.Show("El profesor no existe"); }
@@ -147,22 +140,10 @@ namespace Ejercicio06.Profesores
                 string dni = Interaction.InputBox("DNI del profesor");
                 if (listaProfesores.Contains(dni))
                 {
-                    bool continuar = true;
                     int indice = listaProfesores.FindIndex(dni);
                     string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas a eliminar separadas con ';'");
-                    List<string> listaNotasTemp = asignaturas.Split(';').ToList();
-                    for (int i = 0; i < listaNotasTemp.Count(); i++)
-                    {
-                        for (int j = 0; j < listaProfesores.List()[indice].Asignaturas.Count() && continuar; j++)
-                        {
-                            if (listaNotasTemp.Contains(listaProfesores.List()[indice].Asignaturas[j]))
-                            {
-                                listaProfesores.List()[indice].Asignaturas.Remove(listaNotasTemp[i]);
-                                continuar = false;
-                            }
-                        }
-                        continuar = true;
-                    }
+                    List<string> listaAsignaturas = asignaturas.Split(';').ToList();
+                    listaProfesores.List()[indice] = listaProfesores.RemoveSubjects(listaProfesores.List()[indice], listaAsignaturas);
                     MessageBox.Show("Asignaturas eliminadas");
                 }
                 else { MessageBox.Show("El profesor no existe"); }
@@ -172,20 +153,24 @@ namespace Ejercicio06.Profesores
 
         private void btnShowProfesoresAsinatura_Click(object sender, EventArgs e)
         {
-            string salida = string.Empty;
-            string asignatura = Interaction.InputBox("Asignatura por la que buscar");
-            foreach(Profesor profesor in listaProfesores.List())
+            if (listaProfesores.Count() > 0)
             {
-                if (profesor.Asignaturas.Contains(asignatura))
+                string salida = string.Empty;
+                string asignatura = Interaction.InputBox("Asignatura por la que buscar");
+                foreach (Profesor profesor in listaProfesores.List())
                 {
-                    salida += profesor.ToString();
+                    if (profesor.Asignaturas.Contains(asignatura))
+                    {
+                        salida += profesor.ToString();
+                    }
                 }
+                if (salida == string.Empty)
+                {
+                    MessageBox.Show("Ningun profesor imparte esa asignatura");
+                }
+                else { MessageBox.Show(salida); }
             }
-            if (salida == string.Empty)
-            {
-                MessageBox.Show("Ningun profesor imparte esa asignatura");
-            }
-            else { MessageBox.Show(salida) ; }
+            else { MessageBox.Show("No hay suficientes profesores"); }
         }
     }
 }
