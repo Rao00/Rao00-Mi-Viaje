@@ -51,7 +51,7 @@ namespace QuickSort
             var ciudadano1 = Ciudadano(2);
             var ciudadano2 = Ciudadano(3, 27);
 
-            MessageBox.Show(ciudadano1.Edad.ToString());
+            MessageBox.Show($"{ciudadano1.Nombre}\n{ciudadano1.Edad.ToString()}\n{ciudadano1.Direccion}");
             MessageBox.Show(ciudadano2.Edad.ToString());
         }
     }
