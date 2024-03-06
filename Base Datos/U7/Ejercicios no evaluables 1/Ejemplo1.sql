@@ -81,3 +81,43 @@ SELECT @nombreEstado = descripcion
  WHERE codEstado = @codEstadoPedido
 
 PRINT CONCAT('El pedido ', @codPedido, ' realizado por el cliente ', @nombre_cliente, ' se realizó el ', FORMAT(@fechaPedido, 'dd/MM/yyyy'), ' y su estado es ', @nombreEstado)
+
+-------------------------------------------------------
+
+DECLARE @porcentaje DECIMAL(3,2) = 0.2
+DECLARE @codGama CHAR(2) = 'OR'
+DECLARE @nombreGama VARCHAR(50)
+
+SELECT @nombreGama = nombre
+  FROM CATEGORIA_PRODUCTOS
+ WHERE codCategoria = @codGama
+
+SET NOCOUNT NO
+UPDATE PRODUCTOS
+   SET precio_venta = precio_venta*(1+@porcentaje)
+ WHERE codCategoria = @codGama
+PRINT CONCAT('Se han acutalizado ', @@ROWCOUNT, ' productos')
+
+IF (@porcentaje > 0)
+BEGIN
+  PRINT CONCAT('Se ha aumentado el precio de ', @nombreGama, ' en un ', FLOOR((@porcentaje)*100), '%')
+END
+ELSE IF (@porcentaje < 0)
+BEGIN
+  PRINT CONCAT('Se ha reducido el precio de ', @nombreGama, ' en un ', ABS(FLOOR((@porcentaje)*100)), '%')
+END
+
+-------------------------------------------------------
+
+GO
+DECLARE @numProductos INT = 3
+DECLARE @cantidadClientes INT
+
+SELECT @cantidadClientes = COUNT(DISTINCT codCliente)
+  FROM PEDIDOS
+ WHERE codPedido IN(SELECT dp.codPedido 
+                      FROM DETALLE_PEDIDOS dp 
+                     GROUP BY dp.codPedido
+                    HAVING COUNT(dp.codPedido) >= @numProductos)
+
+PRINT CONCAT(@cantidadClientes, ' cliente/s han hecho al menos 1 pedido con ', @numProductos, ' productos en el mismo pedido')
