@@ -1,4 +1,7 @@
-﻿namespace Ejercicio01
+﻿using System.Drawing.Drawing2D;
+using System.IO;
+
+namespace Ejercicio01
 {
     partial class Form1
     {
@@ -28,45 +31,110 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCrearCircl = new System.Windows.Forms.Button();
+            this.btnMostrarRect = new System.Windows.Forms.Button();
+            this.btnCrearCuadr = new System.Windows.Forms.Button();
+            this.btnMostarCirc = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnCrearCircl
             // 
-            this.button1.Location = new System.Drawing.Point(118, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 161);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCrearCircl.FlatAppearance.BorderSize = 0;
+            this.btnCrearCircl.Location = new System.Drawing.Point(12, 12);
+            this.btnCrearCircl.Name = "btnCrearCircl";
+            this.btnCrearCircl.Size = new System.Drawing.Size(165, 165);
+            this.btnCrearCircl.TabIndex = 0;
+            this.btnCrearCircl.Text = "Crear Figura";
+            this.btnCrearCircl.UseVisualStyleBackColor = true;
+            this.btnCrearCircl.Click += new System.EventHandler(this.btnCrear_Click);
             // 
-            // button2
+            // btnMostrarRect
             // 
-            this.button2.Location = new System.Drawing.Point(530, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 161);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnMostrarRect.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnMostrarRect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnMostrarRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarRect.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrarRect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMostrarRect.Location = new System.Drawing.Point(400, 0);
+            this.btnMostrarRect.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMostrarRect.Name = "btnMostrarRect";
+            this.btnMostrarRect.Size = new System.Drawing.Size(400, 100);
+            this.btnMostrarRect.TabIndex = 1;
+            this.btnMostrarRect.Text = "Mostrar Cuadrados";
+            this.btnMostrarRect.UseVisualStyleBackColor = false;
+            this.btnMostrarRect.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
+            // btnCrearCuadr
+            // 
+            this.btnCrearCuadr.FlatAppearance.BorderSize = 0;
+            this.btnCrearCuadr.Location = new System.Drawing.Point(623, 12);
+            this.btnCrearCuadr.Name = "btnCrearCuadr";
+            this.btnCrearCuadr.Size = new System.Drawing.Size(165, 165);
+            this.btnCrearCuadr.TabIndex = 2;
+            this.btnCrearCuadr.Text = "Crear Figura";
+            this.btnCrearCuadr.UseVisualStyleBackColor = true;
+            this.btnCrearCuadr.Click += new System.EventHandler(this.btnCrearCuadr_Click);
+            // 
+            // btnMostarCirc
+            // 
+            this.btnMostarCirc.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnMostarCirc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnMostarCirc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostarCirc.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostarCirc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMostarCirc.Location = new System.Drawing.Point(0, 0);
+            this.btnMostarCirc.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMostarCirc.Name = "btnMostarCirc";
+            this.btnMostarCirc.Size = new System.Drawing.Size(400, 100);
+            this.btnMostarCirc.TabIndex = 3;
+            this.btnMostarCirc.Text = "Mostrar Circulos";
+            this.btnMostarCirc.UseVisualStyleBackColor = false;
+            this.btnMostarCirc.Click += new System.EventHandler(this.btnMostarCirc_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnMostarCirc, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnMostrarRect, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 350);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 100);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.btnCrearCuadr);
+            this.Controls.Add(this.btnCrearCircl);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCrearCircl;
+        private System.Windows.Forms.Button btnMostrarRect;
+        private System.Windows.Forms.Button btnCrearCuadr;
+        private System.Windows.Forms.Button btnMostarCirc;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 

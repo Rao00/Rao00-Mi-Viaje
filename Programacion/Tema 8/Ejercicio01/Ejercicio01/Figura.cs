@@ -10,6 +10,7 @@ namespace Ejercicio01
     {
         private int x;
         private int y;
+        private string color;
         public int X 
         {
             get { return x; } 
@@ -20,14 +21,21 @@ namespace Ejercicio01
             get { return y; }
             set { y = value; }
         }
+        public string Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
 
         public abstract T Perimetro();
         public abstract T Area();
+        new public abstract string GetType();
+        public abstract override string ToString();
 
-        public Figura(int x, int y) 
+        public Figura(int coordX, int coordY) 
         {
-            X = x;
-            Y = y;
+            x = coordX;
+            y = coordY;
         }
     }
 }

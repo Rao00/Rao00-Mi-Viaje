@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio01
 {
-    internal class Cuadrado : Figura
+    internal class Cuadrado : Figura<double>
     {
         private int baseX;
         private int alturaY;
@@ -17,20 +17,37 @@ namespace Ejercicio01
             set { baseX = value; }
         }
 
-        public int AlturaY
+        public int Altura
         { 
             get { return alturaY; } 
             set { alturaY = value; } 
         }
 
-        public override int Perimetro()
+        public override double Perimetro()
         {
             return baseX * 2 + alturaY * 2;
         }
 
-        public override int Area()
+        public override double Area()
         {
             return baseX * alturaY;
+        }
+
+        public override string GetType()
+        {
+            return "Cuadrado";
+        }
+
+        public override string ToString()
+        {
+            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {baseX} * {alturaY}\nPerimetro = {Perimetro()}\nArea = {Area()}";
+            return salida;
+        }
+
+        public Cuadrado(int coordX, int coordY, int BaseX, int AlturaY) : base(coordX, coordY)
+        {
+            baseX = BaseX;
+            alturaY = AlturaY;
         }
     }
 }
