@@ -28,25 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCrear = new System.Windows.Forms.Button();
+            this.btnSort = new System.Windows.Forms.Button();
+            this.btnShowList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnCrear
             // 
-            this.button1.Location = new System.Drawing.Point(362, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 150);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCrear.Location = new System.Drawing.Point(246, 143);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(143, 150);
+            this.btnCrear.TabIndex = 0;
+            this.btnCrear.Text = "Crear lista";
+            this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
+            // 
+            // btnSort
+            // 
+            this.btnSort.Location = new System.Drawing.Point(395, 143);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(143, 150);
+            this.btnSort.TabIndex = 1;
+            this.btnSort.Text = "Ordenar Lista";
+            this.btnSort.UseVisualStyleBackColor = true;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // btnShowList
+            // 
+            this.btnShowList.Location = new System.Drawing.Point(246, 96);
+            this.btnShowList.Name = "btnShowList";
+            this.btnShowList.Size = new System.Drawing.Size(292, 41);
+            this.btnShowList.TabIndex = 2;
+            this.btnShowList.Text = "Ver Lista";
+            this.btnShowList.UseVisualStyleBackColor = true;
+            this.btnShowList.Click += new System.EventHandler(this.btnShowList_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnShowList);
+            this.Controls.Add(this.btnSort);
+            this.Controls.Add(this.btnCrear);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -55,7 +79,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCrear;
+        private System.Windows.Forms.Button btnSort;
+        private System.Windows.Forms.Button btnShowList;
     }
 }
 

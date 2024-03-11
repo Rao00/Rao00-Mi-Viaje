@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,42 +18,95 @@ namespace QuickSort
             InitializeComponent();
         }
 
-        private (string Nombre, int Edad, string Direccion) Ciudadano(int codigoCiudadano, int edad = 0)
+        int longitud = 1000;
+        List<double> ListaPrincipal = new List<double>();
+
+        private void btnCrear_Click(object sender, EventArgs e)
         {
-            if (edad != 0)
+            Random rand = new Random();
+            for (int i = 0; i < longitud; i++)
             {
-                switch (codigoCiudadano)
-                {
-                    case 0:
-                        return ("Manuel", edad, "Calle Alberto");
-                    case 1:
-                        return ("Hector", edad, "Calle Dudosa Orientacion");
-                    case 2:
-                        return ("Santiago", edad, "Calle Apaga el Movil");
-                }
+                ListaPrincipal.Add(rand.Next(0, 9999));
             }
-            else
-            {
-                switch (codigoCiudadano)
-                {
-                    case 0:
-                        return ("Manuel", 4, "Calle Alberto");
-                    case 1:
-                        return ("Hector", 87, "Calle Dudosa Orientacion");
-                    case 2:
-                        return ("Santiago", 45, "Calle Apaga el Movil");
-                }
-            }
-            return (string.Empty, 0, string.Empty);
+            MessageBox.Show("Lista creada");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnShowList_Click(object sender, EventArgs e)
         {
-            var ciudadano1 = Ciudadano(2);
-            var ciudadano2 = Ciudadano(3, 27);
+            string salida = string.Empty;
+            foreach (int i in ListaPrincipal)
+            {
+                salida += i.ToString() + ", ";
+            }
+            MessageBox.Show(salida);
+        }
 
-            MessageBox.Show($"{ciudadano1.Nombre}\n{ciudadano1.Edad.ToString()}\n{ciudadano1.Direccion}");
-            MessageBox.Show(ciudadano2.Edad.ToString());
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            ListaPrincipal = Sort(ListaPrincipal, ListaPrincipal.Count()-1);
+        }
+
+        private List<double> Swap(List<double> lista, int i, int j)
+        {
+            if (i >= 0 && i < lista.Count && j >= 0 && j < lista.Count)
+            {
+                double temp = lista[i];
+                lista[i] = lista[j];
+                lista[j] = temp;
+            }
+            return lista;
+        }
+
+        private List<double> Sort(List<double> lista, int max)
+        {
+            if (max <= 1)
+            {
+                return lista;
+            }
+
+            Random rnd = new Random();
+            int pivot = rnd.Next(0, max);
+
+            for (int i = 0; i < max; i++)
+            {
+                if (lista[i] > lista[pivot])
+                {
+                    lista = Swap(lista, pivot, pivot + 1);
+                    lista = Swap(lista, i, pivot - 1);
+                }
+            }
+
+            // Recursive calls with reduced range
+            List<double> leftPart = Sort(lista.GetRange(0, pivot), pivot);
+            List<double> rightPart = Sort(lista.GetRange(pivot + 1, max - (pivot + 1)), max - (pivot + 1));
+
+            // Combine the sorted parts
+            List<double> result = new List<double>();
+            result.AddRange(leftPart);
+            result.Add(lista[pivot]);
+            result.AddRange(rightPart);
+
+            return result;
         }
     }
 }
+/*
+Random rnd = new Random();
+int pivot = rnd.Next(0, max);
+if (lista.Count() > 2)
+{
+    int j = 0;
+    for (int i = 0; i < max; i++)
+    {
+        if (lista[i] == lista[pivot]) { continue; }
+        if (lista[i] < lista[pivot])
+        {
+            lista = Swap(lista, j, i);
+            j++;
+        }
+    }
+    lista = Swap(lista, j, pivot);
+    return QuickSort(lista, lista.Count());
+}
+else { return lista; 
+*/
