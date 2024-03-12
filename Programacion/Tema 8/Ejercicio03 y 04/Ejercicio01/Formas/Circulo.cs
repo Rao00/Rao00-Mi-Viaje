@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ejercicio01
+namespace Ejercicio03
 {
     internal class Circulo : Figura<double>
     {
@@ -37,7 +37,7 @@ namespace Ejercicio01
             return salida;
         }
 
-        public Circulo(int coordX, int coordY, string color, double radio) : base(coordX, coordY, color)
+        public Circulo(int coordX, int coordY, string color, double radio, int numeroLados = 0) : base(coordX, coordY, numeroLados, color)
         {
             mRadio = radio;
         }

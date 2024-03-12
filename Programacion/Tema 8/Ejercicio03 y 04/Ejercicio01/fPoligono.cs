@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ejercicio01
+namespace Ejercicio03
 {
     public partial class fPoligono : Form
     {
@@ -31,10 +31,19 @@ namespace Ejercicio01
                 int posX = int.Parse(txtX.Text);
                 int posY = int.Parse(txtY.Text);
                 string color = txtColor.Text;
-                int numLados = int.Parse(txtCantidadLados.Text);
                 double tamLados = double.Parse(txtTamañoLados.Text);
-                Poligono poligono = new Poligono(posX, posY, color, tamLados, numLados);
-                lista.Add(poligono);
+                if (cbCiruclo.Checked == true)
+                {
+                    Circulo circulo = new Circulo(posX, posY, color, tamLados);
+                    MessageBox.Show("prueba");
+                    lista.Add(circulo);
+                }
+                if (cbCiruclo.Checked == false) 
+                {
+                    int numLados = int.Parse(txtCantidadLados.Text);
+                    Poligono poligono = new Poligono(posX, posY, color, numLados, tamLados);
+                    lista.Add(poligono);
+                }
             }
             catch { }
         }
@@ -72,10 +81,12 @@ namespace Ejercicio01
             if(cbCiruclo.Checked) 
             {
                 txtCantidadLados.Enabled = false;
+                lblTam.Text = "Radio";
                 GenerarCirculo();
             }
             else 
-            { 
+            {
+                lblTam.Text = "Tamaño de los Lados";
                 txtCantidadLados.Enabled = true;
                 try
                 {
@@ -114,7 +125,7 @@ namespace Ejercicio01
                 punto.Y = (int)(115 + (4 * (20 * Math.Sin((2 * Math.PI * i) / numLados))));
                 Lados[i] = punto;
             }
-            Lados = GetRotatedBro(Lados, 90);
+            Lados = GetRotatedBro(Lados, 270);
             GraphicsPath path = new GraphicsPath();
             path.AddPolygon(Lados);
             this.btnForma.Region = new System.Drawing.Region(path);
