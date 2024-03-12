@@ -12,7 +12,7 @@ function addNum(){
 
 start.addEventListener('click', function()
 {
-    interval = setInterval(addNum, 100)
+    interval = setInterval(addNum, 1000)
 })
 
 stopB.addEventListener('click', function()
