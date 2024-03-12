@@ -22,7 +22,7 @@ namespace Ejercicio01
             this.btnCrearCircl.Region = new System.Drawing.Region(path);
         }
 
-        List<Figura<double>> ListaFormas = new List<Figura<double>>();
+        public List<Figura<double>> ListaFormas = new List<Figura<double>>();
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
@@ -30,8 +30,9 @@ namespace Ejercicio01
             {
                 int x = int.Parse(Interaction.InputBox("Posicion X"));
                 int y = int.Parse(Interaction.InputBox("Posicion Y"));
+                string color = Interaction.InputBox("Color");
                 double radio = double.Parse(Interaction.InputBox("Radio"));
-                Circulo circulo = new Circulo(x, y, radio);
+                Circulo circulo = new Circulo(x, y, color, radio);
                 AddForma("circulo", circulo);
             }
             catch 
@@ -47,9 +48,10 @@ namespace Ejercicio01
             {
                 int x = int.Parse(Interaction.InputBox("Posicion X"));
                 int y = int.Parse(Interaction.InputBox("Posicion Y"));
+                string color = Interaction.InputBox("Color");
                 int baseX = int.Parse(Interaction.InputBox("Introduce la base"));
                 int alturaY = int.Parse(Interaction.InputBox("Introduce la altura"));
-                Cuadrado cuadrado = new Cuadrado(x, y, baseX, alturaY);
+                Cuadrado cuadrado = new Cuadrado(x, y, color, baseX, alturaY);
                 AddForma("cuadrado", cuadrado);
             }
             catch 
@@ -60,21 +62,66 @@ namespace Ejercicio01
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            
+            string salida = MostarFormas("Cuadrado");
+            if (salida == string.Empty)
+            {
+                MessageBox.Show($"No hay cuadrados que mostrar");
+            }
+            else
+            {
+                MessageBox.Show(salida);
+            }
         }
 
         private void btnMostarCirc_Click(object sender, EventArgs e)
         {
-            string salida = string.Empty;
-            foreach(Figura<double> figura in ListaFormas)
+            string salida = MostarFormas("Circulo");
+            if (salida == string.Empty)
             {
-                if (figura.GetType() == "Circulo")
+                MessageBox.Show($"No hay circulos que mostrar");
+            }
+            else
+            {
+                MessageBox.Show(salida);
+            }
+        }
+
+        private void btnMostrarTodas_Click(object sender, EventArgs e)
+        {
+            string salida = MostarFormas();
+            if (salida == string.Empty)
+            {
+                MessageBox.Show($"No hay formas que mostrar");
+            }
+            else
+            {
+                MessageBox.Show(salida);
+            }
+        }
+
+        private string MostarFormas(string forma)
+        {
+            string salida = string.Empty;
+            foreach (Figura<double> figura in ListaFormas)
+            {
+                if (figura.GetType() == forma)
                 {
                     salida += figura.ToString();
                     salida += "\n\n";
                 }
             }
-            MessageBox.Show(salida);
+            return salida;
+        }
+
+        private string MostarFormas()
+        {
+            string salida = string.Empty;
+            foreach (Figura<double> figura in ListaFormas)
+            {
+                salida += figura.ToString();
+                salida += "\n\n";
+            }
+            return salida;
         }
 
         private void AddForma(string tipoForma, Figura<double> figura)
@@ -83,6 +130,10 @@ namespace Ejercicio01
             MessageBox.Show($"El {figura.GetType()} se ha creado");
         }
 
-
+        private void btnCrearPoli_Click(object sender, EventArgs e)
+        {
+            fPoligono form = new fPoligono(ListaFormas);
+            form.ShowDialog();
+        }
     }
 }

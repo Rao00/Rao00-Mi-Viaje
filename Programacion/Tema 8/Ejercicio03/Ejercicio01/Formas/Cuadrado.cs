@@ -40,11 +40,11 @@ namespace Ejercicio01
 
         public override string ToString()
         {
-            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {baseX} * {alturaY}\nPerimetro = {Perimetro()}\nArea = {Area()}";
+            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {baseX} x {alturaY}\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
             return salida;
         }
 
-        public Cuadrado(int coordX, int coordY, int BaseX, int AlturaY) : base(coordX, coordY)
+        public Cuadrado(int coordX, int coordY, string color, int BaseX, int AlturaY) : base(coordX, coordY, color)
         {
             baseX = BaseX;
             alturaY = AlturaY;

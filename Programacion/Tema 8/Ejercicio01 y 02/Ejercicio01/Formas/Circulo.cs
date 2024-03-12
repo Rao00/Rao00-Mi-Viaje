@@ -18,12 +18,12 @@ namespace Ejercicio01
 
         public override double Perimetro()
         {
-            return 2*Math.PI*mRadio;
+            return Math.Round(2*Math.PI*mRadio,2);
         }
 
         public override double Area()
         {
-            return Math.PI * (Math.Pow(mRadio, 2));
+            return Math.Round(Math.PI * (Math.Pow(mRadio, 2)),2);
         }
 
         public override string GetType()
@@ -33,7 +33,7 @@ namespace Ejercicio01
 
         public override string ToString()
         {
-            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {mRadio} cm\nPerimetro = {Perimetro()}\nArea = {Area()}";
+            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {mRadio} cm\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
             return salida;
         }
 

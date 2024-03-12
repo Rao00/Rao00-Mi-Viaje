@@ -36,6 +36,8 @@ namespace Ejercicio01
             this.btnCrearCuadr = new System.Windows.Forms.Button();
             this.btnMostarCirc = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnMostrarTodas = new System.Windows.Forms.Button();
+            this.btnCrearPoli = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@ namespace Ejercicio01
             this.btnCrearCircl.FlatAppearance.BorderSize = 0;
             this.btnCrearCircl.Location = new System.Drawing.Point(12, 12);
             this.btnCrearCircl.Name = "btnCrearCircl";
-            this.btnCrearCircl.Size = new System.Drawing.Size(165, 165);
+            this.btnCrearCircl.Size = new System.Drawing.Size(119, 119);
             this.btnCrearCircl.TabIndex = 0;
             this.btnCrearCircl.Text = "Crear Figura";
             this.btnCrearCircl.UseVisualStyleBackColor = true;
@@ -52,15 +54,15 @@ namespace Ejercicio01
             // 
             // btnMostrarRect
             // 
-            this.btnMostrarRect.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnMostrarRect.BackColor = System.Drawing.SystemColors.Control;
             this.btnMostrarRect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnMostrarRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMostrarRect.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrarRect.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMostrarRect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMostrarRect.Location = new System.Drawing.Point(400, 0);
+            this.btnMostrarRect.Location = new System.Drawing.Point(0, 0);
             this.btnMostrarRect.Margin = new System.Windows.Forms.Padding(0);
             this.btnMostrarRect.Name = "btnMostrarRect";
-            this.btnMostrarRect.Size = new System.Drawing.Size(400, 100);
+            this.btnMostrarRect.Size = new System.Drawing.Size(400, 41);
             this.btnMostrarRect.TabIndex = 1;
             this.btnMostrarRect.Text = "Mostrar Cuadrados";
             this.btnMostrarRect.UseVisualStyleBackColor = false;
@@ -69,9 +71,9 @@ namespace Ejercicio01
             // btnCrearCuadr
             // 
             this.btnCrearCuadr.FlatAppearance.BorderSize = 0;
-            this.btnCrearCuadr.Location = new System.Drawing.Point(623, 12);
+            this.btnCrearCuadr.Location = new System.Drawing.Point(137, 12);
             this.btnCrearCuadr.Name = "btnCrearCuadr";
-            this.btnCrearCuadr.Size = new System.Drawing.Size(165, 165);
+            this.btnCrearCuadr.Size = new System.Drawing.Size(119, 119);
             this.btnCrearCuadr.TabIndex = 2;
             this.btnCrearCuadr.Text = "Crear Figura";
             this.btnCrearCuadr.UseVisualStyleBackColor = true;
@@ -79,15 +81,15 @@ namespace Ejercicio01
             // 
             // btnMostarCirc
             // 
-            this.btnMostarCirc.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnMostarCirc.BackColor = System.Drawing.SystemColors.Control;
             this.btnMostarCirc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnMostarCirc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMostarCirc.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostarCirc.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMostarCirc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMostarCirc.Location = new System.Drawing.Point(0, 0);
+            this.btnMostarCirc.Location = new System.Drawing.Point(400, 0);
             this.btnMostarCirc.Margin = new System.Windows.Forms.Padding(0);
             this.btnMostarCirc.Name = "btnMostarCirc";
-            this.btnMostarCirc.Size = new System.Drawing.Size(400, 100);
+            this.btnMostarCirc.Size = new System.Drawing.Size(400, 41);
             this.btnMostarCirc.TabIndex = 3;
             this.btnMostarCirc.Text = "Mostrar Circulos";
             this.btnMostarCirc.UseVisualStyleBackColor = false;
@@ -95,21 +97,49 @@ namespace Ejercicio01
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnMostarCirc, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnMostrarRect, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnMostrarTodas, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnMostrarRect, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnMostarCirc, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 350);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 368);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 100);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 82);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // btnMostrarTodas
+            // 
+            this.btnMostrarTodas.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutPanel1.SetColumnSpan(this.btnMostrarTodas, 2);
+            this.btnMostrarTodas.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnMostrarTodas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarTodas.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrarTodas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMostrarTodas.Location = new System.Drawing.Point(0, 41);
+            this.btnMostrarTodas.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMostrarTodas.Name = "btnMostrarTodas";
+            this.btnMostrarTodas.Size = new System.Drawing.Size(800, 41);
+            this.btnMostrarTodas.TabIndex = 4;
+            this.btnMostrarTodas.Text = "Mostrar Todas las Figuras";
+            this.btnMostrarTodas.UseVisualStyleBackColor = false;
+            this.btnMostrarTodas.Click += new System.EventHandler(this.btnMostrarTodas_Click);
+            // 
+            // btnCrearPoli
+            // 
+            this.btnCrearPoli.FlatAppearance.BorderSize = 0;
+            this.btnCrearPoli.Location = new System.Drawing.Point(262, 12);
+            this.btnCrearPoli.Name = "btnCrearPoli";
+            this.btnCrearPoli.Size = new System.Drawing.Size(119, 119);
+            this.btnCrearPoli.TabIndex = 5;
+            this.btnCrearPoli.Text = "Crear Poligono";
+            this.btnCrearPoli.UseVisualStyleBackColor = true;
+            this.btnCrearPoli.Click += new System.EventHandler(this.btnCrearPoli_Click);
             // 
             // Form1
             // 
@@ -117,6 +147,7 @@ namespace Ejercicio01
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCrearPoli);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnCrearCuadr);
             this.Controls.Add(this.btnCrearCircl);
@@ -135,6 +166,8 @@ namespace Ejercicio01
         private System.Windows.Forms.Button btnCrearCuadr;
         private System.Windows.Forms.Button btnMostarCirc;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnMostrarTodas;
+        private System.Windows.Forms.Button btnCrearPoli;
     }
 }
 
