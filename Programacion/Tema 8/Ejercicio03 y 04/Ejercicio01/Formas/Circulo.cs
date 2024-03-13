@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio03
 {
-    internal class Circulo : Figura<double>
+    internal class Circulo : Figura
     {
         private double mRadio;
 
@@ -33,7 +33,7 @@ namespace Ejercicio03
 
         public override string ToString()
         {
-            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {mRadio} cm\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
+            string salida = $"Circulo:\nCoordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {mRadio} cm\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
             return salida;
         }
 

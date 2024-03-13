@@ -16,18 +16,30 @@
 --		Si el número o la potencia son 0 o <0 devolverá el mensaje: “La operación no se puede realizar.
 -------------------------------------------------------------------------------------------
 
-DECLARE @numero INT = 3
-DECLARE @potencia INT = 4
+DECLARE @numero INT = 5
+DECLARE @potencia INT = 3
 DECLARE @resultado INT = 1
 DECLARE @i INT = @potencia
+DECLARE @exit VARCHAR(50)
 
-WHILE (@i > 0)
+IF (@numero > 0 AND @potencia > 0)
 BEGIN
-	SET @resultado *= @numero
-	SET @i -= 1
+	WHILE (@i > 0)
+	BEGIN
+		SET @resultado *= @numero
+		SET @i -= 1
+		SET @exit = CONCAT(@exit, @numero)
+		IF (@i > 0)
+		BEGIN
+			SET @exit = CONCAT(@exit,'*')
+		END
+	END
+	PRINT CONCAT('Numero = ', @numero, ' Potencia = ', @potencia, ' Resultado = ', @exit, ' = ', @resultado)
 END
-
-PRINT CONCAT('Numero = ', @numero, ' Potencia = ', @potencia, ' Resultado = ', @resultado)
+ELSE
+BEGIN
+	PRINT 'El numero y la potencia deben ser mayor que 0'
+END
 GO
 -------------------------------------------------------------------------------------------
 -- 2. Crea un script que calcule las soluciones de una ecuación de segundo grado ax^2 + bx + c = 0
@@ -44,17 +56,24 @@ GO
 --	NOTA: Si no sale lo mismo, te recomiendo revisar bien el orden de prioridad de los operadores... ()
 -------------------------------------------------------------------------------------------
 
-DECLARE @a INT = 3
+DECLARE @a INT = -3
 DECLARE @b INT = -4
 DECLARE @c INT = 1
 DECLARE @resultadoPos DECIMAL(9,2)
 DECLARE @resultadoNeg DECIMAL(9,2)
 
-SET @resultadoPos = (@b*-1 + (SQRT(POWER(@b,2) - (4 * (@a * @c)))))/(2 * @a)
-SET @resultadoNeg = (@b*-1 - (SQRT(POWER(@b,2) - (4 * (@a * @c)))))/(2 * @a)
+IF (@a > 0 AND @c > 0)
+BEGIN
+	SET @resultadoPos = (@b*-1 + (SQRT(POWER(@b,2) - (4 * (@a * @c)))))/(2 * @a)
+	SET @resultadoNeg = (@b*-1 - (SQRT(POWER(@b,2) - (4 * (@a * @c)))))/(2 * @a)
+	PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @resultadoPos, ' y solNegativa = ', @resultadoNeg)
+END
+ELSE
+BEGIN
+	PRINT 'El numero A o el numero C no pueden ser negativos ni iguales a 0'
+END
 
-PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @resultadoPos, ' y solNegativa = ', @resultadoNeg)
-
+GO
 -------------------------------------------------------------------------------------------
 -- 3. Crea un script que calcule la serie de Fibonacci para un número dado.
 
@@ -72,8 +91,21 @@ PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @res
 --	Ayuda: Quizás necesites guardar en algún sitio el valor actual de la serie antes de sumarlo...
 -------------------------------------------------------------------------------------------
 
+DECLARE @i INT = 2
+DECLARE @temp INT = 0
+DECLARE @valor INT = 1
+DECLARE @total INT
 
+WHILE (@i > 0)
+BEGIN
+	SET @total = @temp + @valor
+	PRINT CONCAT(@temp, '+', @valor, ' = ', @total)
+	SET @temp = @valor
+	SET @valor = @total
+	SET @i -= 1
+END
 
+GO
 -------------------------------------------------------------------------------------------
 -- 4. Utilizando la BD JARDINERIA, crea un script que realice lo siguiente:
 --		Obtén el nombre del cliente con código 3 y guárdalo en una variable
@@ -85,8 +117,22 @@ PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @res
 --	    Reto opcional: Implementa el script utilizando una única consulta.
 -------------------------------------------------------------------------------------------
 
+USE JARDINERIA
 
+DECLARE @codCliente INT = 3
+DECLARE @nombreCliente VARCHAR(50)
+DECLARE @numPedidos INT
 
+SELECT @nombreCliente = c.nombre_cliente,
+	   @numPedidos = COUNT(p.codCliente)
+  FROM CLIENTES c INNER JOIN PEDIDOS p
+    ON c.codCliente = p.codCliente
+ WHERE c.codCliente = @codCliente
+ GROUP BY c.codCliente, c.nombre_cliente
+
+PRINT CONCAT('El cliente ', @nombreCliente, ' ha realizado ', @numPedidos, ' pedidos')
+
+GO
 -------------------------------------------------------------------------------------------
 -- 5. Utilizando la BD JARDINERIA, crea un script que realice lo siguiente:
 --		Obtén el nombre y los apellidos de todos los empleados de la empresa
@@ -106,7 +152,34 @@ PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @res
 --			Walton , John
 -------------------------------------------------------------------------------------------
 
+USE JARDINERIA
 
+DECLARE @i INT = 0
+DECLARE @max INT
+DECLARE @nombre VARCHAR(50)
+DECLARE @apellido1 VARCHAR(50)
+DECLARE @apellido2 VARCHAR(50)
+
+SELECT @max = COUNT(codEmpleado)
+  FROM EMPLEADOS
+
+WHILE (@i < @max)
+BEGIN
+	SET @nombre = NULL
+	SELECT @nombre = e.nombre,
+		   @apellido1 = e.apellido1,
+		   @apellido2 = e.apellido2
+	  FROM EMPLEADOS e
+	 WHERE codEmpleado = @i
+	   AND e.codOficina = 'LON-UK'
+	IF (@nombre IS NOT NULL)
+	BEGIN
+		PRINT CONCAT(@apellido1, ' ', @apellido2, ', ', @nombre)
+	END 
+	SET @i += 1
+END
+
+GO
 
 -------------------------------------------------------------------------------------------
 -- 6. Utilizando la BD JARDINERIA, crea un script que realice lo siguiente:
@@ -134,6 +207,27 @@ PRINT CONCAT('a = ', @a, ', b = ', @b, ', c = ', @c, ' --> solPositiva = ', @res
 --			...
 -------------------------------------------------------------------------------------------
 
+USE JARDINERIA
+
+DECLARE @nombreCliente VARCHAR(50)
+DECLARE @numPedidos INT
+DECLARE @max INT
+DECLARE @i INT = 0
+
+SELECT @max = COUNT(*) FROM CLIENTES
+
+WHILE (@i < @max)
+BEGIN
+	SELECT @nombreCliente = c.nombre_cliente,
+		@numPedidos = COUNT(p.codCliente)
+	FROM CLIENTES c INNER JOIN PEDIDOS p
+		ON c.codCliente = p.codCliente
+	WHERE c.codCliente = @i
+	GROUP BY c.codCliente, c.nombre_cliente
+	PRINT CONCAT('El cliente ', @nombreCliente, ' ha realizado ', @numPedidos, ' pedidos')
+END
+
+GO
 
 -------------------------------------------------------------------------------------------
 -- 7. Utilizando la BD JARDINERIA, crea un script que realice las siguientes operaciones:

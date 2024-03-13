@@ -172,5 +172,17 @@ BEGIN CATCH
   RETURN
 END CATCH
 
+GO
 ------------------------------------------------------------------------------------------
 
+SET IMPLICIT_TRANSACTIONS OFF
+
+BEGIN TRY
+  BEGIN TRAN
+    SELECT * FROM SYS.MESSAGES WHERE severity > 18
+  COMMIT
+END TRY
+BEGIN CATCH
+  PRINT ERROR_LINE()
+  ROLLBACK
+END CATCH

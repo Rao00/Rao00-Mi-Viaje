@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio03
 {
-    public abstract class Figura<T>
+    public abstract class Figura
     {
         private int x;
         private int y;
@@ -33,8 +33,8 @@ namespace Ejercicio03
             set { mcolor = value; }
         }
 
-        public abstract T Perimetro();
-        public abstract T Area();
+        public abstract double Perimetro();
+        public abstract double Area();
         new public abstract string GetType();
         public abstract override string ToString();
 

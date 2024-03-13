@@ -19,7 +19,7 @@ namespace Ejercicio03
             InitializeComponent();
         }
 
-        public List<Figura<double>> ListaFormas = new List<Figura<double>>();
+        public List<Figura> ListaFormas = new List<Figura>();
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
@@ -62,22 +62,26 @@ namespace Ejercicio03
 
         private void btnMostrarLados_Click(object sender, EventArgs e)
         {
-            int nlados = int.Parse(Interaction.InputBox("Cantidad de lados del poligono"));
-            string salida = MostrarFormas(nlados);
-            if (salida == string.Empty)
+            try
             {
-                MessageBox.Show($"No hay poligonos de {nlados} lados que mostrar");
+                int nlados = int.Parse(Interaction.InputBox("Cantidad de lados del poligono"));
+                string salida = MostrarFormas(nlados);
+                if (salida == string.Empty)
+                {
+                    MessageBox.Show($"No hay poligonos de {nlados} lados que mostrar");
+                }
+                else
+                {
+                    MessageBox.Show(salida);
+                }
             }
-            else
-            {
-                MessageBox.Show(salida);
-            }
+            catch { MessageBox.Show("Introduce un valor valido"); }
         }
 
         private string MostrarFormas(int numLados)
         {
             string salida = string.Empty;
-            foreach (Figura<double> figura in ListaFormas)
+            foreach (Figura figura in ListaFormas)
             {
                 if (figura.NumeroLados == numLados)
                 {
@@ -91,7 +95,7 @@ namespace Ejercicio03
         private string MostrarFormas(string forma)
         {
             string salida = string.Empty;
-            foreach (Figura<double> figura in ListaFormas)
+            foreach (Figura figura in ListaFormas)
             {
                 if (figura.GetType() == forma)
                 {
@@ -105,7 +109,7 @@ namespace Ejercicio03
         private string MostrarFormas()
         {
             string salida = string.Empty;
-            foreach (Figura<double> figura in ListaFormas)
+            foreach (Figura figura in ListaFormas)
             {
                 salida += figura.ToString();
                 salida += "\n\n";

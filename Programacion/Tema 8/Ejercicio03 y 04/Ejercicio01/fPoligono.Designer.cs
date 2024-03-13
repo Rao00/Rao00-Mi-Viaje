@@ -42,11 +42,15 @@
             this.txtY = new System.Windows.Forms.TextBox();
             this.txtX = new System.Windows.Forms.TextBox();
             this.btnForma = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBase = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txtBase);
             this.groupBox1.Controls.Add(this.cbCiruclo);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCantidadLados);
@@ -69,7 +73,7 @@
             // cbCiruclo
             // 
             this.cbCiruclo.AutoSize = true;
-            this.cbCiruclo.Location = new System.Drawing.Point(218, 112);
+            this.cbCiruclo.Location = new System.Drawing.Point(218, 102);
             this.cbCiruclo.Name = "cbCiruclo";
             this.cbCiruclo.Size = new System.Drawing.Size(58, 17);
             this.cbCiruclo.TabIndex = 10;
@@ -80,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 113);
+            this.label1.Location = new System.Drawing.Point(6, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 9;
@@ -88,7 +92,7 @@
             // 
             // txtCantidadLados
             // 
-            this.txtCantidadLados.Location = new System.Drawing.Point(108, 110);
+            this.txtCantidadLados.Location = new System.Drawing.Point(108, 100);
             this.txtCantidadLados.Name = "txtCantidadLados";
             this.txtCantidadLados.Size = new System.Drawing.Size(104, 20);
             this.txtCantidadLados.TabIndex = 8;
@@ -96,7 +100,7 @@
             // 
             // btnAceptarForma
             // 
-            this.btnAceptarForma.Location = new System.Drawing.Point(25, 171);
+            this.btnAceptarForma.Location = new System.Drawing.Point(34, 177);
             this.btnAceptarForma.Name = "btnAceptarForma";
             this.btnAceptarForma.Size = new System.Drawing.Size(216, 34);
             this.btnAceptarForma.TabIndex = 2;
@@ -107,7 +111,7 @@
             // lblTam
             // 
             this.lblTam.AutoSize = true;
-            this.lblTam.Location = new System.Drawing.Point(46, 138);
+            this.lblTam.Location = new System.Drawing.Point(46, 128);
             this.lblTam.Name = "lblTam";
             this.lblTam.Size = new System.Drawing.Size(109, 13);
             this.lblTam.TabIndex = 7;
@@ -116,7 +120,7 @@
             // lblColor
             // 
             this.lblColor.AutoSize = true;
-            this.lblColor.Location = new System.Drawing.Point(124, 87);
+            this.lblColor.Location = new System.Drawing.Point(124, 77);
             this.lblColor.Name = "lblColor";
             this.lblColor.Size = new System.Drawing.Size(31, 13);
             this.lblColor.TabIndex = 6;
@@ -125,7 +129,7 @@
             // lblY
             // 
             this.lblY.AutoSize = true;
-            this.lblY.Location = new System.Drawing.Point(98, 61);
+            this.lblY.Location = new System.Drawing.Point(98, 51);
             this.lblY.Name = "lblY";
             this.lblY.Size = new System.Drawing.Size(57, 13);
             this.lblY.TabIndex = 5;
@@ -134,7 +138,7 @@
             // lblX
             // 
             this.lblX.AutoSize = true;
-            this.lblX.Location = new System.Drawing.Point(98, 35);
+            this.lblX.Location = new System.Drawing.Point(98, 25);
             this.lblX.Name = "lblX";
             this.lblX.Size = new System.Drawing.Size(57, 13);
             this.lblX.TabIndex = 4;
@@ -142,14 +146,14 @@
             // 
             // txtTamañoLados
             // 
-            this.txtTamañoLados.Location = new System.Drawing.Point(161, 135);
+            this.txtTamañoLados.Location = new System.Drawing.Point(161, 125);
             this.txtTamañoLados.Name = "txtTamañoLados";
             this.txtTamañoLados.Size = new System.Drawing.Size(104, 20);
             this.txtTamañoLados.TabIndex = 3;
             // 
             // txtColor
             // 
-            this.txtColor.Location = new System.Drawing.Point(161, 84);
+            this.txtColor.Location = new System.Drawing.Point(161, 74);
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(104, 20);
             this.txtColor.TabIndex = 2;
@@ -157,14 +161,14 @@
             // 
             // txtY
             // 
-            this.txtY.Location = new System.Drawing.Point(161, 58);
+            this.txtY.Location = new System.Drawing.Point(161, 48);
             this.txtY.Name = "txtY";
             this.txtY.Size = new System.Drawing.Size(104, 20);
             this.txtY.TabIndex = 1;
             // 
             // txtX
             // 
-            this.txtX.Location = new System.Drawing.Point(161, 32);
+            this.txtX.Location = new System.Drawing.Point(161, 22);
             this.txtX.Name = "txtX";
             this.txtX.Size = new System.Drawing.Size(104, 20);
             this.txtX.TabIndex = 0;
@@ -179,6 +183,23 @@
             this.btnForma.Size = new System.Drawing.Size(230, 230);
             this.btnForma.TabIndex = 1;
             this.btnForma.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 154);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Tamaño de la base";
+            // 
+            // txtBase
+            // 
+            this.txtBase.Enabled = false;
+            this.txtBase.Location = new System.Drawing.Point(161, 151);
+            this.txtBase.Name = "txtBase";
+            this.txtBase.Size = new System.Drawing.Size(104, 20);
+            this.txtBase.TabIndex = 11;
             // 
             // fPoligono
             // 
@@ -211,5 +232,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCantidadLados;
         private System.Windows.Forms.CheckBox cbCiruclo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBase;
     }
 }

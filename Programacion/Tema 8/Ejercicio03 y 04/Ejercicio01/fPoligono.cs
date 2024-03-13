@@ -16,8 +16,9 @@ namespace Ejercicio03
 {
     public partial class fPoligono : Form
     {
-        List<Figura<double>> lista;
-        public fPoligono(List<Figura<double>> list)
+        List<Figura> lista;
+
+        public fPoligono(List<Figura> list)
         {
             InitializeComponent();
             GenerarForma();
@@ -35,17 +36,22 @@ namespace Ejercicio03
                 if (cbCiruclo.Checked == true)
                 {
                     Circulo circulo = new Circulo(posX, posY, color, tamLados);
-                    MessageBox.Show("prueba");
                     lista.Add(circulo);
                 }
-                if (cbCiruclo.Checked == false) 
+                if (cbCiruclo.Checked == false && int.Parse(txtCantidadLados.Text) != 4) 
                 {
                     int numLados = int.Parse(txtCantidadLados.Text);
                     Poligono poligono = new Poligono(posX, posY, color, numLados, tamLados);
                     lista.Add(poligono);
                 }
+                if (cbCiruclo.Checked == false && int.Parse(txtCantidadLados.Text) == 4)
+                {
+                    double baseX = double.Parse(txtBase.Text);
+                    Cuadrado cuadrado = new Cuadrado(posX, posY, color, tamLados, baseX);
+                    lista.Add(cuadrado);
+                }
             }
-            catch { }
+            catch { MessageBox.Show("Falta algun valor o alguno es invalido"); }
         }
 
         private void txtCantidadLados_TextChanged(object sender, EventArgs e)
@@ -54,6 +60,10 @@ namespace Ejercicio03
             {
                 int numLados = int.Parse(txtCantidadLados.Text);
                 GenerarForma(numLados);
+                if(numLados == 4)
+                {
+                    txtBase.Enabled = true;
+                }
             }
             catch
             {

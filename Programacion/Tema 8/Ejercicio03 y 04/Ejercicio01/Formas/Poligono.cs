@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio03
 {
-    internal class Poligono : Figura<double>
+    internal class Poligono : Figura
     {
         private double tamLado;
         private int lados;
@@ -30,7 +30,9 @@ namespace Ejercicio03
 
         public override double Area()
         {
-            return Math.Round((lados * Math.Pow(tamLado,2)) / 4 * Math.Tan(Math.PI/lados),2);
+            double alfa = (360 / lados) / 2;
+            double radianes = (Math.PI / 180) * alfa;
+            return Math.Round((lados * (tamLado * tamLado)) / (4 * Math.Tan(radianes)),2);
         }
 
         public override string GetType()
@@ -40,7 +42,7 @@ namespace Ejercicio03
 
         public override string ToString()
         {
-            string salida = $"Coordenadas = {X.ToString()}, {Y.ToString()}\nCantidad de lados = {lados}\nTamaño = {tamLado} cm\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
+            string salida = $"Poligono de {lados} lados:\nCoordenadas = {X.ToString()}, {Y.ToString()}\nCantidad de lados = {lados}\nTamaño = {tamLado} cm\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
             return salida;
         }
 

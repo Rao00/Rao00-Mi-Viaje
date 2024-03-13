@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Figura.cs" />
+    <Compile Include="Formas\Cuadrado.cs" />
     <Compile Include="fPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
