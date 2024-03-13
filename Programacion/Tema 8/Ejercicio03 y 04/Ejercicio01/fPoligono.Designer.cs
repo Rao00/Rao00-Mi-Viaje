@@ -1,4 +1,4 @@
-﻿namespace Ejercicio01
+﻿namespace Ejercicio03
 {
     partial class fPoligono
     {
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCiruclo = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCantidadLados = new System.Windows.Forms.TextBox();
             this.btnAceptarForma = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.txtY = new System.Windows.Forms.TextBox();
             this.txtX = new System.Windows.Forms.TextBox();
             this.btnForma = new System.Windows.Forms.Button();
-            this.cbCiruclo = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Poligono";
+            // 
+            // cbCiruclo
+            // 
+            this.cbCiruclo.AutoSize = true;
+            this.cbCiruclo.Location = new System.Drawing.Point(218, 112);
+            this.cbCiruclo.Name = "cbCiruclo";
+            this.cbCiruclo.Size = new System.Drawing.Size(58, 17);
+            this.cbCiruclo.TabIndex = 10;
+            this.cbCiruclo.Text = "Ciruclo";
+            this.cbCiruclo.UseVisualStyleBackColor = true;
+            this.cbCiruclo.CheckedChanged += new System.EventHandler(this.cbCiruclo_CheckedChanged);
             // 
             // label1
             // 
@@ -168,17 +179,6 @@
             this.btnForma.Size = new System.Drawing.Size(230, 230);
             this.btnForma.TabIndex = 1;
             this.btnForma.UseVisualStyleBackColor = false;
-            // 
-            // cbCiruclo
-            // 
-            this.cbCiruclo.AutoSize = true;
-            this.cbCiruclo.Location = new System.Drawing.Point(218, 112);
-            this.cbCiruclo.Name = "cbCiruclo";
-            this.cbCiruclo.Size = new System.Drawing.Size(58, 17);
-            this.cbCiruclo.TabIndex = 10;
-            this.cbCiruclo.Text = "Ciruclo";
-            this.cbCiruclo.UseVisualStyleBackColor = true;
-            this.cbCiruclo.CheckedChanged += new System.EventHandler(this.cbCiruclo_CheckedChanged);
             // 
             // fPoligono
             // 

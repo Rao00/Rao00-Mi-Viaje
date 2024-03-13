@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ejercicio01
+namespace Ejercicio03
 {
     public abstract class Figura<T>
     {
         private int x;
         private int y;
+        private int nLados;
         private string mcolor;
         public int X 
         {
@@ -20,6 +21,11 @@ namespace Ejercicio01
         {
             get { return y; }
             set { y = value; }
+        }
+        public int NumeroLados
+        {
+            get { return nLados; }
+            set { nLados = value; }
         }
         public string Color
         {
@@ -32,11 +38,12 @@ namespace Ejercicio01
         new public abstract string GetType();
         public abstract override string ToString();
 
-        public Figura(int coordX, int coordY, string color) 
+        public Figura(int coordX, int coordY, int numeroLados , string color) 
         {
             x = coordX;
             y = coordY;
             mcolor = color;
+            nLados = numeroLados;
         }
     }
 }

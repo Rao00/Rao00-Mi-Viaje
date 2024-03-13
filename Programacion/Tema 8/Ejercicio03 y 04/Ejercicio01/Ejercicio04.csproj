@@ -48,15 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Figura.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="fPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="fPrincipal.Designer.cs">
+      <DependentUpon>fPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Formas\Circulo.cs" />
     <Compile Include="Formas\Poligono.cs" />
-    <Compile Include="Formas\Cuadrado.cs" />
     <Compile Include="fPoligono.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,8 +64,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="fPrincipal.resx">
+      <DependentUpon>fPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fPoligono.resx">
       <DependentUpon>fPoligono.cs</DependentUpon>
