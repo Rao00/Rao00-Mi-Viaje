@@ -17,6 +17,8 @@ SELECT *
 
 EXEC sp_columns PRODUCTOS
 
+GO
+
 DECLARE @minPrecio DECIMAL(7,2)
 DECLARE @maxPrecio DECIMAL(7,2)
 DECLARE @codCategoria CHAR(2)
@@ -33,6 +35,8 @@ SELECT @minPrecio = MIN(precio_venta),
 
 PRINT CONCAT('El precio mas bajo ha sido ', @minPrecio)
 PRINT CONCAT('El precio mas alto ha sido ', @maxPrecio)
+
+GO
 
 DECLARE @codCategoria VARCHAR(100)
 
@@ -85,3 +89,88 @@ BEGIN
    WHERE codCliente = @codCliente
   PRINT CONCAT('El cliente ', @idCliente, ' no ha realizado pagos pero ha realizado ', @numPedidos)
 END
+
+-----------------------------------------------------------------------------------------------
+
+DECLARE @i INT = 0
+
+WHILE (@i < 10)
+BEGIN
+  PRINT @i + 1 
+  SET @i += 1
+END
+
+-----------------------------------------------------------------------------------------------
+
+Go
+
+DECLARE @i INT = 1
+
+WHILE (@i <= 30)
+BEGIN
+  IF (@i%5 = 0)
+  BEGIN
+    PRINT @i
+  END
+  SET @i += 1
+END
+
+GO
+
+DECLARE @i INT = 1
+
+WHILE (@i <= 200)
+BEGIN
+  IF (@i%7 = 0 AND @i <> 7)
+  BEGIN
+    PRINT @i
+    BREAK
+  END
+  SET @i += 1
+END
+
+GO
+
+DECLARE @i INT
+DECLARE @max INT
+DECLARE @nombre VARCHAR(50)
+
+SELECT @i = MIN(codCliente), @max = MAX(codCliente) 
+  FROM CLIENTES
+
+WHILE (@i < @max)
+BEGIN
+
+  SELECT @nombre = nombre_cliente 
+    FROM CLIENTES 
+   WHERE codCliente = @i
+
+  SET @i += 1
+  IF (@nombre IS NOT NULL)
+  BEGIN
+    PRINT CONCAT(@i, ') ', @nombre)
+  END
+  SET @nombre = NULL
+END
+
+------------------------------------------------------------------------------------------
+GO
+
+DECLARE @xd INT
+
+BEGIN TRY
+  DECLARE @ruleta INT = FLOOR(RAND()*10)
+  DECLARE @error INT = 10/@ruleta
+  PRINT @ruleta
+END TRY
+
+BEGIN CATCH
+  PRINT ERROR_MESSAGE()
+  PRINT CONCAT('NUMERO DE ERROR: ', ERROR_NUMBER())
+  PRINT CONCAT('LINEA: ', ERROR_LINE()) 
+  PRINT ERROR_PROCEDURE()
+  RETURN
+END CATCH
+
+------------------------------------------------------------------------------------------
+
