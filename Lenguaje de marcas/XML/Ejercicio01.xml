@@ -1,0 +1,28 @@
+<?xml version ="1.0" encoding ="utf-8" ?>
+<AGENDA>
+ <contacte>
+    <nom>Carlos</nom>
+    <apellidos>Saez Moreno</apellidos>
+    <domicili>
+        <direccion tipus="avinguda">Javea, 9</direccion>
+        <província>Madrid</província>
+        <cod_postal>28023</cod_postal>
+    </domicili>
+    <telefono tipus="fix" classe="professional">913 33 88 99</telefono>
+    <telefono tipus="mobil">636 77 44 77</telefono>
+    <email>csaez@sargo.es</email>
+ </contacte>
+ <contacte>
+    <nom>Segismundo</nom>
+    <apellidos>Garcia Peralta</apellidos>
+    <domicili>
+        <direccion tipus="carrer">Mariola, 15</direccion>
+        <poblacion>Bocairent</poblacion>
+        <província>València</província>
+        <cod_postal>46201</cod_postal>
+    </domicili>
+    <telefono tipus="fix" classe="personal">961 11 88 44</telefono>
+    <telefono tipus="mobil" classe="professional">606 22 11 33</telefono>
+    <email>segis@correo.com</email>
+ </contacte>
+</AGENDA>
