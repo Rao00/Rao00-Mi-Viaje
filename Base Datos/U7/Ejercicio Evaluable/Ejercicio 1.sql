@@ -213,18 +213,27 @@ DECLARE @nombreCliente VARCHAR(50)
 DECLARE @numPedidos INT
 DECLARE @max INT
 DECLARE @i INT = 0
+DECLARE @total DECIMAL(9,2)
 
 SELECT @max = COUNT(*) FROM CLIENTES
 
 WHILE (@i < @max)
 BEGIN
+	SET @nombreCliente = NULL
 	SELECT @nombreCliente = c.nombre_cliente,
-		@numPedidos = COUNT(p.codCliente)
-	FROM CLIENTES c INNER JOIN PEDIDOS p
-		ON c.codCliente = p.codCliente
+		   @numPedidos = COUNT(p.codCliente),
+		   @total = SUM(dp.precio_unidad*dp.cantidad)
+	FROM CLIENTES c,
+		 PEDIDOS p,
+		 DETALLE_PEDIDOS dp
 	WHERE c.codCliente = @i
+	  AND c.codCliente = p.codCliente
+	  AND p.codPedido = dp.codPedido
 	GROUP BY c.codCliente, c.nombre_cliente
-	PRINT CONCAT('El cliente ', @nombreCliente, ' ha realizado ', @numPedidos, ' pedidos')
+	IF (@nombreCliente IS NOT NULL)
+	BEGIN 
+		PRINT CONCAT('El cliente ', @nombreCliente, ' ha realizado ', @numPedidos, ' pedidos, con un coste total de ', @total, '€')
+	END
 	SET @i += 1
 END
 
@@ -246,24 +255,26 @@ DECLARE @codCliente INT
 
 BEGIN TRY
 	BEGIN TRAN
-		SELECT @codEmpleado = (codEmpleado)+1 FROM EMPLEADOS
-		SELECT @codCliente = (codCliente)+1 FROM CLIENTES
+		SELECT @codEmpleado = MAX(codEmpleado)+1 FROM EMPLEADOS
+		SELECT @codCliente = MAX(codCliente)+1 FROM CLIENTES
 		INSERT INTO OFICINAS (codOficina, ciudad, pais, codPostal, telefono, linea_direccion1)
 		VALUES ('ALI-ES', 'Alicante', 'España', '03005', '+34697145245', 'Calle Medico Pepe Ramon nº2')
 		INSERT INTO EMPLEADOS (codEmpleado, nombre, apellido1, apellido2, tlf_extension_ofi, email, puesto_cargo, salario, codOficina)
 		VALUES (@codEmpleado, 'Carles', 'Morales', 'Amat', 0698, 'carlesmorales@gmail.com', 'Director Ejecutivo', 69420, 'ALI-ES')
-		INSERT INTO CLIENTES (codCliente, nombre_cliente, nombre_contacto, telefono, email, linea_direccion1, ciudad, codEmpl_ventas, limite_credito)
-		VALUES (@codCliente, 'Manuel Contreras', 'Arcras', '697145244', 'manuel@gmail.com', 'Calle campo n17', 'Fuente Albilla', @codEmpleado, 420)
+		INSERT INTO CLIENTES (codCliente, nombre_cliente, nombre_contacto, telefono, email, linea_direccion1, ciudad, limite_credito)
+		VALUES (@codCliente, 'Manuel Contreras', 'Arcras', '697145244', 'manuel@gmail.com', 'Calle campo n17', 'Fuente Albilla', 420)
+		UPDATE CLIENTES
+		   SET codEmpl_ventas = @codEmpleado
+		 WHERE codCliente = @codCliente
 	COMMIT
 END TRY
 BEGIN CATCH
-	PRINT ERROR_LINE()
-	PRINT ERROR_MESSAGE()
 	ROLLBACK
+	PRINT CONCAT('Linea en la que ha ocurrido tu error: ', ERROR_LINE())
+	PRINT CONCAT('Mensaje de error', ERROR_MESSAGE())
 END CATCH
 
-
-
+GO
 -------------------------------------------------------------------------------------------
 -- 8. Utilizando la BD JARDINERIA, crea un script que realice las siguientes operaciones:
 --	Importante: debes utilizar TRY/CATCH y Transacciones si fueran necesarias.
@@ -273,9 +284,26 @@ END CATCH
 --			todos los datos de cada una de las tablas en una sola ejecución
 -------------------------------------------------------------------------------------------
 
+DECLARE @oficina CHAR(6) = 'ALI-ES'
+DECLARE @cliente INT = 39
 
+BEGIN TRY
+	BEGIN TRAN
+		DELETE FROM CLIENTES
+		 WHERE codCliente = @cliente
+		DELETE FROM EMPLEADOS
+		 WHERE codOficina = @oficina
+		DELETE FROM OFICINAS
+		 WHERE codOficina = @oficina
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+	PRINT CONCAT('Ha ocurrido un error en la linea ', ERROR_LINE())
+	PRINT CONCAT('Mensaje: ', ERROR_MESSAGE())
+END CATCH
 
-
+GO
 -------------------------------------------------------------------------------------------
 -- 9. Utilizando la BD JARDINERIA, crea un script que realice lo siguiente:
 --		Crea un nuevo cliente (invéntate los datos). No debes indicar directamente el código, 
@@ -297,4 +325,53 @@ END CATCH
 --				Forma de pago debe ser: 'PayPal' y Fechapago la del día
 -------------------------------------------------------------------------------------------
 
+SET IMPLICIT_TRANSACTIONS OFF
 
+DECLARE @codEmpleado INT
+DECLARE @codCliente INT
+DECLARE @codPedido INT
+DECLARE @producto1 INT = 151
+DECLARE @producto2 INT = 66
+DECLARE @precio1 DECIMAL(9,2)
+DECLARE @cantidad1 INT = 72
+DECLARE @precio2 DECIMAL(9,2)
+DECLARE @cantidad2 INT = 98
+DECLARE @idTransaccion INT
+DECLARE @total DECIMAL(9,2)
+
+SELECT TOP 1  @codEmpleado = codEmpleado
+  FROM EMPLEADOS
+ ORDER BY NEWID() ASC
+
+SELECT @codPedido = MAX(codPedido)+1 FROM PEDIDOS
+
+BEGIN TRY
+	BEGIN TRAN
+		SELECT @codCliente = MAX(codCliente)+1 FROM CLIENTES
+		
+		INSERT INTO CLIENTES (codCliente, nombre_cliente, nombre_contacto, telefono, email, linea_direccion1, ciudad, limite_credito, codEmpl_ventas)
+		VALUES (@codCliente, 'Manuel Contreras', 'Arcras', '697145244', 'manuel@gmail.com', 'Calle campo n17', 'Fuente Albilla', 420000, @codEmpleado)
+		
+		INSERT INTO PEDIDOS (codPedido, fecha_pedido, fecha_esperada, codEstado, codCliente)
+		VALUES (@codPedido, GETDATE(), DAY(10) + GETDATE(), 'P', @codCliente)
+
+		SELECT @precio1 = codProducto FROM PRODUCTOS WHERE codProducto = @producto1
+		SELECT @precio2 = codProducto FROM PRODUCTOS WHERE codProducto = @producto2
+
+		INSERT INTO DETALLE_PEDIDOS (codPedido, codProducto, cantidad, precio_unidad, numeroLinea)
+		VALUES (@codPedido, @producto1, @cantidad1, @precio1, 1),
+			   (@codPedido, @producto2, @cantidad2, @precio2, 2)
+
+		SELECT @idTransaccion = COUNT(codCliente) FROM PAGOS
+		
+		SET @total = ((@precio1 * @cantidad1) + (@precio2 * @cantidad2))
+
+		INSERT INTO PAGOS (codCliente, id_transaccion, fechaHora_pago, importe_pago, codFormaPago, codPedido)
+		VALUES (@codCliente, CONCAT('ak-std-', @idTransaccion), GETDATE(), @total, 'P', @codPedido)
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+	PRINT CONCAT('Linea en la que ha ocurrido tu error: ', ERROR_LINE())
+	PRINT CONCAT('Mensaje de error', ERROR_MESSAGE())
+END CATCH
