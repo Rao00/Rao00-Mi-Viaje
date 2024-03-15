@@ -225,10 +225,10 @@ BEGIN
 	WHERE c.codCliente = @i
 	GROUP BY c.codCliente, c.nombre_cliente
 	PRINT CONCAT('El cliente ', @nombreCliente, ' ha realizado ', @numPedidos, ' pedidos')
+	SET @i += 1
 END
 
 GO
-
 -------------------------------------------------------------------------------------------
 -- 7. Utilizando la BD JARDINERIA, crea un script que realice las siguientes operaciones:
 --	Importante: debes utilizar TRY/CATCH y Transacciones si fueran necesarias.
@@ -238,6 +238,29 @@ GO
 --		Crea un nuevo cliente (datos inventados) (el codCliente a insertar debes obtenerlo automáticamente)
 --		Asigna como representante de ventas el cliente anterior
 -------------------------------------------------------------------------------------------
+
+SET IMPLICIT_TRANSACTIONS OFF
+
+DECLARE @codEmpleado INT
+DECLARE @codCliente INT
+
+BEGIN TRY
+	BEGIN TRAN
+		SELECT @codEmpleado = (codEmpleado)+1 FROM EMPLEADOS
+		SELECT @codCliente = (codCliente)+1 FROM CLIENTES
+		INSERT INTO OFICINAS (codOficina, ciudad, pais, codPostal, telefono, linea_direccion1)
+		VALUES ('ALI-ES', 'Alicante', 'España', '03005', '+34697145245', 'Calle Medico Pepe Ramon nº2')
+		INSERT INTO EMPLEADOS (codEmpleado, nombre, apellido1, apellido2, tlf_extension_ofi, email, puesto_cargo, salario, codOficina)
+		VALUES (@codEmpleado, 'Carles', 'Morales', 'Amat', 0698, 'carlesmorales@gmail.com', 'Director Ejecutivo', 69420, 'ALI-ES')
+		INSERT INTO CLIENTES (codCliente, nombre_cliente, nombre_contacto, telefono, email, linea_direccion1, ciudad, codEmpl_ventas, limite_credito)
+		VALUES (@codCliente, 'Manuel Contreras', 'Arcras', '697145244', 'manuel@gmail.com', 'Calle campo n17', 'Fuente Albilla', @codEmpleado, 420)
+	COMMIT
+END TRY
+BEGIN CATCH
+	PRINT ERROR_LINE()
+	PRINT ERROR_MESSAGE()
+	ROLLBACK
+END CATCH
 
 
 
