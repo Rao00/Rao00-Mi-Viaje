@@ -24,6 +24,7 @@ namespace Ejercicio03
         private void btnMostrar_Click(object sender, EventArgs e)
         {
             string salida = MostrarFormas("Poligono");
+            salida += MostrarFormas("Cuadrado");
             if (salida == string.Empty)
             {
                 MessageBox.Show($"No hay poligonos que mostrar");

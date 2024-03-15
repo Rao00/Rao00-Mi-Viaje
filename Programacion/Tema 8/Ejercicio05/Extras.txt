@@ -1,0 +1,6 @@
+- Herencia de caso base (Interfaz)
+- Funcion de clases genericas
+- Recuento de las asignaturas dentro del propio TextBox
+- Formulario de cursos Responsive
+- Interfaz propia
+- Clase estatica

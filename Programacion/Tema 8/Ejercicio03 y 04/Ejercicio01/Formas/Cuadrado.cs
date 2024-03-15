@@ -35,12 +35,14 @@ namespace Ejercicio03
 
         public override string GetType()
         {
-            return "Cuadrado";
+            string nombre = "Cuadrado";
+            return nombre;
         }
 
         public override string ToString()
         {
-            string salida = $"Cuadrado:\nCoordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {baseX} x {alturaY}\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
+            string nombre = baseX == alturaY ? "Cuadrado" : "Rectangulo";
+            string salida = $"{nombre}:\nCoordenadas = {X.ToString()}, {Y.ToString()}\nTamaño = {baseX} x {alturaY}\nPerimetro = {Perimetro()} cm\nArea = {Area()} cm2";
             return salida;
         }
 
