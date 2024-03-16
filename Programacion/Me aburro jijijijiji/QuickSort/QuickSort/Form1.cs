@@ -18,7 +18,7 @@ namespace QuickSort
             InitializeComponent();
         }
 
-        int longitud = 1000;
+        int longitud = 5000;
         List<double> ListaPrincipal = new List<double>();
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -26,7 +26,7 @@ namespace QuickSort
             Random rand = new Random();
             for (int i = 0; i < longitud; i++)
             {
-                ListaPrincipal.Add(rand.Next(0, 9999));
+                ListaPrincipal.Add(rand.Next(0, 999999999));
             }
             MessageBox.Show("Lista creada");
         }
@@ -43,7 +43,7 @@ namespace QuickSort
 
         private void btnSort_Click(object sender, EventArgs e)
         {
-            ListaPrincipal = Sort(ListaPrincipal, ListaPrincipal.Count()-1);
+            ListaPrincipal = Sort(ListaPrincipal);
         }
 
         private List<double> Swap(List<double> lista, int i, int j)
@@ -57,56 +57,47 @@ namespace QuickSort
             return lista;
         }
 
-        private List<double> Sort(List<double> lista, int max)
+        private List<double> Sort(List<double> lista, int Miguelito = 10)
         {
-            if (max <= 1)
+            int i = 0;
+            int pivot;
+            if(Miguelito <= 0)
             {
                 return lista;
             }
-
-            Random rnd = new Random();
-            int pivot = rnd.Next(0, max);
-
-            for (int i = 0; i < max; i++)
+            while (i < lista.Count())
             {
-                if (lista[i] > lista[pivot])
+                pivot = i;
+                int rightIndex;
+                int k = 0;
+                for (int j = 0; j < pivot; j++)
                 {
-                    lista = Swap(lista, pivot, pivot + 1);
-                    lista = Swap(lista, i, pivot - 1);
+                    rightIndex = pivot * 2 > lista.Count() - 1 ? lista.Count() - 1 : pivot * 2 - k;
+                    if (lista[j] > lista[rightIndex])
+                    {
+                        Swap(lista, j, rightIndex);
+                        k++;
+                        continue;
+                    }
+                    if (lista[j] > lista[pivot])
+                    {
+                        double temp = lista[j];
+                        lista.RemoveAt(j);
+                        lista.Insert(pivot, temp);
+                        continue;
+                    }
+                    if (lista[rightIndex] < lista[pivot])
+                    {
+                        double temp = lista[rightIndex];
+                        lista.RemoveAt(rightIndex);
+                        lista.Insert(pivot - 1, temp);
+                        k++;
+                        continue;
+                    }
                 }
+                i++;
             }
-
-            // Recursive calls with reduced range
-            List<double> leftPart = Sort(lista.GetRange(0, pivot), pivot);
-            List<double> rightPart = Sort(lista.GetRange(pivot + 1, max - (pivot + 1)), max - (pivot + 1));
-
-            // Combine the sorted parts
-            List<double> result = new List<double>();
-            result.AddRange(leftPart);
-            result.Add(lista[pivot]);
-            result.AddRange(rightPart);
-
-            return result;
+            return Sort(lista, Miguelito-1);
         }
     }
 }
-/*
-Random rnd = new Random();
-int pivot = rnd.Next(0, max);
-if (lista.Count() > 2)
-{
-    int j = 0;
-    for (int i = 0; i < max; i++)
-    {
-        if (lista[i] == lista[pivot]) { continue; }
-        if (lista[i] < lista[pivot])
-        {
-            lista = Swap(lista, j, i);
-            j++;
-        }
-    }
-    lista = Swap(lista, j, pivot);
-    return QuickSort(lista, lista.Count());
-}
-else { return lista; 
-*/
