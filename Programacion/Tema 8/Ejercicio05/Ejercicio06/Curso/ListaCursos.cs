@@ -12,12 +12,12 @@ namespace Ejercicio06.Cursos
     public class ListaCursos
     {
         List<Curso> listaCursos;
-        ListaAlumnos listaAlumnos;
+        ListaPersonas listaGlobal;
 
-        public ListaCursos(ListaAlumnos listaAlumnos)
+        public ListaCursos(ListaPersonas listaGlobal)
         {
             listaCursos = new List<Curso>();
-            this.listaAlumnos = listaAlumnos;
+            this.listaGlobal = listaGlobal;
         }
 
         public List<Curso> List()
@@ -46,8 +46,7 @@ namespace Ejercicio06.Cursos
             return false;
         }
 
-        override
-        public string ToString()
+        public override string ToString()
         {
             string salida = string.Empty;
             foreach(Curso curso in listaCursos)
@@ -61,13 +60,9 @@ namespace Ejercicio06.Cursos
         public string ToString(string codigo)
         {
             string salida = string.Empty;
-            List<Alumno> lista = listaAlumnos.List();
-            for(int i = 0; i < listaAlumnos.Count(); i++)
+            for(int i = 0; i < listaGlobal.Count(); i++)
             {
-                if (lista[i].CodigoCurso == codigo)
-                {
-                    salida += lista[i].ToString() + "\n\n";
-                }
+
             }
             return salida;
         }

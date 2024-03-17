@@ -15,13 +15,13 @@ namespace Ejercicio06.Cursos
     public partial class fCursos : Form
     {
         private ListaCursos listaCursos;
-        private ListaAlumnos listaAlumnos;
+        private ListaPersonas listaGlobal;
 
-        public fCursos(ListaCursos listaCursos, ListaAlumnos listaAlumnos)
+        public fCursos(ListaCursos listaCursos, ListaPersonas listaGlobal)
         {
             InitializeComponent();
             this.listaCursos = listaCursos;
-            this.listaAlumnos = listaAlumnos;
+            this.listaGlobal = listaGlobal;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

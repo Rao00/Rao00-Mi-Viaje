@@ -68,15 +68,14 @@
     <Compile Include="index.Designer.cs">
       <DependentUpon>index.cs</DependentUpon>
     </Compile>
-    <Compile Include="Alumnos\ListaAlumnos.cs" />
-    <Compile Include="Persona.cs" />
+    <Compile Include="Personas\Persona.cs" />
+    <Compile Include="Personas\ListaPersonas.cs" />
     <Compile Include="Profesor\fProfesores.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Profesor\fProfesores.Designer.cs">
       <DependentUpon>fProfesores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profesor\ListaProfesores.cs" />
     <Compile Include="Profesor\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

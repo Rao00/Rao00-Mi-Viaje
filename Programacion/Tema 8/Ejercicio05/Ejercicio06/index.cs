@@ -15,33 +15,32 @@ namespace Ejercicio06
 {
     public partial class Eje06 : Form
     {
-        ListaCursos listaCursos;
-        ListaAlumnos listaAlumnos;
-        ListaProfesores listaProfesores;
+
+        List<ListaCursos> listaCursos;
+        List<ListaPersonas> listaGlobal;
 
         public Eje06()
         {
             InitializeComponent();
-            this.listaAlumnos = new ListaAlumnos();
-            this.listaCursos = new ListaCursos(listaAlumnos);
-            this.listaProfesores = new ListaProfesores();
+            this.listaCursos = new List<ListaCursos>();
+            this.listaGlobal = new List<ListaPersonas>();
         }
 
         private void btnGestionarCursos_Click(object sender, EventArgs e)
         {
-            fCursos formCursos = new fCursos(listaCursos, listaAlumnos);
+            fCursos formCursos = new fCursos(listaCursos, listaGlobal);
             formCursos.ShowDialog();
         }
 
         private void btnGestionarAlumnos_Click(object sender, EventArgs e)
         {
-            fAlumnos formAlumnos = new fAlumnos(listaAlumnos, listaCursos);
+            fAlumnos formAlumnos = new fAlumnos();
             formAlumnos.ShowDialog();
         }
 
         private void btnGestionarProfesores_Click(object sender, EventArgs e)
         {
-            fProfesores formProfesores = new fProfesores(listaProfesores, listaCursos);
+            fProfesores formProfesores = new fProfesores();
             formProfesores.ShowDialog();
         }
     }

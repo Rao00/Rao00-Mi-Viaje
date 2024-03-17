@@ -17,13 +17,13 @@ namespace Ejercicio06.Profesores
 {
     public partial class fProfesores : Form
     {
-        ListaProfesores listaProfesores;
-        ListaCursos listaCursos;
 
-        public fProfesores(ListaProfesores listaProfesores, ListaCursos listaCursos)
+        List<Persona> listaProfesores;
+
+        public fProfesores(List<Persona> Global, List<ListaCursos> listaCursos)
         {
             InitializeComponent();
-            this.listaProfesores = listaProfesores;
+            this.listaProfesores = Global.;
             this.listaCursos = listaCursos;
         }
 
