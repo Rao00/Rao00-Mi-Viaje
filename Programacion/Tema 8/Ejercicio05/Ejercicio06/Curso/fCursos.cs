@@ -86,7 +86,7 @@ namespace Ejercicio06.Cursos
                 string codigo = Interaction.InputBox("Codigo del curso a mostrar");
                 if (listaCursos.Contains(codigo))
                 {
-                    string salida = listaCursos.ToString(codigo);
+                    string salida = listaGlobal.ToString("Alumno");
                     if (salida == string.Empty)
                     {
                         MessageBox.Show("No hay alumnos en ese curso");

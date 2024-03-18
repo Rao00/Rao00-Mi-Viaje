@@ -17,25 +17,25 @@ namespace Ejercicio06.Profesores
 {
     public partial class fProfesores : Form
     {
+        ListaPersonas listaProfesores;
+        ListaCursos listaCursos;
 
-        List<Persona> listaProfesores;
-
-        public fProfesores(List<Persona> Global, List<ListaCursos> listaCursos)
+        public fProfesores(ListaPersonas ListaGlobal, ListaCursos listaCursos)
         {
             InitializeComponent();
-            this.listaProfesores = Global.;
+            this.listaProfesores = ListaGlobal;
             this.listaCursos = listaCursos;
         }
 
         private void btnNewProfesor_Click(object sender, EventArgs e)
         {
-            List<Profesor> tempListaProfesores = listaProfesores.List();
+            List<Profesor> tempListaProfesores = listaProfesores.GetProfesores();
             string dni = Interaction.InputBox("Documento nacional de identidad del profesor");
             try
             {
                 if (listaProfesores.New(dni) == 1)
                 {
-                    int i = listaProfesores.List().Count - 1;
+                    int i = tempListaProfesores.Count() - 1;
                     string nombre = Interaction.InputBox("Nombre del profesor");
                     tempListaProfesores[i].Nombre = nombre;
                     string telefono = Interaction.InputBox("Telefono del profesor");
@@ -125,7 +125,7 @@ namespace Ejercicio06.Profesores
                 {
                     string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas separadas con ';'");
                     List<string> listaAsignaturasTemp = asignaturas.Split(';').ToList();
-                    listaProfesores.List()[indiceProfesor] = listaProfesores.AddSubjects(listaProfesores.List()[indiceProfesor], listaAsignaturasTemp);
+                    listaProfesores.GetProfesores()[indiceProfesor] = listaProfesores.AddSubjects(listaProfesores.GetProfesores()[indiceProfesor], listaAsignaturasTemp);
                     MessageBox.Show("Asignaturas añadidas");
                 }
                 else { MessageBox.Show("El profesor no existe"); }
@@ -143,7 +143,7 @@ namespace Ejercicio06.Profesores
                     int indice = listaProfesores.FindIndex(dni);
                     string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas a eliminar separadas con ';'");
                     List<string> listaAsignaturas = asignaturas.Split(';').ToList();
-                    listaProfesores.List()[indice] = listaProfesores.RemoveSubjects(listaProfesores.List()[indice], listaAsignaturas);
+                    listaProfesores.GetProfesores()[indice] = listaProfesores.RemoveSubjects(listaProfesores.GetProfesores()[indice], listaAsignaturas);
                     MessageBox.Show("Asignaturas eliminadas");
                 }
                 else { MessageBox.Show("El profesor no existe"); }
@@ -157,7 +157,7 @@ namespace Ejercicio06.Profesores
             {
                 string salida = string.Empty;
                 string asignatura = Interaction.InputBox("Asignatura por la que buscar");
-                foreach (Profesor profesor in listaProfesores.List())
+                foreach (Profesor profesor in listaProfesores.GetProfesores())
                 {
                     if (profesor.Asignaturas.Contains(asignatura))
                     {

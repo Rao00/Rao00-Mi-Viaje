@@ -12,12 +12,10 @@ namespace Ejercicio06.Cursos
     public class ListaCursos
     {
         List<Curso> listaCursos;
-        ListaPersonas listaGlobal;
 
-        public ListaCursos(ListaPersonas listaGlobal)
+        public ListaCursos()
         {
             listaCursos = new List<Curso>();
-            this.listaGlobal = listaGlobal;
         }
 
         public List<Curso> List()
@@ -60,7 +58,7 @@ namespace Ejercicio06.Cursos
         public string ToString(string codigo)
         {
             string salida = string.Empty;
-            for(int i = 0; i < listaGlobal.Count(); i++)
+            for(int i = 0; i < listaCursos.Count(); i++)
             {
 
             }

@@ -26,7 +26,7 @@ namespace QuickSort
             Random rand = new Random();
             for (int i = 0; i < longitud; i++)
             {
-                ListaPrincipal.Add(rand.Next(0, 999999999));
+                ListaPrincipal.Add(rand.Next(0, 99));
             }
             MessageBox.Show("Lista creada");
         }
@@ -44,6 +44,7 @@ namespace QuickSort
         private void btnSort_Click(object sender, EventArgs e)
         {
             ListaPrincipal = Sort(ListaPrincipal);
+            MessageBox.Show("Ordenado");
         }
 
         private List<double> Swap(List<double> lista, int i, int j)
@@ -57,47 +58,44 @@ namespace QuickSort
             return lista;
         }
 
-        private List<double> Sort(List<double> lista, int Miguelito = 10)
+        private List<double> Sort(List<double> listaPrincipal, int Miguelito = 10)
         {
             int i = 0;
             int pivot;
             if(Miguelito <= 0)
             {
-                return lista;
+                return listaPrincipal;
             }
-            while (i < lista.Count())
+            while (i < listaPrincipal.Count())
             {
                 pivot = i;
                 int rightIndex;
                 int k = 0;
                 for (int j = 0; j < pivot; j++)
                 {
-                    rightIndex = pivot * 2 > lista.Count() - 1 ? lista.Count() - 1 : pivot * 2 - k;
-                    if (lista[j] > lista[rightIndex])
+                    rightIndex = pivot * 1.5 > listaPrincipal.Count() - 1 ? listaPrincipal.Count() - 1 : pivot + (pivot/2) - k;
+                    if (listaPrincipal[j] > listaPrincipal[rightIndex])
                     {
-                        Swap(lista, j, rightIndex);
+                        Swap(listaPrincipal, j, rightIndex);
                         k++;
-                        continue;
                     }
-                    if (lista[j] > lista[pivot])
+                    else if (listaPrincipal[j] > listaPrincipal[pivot])
                     {
-                        double temp = lista[j];
-                        lista.RemoveAt(j);
-                        lista.Insert(pivot, temp);
-                        continue;
+                        double temp = listaPrincipal[j];
+                        listaPrincipal.RemoveAt(j);
+                        listaPrincipal.Insert(pivot, temp);
                     }
-                    if (lista[rightIndex] < lista[pivot])
+                    else if (listaPrincipal[rightIndex] < listaPrincipal[pivot])
                     {
-                        double temp = lista[rightIndex];
-                        lista.RemoveAt(rightIndex);
-                        lista.Insert(pivot - 1, temp);
+                        double temp = listaPrincipal[rightIndex];
+                        listaPrincipal.RemoveAt(rightIndex);
+                        listaPrincipal.Insert(pivot - 1, temp);
                         k++;
-                        continue;
                     }
                 }
                 i++;
             }
-            return Sort(lista, Miguelito-1);
+            return Sort(listaPrincipal, Miguelito-1);
         }
     }
 }

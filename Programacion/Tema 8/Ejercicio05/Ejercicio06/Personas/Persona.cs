@@ -10,12 +10,9 @@ namespace Ejercicio06
 {
     public abstract class Persona
     {
-
         private string dni;
         private string nombre;
         private string telefono;
-        private string codigoCurso;
-        private List<string> listaGenerica;
 
         public string DNI
         {
@@ -55,25 +52,11 @@ namespace Ejercicio06
             }
         }
 
-        public string CodigoCurso
+        public Persona()
         {
-            get { return codigoCurso; }
-            set { codigoCurso = value; }
-        }
-
-        public List<string> Lista
-        {
-            get { return listaGenerica; }
-            set { listaGenerica = value; }
-        }
-
-        public Persona(string Dni, string Nombre, string Telefono, string CodigoCurso, List<string> Lista)
-        {
-            dni = Dni;
-            nombre = Nombre;
-            telefono = Telefono;
-            codigoCurso = CodigoCurso;
-            listaGenerica = Lista;
+            dni = string.Empty;
+            nombre = string.Empty;
+            telefono = string.Empty;
         }
 
         public abstract override string ToString();

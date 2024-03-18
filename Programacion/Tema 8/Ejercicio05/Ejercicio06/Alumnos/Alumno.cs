@@ -8,11 +8,35 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Ejercicio06.Cursos;
 
-namespace Ejercicio06.Alumnos
+namespace Ejercicio06
 {
     public class Alumno : Persona
     {
-        public Alumno(string dni, string nombre, string telefono, string codigoCurso, List<string> notas) : base(dni, nombre, telefono, codigoCurso, notas) { }
+        string codigoCurso;
+        List<double> listaNotas;
+
+        public Alumno()
+        {
+            
+        }
+
+        public string CodigoCurso
+        {
+            get { return codigoCurso; }
+            set { codigoCurso = value; }
+        }
+
+        public List<double> ListaNotas
+        {
+            get { return listaNotas; }
+            set { listaNotas = value; }
+        }
+
+        public double Media
+        {
+            get { return listaNotas.Average(); }
+        }
+
         
         public override string ToString()
         {

@@ -16,14 +16,14 @@ namespace Ejercicio06
     public partial class Eje06 : Form
     {
 
-        List<ListaCursos> listaCursos;
-        List<ListaPersonas> listaGlobal;
+        ListaCursos listaCursos;
+        ListaPersonas listaGlobal;
 
         public Eje06()
         {
             InitializeComponent();
-            this.listaCursos = new List<ListaCursos>();
-            this.listaGlobal = new List<ListaPersonas>();
+            listaCursos = new ListaCursos();
+            listaGlobal = new ListaPersonas();
         }
 
         private void btnGestionarCursos_Click(object sender, EventArgs e)
@@ -34,13 +34,13 @@ namespace Ejercicio06
 
         private void btnGestionarAlumnos_Click(object sender, EventArgs e)
         {
-            fAlumnos formAlumnos = new fAlumnos();
+            fAlumnos formAlumnos = new fAlumnos(listaGlobal,listaCursos);
             formAlumnos.ShowDialog();
         }
 
         private void btnGestionarProfesores_Click(object sender, EventArgs e)
         {
-            fProfesores formProfesores = new fProfesores();
+            fProfesores formProfesores = new fProfesores(listaGlobal, listaCursos);
             formProfesores.ShowDialog();
         }
     }

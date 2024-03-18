@@ -7,12 +7,30 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Ejercicio06.Cursos;
 
-namespace Ejercicio06.Profesores
+namespace Ejercicio06
 {
     public class Profesor : Persona
     {
-        public Profesor(string dni, string nombre, string telefono, string codigoCurso, List<string> notas) : base(dni, nombre, telefono, codigoCurso, notas) { }
+        private List<string> asignaturas;
+        private string tutorCurso;
 
+        public string TutorCurso
+        {
+            get { return tutorCurso; }
+            set { tutorCurso = value; }
+        }
+
+        public List<string> Asignaturas
+        {
+            get { return asignaturas; }
+            set { asignaturas = value; }
+        }
+
+        public Profesor()
+        {
+            asignaturas = new List<string>();
+            tutorCurso = string.Empty;
+        }
 
         public override string ToString()
         {
@@ -20,7 +38,7 @@ namespace Ejercicio06.Profesores
             salida += "DNI: " + DNI + "\n";
             salida += "Nombre: " + Nombre + "\n";
             salida += "Telefono: " + Telefono + "\n";
-            salida += "Codigo curso: " + CodigoCurso;
+            salida += "Codigo curso: " + TutorCurso;
             return salida;
         }
 

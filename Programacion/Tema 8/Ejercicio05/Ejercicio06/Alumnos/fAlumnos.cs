@@ -15,27 +15,27 @@ namespace Ejercicio06.Alumnos
 {
     public partial class fAlumnos : Form
     {
-        ListaAlumnos listaAlumnos;
+        ListaPersonas listaAlumnos;
         ListaCursos listaCursos;
 
-        public fAlumnos(ListaAlumnos listaAlumnos, ListaCursos listaCursos)
+        public fAlumnos(ListaPersonas listaGlobal, ListaCursos listaCursos)
         {
             InitializeComponent();
-            this.listaAlumnos = listaAlumnos;
+            this.listaAlumnos = listaGlobal;
             this.listaCursos = listaCursos;
         }
 
         private void btnNewAlumno_Click(object sender, EventArgs e)
         {
             int i;
-            List<Alumno> tempListaAlumnos = listaAlumnos.List();
+            List<Alumno> tempListaAlumnos = listaAlumnos.GetAlumnos();
             string dni = Interaction.InputBox("Documento nacional de identidad del alumno");
             try
             {
                 if (listaAlumnos.New(dni) == 1)
                 {
                     string nombre = Interaction.InputBox("Nombre del alumno");
-                    i = listaAlumnos.List().Count-1;
+                    i = tempListaAlumnos.Count()-1;
                     tempListaAlumnos[i].Nombre = nombre;
                     string telefono = Interaction.InputBox("Telefono del alumno");
                     tempListaAlumnos[i].Telefono = telefono;
@@ -143,7 +143,7 @@ namespace Ejercicio06.Alumnos
                     {
                         listaNotas.Add(double.Parse(nota));
                     }
-                    listaAlumnos.List()[i].Notas = listaNotas;
+                    listaAlumnos.GetAlumnos()[i].ListaNotas = listaNotas;
                     MessageBox.Show("Notas añadidas");
                 }
                 else { MessageBox.Show("Ningun alumno coincide con ese DNI"); }
@@ -164,11 +164,11 @@ namespace Ejercicio06.Alumnos
                     List<double> listaNotasTemp = UtilidadesListas.StringToDouble(notas.Split(';').ToList());
                     for (int i = 0; i < listaNotasTemp.Count(); i++)
                     {
-                        for (int j = 0; j < listaAlumnos.List()[indice].Notas.Count() && continuar; j++)
+                        for (int j = 0; j < listaAlumnos.GetAlumnos()[indice].ListaNotas.Count() && continuar; j++)
                         {
-                            if (listaNotasTemp.Contains(listaAlumnos.List()[indice].Notas[i]))
+                            if (listaNotasTemp.Contains(listaAlumnos.GetAlumnos()[indice].ListaNotas[i]))
                             {
-                                listaAlumnos.List()[indice].Notas.Remove(listaNotasTemp[i]);
+                                listaAlumnos.GetAlumnos()[indice].ListaNotas.Remove(listaNotasTemp[i]);
                                 continuar = false;
                             }
                         }
@@ -189,9 +189,9 @@ namespace Ejercicio06.Alumnos
                 string salida = string.Empty;
                 for (int i = 0; i < listaAlumnos.Count(); i++)
                 {
-                    if (listaAlumnos.List()[i].Media >= media)
+                    if (listaAlumnos.GetAlumnos()[i].Media >= media)
                     {
-                        salida += listaAlumnos.List()[i].ToString();
+                        salida += listaAlumnos.GetAlumnos()[i].ToString();
                     }
                 }
                 if (salida == string.Empty)
@@ -211,9 +211,9 @@ namespace Ejercicio06.Alumnos
                 string salida = string.Empty;
                 for (int i = 0; i < listaAlumnos.Count(); i++)
                 {
-                    if (listaAlumnos.List()[i].Media < media)
+                    if (listaAlumnos.GetAlumnos()[i].Media < media)
                     {
-                        salida += listaAlumnos.List()[i].ToString();
+                        salida += listaAlumnos.GetAlumnos()[i].ToString();
                     }
                 }
                 if (salida == string.Empty)
