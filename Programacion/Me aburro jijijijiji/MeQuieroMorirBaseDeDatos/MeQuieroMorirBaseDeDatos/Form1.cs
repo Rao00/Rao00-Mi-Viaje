@@ -50,10 +50,10 @@ namespace MeQuieroMorirBaseDeDatos
                         NewDataBase(split[1]);
                         break;
                     case "/t":
-                        NewTable(DataBase, split[1]); 
+                        NewTable(DataBase, split[1]);
                         break;
                     case "/c":
-                        switch(split.Length)
+                        switch (split.Length)
                         {
                             case 3:
                                 NewColumn(DataBase, Table, split[1], split[2]);
@@ -67,7 +67,7 @@ namespace MeQuieroMorirBaseDeDatos
                         }
                         break;
                     case "/f":
-                        
+
                     case "/s":
                         Table = split[1];
                         break;
