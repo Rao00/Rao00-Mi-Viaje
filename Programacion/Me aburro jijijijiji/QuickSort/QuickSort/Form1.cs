@@ -18,7 +18,7 @@ namespace QuickSort
             InitializeComponent();
         }
 
-        int longitud = 5000;
+        int longitud = 5;
         List<double> ListaPrincipal = new List<double>();
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -26,17 +26,17 @@ namespace QuickSort
             Random rand = new Random();
             for (int i = 0; i < longitud; i++)
             {
-                ListaPrincipal.Add(rand.Next(0, 99));
+                ListaPrincipal.Add(rand.Next(0, 10));
             }
             MessageBox.Show("Lista creada");
         }
 
         private void btnShowList_Click(object sender, EventArgs e)
         {
-            string salida = string.Empty;
-            foreach (int i in ListaPrincipal)
+            string salida = "";
+            for(int i = 0; i < ListaPrincipal.Count(); i++)
             {
-                salida += i.ToString() + ", ";
+                salida += ListaPrincipal[i] + ", ";
             }
             MessageBox.Show(salida);
         }
@@ -58,44 +58,68 @@ namespace QuickSort
             return lista;
         }
 
-        private List<double> Sort(List<double> listaPrincipal, int Miguelito = 10)
+        new private List<double> Move(List<double> lista, int i, int j)
         {
-            int i = 0;
-            int pivot;
-            if(Miguelito <= 0)
+            if (i >= 0 && i < lista.Count && j >= 0 && j < lista.Count)
+            {
+                double temp = lista[i];
+                lista.RemoveAt(i);
+                lista.Insert(j, temp);
+            }
+            return lista;
+        }
+
+        private List<double> Sort(List<double> listaPrincipal)
+        {
+            if (listaPrincipal.Count() <= 1)
             {
                 return listaPrincipal;
             }
-            while (i < listaPrincipal.Count())
+
+            int pivot = listaPrincipal.Count() / 2;
+            double pivotValor = listaPrincipal[pivot];
+
+            List<double> left = new List<double>();
+            List<double> right = new List<double>();
+
+            for (int i = 0; i < listaPrincipal.Count(); i++)
             {
-                pivot = i;
-                int rightIndex;
-                int k = 0;
-                for (int j = 0; j < pivot; j++)
+                if (i == pivot)
                 {
-                    rightIndex = pivot * 1.5 > listaPrincipal.Count() - 1 ? listaPrincipal.Count() - 1 : pivot + (pivot/2) - k;
-                    if (listaPrincipal[j] > listaPrincipal[rightIndex])
-                    {
-                        Swap(listaPrincipal, j, rightIndex);
-                        k++;
-                    }
-                    else if (listaPrincipal[j] > listaPrincipal[pivot])
-                    {
-                        double temp = listaPrincipal[j];
-                        listaPrincipal.RemoveAt(j);
-                        listaPrincipal.Insert(pivot, temp);
-                    }
-                    else if (listaPrincipal[rightIndex] < listaPrincipal[pivot])
-                    {
-                        double temp = listaPrincipal[rightIndex];
-                        listaPrincipal.RemoveAt(rightIndex);
-                        listaPrincipal.Insert(pivot - 1, temp);
-                        k++;
-                    }
+                    continue;
                 }
-                i++;
+                if (listaPrincipal[i] >= listaPrincipal[pivot])
+                {
+                    right.Add(listaPrincipal[i]);
+                }
+                else if (listaPrincipal[i] <= listaPrincipal[pivot])
+                {
+                    left.Add(listaPrincipal[i]);
+                }
             }
-            return Sort(listaPrincipal, Miguelito-1);
+
+            left = Sort(left);
+            right = Sort(right);
+
+            left.Add(pivotValor);
+            left.AddRange(right);
+
+            return left;
+        }
+
+        private void btnComprobar_Click(object sender, EventArgs e)
+        {
+            bool check = true;
+            for(int i = 0; i < ListaPrincipal.Count()-1; i++)
+            {
+                if (ListaPrincipal[i+1] < ListaPrincipal[i]) 
+                {
+                    MessageBox.Show("Error numero" + ListaPrincipal[i-1]);
+                    check = false;
+                    break;
+                }
+            }
+            if (check) { MessageBox.Show("Correcto"); }
         }
     }
 }

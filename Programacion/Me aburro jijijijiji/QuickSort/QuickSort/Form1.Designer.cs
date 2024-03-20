@@ -31,6 +31,7 @@
             this.btnCrear = new System.Windows.Forms.Button();
             this.btnSort = new System.Windows.Forms.Button();
             this.btnShowList = new System.Windows.Forms.Button();
+            this.btnComprobar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCrear
@@ -63,11 +64,22 @@
             this.btnShowList.UseVisualStyleBackColor = true;
             this.btnShowList.Click += new System.EventHandler(this.btnShowList_Click);
             // 
+            // btnComprobar
+            // 
+            this.btnComprobar.Location = new System.Drawing.Point(246, 299);
+            this.btnComprobar.Name = "btnComprobar";
+            this.btnComprobar.Size = new System.Drawing.Size(292, 41);
+            this.btnComprobar.TabIndex = 3;
+            this.btnComprobar.Text = "Check";
+            this.btnComprobar.UseVisualStyleBackColor = true;
+            this.btnComprobar.Click += new System.EventHandler(this.btnComprobar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnComprobar);
             this.Controls.Add(this.btnShowList);
             this.Controls.Add(this.btnSort);
             this.Controls.Add(this.btnCrear);
@@ -82,6 +94,7 @@
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.Button btnSort;
         private System.Windows.Forms.Button btnShowList;
+        private System.Windows.Forms.Button btnComprobar;
     }
 }
 
