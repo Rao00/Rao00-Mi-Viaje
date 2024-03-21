@@ -84,11 +84,19 @@ namespace Ejercicio06
             return listaProfesores;
         }
 
-        public int New(string dni)
+        public int NewAlumno(string dni)
         {
             Alumno alumno = new Alumno();
             alumno.DNI = dni;
             listaGlobal.Add(alumno);
+            return 1;
+        }
+
+        public int NewProfesor(string dni)
+        {
+            Profesor profesor = new Profesor();
+            profesor.DNI = dni;
+            listaGlobal.Add(profesor);
             return 1;
         }
 
@@ -145,9 +153,9 @@ namespace Ejercicio06
 
         public bool Contains(string dni)
         {
-            foreach (Alumno alumno in listaGlobal)
+            foreach (Persona persona in listaGlobal)
             {
-                if (alumno.DNI == dni)
+                if (persona.DNI == dni)
                 {
                     return true;
                 }

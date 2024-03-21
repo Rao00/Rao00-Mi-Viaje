@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facturacion>
+    <factura code='1' tipoPago='T'>
+        <cuenta formato='****************xxxx'>0145</cuenta>
+        <fecha>
+            <dia>14</dia>
+            <mes>5</mes>
+            <año>2023</año>
+        </fecha>
+        <hora>
+            <hora>14</hora>
+            <min>32</min>
+        </hora>
+        <cliente>
+            <dni>49372300V</dni>
+            <nombre>Carles</nombre>
+            <direccion>Calle Medico Luis Rivera</direccion>
+            <codPostal>03005</codPostal>
+            <poblacion>Alicante</poblacion>
+            <telefono>697145245</telefono>
+        </cliente>
+        <productos>
+            <producto>
+                <linea>1</linea>
+                <denominacion>Aceite de oliva</denominacion>
+                <cantidad>1</cantidad>
+                <precioUnitario>129,99</precioUnitario>
+                <iva>21%</iva>
+            </producto>
+        </productos>
+        <descuento tipo='e'>5</descuento>
+    </factura>
+    <factura code='2' tipoPago='E'>
+        <cuenta/>
+        <fecha>
+            <dia>24</dia>
+            <mes>7</mes>
+            <año>2022</año>
+        </fecha>
+        <hora>
+            <hora>17</hora>
+            <min>38</min>
+        </hora>
+        <cliente>
+            <dni>36372300V</dni>
+            <nombre>Manuel</nombre>
+            <direccion>Avenida Historiador Vicente Ramos</direccion>
+            <codPostal>03540</codPostal>
+            <poblacion>Alicante</poblacion>
+            <telefono>697145298</telefono>
+        </cliente>
+        <productos>
+            <producto linea='1'>
+                <denominacion>Croissant</denominacion>
+                <cantidad>12</cantidad>
+                <precioUnitario>12,99</precioUnitario>
+                <iva>14</iva>
+            </producto>
+            <producto linea='2'>
+                <denominacion>Galletas Chiquilin Extragrandes</denominacion>
+                <cantidad>48</cantidad>
+                <precioUnitario>4,99</precioUnitario>
+                <iva>21</iva>
+            </producto>
+        </productos>
+        <descuento/>
+    </factura>
+    <factura code='3' tipoPago='T'>
+        <cuenta formato='****************xxxx'>3726</cuenta>
+        <fecha>
+            <dia>27</dia>
+            <mes>2</mes>
+            <año>2024</año>
+        </fecha>
+        <hora>
+            <hora>19</hora>
+            <min>48</min>
+        </hora>
+        <cliente>
+            <dni>37234589D</dni>
+            <nombre>Miguel</nombre>
+            <direccion>Avenida Mi Casa 34</direccion>
+            <codPostal>03140</codPostal>
+            <poblacion>Guardamar</poblacion>
+            <telefono>722145298</telefono>
+        </cliente>
+        <productos>
+            <producto linea='1'>
+                <denominacion>Croissant</denominacion>
+                <cantidad>98</cantidad>
+                <precioUnitario>12,99</precioUnitario>
+                <iva>14</iva>
+            </producto>
+            <producto linea='2'>
+                <denominacion>Galletas Chiquilin Extragrandes</denominacion>
+                <cantidad>2</cantidad>
+                <precioUnitario>4,99</precioUnitario>
+                <iva>21</iva>
+            </producto>
+        </productos>
+        <descuento tipo='porcentaje'>21</descuento>
+    </factura>
+</facturacion>

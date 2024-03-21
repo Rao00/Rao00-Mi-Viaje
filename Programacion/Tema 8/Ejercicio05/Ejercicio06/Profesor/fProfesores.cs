@@ -29,29 +29,28 @@ namespace Ejercicio06.Profesores
 
         private void btnNewProfesor_Click(object sender, EventArgs e)
         {
-            List<Profesor> tempListaProfesores = listaProfesores.GetProfesores();
             string dni = Interaction.InputBox("Documento nacional de identidad del profesor");
             try
             {
-                if (listaProfesores.New(dni) == 1)
+                if (listaProfesores.NewProfesor(dni) == 1)
                 {
-                    int i = tempListaProfesores.Count() - 1;
+                    int i = listaProfesores.GetProfesores().Count() - 1;
                     string nombre = Interaction.InputBox("Nombre del profesor");
-                    tempListaProfesores[i].Nombre = nombre;
+                    listaProfesores.GetProfesores()[i].Nombre = nombre;
                     string telefono = Interaction.InputBox("Telefono del profesor");
-                    tempListaProfesores[i].Telefono = telefono;
+                    listaProfesores.GetProfesores()[i].Telefono = telefono;
                     string codigoCurso = Interaction.InputBox("Codigo del curso del que se es tutor");
                     if (listaCursos.Contains(codigoCurso))
                     {
                         if (listaProfesores.CheckTutor(codigoCurso))
                         {
-                            tempListaProfesores[i].TutorCurso = codigoCurso;
+                            listaProfesores.GetProfesores()[i].TutorCurso = codigoCurso;
                         }
                         else { throw new ArgumentException("El curso ya tiene asignado un tutor"); } 
                     }
                     else if (codigoCurso == "")
                     {
-                        tempListaProfesores[i].TutorCurso = "No es tutor";
+                        listaProfesores.GetProfesores()[i].TutorCurso = "No es tutor";
                     }
                     else { throw new ArgumentException("El curso no existe"); }
                     MessageBox.Show("Profesor añadido");
@@ -80,7 +79,7 @@ namespace Ejercicio06.Profesores
 
         private void btnMostrarListaProfesores_Click(object sender, EventArgs e)
         {
-            string salida = listaProfesores.Show();
+            string salida = listaProfesores.Show("Profesor");
             if (salida == string.Empty)
             {
                 MessageBox.Show("No hay profesores que mostrar");
