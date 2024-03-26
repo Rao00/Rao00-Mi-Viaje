@@ -15,34 +15,33 @@ namespace Ejercicio06.Alumnos
 {
     public partial class fAlumnos : Form
     {
-        ListaPersonas listaAlumnos;
+        ListaPersonas listaPersonas;
         ListaCursos listaCursos;
 
         public fAlumnos(ListaPersonas listaGlobal, ListaCursos listaCursos)
         {
             InitializeComponent();
-            this.listaAlumnos = listaGlobal;
+            this.listaPersonas = listaGlobal;
             this.listaCursos = listaCursos;
         }
 
         private void btnNewAlumno_Click(object sender, EventArgs e)
         {
             int i;
-            List<Alumno> tempListaAlumnos = listaAlumnos.GetAlumnos();
             string dni = Interaction.InputBox("Documento nacional de identidad del alumno");
             try
             {
-                if (listaAlumnos.New(dni) == 1)
+                if (listaPersonas.NewAlumno(dni) == 1)
                 {
                     string nombre = Interaction.InputBox("Nombre del alumno");
-                    i = tempListaAlumnos.Count()-1;
-                    tempListaAlumnos[i].Nombre = nombre;
+                    i = listaPersonas.GetAlumnos().Count()-1;
+                    listaPersonas.GetAlumnos()[i].Nombre = nombre;
                     string telefono = Interaction.InputBox("Telefono del alumno");
-                    tempListaAlumnos[i].Telefono = telefono;
+                    listaPersonas.GetAlumnos()[i].Telefono = telefono;
                     string codigoCurso = Interaction.InputBox("Codigo del curso del alumno");
                     if (listaCursos.Contains(codigoCurso))
                     {
-                        tempListaAlumnos[i].CodigoCurso = codigoCurso;
+                        listaPersonas.GetAlumnos()[i].CodigoCurso = codigoCurso;
                     }
                     else { throw new ArgumentException("El curso no existe"); }
                     MessageBox.Show("Alumno añadido");
@@ -50,17 +49,17 @@ namespace Ejercicio06.Alumnos
             }
             catch (ArgumentException aex) 
             {
-                listaAlumnos.Delete(dni);
+                listaPersonas.Delete(dni);
                 MessageBox.Show(aex.Message); 
             }   
         }
 
         private void btnDeleteAlumno_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 string dni = Interaction.InputBox("Documento nacional de identidad del alumno a eliminar");
-                if(listaAlumnos.Delete(dni) == 1)
+                if(listaPersonas.Delete(dni) == 1)
                 {
                     MessageBox.Show($"Alumno con DNI: {dni}\nHa sido eliminado");
                 }
@@ -71,7 +70,7 @@ namespace Ejercicio06.Alumnos
 
         private void btnMostrarAlumnos_Click(object sender, EventArgs e)
         {
-            string salida = listaAlumnos.Show();
+            string salida = listaPersonas.Show();
             if (salida == string.Empty)
             {
                 MessageBox.Show("No hay alumnos que mostrar");
@@ -84,9 +83,9 @@ namespace Ejercicio06.Alumnos
         
         private void btnSortAlphOrderAlumnos_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
-                listaAlumnos.Sort();
+                listaPersonas.Sort();
                 MessageBox.Show("Lista ordenada");
             }
             else { MessageBox.Show("No hay alumnos para ordenar"); }
@@ -94,9 +93,9 @@ namespace Ejercicio06.Alumnos
 
         private void btnShowAlumno_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
-                string alumno = listaAlumnos.LookFor(Interaction.InputBox("Introduce el DNI del alumno a buscar"));
+                string alumno = listaPersonas.LookFor(Interaction.InputBox("Introduce el DNI del alumno a buscar"));
                 if (alumno == string.Empty)
                 {
                     MessageBox.Show("El alumno no existe");
@@ -108,7 +107,7 @@ namespace Ejercicio06.Alumnos
 
         private void btnAlumnosEnCurso_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 string codigo = Interaction.InputBox("Codigo del curso a mostrar");
                 if (listaCursos.Contains(codigo))
@@ -130,12 +129,12 @@ namespace Ejercicio06.Alumnos
 
         private void btnAñadirNota_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 string dni = Interaction.InputBox("DNI del alumno");
-                if (listaAlumnos.Contains(dni))
+                if (listaPersonas.Contains(dni))
                 {
-                    int i = listaAlumnos.FindIndex(dni);
+                    int i = listaPersonas.FindIndex(dni);
                     string notas = Interaction.InputBox("Notas separadas con ';'");
                     List<string> listaNotasTemp = notas.Split(';').ToList();
                     List<double> listaNotas = new List<double>();
@@ -143,7 +142,7 @@ namespace Ejercicio06.Alumnos
                     {
                         listaNotas.Add(double.Parse(nota));
                     }
-                    listaAlumnos.GetAlumnos()[i].ListaNotas = listaNotas;
+                    listaPersonas.GetAlumnos()[i].ListaNotas = listaNotas;
                     MessageBox.Show("Notas añadidas");
                 }
                 else { MessageBox.Show("Ningun alumno coincide con ese DNI"); }
@@ -153,22 +152,22 @@ namespace Ejercicio06.Alumnos
 
         private void btnEliminarNota_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 string dni = Interaction.InputBox("DNI del alumno");
-                if (listaAlumnos.Contains(dni))
+                if (listaPersonas.Contains(dni))
                 {
                     bool continuar = true;
-                    int indice = listaAlumnos.FindIndex(dni);
+                    int indice = listaPersonas.FindIndex(dni);
                     string notas = Interaction.InputBox("Notas a eliminar separadas con ';'");
                     List<double> listaNotasTemp = UtilidadesListas.StringToDouble(notas.Split(';').ToList());
                     for (int i = 0; i < listaNotasTemp.Count(); i++)
                     {
-                        for (int j = 0; j < listaAlumnos.GetAlumnos()[indice].ListaNotas.Count() && continuar; j++)
+                        for (int j = 0; j < listaPersonas.GetAlumnos()[indice].ListaNotas.Count() && continuar; j++)
                         {
-                            if (listaNotasTemp.Contains(listaAlumnos.GetAlumnos()[indice].ListaNotas[i]))
+                            if (listaNotasTemp.Contains(listaPersonas.GetAlumnos()[indice].ListaNotas[i]))
                             {
-                                listaAlumnos.GetAlumnos()[indice].ListaNotas.Remove(listaNotasTemp[i]);
+                                listaPersonas.GetAlumnos()[indice].ListaNotas.Remove(listaNotasTemp[i]);
                                 continuar = false;
                             }
                         }
@@ -183,15 +182,15 @@ namespace Ejercicio06.Alumnos
 
         private void btnMediaMayor_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 int media = 5;
                 string salida = string.Empty;
-                for (int i = 0; i < listaAlumnos.Count(); i++)
+                for (int i = 0; i < listaPersonas.Count(); i++)
                 {
-                    if (listaAlumnos.GetAlumnos()[i].Media >= media)
+                    if (listaPersonas.GetAlumnos()[i].Media >= media)
                     {
-                        salida += listaAlumnos.GetAlumnos()[i].ToString();
+                        salida += listaPersonas.GetAlumnos()[i].ToString();
                     }
                 }
                 if (salida == string.Empty)
@@ -205,15 +204,15 @@ namespace Ejercicio06.Alumnos
 
         private void btnMediaMenor_Click(object sender, EventArgs e)
         {
-            if (listaAlumnos.Count() > 0)
+            if (listaPersonas.Count() > 0)
             {
                 int media = 5;
                 string salida = string.Empty;
-                for (int i = 0; i < listaAlumnos.Count(); i++)
+                for (int i = 0; i < listaPersonas.Count(); i++)
                 {
-                    if (listaAlumnos.GetAlumnos()[i].Media < media)
+                    if (listaPersonas.GetAlumnos()[i].Media < media)
                     {
-                        salida += listaAlumnos.GetAlumnos()[i].ToString();
+                        salida += listaPersonas.GetAlumnos()[i].ToString();
                     }
                 }
                 if (salida == string.Empty)

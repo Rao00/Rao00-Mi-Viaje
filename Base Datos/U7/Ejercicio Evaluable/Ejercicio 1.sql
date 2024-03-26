@@ -327,6 +327,10 @@ GO
 
 SET IMPLICIT_TRANSACTIONS OFF
 
+EXEC sp_addmessage 50001, 17, 'Error personalizado, aun no se que error es'
+
+USE JARDINERIA
+
 DECLARE @codEmpleado INT
 DECLARE @codCliente INT
 DECLARE @codPedido INT
@@ -338,6 +342,7 @@ DECLARE @precio2 DECIMAL(9,2)
 DECLARE @cantidad2 INT = 98
 DECLARE @idTransaccion INT
 DECLARE @total DECIMAL(9,2)
+DECLARE @prefijo VARCHAR(8) = 'ak-std-'
 
 SELECT TOP 1  @codEmpleado = codEmpleado
   FROM EMPLEADOS
@@ -362,12 +367,16 @@ BEGIN TRY
 		VALUES (@codPedido, @producto1, @cantidad1, @precio1, 1),
 			   (@codPedido, @producto2, @cantidad2, @precio2, 2)
 
-		SELECT @idTransaccion = COUNT(codCliente) FROM PAGOS
+		SELECT @idTransaccion = FORMAT(MAX(CAST(RIGHT(id_transaccion, LEN(@prefijo)) AS INT))+1, '00000000') FROM PAGOS
 		
 		SET @total = ((@precio1 * @cantidad1) + (@precio2 * @cantidad2))
 
 		INSERT INTO PAGOS (codCliente, id_transaccion, fechaHora_pago, importe_pago, codFormaPago, codPedido)
-		VALUES (@codCliente, CONCAT('ak-std-', @idTransaccion), GETDATE(), @total, 'P', @codPedido)
+		VALUES (@codCliente, CONCAT(@prefijo, @idTransaccion), GETDATE(), @total, 'P', @codPedido)
+		IF (@cantidad2 = 98)
+		BEGIN
+			RAISERROR (50001, 17, 17, 'Error personalizado, aun no se que error es')
+		END
 	COMMIT
 END TRY
 BEGIN CATCH

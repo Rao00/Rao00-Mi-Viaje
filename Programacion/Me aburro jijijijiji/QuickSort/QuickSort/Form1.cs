@@ -18,7 +18,7 @@ namespace QuickSort
             InitializeComponent();
         }
 
-        int longitud = 5;
+        int longitud = 5000;
         List<double> ListaPrincipal = new List<double>();
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -26,7 +26,7 @@ namespace QuickSort
             Random rand = new Random();
             for (int i = 0; i < longitud; i++)
             {
-                ListaPrincipal.Add(rand.Next(0, 10));
+                ListaPrincipal.Add(rand.Next(0, 1000));
             }
             MessageBox.Show("Lista creada");
         }
