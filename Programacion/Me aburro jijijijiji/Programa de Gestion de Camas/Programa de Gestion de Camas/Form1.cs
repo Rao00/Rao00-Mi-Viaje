@@ -18,10 +18,5 @@ namespace Programa_de_Gestion_de_Camas
         {
             InitializeComponent();
         }
-
-        public void Iniciar(object sender, EventArgs e)
-        {
-
-        }
     }
 }
