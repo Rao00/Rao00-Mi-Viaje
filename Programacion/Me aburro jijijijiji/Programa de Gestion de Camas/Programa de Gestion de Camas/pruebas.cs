@@ -5,19 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Programa_de_Gestion_de_Camas
 {
-    public partial class Form1 : Form
+    public partial class pruebas : Form
     {
-        
-        public Form1()
+        public pruebas()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Control panel = Paneles.General(0, 0, 50, 200, "Principal", Color.AliceBlue);
+            this.Controls.Add(panel);
+            this.Refresh();
         }
     }
 }

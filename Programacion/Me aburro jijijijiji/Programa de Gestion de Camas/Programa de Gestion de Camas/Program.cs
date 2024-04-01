@@ -16,6 +16,7 @@ namespace Programa_de_Gestion_de_Camas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new pruebas());
             Application.Run(new Form1());
         }
     }
