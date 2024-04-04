@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Programa_de_Gestion_de_Camas
 {
-    class ListaPlantas
+    class Plantas
     {
         List<Servicio> listaServicios;
 
@@ -18,9 +19,22 @@ namespace Programa_de_Gestion_de_Camas
             set { nombrePlanta = value; }
         }
 
-        public ListaPlantas()
+        public Plantas(string Nombre)
         {
+            nombrePlanta = Nombre;
             listaServicios = new List<Servicio>();
+        }
+
+        public void Add(Servicio servicio)
+        {
+            try
+            {
+                listaServicios.Add(servicio);
+            }
+            catch 
+            {
+                throw new Exception("El servicio no existe");
+            }
         }
     }
 }

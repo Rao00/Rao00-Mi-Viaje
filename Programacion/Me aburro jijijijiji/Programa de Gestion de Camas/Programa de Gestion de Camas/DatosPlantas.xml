@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plantas>
+    <planta>
+        <piso>4</piso>
+        <orientacion>sur</orientacion>
+        <totalcamas>36</totalcamas>
+        <servicio>
+            <nombre media="28">cardiologia</nombre>
+            <camas>28</camas>
+        </servicio>
+        <servicio>
+			<nombre media="29">neumologia</nombre>
+            <camas>8</camas>
+        </servicio>
+        <servicio/>
+    </planta>
+    <planta>
+        <piso>4</piso>
+        <orientacion>centro</orientacion>
+        <totalcamas>36</totalcamas>
+        <servicio>
+            <nombre media="18">digestivo</nombre>
+            <camas>19</camas>
+        </servicio>
+        <servicio>
+            <nombre media="16">neurologia</nombre>
+            <camas>16</camas>
+        </servicio>
+        <servicio>
+            <nombre media="1">reumatologia</nombre>
+            <camas>1</camas>
+        </servicio>
+    </planta>
+    <planta>
+        <piso>4</piso>
+        <orientacion>norte</orientacion>
+        <totalcamas>32</totalcamas>
+        <servicio>
+            <nombre media="30">psiquiatria</nombre>
+            <camas>32</camas>
+        </servicio>
+        <servicio/>
+        <servicio/>
+    </planta>
+    <planta>
+        <piso>3</piso>
+        <orientacion>sur</orientacion>
+        <totalcamas>36</totalcamas>
+        <servicio>
+            <nombre media="22">enfermedades infecciosas</nombre>
+            <camas>20</camas>
+        </servicio>
+        <servicio>
+            <nombre media="29">neumologia</nombre>
+            <camas>18</camas>
+        </servicio>
+        <servicio/>
+    </planta>
+        <planta>
+        <piso>3</piso>
+        <orientacion>centro</orientacion>
+        <totalcamas>36</totalcamas>
+        <servicio>
+			<nombre media="6">otorrinolaringologia</nombre>
+            <camas>6</camas>
+        </servicio>
+        <servicio>
+            <nombre media="1">oftalmologia</nombre>
+            <camas>1</camas>
+        </servicio>
+        <servicio>
+            <nombre media="75">medicina interna</nombre>
+            <camas>29</camas>
+        </servicio>
+    </planta>
+        <planta>
+        <piso>3</piso>
+        <orientacion>norte</orientacion>
+        <totalcamas>36</totalcamas>
+        <servicio>
+            <nombre media="75">medicina interna</nombre>
+            <camas>36</camas>
+        </servicio>
+        <servicio/>
+        <servicio/>
+    </planta>
+    <planta>
+        <piso>2</piso>
+        <orientacion>sur</orientacion>
+        <totalcamas>32</totalcamas>
+        <servicio>
+            <nombre media="26">cirugia traumatologica</nombre>
+            <camas>26</camas>
+        </servicio>
+        <servicio>
+            <nombre media="6">cirugia maxilofacial</nombre>
+            <camas>6</camas>
+        </servicio>
+        <servicio/>
+    </planta>
+    <planta>
+        <piso>2</piso>
+        <orientacion>centro</orientacion>
+        <totalcamas>20</totalcamas>
+        <servicio>
+            <nombre media="18">oncologia</nombre>
+            <camas>20</camas>
+        </servicio>
+        <servicio/>
+        <servicio/>
+    </planta>
+    <planta>
+        <piso>2</piso>
+        <orientacion>norte</orientacion>
+        <totalcamas>39</totalcamas>
+        <servicio>
+            <nombre media="25">cirugia general</nombre>
+            <camas>28</camas>
+        </servicio>
+        <servicio>
+            <nombre media="11">urologia</nombre>
+            <camas>11</camas>
+        </servicio>
+        <servicio/>
+    </planta>
+</plantas>

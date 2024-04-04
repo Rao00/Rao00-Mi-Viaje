@@ -11,8 +11,6 @@ namespace Programa_de_Gestion_de_Camas
         private string nombre;
         private int mediaAnual;
         private int numCamasActuales;
-        private int numCamasMax;
-        private string planta;
 
         public string Nombre
         {
@@ -31,18 +29,6 @@ namespace Programa_de_Gestion_de_Camas
         {
             get { return numCamasActuales; }
             set { numCamasActuales = value; }
-        }
-
-        public int NumCamasMax
-        {
-            get { return numCamasMax; }
-            set { numCamasMax = value; }
-        }
-
-        public string Planta
-        {
-            get { return planta; }
-            set { planta = value; }
         }
     }
 }
