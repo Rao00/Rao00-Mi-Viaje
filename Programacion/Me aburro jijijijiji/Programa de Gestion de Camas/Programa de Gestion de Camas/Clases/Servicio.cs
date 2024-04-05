@@ -30,5 +30,12 @@ namespace Programa_de_Gestion_de_Camas
             get { return numCamasActuales; }
             set { numCamasActuales = value; }
         }
+
+        public Servicio() 
+        { 
+            nombre = string.Empty;
+            mediaAnual = 0;
+            numCamasActuales = 0;
+        }
     }
 }

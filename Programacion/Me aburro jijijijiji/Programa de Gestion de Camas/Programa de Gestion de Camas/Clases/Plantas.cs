@@ -19,6 +19,11 @@ namespace Programa_de_Gestion_de_Camas
             set { nombrePlanta = value; }
         }
 
+        public List<Servicio> List
+        {
+            get { return listaServicios; }
+        }
+
         public Plantas(string Nombre)
         {
             nombrePlanta = Nombre;
@@ -27,14 +32,7 @@ namespace Programa_de_Gestion_de_Camas
 
         public void Add(Servicio servicio)
         {
-            try
-            {
-                listaServicios.Add(servicio);
-            }
-            catch 
-            {
-                throw new Exception("El servicio no existe");
-            }
+            listaServicios.Add(servicio);
         }
     }
 }

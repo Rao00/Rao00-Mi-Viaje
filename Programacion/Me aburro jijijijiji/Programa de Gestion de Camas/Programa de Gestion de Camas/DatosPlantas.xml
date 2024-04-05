@@ -6,11 +6,13 @@
         <orientacion>sur</orientacion>
         <totalcamas>36</totalcamas>
         <servicio>
-            <nombre media="28">cardiologia</nombre>
+            <nombre>cardiologia</nombre>
+			<media>28</media>
             <camas>28</camas>
         </servicio>
         <servicio>
-			<nombre media="29">neumologia</nombre>
+			<nombre>neumologia</nombre>
+			<media>29</media>
             <camas>8</camas>
         </servicio>
         <servicio/>
@@ -20,15 +22,18 @@
         <orientacion>centro</orientacion>
         <totalcamas>36</totalcamas>
         <servicio>
-            <nombre media="18">digestivo</nombre>
+            <nombre>digestivo</nombre>
+			<media>18</media>
             <camas>19</camas>
         </servicio>
         <servicio>
-            <nombre media="16">neurologia</nombre>
+            <nombre>neurologia</nombre>
+			<media>16</media>
             <camas>16</camas>
         </servicio>
         <servicio>
-            <nombre media="1">reumatologia</nombre>
+            <nombre>reumatologia</nombre>
+			<media>1</media>
             <camas>1</camas>
         </servicio>
     </planta>
@@ -37,7 +42,8 @@
         <orientacion>norte</orientacion>
         <totalcamas>32</totalcamas>
         <servicio>
-            <nombre media="30">psiquiatria</nombre>
+            <nombre>psiquiatria</nombre>
+			<media>30</media>
             <camas>32</camas>
         </servicio>
         <servicio/>
@@ -48,11 +54,13 @@
         <orientacion>sur</orientacion>
         <totalcamas>36</totalcamas>
         <servicio>
-            <nombre media="22">enfermedades infecciosas</nombre>
+            <nombre>enfermedades infecciosas</nombre>
+			<media>22</media>
             <camas>20</camas>
         </servicio>
         <servicio>
-            <nombre media="29">neumologia</nombre>
+            <nombre>neumologia</nombre>
+			<media>29</media>
             <camas>18</camas>
         </servicio>
         <servicio/>
@@ -62,15 +70,18 @@
         <orientacion>centro</orientacion>
         <totalcamas>36</totalcamas>
         <servicio>
-			<nombre media="6">otorrinolaringologia</nombre>
+			<nombre>otorrinolaringologia</nombre>
+			<media>6</media>
             <camas>6</camas>
         </servicio>
         <servicio>
-            <nombre media="1">oftalmologia</nombre>
+            <nombre>oftalmologia</nombre>
+			<media>1</media>
             <camas>1</camas>
         </servicio>
         <servicio>
-            <nombre media="75">medicina interna</nombre>
+            <nombre>medicina interna</nombre>
+			<media>75</media>
             <camas>29</camas>
         </servicio>
     </planta>
@@ -79,7 +90,8 @@
         <orientacion>norte</orientacion>
         <totalcamas>36</totalcamas>
         <servicio>
-            <nombre media="75">medicina interna</nombre>
+            <nombre>medicina interna</nombre>
+			<media>75</media>
             <camas>36</camas>
         </servicio>
         <servicio/>
@@ -90,11 +102,13 @@
         <orientacion>sur</orientacion>
         <totalcamas>32</totalcamas>
         <servicio>
-            <nombre media="26">cirugia traumatologica</nombre>
+            <nombre>cirugia traumatologica</nombre>
+			<media>26</media>
             <camas>26</camas>
         </servicio>
         <servicio>
-            <nombre media="6">cirugia maxilofacial</nombre>
+            <nombre>cirugia maxilofacial</nombre>
+			<media>6</media>
             <camas>6</camas>
         </servicio>
         <servicio/>
@@ -104,7 +118,8 @@
         <orientacion>centro</orientacion>
         <totalcamas>20</totalcamas>
         <servicio>
-            <nombre media="18">oncologia</nombre>
+            <nombre>oncologia</nombre>
+			<media>18</media>
             <camas>20</camas>
         </servicio>
         <servicio/>
@@ -115,11 +130,13 @@
         <orientacion>norte</orientacion>
         <totalcamas>39</totalcamas>
         <servicio>
-            <nombre media="25">cirugia general</nombre>
+            <nombre>cirugia general</nombre>
+			<media>25</media>
             <camas>28</camas>
         </servicio>
         <servicio>
-            <nombre media="11">urologia</nombre>
+            <nombre>urologia</nombre>
+			<media>11</media>
             <camas>11</camas>
         </servicio>
         <servicio/>
