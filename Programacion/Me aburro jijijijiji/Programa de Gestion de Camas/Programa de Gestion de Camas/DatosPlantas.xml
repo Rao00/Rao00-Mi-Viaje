@@ -7,12 +7,10 @@
         <totalcamas>36</totalcamas>
         <servicio>
             <nombre>cardiologia</nombre>
-			<media>28</media>
             <camas>28</camas>
         </servicio>
         <servicio>
 			<nombre>neumologia</nombre>
-			<media>29</media>
             <camas>8</camas>
         </servicio>
         <servicio/>
@@ -23,17 +21,14 @@
         <totalcamas>36</totalcamas>
         <servicio>
             <nombre>digestivo</nombre>
-			<media>18</media>
             <camas>19</camas>
         </servicio>
         <servicio>
             <nombre>neurologia</nombre>
-			<media>16</media>
             <camas>16</camas>
         </servicio>
         <servicio>
             <nombre>reumatologia</nombre>
-			<media>1</media>
             <camas>1</camas>
         </servicio>
     </planta>
@@ -43,7 +38,6 @@
         <totalcamas>32</totalcamas>
         <servicio>
             <nombre>psiquiatria</nombre>
-			<media>30</media>
             <camas>32</camas>
         </servicio>
         <servicio/>
@@ -60,7 +54,6 @@
         </servicio>
         <servicio>
             <nombre>neumologia</nombre>
-			<media>29</media>
             <camas>18</camas>
         </servicio>
         <servicio/>
@@ -71,7 +64,6 @@
         <totalcamas>36</totalcamas>
         <servicio>
 			<nombre>otorrinolaringologia</nombre>
-			<media>6</media>
             <camas>6</camas>
         </servicio>
         <servicio>
@@ -81,7 +73,6 @@
         </servicio>
         <servicio>
             <nombre>medicina interna</nombre>
-			<media>75</media>
             <camas>29</camas>
         </servicio>
     </planta>
@@ -91,7 +82,6 @@
         <totalcamas>36</totalcamas>
         <servicio>
             <nombre>medicina interna</nombre>
-			<media>75</media>
             <camas>36</camas>
         </servicio>
         <servicio/>
@@ -103,7 +93,6 @@
         <totalcamas>32</totalcamas>
         <servicio>
             <nombre>cirugia traumatologica</nombre>
-			<media>26</media>
             <camas>26</camas>
         </servicio>
         <servicio>
@@ -119,7 +108,6 @@
         <totalcamas>20</totalcamas>
         <servicio>
             <nombre>oncologia</nombre>
-			<media>18</media>
             <camas>20</camas>
         </servicio>
         <servicio/>
@@ -131,12 +119,10 @@
         <totalcamas>39</totalcamas>
         <servicio>
             <nombre>cirugia general</nombre>
-			<media>25</media>
             <camas>28</camas>
         </servicio>
         <servicio>
             <nombre>urologia</nombre>
-			<media>11</media>
             <camas>11</camas>
         </servicio>
         <servicio/>

@@ -8,118 +8,183 @@ namespace Programa_de_Gestion_de_Camas
     public partial class PagPrincipal : Form
     {
         List<Plantas> ListaPlantas = new List<Plantas>();
-        List<List<Label>> ListaLabels = new List<List<Label>>();
+        List<Tuple<List<Label>, List<Label>>> ListaLabels = new List<Tuple<List<Label>, List<Label>>>();
 
         public PagPrincipal()
         {
             InitializeComponent();
-            ListaPlantas = LeerXml();
+            LeerXml();
             AgruparLabels();
+            ReiniciarLabels();
+            AlghoritmoDeOrdenacion();
         }
 
-        private List<Plantas> LeerXml()
+        private void LeerXml()
         {
-            int i = 0;
-            string nombrePlanta = String.Empty;
             string path = "..\\..\\Data\\DatosPlantas.xml";
             XmlReader xml = XmlReader.Create(path);
             while (xml.Read())
             {
-                nombrePlanta = (xml.Name == "piso") ? xml.ReadElementContentAsString() : nombrePlanta;
-                nombrePlanta = (xml.Name == "orientacion") ? nombrePlanta += $" {xml.ReadElementContentAsString().ToUpper()}" : nombrePlanta;
-                if (nombrePlanta.Length >= 4)
+                if (xml.Name == "planta")
                 {
-                    Plantas planta = new Plantas(nombrePlanta);
-                    ListaPlantas.Add(planta);
-                    nombrePlanta = string.Empty;
-                }
-
-                if (xml.Name == "servicio" && !xml.IsEmptyElement)
-                {
-                    XmlReader xmlTemp = xml.ReadSubtree();
-                    Servicio servicio = new Servicio();
-                    while (xmlTemp.Read())
-                    {
-                        if (xmlTemp.Name == "nombre")
-                        {
-                            servicio.Nombre = xmlTemp.ReadElementContentAsString();
-                        }
-                        if (xmlTemp.Name == "media")
-                        {
-                            MessageBox.Show("gferwhiubjoqwefoibghuwegt hiouygq3gr iohpuy");
-                            servicio.MediaAnual = int.Parse(xmlTemp.ReadElementContentAsString());
-                        }
-                        if (xmlTemp.Name == "camas")
-                        {
-                            servicio.NumCamasActuales = int.Parse(xmlTemp.ReadElementContentAsString());
-                        }
-                        if (servicio.Nombre.Length > 0 && servicio.MediaAnual > 0 && servicio.NumCamasActuales > 0)
-                        {
-                            MessageBox.Show(servicio.Nombre);
-                            MessageBox.Show(servicio.MediaAnual.ToString());
-                            MessageBox.Show(servicio.NumCamasActuales.ToString());
-                            ListaPlantas[i].List.Add(servicio);
-                            servicio = new Servicio();
-                        }
-                    }
-                    i++;
+                    XmlReader xmlPlanta = xml.ReadSubtree();
+                    ListaPlantas.Add(LeerPlanta(xmlPlanta));
+                    xml.Skip();
                 }
             }
-            return ListaPlantas;
+        }
+
+        private Plantas LeerPlanta(XmlReader xml)
+        {
+            string nombrePlanta = String.Empty;
+            Plantas planta = new Plantas(nombrePlanta);
+            Servicio servicio = new Servicio();
+            while (xml.Read())
+            {
+                nombrePlanta = (xml.Name == "piso") ? xml.ReadElementContentAsString() : nombrePlanta;
+                nombrePlanta = (xml.Name == "orientacion") ? nombrePlanta += $" {xml.ReadElementContentAsString().ToUpper()}" : nombrePlanta;
+                planta.Nombre = (nombrePlanta.Length >= 4 && planta.Nombre.Length < 4) ? nombrePlanta : planta.Nombre;
+                servicio.Nombre = (xml.Name == "nombre") ? xml.ReadElementContentAsString() : servicio.Nombre;
+                servicio.MediaAnual = (xml.Name == "camas") ? int.Parse(xml.ReadInnerXml()) : servicio.MediaAnual;
+                if (servicio.Nombre.Length > 0 && servicio.MediaAnual > 0)
+                {
+                    planta.List.Add(servicio);
+                    nombrePlanta = string.Empty;
+                    servicio = new Servicio();
+                }
+            }
+            return planta;
         }
 
         private void AgruparLabels()
         {
-            ListaLabels.Add(new List<Label> { lbCamasN1, lbCamasN2, lbCamasN3 });
-            ListaLabels.Add(new List<Label> { lbCamasC1, lbCamasC2, lbCamasC3 });
-            ListaLabels.Add(new List<Label> { lbCamasS1, lbCamasS2, lbCamasS3 });
+            for(int i = 0; i < 3; i++)
+            {
+                Tuple<List<Label>, List<Label>> tuple = new Tuple<List<Label>, List<Label>>(new List<Label>(), new List<Label>());
+                ListaLabels.Add(tuple);
+            }
+
+            ListaLabels[0].Item1.AddRange(new List<Label> { lbCamasN1, lbCamasN2, lbCamasN3 });
+            ListaLabels[0].Item2.AddRange(new List<Label> { lbNumCamasN1, lbNumCamasN2, lbNumCamasN3 });
+            ListaLabels[1].Item1.AddRange(new List<Label> { lbCamasC1, lbCamasC2, lbCamasC3 });
+            ListaLabels[1].Item2.AddRange(new List<Label> { lbNumCamasC1, lbNumCamasC2, lbNumCamasC3 });
+            ListaLabels[2].Item1.AddRange(new List<Label> { lbCamasS1, lbCamasS2, lbCamasS3 });
+            ListaLabels[2].Item2.AddRange(new List<Label> { lbNumCamasS1, lbNumCamasS2, lbNumCamasS3 });
         }
 
-        private void btnSegundaP_Click(object sender, EventArgs e)
+        private void SeleccionarPlantaBoton(string numPlanta)
         {
-            string numPlanta = "2";
-            int i;
-            lPlanta.Text = "Segunda Planta";
-            foreach(Plantas planta in ListaPlantas)
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            foreach (Plantas planta in ListaPlantas)
             {
-                MessageBox.Show(planta.List.Count.ToString());
                 if (planta.Nombre.StartsWith(numPlanta))
                 {
-                    i = 0;
                     foreach (Servicio servicio in planta.List)
                     {
-                        switch (planta.Nombre.Substring(1))
+                        switch (planta.Nombre.Substring(2).ToLower())
                         {
                             case "norte":
-                                ListaLabels[0][i].Text = $"Camas en {servicio.Nombre} :";
-                                MessageBox.Show($"Camas en {servicio.Nombre} :");
+                                ListaLabels[0].Item1[i].Text = $"Camas en {servicio.Nombre} :";
+                                ListaLabels[0].Item2[i].Text = servicio.NumCamasActuales.ToString();
+                                lbTotalN.Text = planta.TotalCamas.ToString();
+                                lbRTotalN.Text = planta.TotalCamas.ToString();
                                 i++;
                                 break;
                             case "centro":
-                                ListaLabels[1][i].Text = $"Camas en {servicio.Nombre} :";
-                                MessageBox.Show($"Camas en {servicio.Nombre} :");
-                                i++;
+                                ListaLabels[1].Item1[j].Text = $"Camas en {servicio.Nombre} :";
+                                ListaLabels[1].Item2[j].Text = servicio.NumCamasActuales.ToString();
+                                lbTotalC.Text = planta.TotalCamas.ToString();
+                                lbRTotalC.Text = planta.TotalCamas.ToString();
+                                j++;
                                 break;
                             case "sur":
-                                ListaLabels[2][i].Text = $"Camas en {servicio.Nombre} :";
-                                MessageBox.Show($"Camas en {servicio.Nombre} :");
-                                i++;
+                                ListaLabels[2].Item1[k].Text = $"Camas en {servicio.Nombre} :";
+                                ListaLabels[2].Item2[k].Text = servicio.NumCamasActuales.ToString();
+                                lbTotalS.Text = planta.TotalCamas.ToString();
+                                lbRTotalS.Text = planta.TotalCamas.ToString();
+                                k++;
                                 break;
                         }
                     }
                 }
+                lbTotalCamas.Text = (int.Parse(lbRTotalN.Text) + int.Parse(lbRTotalC.Text) + int.Parse(lbRTotalS.Text)).ToString();
             }
-            for(i = 0; i < 3; i++)
+            for (i = 0; i < 3; i++)
             {
-                foreach(Label label in ListaLabels[i])
+                for (j = 0; j < ListaLabels[i].Item1.Count; j++)
                 {
-                    if (label.Text.EndsWith("--"))
+                    if (ListaLabels[i].Item1[j].Text.EndsWith(" -- :"))
                     {
-                        label.Hide();
+                        ListaLabels[i].Item2[j].Hide();
+                        ListaLabels[i].Item1[j].Hide();
                     }
                     else
                     {
-                        label.Show();
+                        ListaLabels[i].Item2[j].Show();
+                        ListaLabels[i].Item1[j].Show();
+                    }
+                }
+            }
+        }
+
+        private void ReiniciarLabels()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < ListaLabels[i].Item1.Count; j++)
+                {
+                    ListaLabels[i].Item2[j].Show();
+                    ListaLabels[i].Item1[j].Show();
+                    ListaLabels[i].Item2[j].Text = "0";
+                    ListaLabels[i].Item1[j].Text = "Camas en -- :";
+                }
+            }
+        }
+
+        private void btnSegundaP_Click(object sender, EventArgs e)
+        {
+            ReiniciarLabels();
+            string numPlanta = "2";
+            lPlanta.Text = "Segunda Planta";
+            SeleccionarPlantaBoton(numPlanta);
+        }
+
+        private void btnTerceraP_Click(object sender, EventArgs e)
+        {
+            ReiniciarLabels();
+            string numPlanta = "3";
+            lPlanta.Text = "Tercera Planta";
+            SeleccionarPlantaBoton(numPlanta);
+        }
+
+        private void btnCuartaP_Click(object sender, EventArgs e)
+        {
+            ReiniciarLabels();
+            string numPlanta = "4";
+            lPlanta.Text = "Cuarta Planta";
+            SeleccionarPlantaBoton(numPlanta);
+        }
+
+        private void AlghoritmoDeOrdenacion()
+        {
+            int MaxCamasPorPlanta;
+            foreach (Plantas planta in ListaPlantas)
+            {
+                MaxCamasPorPlanta = 36;
+                foreach (Servicio servicio in planta.List)
+                {
+                    if (MaxCamasPorPlanta - servicio.MediaAnual < 0)
+                    {
+                        servicio.NumCamasActuales = MaxCamasPorPlanta;
+                        servicio.MediaAnual -= MaxCamasPorPlanta;
+                        MaxCamasPorPlanta = 0;
+                    }
+                    else
+                    {
+                        MaxCamasPorPlanta -= servicio.MediaAnual;
+                        servicio.NumCamasActuales = servicio.MediaAnual;
                     }
                 }
             }

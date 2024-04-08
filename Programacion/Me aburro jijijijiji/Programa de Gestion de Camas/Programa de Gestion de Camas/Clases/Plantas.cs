@@ -19,6 +19,11 @@ namespace Programa_de_Gestion_de_Camas
             set { nombrePlanta = value; }
         }
 
+        public int TotalCamas
+        {
+            get { return Suma(); }
+        }
+
         public List<Servicio> List
         {
             get { return listaServicios; }
@@ -28,6 +33,16 @@ namespace Programa_de_Gestion_de_Camas
         {
             nombrePlanta = Nombre;
             listaServicios = new List<Servicio>();
+        }
+
+        private int Suma()
+        {
+            int total = 0;
+            foreach(Servicio servicio in listaServicios)
+            {
+                total += servicio.NumCamasActuales;
+            }
+            return total;
         }
 
         public void Add(Servicio servicio)
