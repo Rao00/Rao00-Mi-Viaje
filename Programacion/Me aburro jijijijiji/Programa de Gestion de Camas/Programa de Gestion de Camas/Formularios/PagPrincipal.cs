@@ -178,7 +178,16 @@ namespace Programa_de_Gestion_de_Camas
                     if (MaxCamasPorPlanta - servicio.MediaAnual < 0)
                     {
                         servicio.NumCamasActuales = MaxCamasPorPlanta;
-                        servicio.MediaAnual -= MaxCamasPorPlanta;
+                        for (int i = 0; i < ListaPlantas.Count; i++)
+                        {
+                            foreach (Servicio servicioTemp in ListaPlantas[i].List)
+                            {
+                                if (servicioTemp.Nombre == servicio.Nombre)
+                                {
+                                    servicioTemp.MediaAnual -= MaxCamasPorPlanta;
+                                }
+                            }
+                        }
                         MaxCamasPorPlanta = 0;
                     }
                     else
