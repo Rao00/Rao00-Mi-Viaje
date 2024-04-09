@@ -12,18 +12,11 @@ namespace Programa_de_Gestion_de_Camas
         List<Servicio> listaServicios;
 
         private string nombrePlanta;
-        private int maxCamas;
 
         public string Nombre 
         {  
             get { return nombrePlanta; } 
             set { nombrePlanta = value; }
-        }
-
-        public int MaxCamas
-        {
-            get { return maxCamas; }
-            set { maxCamas = value; }
         }
 
         public int TotalCamas
@@ -39,7 +32,6 @@ namespace Programa_de_Gestion_de_Camas
         public Plantas(string Nombre)
         {
             nombrePlanta = Nombre;
-            maxCamas = 0;
             listaServicios = new List<Servicio>();
         }
 
