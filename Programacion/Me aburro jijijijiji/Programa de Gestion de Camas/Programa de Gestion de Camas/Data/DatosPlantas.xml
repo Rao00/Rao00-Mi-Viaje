@@ -10,7 +10,7 @@
             <camas>28</camas>
         </servicio>
         <servicio>
-            <nombre>nuemologia</nombre>
+            <nombre>neumologia</nombre>
             <camas>8</camas>
         </servicio>
         <servicio/>
@@ -52,7 +52,7 @@
             <camas>20</camas>
         </servicio>
         <servicio>
-            <nombre>nuemologia</nombre>
+            <nombre>neumologia</nombre>
             <camas>18</camas>
         </servicio>
         <servicio/>
@@ -88,7 +88,7 @@
     <planta>
         <piso>2</piso>
         <orientacion>sur</orientacion>
-        <totalcamas>32</totalcamas>
+        <totalcamas>36</totalcamas>
         <servicio>
             <nombre>traumatologia</nombre>
             <camas>26</camas>
@@ -113,7 +113,7 @@
     <planta>
         <piso>2</piso>
         <orientacion>norte</orientacion>
-        <totalcamas>39</totalcamas>
+        <totalcamas>36</totalcamas>
         <servicio>
             <nombre>cirugia general</nombre>
             <camas>28</camas>
