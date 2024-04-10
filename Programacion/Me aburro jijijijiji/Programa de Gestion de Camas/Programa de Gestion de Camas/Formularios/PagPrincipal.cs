@@ -8,6 +8,7 @@ namespace Programa_de_Gestion_de_Camas
     public partial class PagPrincipal : Form
     {
         List<Plantas> ListaPlantas = new List<Plantas>();
+        List<Servicio> ServiciosExtras = new List<Servicio>();
         List<Tuple<List<Label>, List<Label>>> ListaLabels = new List<Tuple<List<Label>, List<Label>>>();
 
         public PagPrincipal()
@@ -22,7 +23,9 @@ namespace Programa_de_Gestion_de_Camas
         private void LeerXml()
         {
             string path = "..\\..\\Data\\DatosPlantas.xml";
+            string pathExtras = "..\\..\\Data\\DatosServiciosExtras.xml";
             XmlReader xml = XmlReader.Create(path);
+            XmlReader xmlExtras = XmlReader.Create(pathExtras);
             while (xml.Read())
             {
                 if (xml.Name == "planta")
@@ -32,6 +35,7 @@ namespace Programa_de_Gestion_de_Camas
                     xml.Skip();
                 }
             }
+            ServiciosExtras = LeerServiciosExtra(xmlExtras);
         }
 
         private Plantas LeerPlanta(XmlReader xml)
@@ -44,6 +48,7 @@ namespace Programa_de_Gestion_de_Camas
                 nombrePlanta = (xml.Name == "piso") ? xml.ReadElementContentAsString() : nombrePlanta;
                 nombrePlanta = (xml.Name == "orientacion") ? nombrePlanta += $" {xml.ReadElementContentAsString().ToUpper()}" : nombrePlanta;
                 planta.Nombre = (nombrePlanta.Length >= 4 && planta.Nombre.Length < 4) ? nombrePlanta : planta.Nombre;
+                planta.MaxCamas = (xml.Name == "totalcamas") ? xml.ReadElementContentAsInt() : planta.MaxCamas;
                 servicio.Nombre = (xml.Name == "nombre") ? xml.ReadElementContentAsString() : servicio.Nombre;
                 servicio.MediaAnual = (xml.Name == "camas") ? int.Parse(xml.ReadInnerXml()) : servicio.MediaAnual;
                 if (servicio.Nombre.Length > 0 && servicio.MediaAnual > 0)
@@ -54,6 +59,29 @@ namespace Programa_de_Gestion_de_Camas
                 }
             }
             return planta;
+        }
+
+        private List<Servicio> LeerServiciosExtra(XmlReader xml)
+        {
+            List<Servicio> listaServicios = new List<Servicio>();
+            Servicio servicio = new Servicio();
+            while (xml.Read())
+            {
+                if (xml.Name == "servicio")
+                {
+                    servicio = new Servicio();
+                }
+                if (xml.Name == "nombre")
+                {
+                    servicio.Nombre = xml.ReadElementContentAsString();
+                }
+                if (xml.Name == "camas")
+                {
+                    servicio.MediaAnual = xml.ReadElementContentAsInt();
+                    listaServicios.Add(servicio);
+                }
+            }
+            return listaServicios;
         }
 
         private void AgruparLabels()
@@ -172,22 +200,13 @@ namespace Programa_de_Gestion_de_Camas
             int MaxCamasPorPlanta;
             foreach (Plantas planta in ListaPlantas)
             {
-                MaxCamasPorPlanta = 36;
+                MaxCamasPorPlanta = planta.MaxCamas;
                 foreach (Servicio servicio in planta.List)
                 {
                     if (MaxCamasPorPlanta - servicio.MediaAnual < 0)
                     {
                         servicio.NumCamasActuales = MaxCamasPorPlanta;
-                        for (int i = 0; i < ListaPlantas.Count; i++)
-                        {
-                            foreach (Servicio servicioTemp in ListaPlantas[i].List)
-                            {
-                                if (servicioTemp.Nombre == servicio.Nombre)
-                                {
-                                    servicioTemp.MediaAnual -= MaxCamasPorPlanta;
-                                }
-                            }
-                        }
+                        servicio.MediaAnual -= MaxCamasPorPlanta;
                         MaxCamasPorPlanta = 0;
                     }
                     else
@@ -197,6 +216,45 @@ namespace Programa_de_Gestion_de_Camas
                     }
                 }
             }
+            foreach (Servicio servicioExtra in ServiciosExtras)
+            {
+                AlghoritmoDeDistribucion(servicioExtra);
+            }
+        }
+
+        private void AlghoritmoDeDistribucion(Servicio servicio)
+        {
+            bool cont = true;
+            int temp = int.MaxValue;
+            Plantas plantaTemp = new Plantas("temp");
+            for (int i = 0; i < ListaPlantas.Count; i++)
+            {
+                if (ListaPlantas[i].TotalCamas < temp)
+                {
+                    plantaTemp = ListaPlantas[i];
+                    temp = ListaPlantas[i].TotalCamas;
+                }
+            }
+            
+            for (int i = 0; i < ListaPlantas.Count && cont; i++)
+            {
+                if (ListaPlantas[i].Nombre == plantaTemp.Nombre)
+                {
+                    int MaxCamasPorPlanta = ListaPlantas[i].MaxCamas;
+                    if (MaxCamasPorPlanta - servicio.MediaAnual < 0)
+                    {
+                        servicio.NumCamasActuales = MaxCamasPorPlanta;
+                        servicio.MediaAnual -= MaxCamasPorPlanta;
+                    }
+                    else
+                    {
+                        servicio.NumCamasActuales = servicio.MediaAnual;
+                    }
+                    ListaPlantas[i].Add(servicio);
+                    cont = false;
+                }
+            }
+            cont = true; 
         }
     }
 }
