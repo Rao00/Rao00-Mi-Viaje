@@ -42,13 +42,13 @@ namespace Ejercicio06
 
             foreach (Persona persona in listaGlobal)
             {
-                if (persona.GetType() == TipoDeDato)
+                if (persona.DNI == TipoDeDato)
                 {
                     salida += persona.ToString() + "\n";
                 }
             }
 
-            if(salida == string.Empty)
+            if (salida == string.Empty)
             {
                 throw new ArgumentNullException($"No hay datos de {TipoDeDato} en la lista");
             }
@@ -61,9 +61,9 @@ namespace Ejercicio06
         public List<Alumno> GetAlumnos()
         {
             List<Alumno> listaAlumnos = new List<Alumno>();
-            foreach(Persona persona in listaGlobal)
+            foreach (Persona persona in listaGlobal)
             {
-                if(persona.GetType() == "Alumno")
+                if (persona.GetType() == "Alumno")
                 {
                     listaAlumnos.Add((Alumno)persona);
                 }
@@ -102,7 +102,7 @@ namespace Ejercicio06
 
         public int Delete(string dni)
         {
-            foreach(Persona persona in listaGlobal)
+            foreach (Persona persona in listaGlobal)
             {
                 if (persona.DNI == dni)
                 {
@@ -179,10 +179,10 @@ namespace Ejercicio06
         {
             foreach (Persona profesor in listaGlobal)
             {
-                if(profesor.GetType() == "Profesor")
+                if (profesor.GetType() == "Profesor")
                 {
                     Profesor tempProfesor = (Profesor)profesor;
-                    
+
                     if (tempProfesor.TutorCurso == curso)
                     {
                         return false;
@@ -221,6 +221,17 @@ namespace Ejercicio06
                 else { MessageBox.Show($"El profesor con DNI {profesor.DNI} ya tiene asignada la asignatura de {asignatura}"); }
             }
             return profesor;
+        }
+
+        public string ReadSubjects(Profesor profesor)
+        {
+            string salida = string.Empty;
+            foreach(string asignatura in profesor.Asignaturas)
+            {
+                salida += asignatura + "\n";
+            }
+            salida = (salida == string.Empty) ? "No contiene asignaturas" : salida;
+            return salida;
         }
     }
 }

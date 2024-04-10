@@ -116,20 +116,24 @@ namespace Ejercicio06.Profesores
 
         private void btnAddAsignatura_Click(object sender, EventArgs e)
         {
-            if (listaProfesores.Count() > 0)
+            try
             {
-                string dni = Interaction.InputBox("Introduce el DNI del profesor a añadir la asignatura");
-                int indiceProfesor = listaProfesores.FindIndex(dni);
-                if (indiceProfesor >= 0)
+                if (listaProfesores.Count() > 0)
                 {
-                    string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas separadas con ';'");
-                    List<string> listaAsignaturasTemp = asignaturas.Split(';').ToList();
-                    listaProfesores.GetProfesores()[indiceProfesor] = listaProfesores.AddSubjects(listaProfesores.GetProfesores()[indiceProfesor], listaAsignaturasTemp);
-                    MessageBox.Show("Asignaturas añadidas");
+                    string dni = Interaction.InputBox("Introduce el DNI del profesor a añadir la asignatura");
+                    int indiceProfesor = listaProfesores.FindIndex(dni);
+                    if (indiceProfesor >= 0)
+                    {
+                        string asignaturas = Interaction.InputBox($"{listaProfesores.ReadSubjects(listaProfesores.GetProfesores()[indiceProfesor])}", "Asignaturas separadas con ';'");
+                        List<string> listaAsignaturasTemp = asignaturas.Split(';').ToList();
+                        listaProfesores.GetProfesores()[indiceProfesor] = listaProfesores.AddSubjects(listaProfesores.GetProfesores()[indiceProfesor], listaAsignaturasTemp);
+                        MessageBox.Show("Asignaturas añadidas");
+                    }
+                    else { MessageBox.Show("El profesor no existe"); }
                 }
-                else { MessageBox.Show("El profesor no existe"); }
+                else { MessageBox.Show("No hay profesores"); }
             }
-            else { MessageBox.Show("No hay profesores"); }
+            catch (Exception en) { MessageBox.Show(en.Message); }
         }
 
         private void btnDeleteAsignaturas_Click(object sender, EventArgs e)
@@ -140,7 +144,7 @@ namespace Ejercicio06.Profesores
                 if (listaProfesores.Contains(dni))
                 {
                     int indice = listaProfesores.FindIndex(dni);
-                    string asignaturas = Interaction.InputBox($"{listaProfesores.ToString(dni)}", "Asignaturas a eliminar separadas con ';'");
+                    string asignaturas = Interaction.InputBox($"{listaProfesores.ReadSubjects(listaProfesores.GetProfesores()[indice])}", "Asignaturas a eliminar separadas con ';'");
                     List<string> listaAsignaturas = asignaturas.Split(';').ToList();
                     listaProfesores.GetProfesores()[indice] = listaProfesores.RemoveSubjects(listaProfesores.GetProfesores()[indice], listaAsignaturas);
                     MessageBox.Show("Asignaturas eliminadas");
