@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.7.34024.191
+VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jirafa", "Jirafa\Jirafa.csproj", "{D781FD78-FF0B-49A3-87B2-61CF98656D52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{CBB1B2E5-85D9-4AE8-A456-990471A3328A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D781FD78-FF0B-49A3-87B2-61CF98656D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D781FD78-FF0B-49A3-87B2-61CF98656D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D781FD78-FF0B-49A3-87B2-61CF98656D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D781FD78-FF0B-49A3-87B2-61CF98656D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB1B2E5-85D9-4AE8-A456-990471A3328A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB1B2E5-85D9-4AE8-A456-990471A3328A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB1B2E5-85D9-4AE8-A456-990471A3328A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB1B2E5-85D9-4AE8-A456-990471A3328A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8CFDC8D3-818D-418D-951B-48402ADD0F62}
+		SolutionGuid = {EF4FECF6-960F-4C93-B810-55D953716F81}
 	EndGlobalSection
 EndGlobal
