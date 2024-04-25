@@ -18,6 +18,16 @@ namespace Programa_de_Gestion_de_Camas
             AgruparLabels();
             ReiniciarLabels();
             AlghoritmoDeOrdenacion();
+            foreach (Plantas planta in ListaPlantas)
+            {
+                for(int i = 0; i < planta.List.Count; i++)
+                {
+                    if (planta.List[i].MediaAnual > 0)
+                    {
+                        AlghoritmoDeDistribucion(planta.List[i]);
+                    }
+                }
+            }
         }
 
         private void LeerXml()
@@ -216,45 +226,17 @@ namespace Programa_de_Gestion_de_Camas
                     }
                 }
             }
-            foreach (Servicio servicioExtra in ServiciosExtras)
-            {
-                AlghoritmoDeDistribucion(servicioExtra);
-            }
+        }
+
+        private Plantas AlghoritmoDeSeleccion()
+        {
+            Plantas planta = new Plantas("si");
+            return planta;
         }
 
         private void AlghoritmoDeDistribucion(Servicio servicio)
         {
-            bool cont = true;
-            int temp = int.MaxValue;
-            Plantas plantaTemp = new Plantas("temp");
-            for (int i = 0; i < ListaPlantas.Count; i++)
-            {
-                if (ListaPlantas[i].TotalCamas < temp)
-                {
-                    plantaTemp = ListaPlantas[i];
-                    temp = ListaPlantas[i].TotalCamas;
-                }
-            }
             
-            for (int i = 0; i < ListaPlantas.Count && cont; i++)
-            {
-                if (ListaPlantas[i].Nombre == plantaTemp.Nombre)
-                {
-                    int MaxCamasPorPlanta = ListaPlantas[i].MaxCamas;
-                    if (MaxCamasPorPlanta - servicio.MediaAnual < 0)
-                    {
-                        servicio.NumCamasActuales = MaxCamasPorPlanta;
-                        servicio.MediaAnual -= MaxCamasPorPlanta;
-                    }
-                    else
-                    {
-                        servicio.NumCamasActuales = servicio.MediaAnual;
-                    }
-                    ListaPlantas[i].Add(servicio);
-                    cont = false;
-                }
-            }
-            cont = true; 
         }
     }
 }
