@@ -51,11 +51,8 @@ namespace Ejercicio1
                 consulta = $"SELECT {tipoFiltro}, DNI FROM Profesores WHERE LEFT({tipoFiltro}, {tamFiltro}) = '{filtro}'";
             }
             textData = new DataSet();
-            outputData = new DataSet();
             SqlDataAdapter adapterNombre = new SqlDataAdapter(consulta, sql);
-            SqlDataAdapter adapterOutput = new SqlDataAdapter($"SELECT * FROM Profesores WHERE LEFT({tipoFiltro}, {tamFiltro}) = '{filtro}'", sql);
-            adapterNombre.Fill(textData, "Profesores");
-            adapterOutput.Fill(outputData, "Profesores");
+            adapterNombre.Fill(textData, "Profesores");    
             foreach(DataRow nombres in textData.Tables["Profesores"].Rows)
             {
                 salida += ($"{nombres[0]} - {nombres[1]}\n");

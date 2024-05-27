@@ -1,0 +1,10 @@
+/centroFormacion/nombre
+/centroFormacion/web/text()
+/centroFormacion/ciclos/ciclo/nombre/text()
+/centroFormacion/ciclos/ciclo/@id/data()
+/centroFormacion/ciclos/ciclo[grado="Medio"]
+/centroFormacion/ciclos/ciclo[grado="Superior"]/nombre
+/centroFormacion/ciclos/ciclo[decretoTitulo/@año<2010]/nombre/text()
+/centroFormacion/ciclos/ciclo[decretoTitulo/@año=2010 or decretoTitulo/@año=2009]/nombre/text()
+/centroFormacion/ciclos/ciclo[@familia="Informática y Comunicaciones"]/nombre/text()
+/centroFormacion/ciclos/ciclo/decretoTitulo/@año/data()

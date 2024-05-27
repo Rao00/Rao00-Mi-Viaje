@@ -1,0 +1,20 @@
+a. XPath. Obtener los elementos <empresa>
+//empresa
+
+b. XPath. Obtener los valores de los elementos <contacto>. 
+//contacto/text()
+
+c. XPath. Obtener los elementos <contacto> de los clientes de tipo “A”. 
+//cliente[@tipo = 'A']/contacto
+
+d. XPath. Obtener los valores de los elementos <empresa> de los clientes cuyas ventas sean superiores a 3000. 
+//cliente[./ventas/text() > 3000]/empresa/text()
+
+e. XPath. Obtener los elementos del contacto y el teléfono móvil de todos los clientes. 
+//cliente/contacto | //cliente/telefonos/movil
+
+f. XPath. Obtener los valores de los correos de los clientes de Arabia Saudí.
+//cliente[pais = 'Arabia Saudí']/email/text()
+
+g. XPath. Obtener el id cliente que tenga un teléfono de tipo particular
+//cliente/telefonos/particular/../../@id

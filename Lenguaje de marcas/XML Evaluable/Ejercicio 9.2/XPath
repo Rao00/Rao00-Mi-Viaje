@@ -1,0 +1,6 @@
+/bookstore/book/author
+/bookstore/book[@style/data() = ../@specialty/data()]
+/bookstore/book//last-name
+/bookstore/book[@id]
+//author/last-name/text() | //author/first-name/text()
+/bookstore/book/@style/data()

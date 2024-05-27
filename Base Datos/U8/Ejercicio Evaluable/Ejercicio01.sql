@@ -372,7 +372,7 @@ END
 GO
 
 SELECT codCliente, dbo.getCostePedidos(codCliente)
-  FROM CLIENTES;
+  FROM CLIENTES
 
 GO
 -------------------------------------------------------------------------------------------
@@ -395,8 +395,8 @@ GO
 
 SELECT codOficina, dbo.numEmpleadosOfic(codOficina) AS cantidadEmpleados
   FROM OFICINAS
- WHERE dbo.numEmpleadosOfic(codOficina) > 0
 
+GO
 -------------------------------------------------------------------------------------------
 -- 9. Implementa una función llamada clientePagos_SN que reciba como parámetro un codCliente y devuelva
 --		'S' si ha realizado pagos y 'N' si no ha realizado ningún pago.
@@ -404,8 +404,20 @@ SELECT codOficina, dbo.numEmpleadosOfic(codOficina) AS cantidadEmpleados
 --	Recuerda que debes incluir la SELECT y comprobar el funcionamiento
 -------------------------------------------------------------------------------------------
 
+CREATE OR ALTER FUNCTION clientePagos_SN(@codCliente INT)
+RETURNS CHAR(1)
+AS
+BEGIN
+RETURN ISNULL((SELECT pagosSN = CASE WHEN COUNT(codCliente) > 0 THEN 'S' WHEN COUNT(codCliente) < 0 THEN 'N' END FROM PAGOS WHERE codCliente = @codCliente), 'N')
+----RETURN ISNULL((SELECT TOP(1)'S' FROM PAGOS WHERE codCliente = @codCliente),'N')----
+END
 
+GO
 
+SELECT dbo.clientePagos_SN(codCliente)
+  FROM CLIENTES
+
+GO
 -------------------------------------------------------------------------------------------
 -- 10. Implementa una función llamada pedidosPendientesAnyo que reciba como parámetros 'estado' y 'anyo'
 --	    y devuelva una TABLA con los pedidos pendientes del año 2009 (estos datos deben ponerse directamente en la SELECT, NO son dinámicos)
@@ -413,3 +425,12 @@ SELECT codOficina, dbo.numEmpleadosOfic(codOficina) AS cantidadEmpleados
 --	Recuerda que debes incluir la SELECT y comprobar el funcionamiento
 -------------------------------------------------------------------------------------------
 
+CREATE OR ALTER FUNCTION pedidosPendientesAnyo(@estado CHAR(1), @anyo INT)
+RETURNS TABLE
+AS
+RETURN SELECT * FROM PEDIDOS WHERE YEAR(fecha_pedido) = @anyo AND codEstado = @estado
+
+GO
+
+
+SELECT * FROM pedidosPendientesAnyo('P', 2023)

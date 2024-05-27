@@ -1,0 +1,15 @@
+<!ELEMENT situaciones (situacion+)>
+<!ELEMENT situacion (id, nombre, tiempo-ejecucion, ejemplo, patrones)>
+<!ATTLIST situacion tipo CDATA #REQUIRED>
+<!ATTLIST situacion complejidad CDATA #REQUIRED>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT tiempo-ejecucion (#PCDATA)>
+<!ELEMENT ejemplo (#PCDATA)>
+<!ELEMENT patrones (patron+)>
+<!ELEMENT patron (id-patron, resultado, operacion)>
+<!ELEMENT id-patron (#PCDATA)>
+<!ELEMENT resultado (#PCDATA)>
+<!ELEMENT operacion (paso+)>
+<!ELEMENT paso (#PCDATA)>
+<!ATTLIST paso num CDATA #REQUIRED>

@@ -47,28 +47,6 @@ namespace QuickSort
             MessageBox.Show("Ordenado");
         }
 
-        private List<double> Swap(List<double> lista, int i, int j)
-        {
-            if (i >= 0 && i < lista.Count && j >= 0 && j < lista.Count)
-            {
-                double temp = lista[i];
-                lista[i] = lista[j];
-                lista[j] = temp;
-            }
-            return lista;
-        }
-
-        new private List<double> Move(List<double> lista, int i, int j)
-        {
-            if (i >= 0 && i < lista.Count && j >= 0 && j < lista.Count)
-            {
-                double temp = lista[i];
-                lista.RemoveAt(i);
-                lista.Insert(j, temp);
-            }
-            return lista;
-        }
-
         private List<double> Sort(List<double> listaPrincipal)
         {
             if (listaPrincipal.Count() <= 1)

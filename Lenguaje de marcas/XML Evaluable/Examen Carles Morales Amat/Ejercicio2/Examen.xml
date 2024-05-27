@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<clientes>
+    <cliente id="1" tipo="C">
+        <empresa>BLICK INDUSTRIES</empresa>
+        <contacto>Mike Saraylian</contacto>
+        <telefonos>
+            <trabajo>9494995026</trabajo>
+            <particular>9491230055</particular>
+            <movil>8054515068</movil>
+        </telefonos>
+        <email>mike@blickindustries.com</email>
+        <web>www.blickindustries.com</web>
+        <pais>USA</pais>
+        <ventas>3578</ventas>
+    </cliente>
+    <cliente id="2" tipo="A">
+        <empresa>AFSANE SANGI</empresa>
+        <contacto>Hamid Kazerani</contacto>
+        <telefonos>
+            <trabajo>982188260019</trabajo>
+            <movil>989126767886</movil>
+        </telefonos>
+        <email>h_kazerani@afsanesangi.com </email>
+        <web>www.afsanesangi.com</web>
+        <pais>Arabia Saudí</pais>
+        <ventas>38725</ventas>
+    </cliente>
+    <cliente id="3">
+        <empresa>CURVE ANGLE</empresa>
+        <contacto>John Carry</contacto>
+        <telefonos>
+            <trabajo>44337876098</trabajo>
+            <movil>237786665556</movil>
+        </telefonos>
+        <email>carry@curve.com </email>
+        <web>www.curve.com</web>
+        <pais>USA</pais>
+        <ventas>2345</ventas>
+    </cliente>
+</clientes> 

@@ -73,6 +73,16 @@ namespace Ejercicio1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Error_logo {
+            get {
+                object obj = ResourceManager.GetObject("Error-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Primero {
             get {
                 object obj = ResourceManager.GetObject("Primero", resourceCulture);
@@ -96,6 +106,16 @@ namespace Ejercicio1.Properties {
         internal static System.Drawing.Bitmap Ultimo {
             get {
                 object obj = ResourceManager.GetObject("Ultimo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Usuario_Vacio {
+            get {
+                object obj = ResourceManager.GetObject("Usuario-Vacio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

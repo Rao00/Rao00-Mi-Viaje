@@ -16,7 +16,7 @@ namespace Pacman
     {
         List<Tuple<int, int>> datosEntrenamiento = new List<Tuple<int, int>>();
 
-        int valor = 20;
+        int valor = 13;
 
         double neurona1 = 1;
 
@@ -27,18 +27,20 @@ namespace Pacman
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < datosEntrenamiento.Count; i++)
+            while(neurona1 != valor)
             {
-                if (datosEntrenamiento[i].Item1 * neurona1 > datosEntrenamiento[i].Item2)
+                for (int i = 0; i < datosEntrenamiento.Count; i++)
                 {
-                    neurona1 -= (datosEntrenamiento[i].Item2 - datosEntrenamiento[i].Item1) / 100;
-                    continue;
+                    if (datosEntrenamiento[i].Item1 * neurona1 > datosEntrenamiento[i].Item2)
+                    {
+                        neurona1 -= (datosEntrenamiento[i].Item2 - datosEntrenamiento[i].Item1) / (Math.Pow(10, datosEntrenamiento[i].Item2.ToString().Length) / 10);
+                    }
+                    if (datosEntrenamiento[i].Item1 * neurona1 < datosEntrenamiento[i].Item2)
+                    {
+                        neurona1 += (datosEntrenamiento[i].Item2 - datosEntrenamiento[i].Item1) / (Math.Pow(10, datosEntrenamiento[i].Item2.ToString().Length) / 10);
+                    }
                 }
-                if (datosEntrenamiento[i].Item1 * neurona1 < datosEntrenamiento[i].Item2)
-                {
-                    neurona1 += (datosEntrenamiento[i].Item2 - datosEntrenamiento[i].Item1) / 100;
-                    continue;
-                }
+                neurona1 = (int)neurona1;
             }
             MessageBox.Show("Entrenado");
         }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE oferta SYSTEM "Examen Validation.dtd">
+<oferta>
+    <vehiculo matricula="AA1234">
+        <marca>Ford</marca>
+        <modelo color="gris">Focus</modelo>
+        <motor combustible="gasolina">Duratorc 1.4</motor>
+        <kilometros>12500</kilometros>
+        <precio>12000</precio>
+        <extra valor="250">Pintura metalizada</extra>
+        <extra>Llantas de aleación</extra>
+        <foto>11325.jpg</foto>
+        <foto>11326.jpg</foto>
+    </vehiculo>
+    <vehiculo matricula=" AA5432">
+        <marca>Ford</marca>
+        <modelo color="azul">Focus</modelo>
+        <motor combustible="diesel">DTI 1.4</motor>
+        <kilometros>12500</kilometros>
+        <precio>12000</precio>
+        <extra>Kit de comunicaciones multimedia</extra>
+        <foto>12786.jpg</foto>
+    </vehiculo>
+</oferta>

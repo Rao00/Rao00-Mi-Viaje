@@ -9,84 +9,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ejercicio1
 {
     public partial class Filtro : Form
     {
-        DataSet textData;
-        DataSet outputData;
-        SqlConnection sql;
+        // Instancia de SqlDBHelper para interactuar con la base de datos
+        SqlDBHelper dbHelper;
+        // Listas para almacenar los RadioButton de los filtros y tipos de tabla
         List<RadioButton> radioButtons = new List<RadioButton>();
+        List<RadioButton> radioType = new List<RadioButton>();
+        // Variables para almacenar el tipo de filtro y la tabla seleccionados
+        string tipoFiltro;
+        string tabla;
 
-        public Filtro(SqlConnection _sql)
+        // Constructor de la clase Filtro
+        public Filtro(SqlDBHelper _dbHelper)
         {
             InitializeComponent();
-            textData = new DataSet();
-            this.sql = _sql;
+            // Asigna la instancia de SqlDBHelper recibida al atributo correspondiente
+            this.dbHelper = _dbHelper;
         }
 
-        public DataSet DataText
-        {
-            get { return outputData; }
-        }
-
-        private string FiltrarBusqueda(string tipoFiltro)
-        {
-            sql.Open();
-            string consulta;
-            string filtro = txtFiltro.Text.ToLower();
-            int tamFiltro = filtro.Length;
-            string salida = string.Empty;
-            if (tamFiltro <= 0)
-            {
-                consulta = $"SELECT {tipoFiltro}, DNI FROM Profesores";
-            }
-            else if (tipoFiltro == "DNI")
-            {
-                consulta = $"SELECT DNI, Nombre FROM Profesores WHERE LEFT(DNI, {tamFiltro}) = '{filtro}'";
-            }
-            else
-            {
-                consulta = $"SELECT {tipoFiltro}, DNI FROM Profesores WHERE LEFT({tipoFiltro}, {tamFiltro}) = '{filtro}'";
-            }
-            textData = new DataSet();
-            outputData = new DataSet();
-            SqlDataAdapter adapterNombre = new SqlDataAdapter(consulta, sql);
-            SqlDataAdapter adapterOutput = new SqlDataAdapter($"SELECT * FROM Profesores WHERE LEFT({tipoFiltro}, {tamFiltro}) = '{filtro}'", sql);
-            adapterNombre.Fill(textData, "Profesores");
-            adapterOutput.Fill(outputData, "Profesores");
-            foreach(DataRow nombres in textData.Tables["Profesores"].Rows)
-            {
-                salida += ($"{nombres[0]} - {nombres[1]}\n");
-            }
-            sql.Close();
-            return salida;
-        }
-
+        // Evento Load del formulario
         private void Filtro_Load(object sender, EventArgs e)
         {
+            // Agrega los RadioButton de los filtros a la lista correspondiente
             radioButtons.Add(rbDNI);
             radioButtons.Add(rbNombre);
             radioButtons.Add(rbApellido);
             radioButtons.Add(rbCorreo);
             radioButtons.Add(rbTelefono);
+
+            // Agrega los RadioButton de los tipos de tabla a la lista correspondiente
+            radioType.Add(rbAdmin);
+            radioType.Add(rbProfesores);
+            radioType.Add(rbAlumnos);
+            radioType.Add(rbTodos);
         }
 
+        // Evento CheckedChanged del RadioButton DNI
         private void rbDNI_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (RadioButton radioButton in radioButtons) 
-            { 
+            // Establece el tipo de filtro como DNI y actualiza el TextBox de resultados
+            rbDNI.Checked = true;
+            foreach (RadioButton radioButton in radioButtons)
+            {
                 if (radioButton.Name != "rbDNI")
                 {
                     radioButton.Checked = false;
-                }     
+                }
             }
-            txtResultados.Text = FiltrarBusqueda("DNI");
+            tipoFiltro = "DNI";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
+        // Evento CheckedChanged del RadioButton Nombre
         private void rbNombre_CheckedChanged(object sender, EventArgs e)
         {
+            // Establece el tipo de filtro como nombre y actualiza el TextBox de resultados
+            rbNombre.Checked = true;
             foreach (RadioButton radioButton in radioButtons)
             {
                 if (radioButton.Name != "rbNombre")
@@ -94,11 +78,15 @@ namespace Ejercicio1
                     radioButton.Checked = false;
                 }
             }
-            txtResultados.Text = FiltrarBusqueda("Nombre");
+            tipoFiltro = "nombre";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
+        // Evento CheckedChanged del RadioButton Apellido
         private void rbApellido_CheckedChanged(object sender, EventArgs e)
         {
+            // Establece el tipo de filtro como apellido y actualiza el TextBox de resultados
+            rbApellido.Checked = true;
             foreach (RadioButton radioButton in radioButtons)
             {
                 if (radioButton.Name != "rbApellido")
@@ -106,11 +94,15 @@ namespace Ejercicio1
                     radioButton.Checked = false;
                 }
             }
-            txtResultados.Text = FiltrarBusqueda("Apellido");
+            tipoFiltro = "apellido";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
+        // Evento CheckedChanged del RadioButton Teléfono
         private void rbTelefono_CheckedChanged(object sender, EventArgs e)
         {
+            // Establece el tipo de filtro como teléfono y actualiza el TextBox de resultados
+            rbTelefono.Checked = true;
             foreach (RadioButton radioButton in radioButtons)
             {
                 if (radioButton.Name != "rbTelefono")
@@ -118,11 +110,15 @@ namespace Ejercicio1
                     radioButton.Checked = false;
                 }
             }
-            txtResultados.Text = FiltrarBusqueda("Tlf");
+            tipoFiltro = "telefono";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
+        // Evento CheckedChanged del RadioButton Correo
         private void rbCorreo_CheckedChanged(object sender, EventArgs e)
         {
+            // Establece el tipo de filtro como correo y actualiza el TextBox de resultados
+            rbCorreo.Checked = true;
             foreach (RadioButton radioButton in radioButtons)
             {
                 if (radioButton.Name != "rbCorreo")
@@ -130,54 +126,93 @@ namespace Ejercicio1
                     radioButton.Checked = false;
                 }
             }
-            txtResultados.Text = FiltrarBusqueda("EMail");
+            tipoFiltro = "email";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
-        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        // Evento CheckedChanged del RadioButton Profesores
+        private void rbtnProfesores_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton tempRadioButton = new RadioButton();
-            string tipoFiltro = "";
-            foreach(RadioButton radioButton in radioButtons)
+            // Establece la tabla como Profesores y actualiza el TextBox de resultados
+            rbProfesores.Checked = true;
+            foreach (RadioButton radioButton in radioType)
             {
-                if (radioButton.Checked)
+                if (radioButton.Name != "rbProfesores")
                 {
-                    tempRadioButton = radioButton;
+                    radioButton.Checked = false;
                 }
             }
-            switch (tempRadioButton.Name)
-            {
-                case "rbDNI":
-                    tipoFiltro = "DNI";
-                    break;
-                case "rbNombre":
-                    tipoFiltro = "Nombre";
-                    break;
-                case "rbApellido":
-                    tipoFiltro = "Apellido";
-                    break;
-                case "rbTelefono":
-                    tipoFiltro = "Tlf";
-                    break;
-                case "rbCorreo":
-                    tipoFiltro = "EMail";
-                    break;
-            }
-            txtResultados.Text = FiltrarBusqueda(tipoFiltro);
+            tabla = "Profesores";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
         }
 
+        // Evento CheckedChanged del RadioButton Administradores
+        private void rbtnAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            // Establece la tabla como Administradores y actualiza el TextBox de resultados
+            rbAdmin.Checked = true;
+            foreach (RadioButton radioButton in radioType)
+            {
+                if (radioButton.Name != "rbAdmin")
+                {
+                    radioButton.Checked = false;
+                }
+            }
+            tabla = "Administradores";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
+        }
+
+        // Evento CheckedChanged del RadioButton Alumnos
+        private void rbtnAlumnos_CheckedChanged(object sender, EventArgs e)
+        {
+            // Establece la tabla como Alumnos y actualiza el TextBox de resultados
+            rbAlumnos.Checked = true;
+            foreach (RadioButton radioButton in radioType)
+            {
+                if (radioButton.Name != "rbAlumnos")
+                {
+                    radioButton.Checked = false;
+                }
+            }
+            tabla = "Alumnos";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
+        }
+
+        // Evento CheckedChanged del RadioButton Todos
+        private void rbTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            // Establece la tabla como Personas y actualiza el TextBox de resultados
+            rbTodos.Checked = true;
+            foreach (RadioButton radioButton in radioType)
+            {
+                if (radioButton.Name != "rbTodos")
+                {
+                    radioButton.Checked = false;
+                }
+            }
+            tabla = "Personas";
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
+        }
+
+        // Evento TextChanged del TextBox de filtro
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            // Actualiza el TextBox de resultados con el filtro aplicado
+            txtResultados.Text = dbHelper.Filter(txtFiltro.Text, tipoFiltro, tabla);
+        }
+
+        // Evento Click del botón No Filtrar
         private void btnNoFiltrar_Click(object sender, EventArgs e)
         {
-            sql.Open();
-            string consulta = "SELECT * FROM Profesores";
-            textData = new DataSet();
-            SqlDataAdapter tempAdapter = new SqlDataAdapter(consulta, sql);
-            tempAdapter.Fill(textData, "Profesores");
-            sql.Close();
+            // Restablece la tabla como Personas y cierra el formulario
+            dbHelper.ReadTable("Personas");
             this.Close();
         }
 
+        // Evento Click del botón Filtrar
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            // Cierra el formulario
             this.Close();
         }
     }

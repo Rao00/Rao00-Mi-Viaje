@@ -121,6 +121,9 @@
   <data name="Siguiente" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sprites\Siguiente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Usuario-Vacio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Sprites\Usuario-Vacio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Primero" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sprites\Primero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,5 +132,8 @@
   </data>
   <data name="Anterior" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sprites\Anterior.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Error-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Sprites\Error-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
