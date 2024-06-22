@@ -56,7 +56,7 @@
             this.gbRegistro = new System.Windows.Forms.GroupBox();
             this.btnGuardarNuevo = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnFiltrarProfesores = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnMoreInfo = new System.Windows.Forms.Button();
             this.lblNumRegistro = new System.Windows.Forms.Label();
             this.btnError = new System.Windows.Forms.Button();
@@ -307,7 +307,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.gbRegistro, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnFiltrarProfesores, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnFiltrar, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.btnMoreInfo, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(71, 187);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -394,15 +394,15 @@
             // 
             // btnFiltrarProfesores
             // 
-            this.tableLayoutPanel2.SetColumnSpan(this.btnFiltrarProfesores, 2);
-            this.btnFiltrarProfesores.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltrarProfesores.Location = new System.Drawing.Point(3, 132);
-            this.btnFiltrarProfesores.Name = "btnFiltrarProfesores";
-            this.btnFiltrarProfesores.Size = new System.Drawing.Size(648, 37);
-            this.btnFiltrarProfesores.TabIndex = 5;
-            this.btnFiltrarProfesores.Text = "Filtrar";
-            this.btnFiltrarProfesores.UseVisualStyleBackColor = true;
-            this.btnFiltrarProfesores.Click += new System.EventHandler(this.btnFiltrarProfesores_Click);
+            this.tableLayoutPanel2.SetColumnSpan(this.btnFiltrar, 2);
+            this.btnFiltrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFiltrar.Location = new System.Drawing.Point(3, 132);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(648, 37);
+            this.btnFiltrar.TabIndex = 5;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrarProfesores_Click);
             // 
             // btnMoreInfo
             // 
@@ -507,7 +507,7 @@
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnGuardarNuevo;
         private System.Windows.Forms.Label lblNumRegistro;
-        private System.Windows.Forms.Button btnFiltrarProfesores;
+        private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Button btnMoreInfo;
         private System.Windows.Forms.Button btnError;
     }

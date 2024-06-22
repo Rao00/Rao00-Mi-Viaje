@@ -52,9 +52,15 @@ namespace Ejercicio1
             {
                 case "Profesor":
                     dbHelper.QueryTable("Personas", $"SELECT * FROM Personas WHERE DNI = ANY(SELECT DNI FROM Alumnos WHERE codCurso = ANY(SELECT cursoAsignado FROM Profesores WHERE DNI = '{DNI}'))");
+                    btnActualizar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnFiltrar.Enabled = false;
                     break;
                 case "Alumno":
                     dbHelper.QueryTable("Personas", $"SELECT * FROM Personas WHERE DNI = ANY(SELECT DNI FROM Profesores WHERE cursoAsignado = ANY(SELECT codCurso FROM Alumnos WHERE DNI = '{DNI}'))");
+                    btnActualizar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnFiltrar.Enabled = false;
                     break;
                 default:
                     dbHelper.Filter("", "DNI", "Personas");
@@ -64,7 +70,6 @@ namespace Ejercicio1
             // Mostrar mensaje si hay registros
             if (dbHelper.LastPos() > 0)
             {
-                MessageBox.Show(tipo);
                 CambiarDatos(dbHelper.ReadRow(0));
             }
             else
@@ -114,13 +119,16 @@ namespace Ejercicio1
         // Método para habilitar o deshabilitar el botón de limpiar
         private bool HabilitarLimpiar()
         {
-            if ((txtDni.Text.Length, txtNombre.Text.Length, txtApellidos.Text.Length, txtTelefono.Text.Length, txtEmail.Text.Length) == (0, 0, 0, 0, 0) && tipo == "Administrador")
+            if ((txtDni.Text.Length, txtNombre.Text.Length, txtApellidos.Text.Length, txtTelefono.Text.Length, txtEmail.Text.Length) == (0, 0, 0, 0, 0))
             {
                 return false;
             }
             else
             {
-                return true;
+                if (tipo == "Administrador")
+                    return true;
+                else
+                    return false;
             }
         }
 
@@ -261,7 +269,7 @@ namespace Ejercicio1
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
             btnLimpiar.Enabled = HabilitarLimpiar();
-            if (!Regex.IsMatch(txtNombre.Text, @"^[A-Z][a-z]+$") && txtNombre.Text.Length != 0)
+            if (!Regex.IsMatch(txtNombre.Text, @"^[A-Za-z\s]+$") && txtNombre.Text.Length != 0)
             {
                 registroNombre = false;
                 txtNombre.BackColor = colorError;
@@ -293,7 +301,7 @@ namespace Ejercicio1
         private void txtApellidos_TextChanged(object sender, EventArgs e)
         {
             btnLimpiar.Enabled = HabilitarLimpiar();
-            if (!Regex.IsMatch(txtApellidos.Text, @"^[A-Z][a-z]+$") && txtApellidos.Text.Length != 0)
+            if (!Regex.IsMatch(txtApellidos.Text, @"^[A-Za-z\s]+$") && txtApellidos.Text.Length != 0)
             {
                 registroApellidos = false;
                 txtApellidos.BackColor = colorError;
@@ -439,6 +447,7 @@ namespace Ejercicio1
             {
                 if (MessageBox.Show("¿Esta seguro de que desea eliminar el registro actual?", "Eliminar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    dbHelper.DeletePersona(txtDni.Text);
                     ComprobarBotones();
                     if (dbHelper.LastPos() - 1 > 0)
                     {

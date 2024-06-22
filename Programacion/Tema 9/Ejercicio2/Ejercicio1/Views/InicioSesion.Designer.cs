@@ -113,6 +113,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "InicioSesion";
             this.Text = "Sesion";
+            this.Activated += new System.EventHandler(this.InicioSesion_Activated);
             this.Load += new System.EventHandler(this.InicioSesion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,0 +1,43 @@
+<?xml version ="1.0" encoding ="UTF-8"?>
+<?xml-stylesheet href="style.xsl" type="text/xsl"?>
+<receta>
+ <titulo>Churros</titulo>
+ <tiempo_elaboracion t_medida = "minuts">30</tiempo_elaboracion>
+ <cocina>España</cocina>
+ <especialitat>Resposteria</especialitat>
+ <comensals></comensals>
+ <ingredients comensals ="10">
+ <ingredient categoria ="principal">
+ <nom>Parina de blat</nom>
+ <cantidad>300</cantidad>
+ <mesura>grams</mesura>
+ </ingredient>
+ <ingredient categoria ="principal">
+ <nom>Agua</nom>
+ <cantidad>440</cantidad>
+ <mesura>mililitres</mesura>
+ </ingredient>
+ <ingredient categoria ="secundari">
+ <nom>Sal</nom>
+ <cantidad>3</cantidad>
+ <mesura>punta de cullera</mesura>
+ </ingredient>
+ <ingredient categoria ="principal">
+ <nom>Aceite vegetal suau</nom>
+ <cantidad>en abundància</cantidad>
+ <mesura></mesura>
+ </ingredient>
+ </ingredients>
+ <procediment>
+ <pas>Posar a bullir l' aigua.</pas>
+ <pas>Mesclar la farina amb la sal.</pas>
+ <pas>Llegir l'aigua glacint sobre la farina (tota d'una vegada).</pas>
+ <pas>Mover molt, molt, molt, molt... </pas>
+ <pas>Posar la massa a la xurrera i fer anar a l'oli calent.</pas>
+ <pas>Sacar de la fregidora quan estiguin daurats.</pas>
+ <pas>
+ Servir i menjar calents. Opcionalment, espolsar ensucrar per
+ a sobre abans de dinar.
+ </pas>
+ </pr ocediment>
+</recepta>

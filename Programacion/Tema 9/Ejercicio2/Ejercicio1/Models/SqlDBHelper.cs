@@ -251,5 +251,16 @@ namespace Ejercicio1
             procedure.ExecuteNonQuery();
             sql.Close();
         }
+
+        public void DeletePersona(string dni)
+        {
+            SqlCommand procedure = new SqlCommand("DeletePersona", sql);
+            procedure.CommandType = CommandType.StoredProcedure;
+            procedure.Parameters.AddWithValue("@DNI", dni);
+            sql.Open();
+            procedure.ExecuteNonQuery();
+            sql.Close();
+            ReadTable();
+        }
     }
 }

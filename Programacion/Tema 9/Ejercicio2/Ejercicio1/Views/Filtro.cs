@@ -23,7 +23,7 @@ namespace Ejercicio1
         List<RadioButton> radioType = new List<RadioButton>();
         // Variables para almacenar el tipo de filtro y la tabla seleccionados
         string tipoFiltro;
-        string tabla;
+        string tabla = "Personas";
 
         // Constructor de la clase Filtro
         public Filtro(SqlDBHelper _dbHelper)
