@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Drawing.Design;
-using System.Drawing.Drawing2D;
+using OpenTK.Graphics.OpenGL;
 
 namespace Hanoi
 {
@@ -19,19 +14,21 @@ namespace Hanoi
         {
             int torreOrigen = 0;
             int torreDestino = 0;
+            Color fondo = Color.Green;
             Program programa = new Program();
-            while(true)
+            Ventana ventana = new Ventana(1280, 720, "Prueba", fondo);
+            while (true)
             {
-                programa.Draw();
-                programa.Mover(torreOrigen, torreDestino);
+                
+                /*programa.Mover(torreOrigen, torreDestino);
                 programa.Dibujar();
-                Console.WriteLine("Selecciona torre origen");
-                torreOrigen = int.TryParse(Console.ReadLine(), out int origen) ? origen-1 : -1;
-                if(torreOrigen < 0 || torreOrigen > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue;}
-                Console.WriteLine("Selecciona torre destino");
-                torreDestino = int.TryParse(Console.ReadLine(), out int destino) ? destino-1: -1;
-                if (torreDestino < 0 || torreDestino > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; }
                 if (programa.ComprobarVictoria()) { Console.WriteLine("Has ganado"); Console.ReadLine(); break; }
+                Console.WriteLine("Selecciona torre origen");
+                torreOrigen = int.TryParse(Console.ReadLine(), out int origen) ? origen - 1 : -1;
+                if (torreOrigen < 0 || torreOrigen > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; }
+                Console.WriteLine("Selecciona torre destino");
+                torreDestino = int.TryParse(Console.ReadLine(), out int destino) ? destino - 1 : -1;
+                if (torreDestino < 0 || torreDestino > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; } */
             }
         }
 
