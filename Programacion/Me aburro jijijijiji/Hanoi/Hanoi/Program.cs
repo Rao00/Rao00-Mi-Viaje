@@ -12,8 +12,8 @@ namespace Hanoi
         Disco[] torres = new Disco[tamTorres * cantidadTorres];
         static void Main(string[] args)
         {
-            int torreOrigen = 0;
-            int torreDestino = 0;
+            //int torreOrigen = 0;
+            //int torreDestino = 0;
             Color fondo = Color.Green;
             Program programa = new Program();
             Ventana ventana = new Ventana(1280, 720, "Prueba", fondo);

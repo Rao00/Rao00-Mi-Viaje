@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Graphics;
 using OpenTK.Input;
+using System.Dynamic;
 
 namespace Hanoi
 {
@@ -20,7 +21,7 @@ namespace Hanoi
 
         Color background;
         List<Tuple<float, float>> listaElementos = new List<Tuple<float, float>>();
-        List<Tuple<float, float>> listaLineas = new List<Tuple<float, float>>();
+        List<Tuple<float, float>> listaPuntos = new List<Tuple<float, float>>();
         List<Tuple<float, float>> listaTemporalElementos = new List<Tuple<float, float>>();
 
         public Ventana(int _ancho, int _alto, string titulo, Color? _background) : base(_ancho, _alto, GraphicsMode.Default, titulo)
@@ -57,6 +58,8 @@ namespace Hanoi
             GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0f, 0f, 0f);
             DibujarListaTemporal();
+            GL.Color3(0f, 1.0f, 1.0f);
+            DibujarListaPuntos();
             GL.End();
 
             GL.Begin(PrimitiveType.Triangles);
@@ -67,39 +70,78 @@ namespace Hanoi
             this.SwapBuffers();
         }
 
-        public bool Colision(float x1, float y1, float x2, float y2, out Tuple<float, float> primerContacto)
+        public Tuple<float, float> Rayo(float x, float y, float tiempo = 0, float direccion = 0, Tuple<float, float> vectorFinal = null)
         {
-            for (int i = 0; i < listaElementos.Count-1; i++)
+            float direccionX = vectorFinal.Item1;
+            float direccionY = vectorFinal.Item2;
+            
+            if (vectorFinal == null)
             {
-                float x3 = listaElementos[i].Item1;
-                float y3 = listaElementos[i].Item2;
-                float x4 = listaElementos[i + 1].Item1;
-                float y4 = listaElementos[i + 1].Item2;
-                
-                float denominador = (x4 - x3) * (y2 - y1) - (x2 - x1) * (y4 - y3);
-                if (denominador == 0) { continue; }
-                
-                float t = ((y1 - y3) * (x4 - x3) + (x3 - x1) * (y4 - y3)) / denominador;
-                float s = ((y1 - y3) * (x2 - x1) + (x3 - x1) * (y2 - y1)) / denominador;
-                if (t < 0 || t > 1) { continue; }
-                if (s < 0 || s > 1) { continue; }
+                //Conversion de grados a Vector Direccion
+                float radianes = direccion * (float)(Math.PI / 180);
+                direccionX = (float)Math.Cos(radianes);
+                direccionY = (float)Math.Sin(radianes);
 
-                float resultadoX = x1 + t * (x2 - x1);
-                float resultadoY = y1 + t * (y2 - y1);
-
-                primerContacto = new Tuple<float, float> ( resultadoX, resultadoY );
-
-                return true;
             }
 
-            primerContacto = null;
-            return false;
-        }
-        private bool Colision(float x1, float y1, float x2, float y2)
-        {
-            return Colision(x1, y1, x2, y2, out _);
+            x += tiempo * direccionX;
+            y += tiempo * direccionY;
+
+            return Tuple.Create(x, y);
         }
 
+        public bool Colision(float x1, float y1, out List<Tuple<float, float>> listaTriangulosPorRevisar)
+        {
+            listaTriangulosPorRevisar = new List<Tuple<float,float>>();
+            var boundingBox = new Tuple<float, float>[3];
+            //Registrar las hitboxes de todos los elementos
+            for (int i = 0; i < listaElementos.Count; i += 3)
+            {
+                boundingBox[0] = listaElementos[i];
+                boundingBox[1] = listaElementos[i + 1];
+                boundingBox[2] = listaElementos[i + 2];
+
+                float[] boundingAltura = new float[2];
+                //Conseguir la altura maxima y minima del elemento
+                boundingAltura[0] = listaElementos.GetRange(i, 3).Max(y => y.Item2);
+                boundingAltura[1] = listaElementos.GetRange(i, 3).Min(y => y.Item2);
+
+                float[] boundingAnchura = new float[2];
+                //Conseguir la anchura maxima y minima del elemento
+                boundingAnchura[0] = listaElementos.GetRange(i, 3).Max(x => x.Item1);
+                boundingAnchura[1] = listaElementos.GetRange(i, 3).Min(x => x.Item1);
+
+                //Recoger solo los triangulos posiblemente con colison
+                if ((boundingAltura[0] > y1 && boundingAltura[1] < y1) || (boundingAnchura[0] > x1 && boundingAnchura[1] < x1))
+                {
+                    listaTriangulosPorRevisar.AddRange(boundingBox);
+                }
+
+                //Comprobar si el punto se puede colocar
+                if ((boundingAltura[0] > y1 && boundingAltura[1] < y1) && (boundingAnchura[0] > x1 && boundingAnchura[1] < x1))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool Colision(float x1, float y1)
+        {
+            return Colision(x1, y1, out _);
+        }
+        private bool Colision(Tuple<float, float> vector)
+        {
+            return Colision(vector.Item1, vector.Item2, out _);
+        }
+
+        private void DibujarListaPuntos()
+        {
+            foreach (var item in listaPuntos)
+            {
+                GL.Vertex2(item.Item1, item.Item2);
+            }
+        }
         private void DibujarListaTemporal()
         {
             foreach(var item in listaTemporalElementos)
@@ -129,6 +171,12 @@ namespace Hanoi
                 offset *= -1;
                 tempTamCursor *= -1;
             }
+            List<Tuple<float, float>> seleccion;
+            Colision(cursorX, cursorY, out seleccion);
+            foreach (var item in seleccion)
+            {
+                GL.Vertex2(item.Item1, item.Item2);
+            }
         }
         public void DibujarTriangulosAleatorios()
         {
@@ -137,7 +185,7 @@ namespace Hanoi
             for (int i = 0; i < 10; i++)
             {
                 float orientacion = rnd.Next(0, 2);
-                float tama = rnd.Next(5, 200);
+                float tama = rnd.Next(20, 100);
                 float y = rnd.Next(0, alto);
                 float x = rnd.Next(0, ancho);
                 if (orientacion == 0)
@@ -160,28 +208,11 @@ namespace Hanoi
         public void MouseClick(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = e.Button == MouseButton.Left ? true : false;
-            switch (listaTemporalElementos.Count)
+            Tuple<float, float> vertice;
+            if (!Colision(cursorX, cursorY))
             {
-                case 0:
-                    Tuple<float, float> vertice = new Tuple<float, float>(cursorX, cursorY);
-                    listaTemporalElementos.Add(vertice);
-                    break;
-                case 1:
-                    if (!Colision(cursorX, cursorY, listaTemporalElementos[0].Item1, listaTemporalElementos[0].Item2))
-                    {
-                        vertice = new Tuple<float, float>(cursorX, cursorY);
-                        listaTemporalElementos.Add(vertice);
-                    }
-                    else { listaTemporalElementos.Clear(); }
-                    break;
-                case 2:
-                    if (!Colision(cursorX, cursorY, listaTemporalElementos[1].Item1, listaTemporalElementos[1].Item2))
-                    {
-                        vertice = new Tuple<float, float>(cursorX, cursorY);
-                        listaTemporalElementos.Add(vertice);
-                    }
-                    else { listaTemporalElementos.Clear(); }
-                    break;
+                vertice = new Tuple<float, float>(cursorX, cursorY);
+                listaTemporalElementos.Add(vertice);
             }
         }
         public void MouseRelease(object obj, MouseButtonEventArgs e)
