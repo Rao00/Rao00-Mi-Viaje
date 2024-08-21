@@ -21,9 +21,14 @@ namespace Hanoi
 
         Color background;
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<Tuple<float, float>> listaElementos = new List<Tuple<float, float>>();
         List<Tuple<float, float>> listaPuntos = new List<Tuple<float, float>>();
         List<Tuple<float, float>> listaTemporalElementos = new List<Tuple<float, float>>();
+=======
+        List<Vertex> listaElementos = new List<Vertex>();
+        List<Vertex> listaTemporalElementos = new List<Vertex>();
+>>>>>>> parent of e795821 (a)
 =======
         List<Vertex> listaElementos = new List<Vertex>();
         List<Vertex> listaTemporalElementos = new List<Vertex>();
@@ -43,8 +48,11 @@ namespace Hanoi
             this.CursorVisible = false;
             DibujarTriangulosAleatorios();
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.Run(1 / 60.0);
 =======
+=======
+>>>>>>> parent of e795821 (a)
             this.Run(1 / 144.0);
 >>>>>>> parent of e795821 (a)
         }
@@ -75,7 +83,11 @@ namespace Hanoi
             GL.Color3(1.0f, 1.0f, 0.5f);
             DibujarCursor(cursorX, cursorY);
 <<<<<<< HEAD
+<<<<<<< HEAD
             GL.End();
+=======
+            DibujarPuntosTemporales();
+>>>>>>> parent of e795821 (a)
 =======
             DibujarPuntosTemporales();
 >>>>>>> parent of e795821 (a)
@@ -84,7 +96,11 @@ namespace Hanoi
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Tuple<float, float> Rayo(float x, float y, float tiempo = 0, float direccion = 0, Tuple<float, float> vectorFinal = null)
+=======
+        public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
+>>>>>>> parent of e795821 (a)
 =======
         public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
 >>>>>>> parent of e795821 (a)
@@ -266,6 +282,9 @@ namespace Hanoi
         {
             DibujarElementos(PrimitiveType.Triangles, listaElementos);
         }
+<<<<<<< HEAD
+>>>>>>> parent of e795821 (a)
+=======
 >>>>>>> parent of e795821 (a)
         public void DibujarCursor(float x, float y)
         {
@@ -333,13 +352,50 @@ namespace Hanoi
             }
             GL.End();
         }
+        public void DibujarTriangulosAleatorios()
+        {
+            Random rnd = new Random();
+            GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            for (int i = 0; i < 15; i++)
+            {
+                float orientacion = rnd.Next(0, 2);
+                float tama = rnd.Next(20, 100);
+                float y = rnd.Next(0, alto);
+                float x = rnd.Next(0, ancho);
+                if (orientacion == 0)
+                {
+                    tama *= -1;
+                }
+                Vertex vertice1 = new Vertex((x + tama), (y + tama));
+                Vertex vertice2 = new Vertex(x, y + tama);
+                Vertex vertice3 = new Vertex(x + tama, y);
+                listaElementos.Add(vertice1);
+                listaElementos.Add(vertice2);
+                listaElementos.Add(vertice3);
+            }
+        } 
+        public void DibujarPuntosTemporales()
+        {
+            GL.PointSize(2.5f);
+            GL.Begin(PrimitiveType.Points);
+            GL.Color3(1.0f, 0f, 0f);
+            foreach (Vertex v in listaTemporalElementos)
+            {
+                GL.Vertex2(v.X, v.Y);
+            }
+            GL.End();
+        }
 
+<<<<<<< HEAD
+>>>>>>> parent of e795821 (a)
+=======
 >>>>>>> parent of e795821 (a)
         public void OnCursorMove(object obj, MouseMoveEventArgs eventoCursor)
         {
             cursorX = eventoCursor.X;
             cursorY = alto - eventoCursor.Y;
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         public void MouseClick(object obj, MouseButtonEventArgs e)
         {
@@ -350,6 +406,8 @@ namespace Hanoi
                 vertice = new Tuple<float, float>(cursorX, cursorY);
                 listaTemporalElementos.Add(vertice);
 =======
+=======
+>>>>>>> parent of e795821 (a)
         public void OnMouseClick(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = e.Button == MouseButton.Left ? true : false;
@@ -369,16 +427,22 @@ namespace Hanoi
             ComprobarTamañoListaTemp();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public void MouseRelease(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = false;
         }
 =======
+=======
+>>>>>>> parent of e795821 (a)
         public void OnMouseRelease(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = false;
         }
 
+<<<<<<< HEAD
+>>>>>>> parent of e795821 (a)
+=======
 >>>>>>> parent of e795821 (a)
         public void Carga(object obj, EventArgs e)
         {
