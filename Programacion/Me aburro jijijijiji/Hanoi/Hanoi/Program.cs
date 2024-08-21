@@ -8,18 +8,19 @@ namespace Hanoi
     {
         const int tamTorres = 5;
         const int cantidadTorres = 3;
+        //int indiceDisco = numDisco + (cantidadTorres * tamTorres);
         Disco[] torres = new Disco[tamTorres * cantidadTorres];
         static void Main(string[] args)
         {
-            int torreOrigen = 0;
-            int torreDestino = 0;
+            //int torreOrigen = 0;
+            //int torreDestino = 0;
             Color fondo = Color.Green;
             Program programa = new Program();
             Ventana ventana = new Ventana(1280, 720, "Prueba", fondo);
             while (true)
             {
                 
-                programa.Mover(torreOrigen, torreDestino);
+                /*programa.Mover(torreOrigen, torreDestino);
                 programa.Dibujar();
                 if (programa.ComprobarVictoria()) { Console.WriteLine("Has ganado"); Console.ReadLine(); break; }
                 Console.WriteLine("Selecciona torre origen");
@@ -27,7 +28,7 @@ namespace Hanoi
                 if (torreOrigen < 0 || torreOrigen > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; }
                 Console.WriteLine("Selecciona torre destino");
                 torreDestino = int.TryParse(Console.ReadLine(), out int destino) ? destino - 1 : -1;
-                if (torreDestino < 0 || torreDestino > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; }
+                if (torreDestino < 0 || torreDestino > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; } */
             }
         }
 
