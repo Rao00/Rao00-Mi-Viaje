@@ -344,6 +344,39 @@ namespace Hanoi
             }
             GL.End();
         }
+        public void DibujarTriangulosAleatorios()
+        {
+            Random rnd = new Random();
+            GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            for (int i = 0; i < 15; i++)
+            {
+                float orientacion = rnd.Next(0, 2);
+                float tama = rnd.Next(20, 100);
+                float y = rnd.Next(0, alto);
+                float x = rnd.Next(0, ancho);
+                if (orientacion == 0)
+                {
+                    tama *= -1;
+                }
+                Vertex vertice1 = new Vertex((x + tama), (y + tama));
+                Vertex vertice2 = new Vertex(x, y + tama);
+                Vertex vertice3 = new Vertex(x + tama, y);
+                listaElementos.Add(vertice1);
+                listaElementos.Add(vertice2);
+                listaElementos.Add(vertice3);
+            }
+        } 
+        public void DibujarPuntosTemporales()
+        {
+            GL.PointSize(2.5f);
+            GL.Begin(PrimitiveType.Points);
+            GL.Color3(1.0f, 0f, 0f);
+            foreach (Vertex v in listaTemporalElementos)
+            {
+                GL.Vertex2(v.X, v.Y);
+            }
+            GL.End();
+        }
 
         public void OnCursorMove(object obj, MouseMoveEventArgs eventoCursor)
         {
