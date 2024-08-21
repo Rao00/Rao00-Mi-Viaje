@@ -20,9 +20,8 @@ namespace Hanoi
         bool mousePresionado = false;
 
         Color background;
-        List<Tuple<float, float>> listaElementos = new List<Tuple<float, float>>();
-        List<Tuple<float, float>> listaPuntos = new List<Tuple<float, float>>();
-        List<Tuple<float, float>> listaTemporalElementos = new List<Tuple<float, float>>();
+        List<Vertex> listaElementos = new List<Vertex>();
+        List<Vertex> listaTemporalElementos = new List<Vertex>();
 
         public Ventana(int _ancho, int _alto, string titulo, Color? _background) : base(_ancho, _alto, GraphicsMode.Default, titulo)
         {
@@ -305,7 +304,6 @@ namespace Hanoi
             cursorX = eventoCursor.X;
             cursorY = alto - eventoCursor.Y;
         }
-
         public void OnMouseClick(object obj, MouseButtonEventArgs e)
         {
             mousePresionado = e.Button == MouseButton.Left ? true : false;
