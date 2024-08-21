@@ -36,7 +36,7 @@ namespace Hanoi
             this.MouseUp += this.MouseRelease;
             this.CursorVisible = false;
             DibujarTriangulosAleatorios();
-            this.Run(1 / 60.0);
+            this.Run(1 / 144.0);
         }
 
         public void ActualizarFrame(object obj, EventArgs e)
@@ -299,6 +299,18 @@ namespace Hanoi
                 listaElementos.Add(vertice3);
             }
         } 
+        public void DibujarPuntosTemporales()
+        {
+            GL.PointSize(2.5f);
+            GL.Begin(PrimitiveType.Points);
+            GL.Color3(1.0f, 0f, 0f);
+            foreach (Vertex v in listaTemporalElementos)
+            {
+                GL.Vertex2(v.X, v.Y);
+            }
+            GL.End();
+        }
+
         public void OnCursorMove(object obj, MouseMoveEventArgs eventoCursor)
         {
             cursorX = eventoCursor.X;
