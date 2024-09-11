@@ -9,6 +9,7 @@ namespace Hanoi
     public class Disco
     {
         int tamaño;
+        int altura;
 
         public int Tamaño
         {
@@ -16,9 +17,16 @@ namespace Hanoi
             set { tamaño = value; }
         }
 
-        public Disco(int _tamaño = 0)
+        public int Altura
         {
-            Tamaño = _tamaño;
+            get { return altura; }
+            set { altura = value; }
+        }
+
+        public Disco(int _tamaño = 0, int _altura = 0)
+        {
+            tamaño = _tamaño;
+            altura = _altura;
         }
     }
 }

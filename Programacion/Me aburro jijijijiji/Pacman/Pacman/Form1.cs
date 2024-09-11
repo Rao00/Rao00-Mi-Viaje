@@ -1,5 +1,4 @@
 ﻿using OpenTK.WinForms;
-using Hanoi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +12,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Threading;
 using System.Windows.Input;
-using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
+using System.Printing;
 
 namespace Pacman
 {
@@ -21,6 +20,7 @@ namespace Pacman
     {
         Ventana ventana;
         int angulo = 180;
+        GameObject[,] mapa;
 
         public fPacman()
         {
@@ -31,28 +31,23 @@ namespace Pacman
         {
             ventana = new(GLControl, Color.Black);
 
-            ventana.LoadMap("C:\\Users\\Pablo\\Desktop\\Rao00-Mi-Viaje\\Programacion\\Me aburro jijijijiji\\Pacman\\maps\\map1.bmp");
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 20, 20, 50, 50, Color.Yellow); //Pacman
 
-            ventana.AddQuad(20, 20, 50, 50, Color.Yellow); //Pacman
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 80, 20, 50, 50, Color.Red); //Blinky
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 140, 20, 50, 50, Color.Cyan); //Inky
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 200, 20, 50, 50, Color.LightPink); //Pinky
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 260, 20, 50, 50, Color.DarkOrange); //Clyde
 
-            ventana.AddQuad(80, 20, 50, 50, Color.Red); //Blinky
-            ventana.AddQuad(140, 20, 50, 50, Color.Cyan); //Inky
-            ventana.AddQuad(200, 20, 50, 50, Color.LightPink); //Pinky
-            ventana.AddQuad(260, 20, 50, 50, Color.DarkOrange); //Clyde   
+            mapa = FormatMap(ventana.LoadMap("..\\..\\..\\maps\\map1.bmp"));
         }
 
         private void PaintGLControl(object sender, PaintEventArgs e)
         {
             GLControl.Focus();
-            for (int i = 0; i < 10; i++)
-            {
-                ventana.RenderFrame();
-                Thread.Sleep(5);
-            }
             ventana.RenderFrame();
         }
 
-        private void KeyPressed(object sender, KeyEventArgs e)
+        private void KeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.W))
                 angulo = 90;
@@ -65,10 +60,45 @@ namespace Pacman
 
             for (int i = 0; i < 10; i++)
             {
-                ventana.Move(1, 5, angulo);
+                ventana.Move(0, 5, angulo);
                 ventana.RenderFrame();
                 Thread.Sleep(5);
             }
+        }
+
+        private GameObject[,] FormatMap(Color[,] map)
+        {
+            int xLength = map.GetLength(0);
+            int yLength = map.GetLength(1);
+
+            GameObject[,] mapaFormateado = new GameObject[xLength, yLength];
+
+            Dictionary<Color, GameObject> coloresMapa = new Dictionary<Color, GameObject>
+            {
+                { Color.White, GameObject.None },
+                { Color.Black, GameObject.Wall },
+                { Color.Pink, GameObject.Door },
+                { Color.Yellow, GameObject.GamePoint },
+                { Color.Orange, GameObject.GamePoint2 }
+            };
+
+            for (int i = 0; i < yLength; i++)
+            {
+                for (int j = 0; j < xLength; j++)
+                {
+                    Color color = map[j, i];
+
+                    mapaFormateado[j, i] = coloresMapa.TryGetValue(color, out GameObject objetoAsignado) 
+                        ? objetoAsignado : GameObject.None;
+                }
+            }
+
+            return mapaFormateado;
+        }
+
+        private void LoadPacman()
+        {
+            
         }
     }
 }

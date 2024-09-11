@@ -11,12 +11,13 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace Hanoi
+namespace Pacman
 {
     public class Ventana
     {
         readonly GLControl Viewport;
         private List<float[]> listaElementos = new List<float[]>();
+        private List<float[]> listaPersonajes = new List<float[]>();
 
         int VertexBufferObject;
         int VertexArrayObject;
@@ -76,7 +77,7 @@ namespace Hanoi
             GL.DeleteShader(fragmentShader);
         }
 
-        private void LoadVertexBufferObject()
+        private void LoadStaticVertexBufferObject()
         {
             try
             {
@@ -96,6 +97,26 @@ namespace Hanoi
             catch { }
         }
 
+        private void LoadStreamVertexBufferObject()
+        {
+            try
+            {
+                GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
+
+                float[] bufferElements = new float[listaPersonajes.Count * listaPersonajes[0].Length];
+
+                int offset = 0;
+                foreach (float[] objeto in listaPersonajes)
+                {
+                    Array.Copy(objeto, 0, bufferElements, offset, objeto.Length);
+                    offset += objeto.Length;
+                }
+
+                GL.BufferData(BufferTarget.ArrayBuffer, bufferElements.Length * sizeof(float), bufferElements, BufferUsageHint.StreamDraw);
+            }
+            catch { }
+        }
+
         private void LoadVertexArrayObject()
         {
             GL.BindVertexArray(VertexArrayObject);
@@ -110,7 +131,8 @@ namespace Hanoi
         public void RenderFrame()
         {
             LoadVertexArrayObject();
-            LoadVertexBufferObject();
+            LoadStreamVertexBufferObject();
+            LoadStaticVertexBufferObject();
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
@@ -119,6 +141,7 @@ namespace Hanoi
 
             GL.DrawArrays(PrimitiveType.Triangles, 0, listaElementos.Count * 3);
             GL.DrawArrays(PrimitiveType.Triangles, 0, listaElementos.Count * 6);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, listaPersonajes.Count * 6);
 
             Viewport.SwapBuffers();
         }
@@ -146,10 +169,10 @@ namespace Hanoi
 
             listaElementos.Add(vertices);
 
-            LoadVertexBufferObject();
+            LoadStaticVertexBufferObject();
         }
 
-        public void AddQuad(float _x, float _y, float _height, float _width, Color? color)
+        public void AddQuad(BufferUsageHint bufferType, float _x, float _y, float _height, float _width, Color? color)
         {
             float x = (_x / (Viewport.Width / 2.0f)) - 1.0f;
             float y = (_y / (Viewport.Height / 2.0f)) - 1.0f;
@@ -178,35 +201,60 @@ namespace Hanoi
                 vec6.X, vec6.Y, color.Value.R / 255f, color.Value.G / 255f, color.Value.B / 255f
             };
 
-            listaElementos.Add(vertices);
-
-            LoadVertexBufferObject();
+            if (bufferType == BufferUsageHint.StreamDraw) 
+            {
+                listaPersonajes.Add(vertices);
+                LoadStreamVertexBufferObject();
+            }
+            else if (bufferType == BufferUsageHint.StaticDraw)
+            {
+                listaElementos.Add(vertices);
+                LoadStaticVertexBufferObject();
+            }
         }
 
         public void Move(int index, int _distancia, float _orientation)
         {
             float orientation = (float)(_orientation * (Math.PI / 180));
 
-            for (int i = 0; i < listaElementos[index].Length; i+=5)
+            for (int i = 0; i < listaPersonajes[index].Length; i+=5)
             {
-                float x = listaElementos[index][i];
-                float y = listaElementos[index][i + 1];
+                float x = listaPersonajes[index][i];
+                float y = listaPersonajes[index][i + 1];
 
                 float distancia = _distancia / ((Viewport.Width / 2.0f) - 1.0f);
 
-                listaElementos[index][i] = (float)(x + (distancia * Math.Cos(orientation)));
-                listaElementos[index][i + 1] = (float)(y + (distancia * Math.Sin(orientation)));
+                listaPersonajes[index][i] = (float)(x + (distancia * Math.Cos(orientation)));
+                listaPersonajes[index][i + 1] = (float)(y + (distancia * Math.Sin(orientation)));
             }
+
+            LoadStreamVertexBufferObject();
         }
         
-        public void LoadMap(string ruta)
+        public Color[,] LoadMap(string ruta)
         {
-            FileStream map = new FileStream(ruta, FileMode.Open, FileAccess.Read);
-            BinaryReader data = new BinaryReader(map);
-            for (int i = 0; i < map.Length; i++)
+            Bitmap map = new Bitmap(ruta);
+
+            Color[,] mapArray = new Color[map.Width, map.Height];
+
+            float height = (Viewport.Height / map.Height);
+            float width = (Viewport.Width / map.Width);
+
+            float reposHeight = Viewport.Height - (map.Height * height);
+            float reposWidth = (Viewport.Width - (map.Width * width)) * 4;
+
+            for (int i = 1; i <= map.Width; i++)
             {
-                MessageBox.Show(data.Read().ToString());
+                for (int j = 1; j <= map.Height; j++)
+                {
+                    Color colorPixel = map.GetPixel(i - 1, j - 1);
+                    AddQuad(BufferUsageHint.StaticDraw, (i * width) - reposWidth, (j * height) - reposHeight, height, width, colorPixel);
+
+                    mapArray[i - 1, j - 1] = colorPixel;
+                }
             }
+
+            return mapArray;
         }
     }
 }

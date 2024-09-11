@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
 using OpenTK.Graphics.OpenGL;
 
 namespace Hanoi
@@ -7,112 +11,102 @@ namespace Hanoi
     class Program
     {
         const int tamTorres = 5;
-        const int cantidadTorres = 3;
-        //int indiceDisco = numDisco + (cantidadTorres * tamTorres);
-        Disco[] torres = new Disco[tamTorres * cantidadTorres];
-        static void Main(string[] args)
+        List<Disco[]> torres = new List<Disco[]>();
+
+        public static void Main(string[] args)
         {
-            //int torreOrigen = 0;
-            //int torreDestino = 0;
-            Color fondo = Color.Green;
             Program programa = new Program();
-            Ventana ventana = new Ventana(1280, 720, "Prueba", fondo);
+
+            int i = 0;
+
             while (true)
             {
+                programa.Render();
                 
-                /*programa.Mover(torreOrigen, torreDestino);
-                programa.Dibujar();
-                if (programa.ComprobarVictoria()) { Console.WriteLine("Has ganado"); Console.ReadLine(); break; }
-                Console.WriteLine("Selecciona torre origen");
-                torreOrigen = int.TryParse(Console.ReadLine(), out int origen) ? origen - 1 : -1;
-                if (torreOrigen < 0 || torreOrigen > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; }
-                Console.WriteLine("Selecciona torre destino");
-                torreDestino = int.TryParse(Console.ReadLine(), out int destino) ? destino - 1 : -1;
-                if (torreDestino < 0 || torreDestino > cantidadTorres) { Console.WriteLine("Introduce una torre valida"); continue; } */
+                programa.TorreWhereDisco()
+
+                programa.Resolver(º);
+
+                i++;
+
+                Thread.Sleep(500);
             }
         }
 
         public Program()
         {
-            for (int i = 0; i < tamTorres; i++) 
+            for (int i = 0; i < 3; i++)
             {
-                Disco disco = new Disco(i + 1);
-                torres[i] = disco;
+                Disco[] torre = new Disco[tamTorres];
+                torres.Add(torre);
             }
-            for( int i = 0 + (tamTorres); i < tamTorres * cantidadTorres; i++)
-            {
-                Disco disco = new Disco();
-                torres[i] = disco;
-            }
-        }
 
-        private void Dibujar()
-        {
-            for (int i = 0; i < tamTorres; i++)
+            for (int j = 0; j < 3; j++)
             {
-                string salida = string.Empty;
-                for (int j = 0; j < cantidadTorres; j++)
-                {
-                    int indiceDisco = i + (j * tamTorres);
-                    switch (torres[indiceDisco].Tamaño > 0)
-                    {
-                        case true:
-                            salida += $"{torres[indiceDisco].Tamaño} ";
-                            break;
-                        default:
-                            salida += "| ";
-                            break;
-                    }
-                }
-                Console.WriteLine(salida);
-            }
-        }
-
-        private int Mover(int indiceTorreOrigen, int indiceTorreDestino)
-        {
-            try
-            {
-                int indiceDisco;
                 for (int i = 0; i < tamTorres; i++)
                 {
-                    indiceDisco = i + (indiceTorreOrigen * 5);
-                    if (torres[indiceDisco].Tamaño > 0)
-                    {
-                        for (int j = 1; j < tamTorres + 1; j++)
-                        {
-                            int discoMasAlto = (j - 1) + (indiceTorreDestino * tamTorres);
-                            if (torres[discoMasAlto].Tamaño <= torres[indiceDisco].Tamaño && torres[discoMasAlto].Tamaño != 0)
-                            {
-                                return -1;
-                            }
-                            else if (torres[discoMasAlto].Tamaño > torres[indiceDisco].Tamaño)
-                            {
-                                torres[(discoMasAlto - 1)].Tamaño = torres[indiceDisco].Tamaño;
-                                torres[indiceDisco].Tamaño = 0;
-                                return 1;
-                            }
-                            else if (j == tamTorres)
-                            {
-                                torres[(discoMasAlto)].Tamaño = torres[indiceDisco].Tamaño;
-                                torres[indiceDisco].Tamaño = 0;
-                                return 1;
-                            }
-                        }
-                        break;
-                    }
+                    int valorTorre = j != 0 ? 0 : (tamTorres - i);
+
+                    torres[j][i] = new Disco(valorTorre, i);
                 }
-                return 0;
             }
-            catch { return -1; }
         }
-        
-        private bool ComprobarVictoria()
+
+        public void Render()
         {
-            if (torres[(tamTorres * (cantidadTorres-1)) + 1].Tamaño > 0)
+            StringBuilder salida = new StringBuilder();
+
+            string prueba = string.Empty;
+
+            for (int i = tamTorres - 1; i >= 0; i--)
             {
-                return true;
+                foreach (Disco[] torre in torres)
+                {
+                    salida.Append(torre[i].Tamaño + " ");
+                }
+
+                salida.Append("\n");
             }
-            return false;
+
+            Console.WriteLine(salida);
+        }
+
+        public void Resolver(Disco disco, bool cont = true)
+        {
+            // torre pasa disco a torre con tamDisco + 1
+            // torre pasa disco a torre + 1
+            // torre pasa disco a donde sea
+
+            if (!cont)
+                return;
+
+            int indexTorre = TorreWhereDisco(disco);
+
+            for (int i = 0; i < torres[indexTorre].Length; i++)
+            {
+                if (torres[indexTorre][i].Tamaño != torres[indexTorre][disco.Altura].Tamaño)
+                {
+                    return;
+                }
+            }
+
+            for (int i = 2; i > 0; i--)
+            {
+                int torreAComprobar = indexTorre + 1 < torres.Count ? indexTorre + 1 : 0;
+
+                torres[torreAComprobar].Last();
+            }
+        }
+
+        public int TorreWhereDisco(Disco disco)
+        {
+            for (int i = 0; i < torres.Count; i++)
+            {
+                if (torres[i].Contains(disco))
+                    return i;
+            }
+
+            return -1;
         }
     }
 }
