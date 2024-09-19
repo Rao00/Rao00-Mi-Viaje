@@ -10,7 +10,8 @@ namespace Hanoi
 {
     class Program
     {
-        const int tamTorres = 5;
+        bool victoria = false;
+        const int tamTorres = 10;
         List<Disco[]> torres = new List<Disco[]>();
 
         public static void Main(string[] args)
@@ -19,23 +20,25 @@ namespace Hanoi
 
             int i = 1;
 
-            while (true)
+            while (!programa.victoria)
             {
-                i = i > 5 ? 1 : i;
-
-                programa.Render();
-
-                var discoActual = programa.TorreWhereDisco(i);
+                i = i > tamTorres ? 1 : i;
 
                 programa.Resolver(i);
 
-                Console.WriteLine("Disco = " + i + " Torre = " + discoActual.torre + " Altura = " + discoActual.disco.Altura);
+                if (i == tamTorres)
+                { 
+                    Console.Clear();
+                    programa.Render();
+                    programa.victoria = programa.ComprobarVictoria();
+                }
 
-                Thread.Sleep(500);
-                Console.Clear();
-
+                Thread.Sleep(100);
+                
                 i++;
             }
+
+            Console.ReadLine();
         }
 
         public Program()
@@ -93,19 +96,17 @@ namespace Hanoi
 
         public void Mover(int torreOrigen, int torreDestino)
         {
-            int indexOrigen = FindTallestEmptyIndex(torreOrigen);
-            int indexDestino = FindTallestEmptyIndex(torreDestino);
-
-            if (indexOrigen == -1 || indexDestino == -1)
+            int indexOrigen = FindTallestDiscIndex(torreOrigen, out Disco discoOrigen);
+            if (discoOrigen.Tamaño == 0)
                 return;
 
+            int indexDestino = FindTallestEmptyIndex(torreDestino);
             if (indexDestino > 0)
-                if (torres[torreDestino][indexDestino - 1].Tamaño < torres[torreOrigen][indexOrigen].Tamaño)
+                if (torres[torreDestino][indexDestino - 1].Tamaño < discoOrigen.Tamaño)
                     return;
 
-            Disco tmp = torres[torreOrigen][indexOrigen];
-            tmp.Altura = indexDestino;
-            torres[torreDestino][indexDestino] = tmp;
+            discoOrigen.Altura = indexDestino;
+            torres[torreDestino][indexDestino] = discoOrigen;
             torres[torreOrigen][indexOrigen] = new Disco(0, indexOrigen);
         }
 
@@ -114,10 +115,22 @@ namespace Hanoi
             for (int i = 0; i < tamTorres; i++)
             {
                 if (torres[torre][i].Tamaño == 0)
+                    return i;
+            }
+            return 0;
+        }
+
+        public int FindTallestDiscIndex(int torre, out Disco _)
+        {
+            for (int i = tamTorres - 1; i >= 0; i--)
+            { 
+                if (torres[torre][i].Tamaño != 0)
                 {
+                    _ = torres[torre][i];
                     return i;
                 }
             }
+            _ = new Disco();
             return 0;
         }
 
@@ -129,58 +142,62 @@ namespace Hanoi
             Disco disco = TorreWhereDisco(tamDisco).disco;
 
             //comprobar si el disco se puede mover
-            destinoIndex = FindTallestEmptyIndex(torreOrigen);
+            destinoIndex = FindTallestDiscIndex(torreOrigen, out Disco tmpDisco);
 
-            destinoIndex = destinoIndex - 1 >= 0 ? destinoIndex - 1 : 0;
+            if (tmpDisco.Tamaño != tamDisco)
+                return;
 
             // mover disco a torre donde este tamDisco + 1
             if (tamDisco > tamTorres - 1)
                 goto regla2;
 
             torreDestino = TorreWhereDisco(tamDisco + 1).torre;
-            destinoIndex = FindTallestEmptyIndex(torreDestino);
 
-            destinoIndex = destinoIndex - 1 >= 0 ? destinoIndex - 1 : 0;
+            if (torreDestino == torreOrigen)
+                goto regla2;
 
-            if (torres[torreDestino][destinoIndex].Tamaño < disco.Tamaño)
+            FindTallestDiscIndex(torreDestino, out tmpDisco);
+
+            if (tmpDisco.Tamaño > disco.Tamaño)
             {
                 Mover(torreOrigen, torreDestino);
                 return;
             }
-
-            goto regla2;
 
             // mover disco a torre + 1
 
             regla2:
 
-            torreDestino = torreOrigen + 1 > 2 ? 0 : torreOrigen + 1;
-            destinoIndex = FindTallestEmptyIndex(torreDestino);
-
-            destinoIndex = destinoIndex - 1 >= 0 ? destinoIndex - 1 : 0;
-
-            if (torres[torreDestino][destinoIndex].Tamaño > tamDisco || torres[torreDestino][destinoIndex].Tamaño == 0)
+            for (int i = 1; i <= 2; i++)
             {
-                Mover(torreOrigen, torreDestino);
-                return;
-            }
+                torreDestino = torreOrigen + i > 2 ? (torreOrigen + i) - 3 : torreOrigen + i;
 
-            // mover disco a donde sea
+                int tmp = FindTallestDiscIndex(torreDestino, out Disco discoTmp);
 
-            for (int i = 0; i < 2; i++)
-            {
-                torreDestino = torreOrigen + 1 > 2 ? 0 : torreOrigen++;
-                destinoIndex = FindTallestEmptyIndex(torreDestino);
-
-                destinoIndex = destinoIndex - 1 >= 0 ? destinoIndex - 1 : 0;
-
-                if (torres[torreDestino][destinoIndex].Tamaño > tamDisco || destinoIndex == 0)
+                if (discoTmp.Tamaño > disco.Tamaño || discoTmp.Tamaño == 0)
                 {
                     Mover(torreOrigen, torreDestino);
+                    return;
+                }
+            }
+        }
+
+        public bool ComprobarVictoria()
+        {
+            bool victoria = true;
+
+            Disco[] listaVictoria = new Disco[tamTorres];
+
+            for (int i = 0; i < tamTorres; i++)
+            {
+                if (torres[2][i].Tamaño == 0)
+                {
+                    victoria = false;
                     break;
                 }
             }
-            
+
+            return victoria;
         }
     }
 }

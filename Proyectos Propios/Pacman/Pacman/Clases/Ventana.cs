@@ -23,6 +23,19 @@ namespace Pacman
         int VertexArrayObject;
         int shader;
 
+        int heightPixel;
+        int widthPixel;
+
+        public int HeightPixel
+        {
+            get { return heightPixel; }
+        }
+
+        public int WidthPixel
+        {
+            get { return widthPixel; }
+        }
+
         public Ventana(GLControl viewport, Color _background)
         {
             Viewport = viewport;
@@ -131,16 +144,16 @@ namespace Pacman
         public void RenderFrame()
         {
             LoadVertexArrayObject();
-            LoadStreamVertexBufferObject();
-            LoadStaticVertexBufferObject();
-
+            
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             GL.UseProgram(shader);
             GL.BindVertexArray(VertexArrayObject);
 
-            GL.DrawArrays(PrimitiveType.Triangles, 0, listaElementos.Count * 3);
+            LoadStaticVertexBufferObject();
             GL.DrawArrays(PrimitiveType.Triangles, 0, listaElementos.Count * 6);
+
+            LoadStreamVertexBufferObject();
             GL.DrawArrays(PrimitiveType.Triangles, 0, listaPersonajes.Count * 6);
 
             Viewport.SwapBuffers();
@@ -237,18 +250,18 @@ namespace Pacman
 
             Color[,] mapArray = new Color[map.Width, map.Height];
 
-            float height = (Viewport.Height / map.Height);
-            float width = (Viewport.Width / map.Width);
+            heightPixel = (Viewport.Height / map.Height);
+            widthPixel = (Viewport.Width / map.Width);
 
-            float reposHeight = Viewport.Height - (map.Height * height);
-            float reposWidth = (Viewport.Width - (map.Width * width)) * 4;
+            float reposHeight = Viewport.Height - (map.Height * heightPixel);
+            float reposWidth = (Viewport.Width - (map.Width * widthPixel)) * 4;
 
             for (int i = 1; i <= map.Width; i++)
             {
                 for (int j = 1; j <= map.Height; j++)
                 {
                     Color colorPixel = map.GetPixel(i - 1, j - 1);
-                    AddQuad(BufferUsageHint.StaticDraw, (i * width) - reposWidth, (j * height) - reposHeight, height, width, colorPixel);
+                    AddQuad(BufferUsageHint.StaticDraw, (i * widthPixel) - reposWidth, (j * heightPixel) - reposHeight, heightPixel, widthPixel, colorPixel);
 
                     mapArray[i - 1, j - 1] = colorPixel;
                 }

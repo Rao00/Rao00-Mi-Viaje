@@ -1,0 +1,29 @@
+
+Manuel:
+    Good morning Sir
+    We want to develop a cybersecurity website
+
+Hector:
+    Our idea is to develop a website to bring our apps and our services to the world
+
+Carles:
+    Ok, what kind of services and apps are you talking about?
+
+Manuel:
+    Our services and apps are password managers, antibugs, firewalls and things like that
+
+Carles:
+    So your website would need a cart with an integrated payment method?
+
+Hector:
+    Yes, that sounds great. 
+    Apart from that we need the products to be shown clearly on the website
+
+Carles:
+    Ok so we are using OpentTk to animate the images and recreate a cybersecutrity method with pseudorandom numbers to make it get to the largest number of people posible
+
+Manuel:
+    Moving on, we want to be known as a serious company, that's why we need a profesional and serious layout while we keep cybersecurity esence
+
+Hector:
+    The bebesita drinks lyn and drinks wiskey, smoke marihuana and get into her blood kinki

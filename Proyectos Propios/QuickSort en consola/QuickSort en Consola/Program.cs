@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.Xml;
+﻿using System.Xml;
 using System.Threading;
 
 int longitud = 500000;
@@ -16,6 +15,7 @@ void Menu()
     Console.WriteLine("Crear lista = C");
     Console.WriteLine("Ordenar lista = O");
     Console.WriteLine("Comprobar lista = Check");
+    Console.WriteLine("Contar Valores = Count");
     Console.WriteLine("Ver lista = V");
     switch (Console.ReadLine())
     {
@@ -31,6 +31,9 @@ void Menu()
         case "V":
             btnShowList_Click();
             break;
+        case "Count":
+            btnContar_Click();
+            break;
         default: 
             Console.WriteLine("Opcion no valida");
             break;
@@ -39,6 +42,7 @@ void Menu()
 
 void btnCrear_Click()
 {
+    ListaPrincipal.Clear();
     Random rand = new Random();
     for (int i = 0; i < longitud; i++)
     {
@@ -83,6 +87,11 @@ void btnComprobar_Click()
     if (check) { Console.WriteLine("Correcto"); }
 }
 
+void btnContar_Click()
+{
+    Console.WriteLine("Total de valores " + ListaPrincipal.Count.ToString());
+}
+
 List<double> Sort(List<double> listaPrincipal)
 {
     if (listaPrincipal.Count() <= 1)
@@ -93,8 +102,8 @@ List<double> Sort(List<double> listaPrincipal)
     int pivot = listaPrincipal.Count() / 2;
     double pivotValor = listaPrincipal[pivot];
 
-    List<double> left = new List<double>();
-    List<double> right = new List<double>();
+    List<double> listaIzq = new List<double>();
+    List<double> listaDerecha = new List<double>();
 
     for (int i = 0; i < listaPrincipal.Count(); i++)
     {
@@ -104,19 +113,19 @@ List<double> Sort(List<double> listaPrincipal)
         }
         if (listaPrincipal[i] >= listaPrincipal[pivot])
         {
-            right.Add(listaPrincipal[i]);
+            listaDerecha.Add(listaPrincipal[i]);
         }
-        else if (listaPrincipal[i] <= listaPrincipal[pivot])
+        else if (listaPrincipal[i] < listaPrincipal[pivot])
         {
-            left.Add(listaPrincipal[i]);
+            listaIzq.Add(listaPrincipal[i]);
         }
     }
 
-    left = Sort(left);
-    right = Sort(right);
+    listaIzq = Sort(listaIzq);
+    listaDerecha = Sort(listaDerecha);
 
-    left.Add(pivotValor);
-    left.AddRange(right);
+    listaIzq.Add(pivotValor);
+    listaIzq.AddRange(listaDerecha);
 
-    return left;
+    return listaIzq;
 }

@@ -31,14 +31,14 @@ namespace Pacman
         {
             ventana = new(GLControl, Color.Black);
 
-            ventana.AddQuad(BufferUsageHint.StreamDraw, 20, 20, 50, 50, Color.Yellow); //Pacman
+            mapa = FormatMap(ventana.LoadMap("..\\..\\..\\maps\\map1.bmp"));
+
+            ventana.AddQuad(BufferUsageHint.StreamDraw, 20, 20, ventana.HeightPixel, ventana.WidthPixel, Color.Yellow); //Pacman
 
             ventana.AddQuad(BufferUsageHint.StreamDraw, 80, 20, 50, 50, Color.Red); //Blinky
             ventana.AddQuad(BufferUsageHint.StreamDraw, 140, 20, 50, 50, Color.Cyan); //Inky
             ventana.AddQuad(BufferUsageHint.StreamDraw, 200, 20, 50, 50, Color.LightPink); //Pinky
             ventana.AddQuad(BufferUsageHint.StreamDraw, 260, 20, 50, 50, Color.DarkOrange); //Clyde
-
-            mapa = FormatMap(ventana.LoadMap("..\\..\\..\\maps\\map1.bmp"));
         }
 
         private void PaintGLControl(object sender, PaintEventArgs e)
