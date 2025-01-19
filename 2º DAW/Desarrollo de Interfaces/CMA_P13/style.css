@@ -1,0 +1,102 @@
+*{
+    box-sizing: border-box;
+    text-align: center;
+}
+*:not(html, body, main){
+    font-weight: bolder;
+}
+header, #menu, main, footer{
+    width: 75%;
+    transition: all ease 0.3s;
+}
+header{
+    background-image: conic-gradient(at 100% 100%,red 270deg, blue 280deg);
+    height: 60px;
+}
+#menu{
+    background-image: conic-gradient(at 0% 0%,red 90deg, blue 100deg);
+    height: 80px;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+main{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    section{
+        width: calc(75% - 5px);
+    }
+    aside{
+        background-image: linear-gradient(green, white);
+        width: calc(25% - 5px);
+    }
+}
+section{
+    background-color: #CA6624;
+    text-align: center;
+    height: 600px;
+    gap:10px;
+    display: grid;
+    grid-template-areas: 
+    "nav1 nav1 nav1"
+    "nav2 cuerpo1 cuerpo1";
+    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 1fr 2fr 2fr;
+    #nav1{
+        grid-area: nav1;
+        background-image: conic-gradient(at 0% 100%,green 20deg, greenyellow 70deg);
+    }
+    #nav2{
+        background-image: linear-gradient(red, green);
+        grid-area: nav2;
+    }
+    #cuerpo1{
+        background-image: repeating-radial-gradient(yellow 4%, red 55%);
+        grid-area: cuerpo1;
+    }
+}
+footer{
+    height: 40px;
+    background-image: repeating-radial-gradient(yellow 1%, blue 4.5%);
+}
+
+header:hover, #menu:hover, #nav1:hover, #nav2:hover, #cuerpo1:hover, aside:hover, footer:hover{
+    transform: translateY(-5px);
+    box-shadow: inset 0px -2px 5px 5px red;
+}
+
+@media(max-width:1024px){
+    header, #menu, main, aside, section, footer{
+        width: 100%;
+    }
+    main{
+        flex-direction: column;
+        aside, section{
+            width: 100%;
+        }
+        aside{
+            height: 80px;
+        }
+    }    
+}
+
+
+@media(max-width:700px){
+    header, #menu, main, aside, section, footer{
+        width: 100%;
+    }
+    main{
+        flex-direction: column;
+    }
+    section{
+        grid-template-areas: 
+        "nav1 nav1 nav1"
+        "nav2 nav2 nav2"
+        "cuerpo1 cuerpo1 cuerpo1";
+        grid-template-rows: auto auto 4fr;
+    }
+}
+

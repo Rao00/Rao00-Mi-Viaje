@@ -1,0 +1,42 @@
+<html>
+    <body>
+        <h1>Hola!</h1>
+        <button onclick="newCounter()">Reiniciar contador</button>
+        <button id="general" onclick="stopCounter()">Parar contador</button>
+        <br>
+        <h1 id="contador">0</h1>  
+
+        <script>
+            let CONTADOR = 0;
+            let intervalo = setInterval(sumar1, 1000);
+            let texto = document.getElementById("contador");
+            let boton = document.getElementById("general");
+            let funcionando = true;
+
+            function sumar1(){
+                if (funcionando){
+                    CONTADOR++;
+                    texto.innerHTML = CONTADOR;
+                }
+            }
+            function newCounter(){
+                CONTADOR = 0;
+                texto.innerHTML = CONTADOR;
+                funcionando = true;
+            }
+            function stopCounter(){
+                if (funcionando){
+                    clearInterval(intervalo);
+                    intervalo = null;
+                    funcionando = false;
+                    boton.innerHTML = "Iniciar contador"
+                }
+                else{
+                    intervalo = setInterval(sumar1, 1000);
+                    funcionando = true;
+                    boton.innerHTML = "Parar contador"
+                }
+            }
+        </script>        
+    </body>
+</html>

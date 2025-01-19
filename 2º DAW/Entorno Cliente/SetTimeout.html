@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <p id="text"></p>
+        <script>
+            let salida = document.getElementById("text");
+            let temporizador = {
+                cuentaAtras: function() {
+                    setTimeout(() => {
+                        console.log(`Ha terminado el temporizador de ${this.tiempo} ms.`);
+                    }, this.tiempo);
+                }
+            }   
+            temporizador.tiempo = 2000;
+            temporizador.cuentaAtras();
+        </script>
+    </body>
+</html>

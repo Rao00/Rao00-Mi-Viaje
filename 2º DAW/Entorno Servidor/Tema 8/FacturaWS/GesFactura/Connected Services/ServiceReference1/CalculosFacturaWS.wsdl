@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio Web para la obtención de cálculos en líneas de factura.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CalculosLineaFactura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cantidad" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="precio" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="tipo_descuento" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="tipo_iva" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculosLineaFacturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CalculosLineaFacturaResult" type="tns:Calculos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Calculos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Bruto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descuento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseImponible" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Iva" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Total" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CalculosLineaFacturaSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculosLineaFactura" />
+  </wsdl:message>
+  <wsdl:message name="CalculosLineaFacturaSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculosLineaFacturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CalculosFacturaWSSoap">
+    <wsdl:operation name="CalculosLineaFactura">
+      <wsdl:input message="tns:CalculosLineaFacturaSoapIn" />
+      <wsdl:output message="tns:CalculosLineaFacturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculosFacturaWSSoap" type="tns:CalculosFacturaWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculosLineaFactura">
+      <soap:operation soapAction="http://tempuri.org/CalculosLineaFactura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CalculosFacturaWSSoap12" type="tns:CalculosFacturaWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculosLineaFactura">
+      <soap12:operation soapAction="http://tempuri.org/CalculosLineaFactura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculosFacturaWS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio Web para la obtención de cálculos en líneas de factura.</wsdl:documentation>
+    <wsdl:port name="CalculosFacturaWSSoap" binding="tns:CalculosFacturaWSSoap">
+      <soap:address location="https://localhost:44312/CalculosFacturaWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CalculosFacturaWSSoap12" binding="tns:CalculosFacturaWSSoap12">
+      <soap12:address location="https://localhost:44312/CalculosFacturaWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+html {box-sizing: border-box; }
+*, *:before, *:after {box-sizing: inherit; }
+
+* {
+    padding: 15px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+header{
+    background-color: red;
+    height: 100px;
+}
+section{
+    display: flex;
+    background-color: greenyellow;
+}
+
+main {
+    background-color: blue;
+    width: 80%;
+}
+
+article{
+    padding-bottom: 1px;
+    background-color: green;
+}
+article:nth-of-type(2){
+    height: 150px;
+}
+
+nav{
+    background-color: yellow;
+}
+
+aside{
+    background-color: aqua;  
+}

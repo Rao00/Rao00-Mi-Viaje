@@ -1,0 +1,33 @@
+@SupuestoIntegrado_HostAddress = http://localhost:5190/api
+
+//UserController
+
+GET {{SupuestoIntegrado_HostAddress}}/users?correo=carlesmorales.mcv00@gmail.com
+###
+
+POST {{SupuestoIntegrado_HostAddress}}/users/new
+Accept: application/json
+{
+  "Name":"Carles",
+  "Password":"1234",
+  "Correo":"carlesmorales@gmail.com"
+}
+
+###
+
+POST {{SupuestoIntegrado_HostAddress}}/users/delete
+Accept: application/json
+{
+  "Name":"Carles",
+  "Password":"1235"
+}
+
+###
+
+POST {{SupuestoIntegrado_HostAddress}}/users/edit
+Accept: application/json
+{
+  "Name":"Carles",
+  "Password":"1234",
+  "Correo":"rinchy@gmail.com"
+}

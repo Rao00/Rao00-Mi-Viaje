@@ -1,0 +1,12 @@
+
+-------------------------------------------------------------------------------
+
+Mapa:
+    array[Objecto]
+
+    func => LoadMap(path)
+
+    func => FindObject(id) return Objecto
+            FindObject(x, y) return Objecto
+
+

@@ -1,0 +1,71 @@
+﻿@* @model IEnumerable<McvSoporte.Models.Empleado> *@
+@model PaginatedList<McvSoporte.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Empleados</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+                @* @Html.DisplayNameFor(model => model.Nombre) *@
+            </th>
+            <th>
+                Correo electrónico
+                @* @Html.DisplayNameFor(model => model.Email) *@
+            </th>
+            <th>
+                Teléfono
+                @* @Html.DisplayNameFor(model => model.Telefono) *@
+            </th>
+            <th>
+                Fecha de nacimiento
+                @* @Html.DisplayNameFor(model => model.FechaNacimiento) *@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-outline-secondary @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-outline-secondary @nextDisabled">
+    Siguiente
+</a>

@@ -1,77 +1,90 @@
 ﻿
-using ConsoleApp1;
+using System.Diagnostics;
 using System.Text;
 
-List<Categoria> ListaGanadores = new List<Categoria>();
+Stopwatch tiempo = Stopwatch.StartNew();
+tiempo.Start();
+
+Dictionary<string, Dictionary<string, int>> clasificacionTotal = new Dictionary<string, Dictionary<string, int>>();
+Dictionary<string, int> clasificacionCategoria = new Dictionary<string, int>();
 
 ReadInput();
 
-foreach (Categoria ganadoresCat in ListaGanadores)
+foreach (var clasificacionPorCategoria in clasificacionTotal)
 {
-    Console.WriteLine(ganadoresCat.Name);
+    Console.WriteLine(clasificacionPorCategoria.Key);
 
-    Dictionary<string, int> ganadores = new Dictionary<string, int>{ {" ",0} };
-
-    for (int i = 0; i < ganadoresCat.List.Count; i++)
+    string parejaGanadora = String.Empty;
+    int puntosPareja = 0;
+    foreach (var parejasConPuntos in clasificacionPorCategoria.Value)
     {
-        string pareja = ganadoresCat.List[i];
-        if (ganadores.ContainsKey(pareja))
-        {
-            ganadores[pareja] += 1;
-        }
-        else
-        { 
-            ganadores.Add(pareja, 1);
-        }
+        parejaGanadora = parejasConPuntos.Value > puntosPareja ? parejasConPuntos.Key : parejaGanadora;
+        puntosPareja = parejasConPuntos.Value > puntosPareja ? parejasConPuntos.Value : puntosPareja;
+    }
+    clasificacionPorCategoria.Value.Remove(parejaGanadora);
+
+    int puntosParejaSegunda = 0;
+    foreach (var parejasConPuntos in clasificacionPorCategoria.Value)
+    {
+        puntosParejaSegunda = parejasConPuntos.Value > puntosParejaSegunda ? parejasConPuntos.Value : puntosParejaSegunda;
     }
 
-    for (int i = 0; i < ganadores.Count; i++)
-    {
+    int difPuntosPareja = puntosPareja - puntosParejaSegunda;
 
-    }
-
-    if (parejaGanadora != " ")
-        Console.WriteLine($"Ganador = {parejaGanadora} {ganadores[parejaGanadora]}");
+    if (difPuntosPareja > 0)
+        Console.WriteLine($"{parejaGanadora} {difPuntosPareja}\n");
+    else
+        Console.WriteLine("Empate\n");
 }
 
-Console.ReadLine();
+tiempo.Stop();
+Console.WriteLine(tiempo.ToString());
 
 void ReadInput(string ruta = ".\\..\\..\\..\\Input.txt")
 {
     StreamReader reader = new StreamReader(ruta);
     string linea = reader.ReadLine();
+    string nombreCategoria = "";
 
-continueReading:
-    Categoria categoria = new Categoria();
     while (linea != null)
     {
+        List<string> listaDePalabras = ReadWord(linea);
+
         if (linea == "FIN")
         {
-            linea = reader.ReadLine();
-            break;
-        }
-            
-        List<string> palabras = ReadWord(linea);
+            if (clasificacionTotal.ContainsKey(nombreCategoria))
+                break;
 
-        if (palabras.Count() == 1)
-        {
-            categoria.Name = palabras[0];
+            clasificacionTotal.Add(nombreCategoria, clasificacionCategoria);
             linea = reader.ReadLine();
             continue;
         }
-        
-        if (int.Parse(palabras[1]) > int.Parse(palabras[3]))
-            categoria.AddPartido(palabras[0]);
-        else
-            categoria.AddPartido(palabras[2]);
+
+        if (listaDePalabras.Count == 1)
+        {
+            nombreCategoria = linea;
+            clasificacionCategoria = new Dictionary<string, int>();
+            linea = reader.ReadLine();
+            continue;
+        }
+
+        bool localGanador = (int.Parse(listaDePalabras[1]) > int.Parse(listaDePalabras[3]));
+
+        for (int i = 0; i < listaDePalabras.Count; i += 2)
+        {
+            int puntosAGanar = 0;
+            if ((localGanador && i == 0) || (!localGanador && i == 2))
+                puntosAGanar = 2;
+            if ((!localGanador && i == 0) || (localGanador && i == 2))
+                puntosAGanar = 1;
+
+            if (!clasificacionCategoria.ContainsKey(listaDePalabras[i]))
+                clasificacionCategoria.Add(listaDePalabras[i], puntosAGanar);
+            else
+                clasificacionCategoria[listaDePalabras[i]] += puntosAGanar;
+        }
 
         linea = reader.ReadLine();
-    }
-    ListaGanadores.Add(categoria);
-
-    if (linea != null)
-    {
-        goto continueReading;
     }
 }
 

@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+    color: white;
+}
+/* Punto C.- la primera letra de todos los botones es de color lima 
+ * button::first-letter{ color: lime; } 
+ */
+button{
+    align-items: center;
+    border: hidden;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 5px calc(15px - 8px) 5px 15px;
+    font-weight: 550;
+}
+button:nth-child(1){ background-color: #0D6EFD; }
+button:nth-child(2){ background-color: #6C757D; }
+button:nth-child(3){ background-color: #198754; }
+button:nth-child(4){
+    background-color: #DC3545; 
+    span{ background-color: #198754; }
+    /*
+     * Esta linea de abajo puede ser descomentada para ocultar la etiqueta Danger sin perder su posicion
+     * visibility: hidden; 
+     */
+}
+button:nth-child(5){ 
+    background-color: #FFC107; 
+    color: black;
+}
+button:nth-child(6){ 
+    background-color: #0DCAF0; 
+    color: black;
+}
+button:nth-child(7){ 
+    background-color: #F8F9FA; 
+    color: black;
+}
+button:nth-child(8){ background-color: #212529; }
+span{
+    background-color: #DB2D43;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 1px 5px;
+    margin: 0px 5px;
+    border-radius: 100%;
+}

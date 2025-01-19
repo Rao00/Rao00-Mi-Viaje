@@ -1,0 +1,39 @@
+﻿@model McvSoporte.Models.Empleado
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Mis datos</h1>
+<h4>Empleado</h4>
+<p>Es necesario completar sus datos antes de poder empezar a utilizar la aplicación web</p>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Nombre" class="control-label"></label>
+				<input asp-for="Nombre" class="form-control" />
+				<span asp-validation-for="Nombre" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Telefono" class="control-label"></label>
+				<input asp-for="Telefono" class="form-control" />
+				<span asp-validation-for="Telefono" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="FechaNacimiento" class="control-label"></label>
+				<input asp-for="FechaNacimiento" class="form-control" />
+				<span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

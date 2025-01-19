@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+main{
+    display: grid;
+    grid-template-areas: 
+    "a a b c d"
+    "e f g g d"
+    "e h g g i"
+    "j h k l l";
+    grid-template-columns: 50px 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px;
+    border: solid 10px #07425E;
+    border-radius: 30px;
+    width:fit-content;
+    padding: 10px;
+    section{
+        border-radius: 10px;
+        margin: 5px;
+    }
+    section:nth-child(1){
+        grid-area: a;
+        background-color: #009D5B;
+    }
+    section:nth-child(2){
+        grid-area: b;
+        background-color: #009F9A;
+    }
+    section:nth-child(3){
+        grid-area: c;
+        background-color: #007FB7;
+    }
+    section:nth-child(4){
+        grid-area: d;
+        background-color: #4157A1;
+    }
+    section:nth-child(5){
+        grid-area: e;
+        background-color: #71B34D;
+    }
+    /*
+     --------------------------------------------------------------------------------------
+                            * Section que define el cuadrado a borrar *
+     --------------------------------------------------------------------------------------
+    */
+    section:nth-child(6){
+        grid-area: f;
+        background-color: #47AD6F;
+    }
+    section:nth-child(7){
+        grid-area: g;
+        background-color: #8E7D93;
+    }
+    /*
+     --------------------------------------------------------------------------------------
+                                * Section que oculta mi cuadrado *
+     --------------------------------------------------------------------------------------
+    */
+    section:nth-child(8){
+        grid-area: h;
+        background-color: #D49C5E;
+        z-index: 1;
+        grid-row: 5/2;
+    }
+    section:nth-child(9){
+        grid-area: i;
+        background-color: #A660A0;
+    }
+    section:nth-child(10){
+        grid-area: j;
+        background-color: #F4B158;
+    }
+    section:nth-child(11){
+        grid-area: k;
+        background-color: #EB8378;
+    }
+    section:nth-child(12){
+        grid-area: l;
+        background-color: #E879A2;
+    }
+}

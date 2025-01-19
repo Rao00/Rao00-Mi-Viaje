@@ -1,0 +1,13 @@
+#cabecera{
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: black;
+    color: white;
+}
+
+
+
+.logo{
+    width: 5%;
+    height: 5%;
+}

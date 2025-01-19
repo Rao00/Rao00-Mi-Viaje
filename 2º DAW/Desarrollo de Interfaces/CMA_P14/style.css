@@ -1,0 +1,14 @@
+.bg-myprimarycolor{
+    background-color: #FFA500;
+}
+
+.bg-mysecondarycolor{
+    background-color: #CA6624;
+}
+
+header{
+    height: 60px;
+}
+#menu{
+    height: 80px;
+}

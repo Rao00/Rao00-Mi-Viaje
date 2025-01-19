@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturaWS", "FacturaWS\FacturaWS.csproj", "{87287F88-4D56-4AED-AAAD-BB12A74477A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFactura", "GesFactura\GesFactura.csproj", "{268B44A3-5E7E-4B74-B863-115A04028D74}"
+	ProjectSection(ProjectDependencies) = postProject
+		{87287F88-4D56-4AED-AAAD-BB12A74477A3} = {87287F88-4D56-4AED-AAAD-BB12A74477A3}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87287F88-4D56-4AED-AAAD-BB12A74477A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87287F88-4D56-4AED-AAAD-BB12A74477A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87287F88-4D56-4AED-AAAD-BB12A74477A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87287F88-4D56-4AED-AAAD-BB12A74477A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268B44A3-5E7E-4B74-B863-115A04028D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268B44A3-5E7E-4B74-B863-115A04028D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268B44A3-5E7E-4B74-B863-115A04028D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268B44A3-5E7E-4B74-B863-115A04028D74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E8A4705-65D5-491D-AA0D-5C484B6058C7}
+	EndGlobalSection
+EndGlobal

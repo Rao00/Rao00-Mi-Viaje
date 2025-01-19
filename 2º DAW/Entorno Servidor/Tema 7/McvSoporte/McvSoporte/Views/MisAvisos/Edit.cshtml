@@ -1,0 +1,62 @@
+﻿@model McvSoporte.Models.Aviso
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Aviso</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaAviso" class="control-label"></label>
+                <input asp-for="FechaAviso" class="form-control" />
+                <span asp-validation-for="FechaAviso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCierre" class="control-label"></label>
+                <input asp-for="FechaCierre" class="form-control" />
+                <span asp-validation-for="FechaCierre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <input asp-for="Observaciones" class="form-control" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="EmpleadoId" class="control-label"></label>
+                <select asp-for="EmpleadoId" class="form-control" asp-items="ViewBag.EmpleadoId"></select>
+                <span asp-validation-for="EmpleadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoAveriaId" class="control-label"></label>
+                <select asp-for="TipoAveriaId" class="form-control" asp-items="ViewBag.TipoAveriaId"></select>
+                <span asp-validation-for="TipoAveriaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipoId" class="control-label"></label>
+                <select asp-for="EquipoId" class="form-control" asp-items="ViewBag.EquipoId"></select>
+                <span asp-validation-for="EquipoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

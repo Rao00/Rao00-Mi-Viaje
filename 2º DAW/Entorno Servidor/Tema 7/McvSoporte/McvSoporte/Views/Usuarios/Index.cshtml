@@ -1,0 +1,37 @@
+﻿@model IEnumerable<McvSoporte.Models.ViewUsuarioConRol>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Usuarios</h1>
+<br />
+<p>
+	<a asp-action="Create">Nuevo Administrador</a>
+</p>
+<table class="table">
+	<tr>
+		<th>
+			Usuario
+		</th>
+		<th>
+			Nombre de Usuario
+		</th>
+		<th>
+			Rol
+		</th>
+	</tr>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelIdtem => item.Email)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NombreUsuario)
+			</td>
+			<td>
+				@Html.DisplayFor(modelIdtem => item.RolDeUsuario)
+			</td>
+		</tr>
+	}
+</table>

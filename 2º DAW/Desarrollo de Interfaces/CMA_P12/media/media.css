@@ -1,0 +1,39 @@
+@media (max-width: 790px){
+    :root{
+        --font-size-article: calc(1vw * 2 + 1vh / 2);
+        --rows-size: 10vh;
+        --columns-size: 15vw;
+
+    }
+    header > select:nth-child(2), header >  a:nth-child(3), header > a:nth-child(4), header > a:nth-child(5), p{
+        display: none;
+    }
+    nav{
+        align-self: center;
+    }
+}
+@media (max-height: 768px){
+    :root{
+        --font-size-article: calc(1vw / 2 + 1vh);
+    }
+    body > main > section{
+        grid-template-areas:
+        "a1 a1 a1 b1 b3 b2"
+        "a1 a1 a1 a2 a2 a2"
+        "b5 b5 b5 a2 a2 a2"
+        "b5 b5 b5 b4 b4 b6"
+        "d1 d1 d1 d1 d1 d1";
+        grid-template-rows: var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size);
+        grid-template-columns: var(--columns-size) var(--columns-size) var(--columns-size) var(--columns-size) var(--columns-size) var(--columns-size);
+
+        article:nth-child(3){
+            display: none;
+        }
+    }
+}
+    /* button{
+        grid-area: a3;
+    }
+    article:nth-child(3){
+        grid-area: temp;
+    }

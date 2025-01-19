@@ -1,0 +1,47 @@
+﻿body{
+}
+
+.titulo {
+    font-family: 'Arial';
+    color: brown;
+    text-align: center;
+    font-weight: bold;
+}
+
+.subtitlo {
+    font-family: 'Arial';
+    color: darkblue;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.tituloseccion {
+    font-family: 'Arial';
+    color: darkblue;
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.parrafo {
+    font-family: 'Arial';
+    font-size: 16px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.columnaIzqEmpleados {
+    width: 175px;
+    text-align: right;
+    padding-right: 20px;
+    vertical-align: top;
+}
+
+.pieDePagina {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

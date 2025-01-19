@@ -1,0 +1,82 @@
+:root{
+    --font-size-article: 17.5px;
+    --rows-size: 10vh;
+    --columns-size: 9vw;
+}
+main{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section{
+    display: grid;
+    grid-template-areas: 
+    "a1 a1 b1 b3 b2"
+    "a1 a1 a2 a2 a2"
+    "b5 b5 a2 a2 a2"
+    "b5 b5 b4 b4 b6"
+    "a3 a3 a3 a3 a3"
+    "d1 d1 d1 d1 d1";
+    grid-template-rows: var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size) var(--rows-size);
+    grid-template-columns: var(--columns-size) var(--columns-size) var(--columns-size) var(--columns-size) var(--columns-size);
+    gap: 20px;
+    article{
+        box-shadow: 5px 10px 10px rgb(0, 0, 0);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50%;
+        padding: 10px;
+        font-size: var(--font-size-article);
+        font-family:'Courier New', Courier, monospace;
+        text-align: center;
+        align-content: center;
+        background-color: #c81b04;
+    }
+    article:nth-child(1){
+        grid-area: a1;
+    }
+    article:nth-child(2){
+        grid-area: a2;
+    }
+    article:nth-child(3){
+        grid-area: a3;
+    }
+    article:nth-child(4){
+        grid-area: b1;
+        background-image: url(../img/imagen1.webp);
+    }
+    article:nth-child(5){
+        grid-area: b2;
+        background-image: url(../img/imagen2.jpg);
+    }
+    article:nth-child(6){
+        grid-area: b3;
+        background-image: url(../img/imagen4.avif);
+    }
+    article:nth-child(7){
+        grid-area: b4;
+        background-image: url(../img/imagen3.jpg);
+    }
+    article:nth-child(8){
+        grid-area: b5;
+        background-image: url(../img/imagen5.jpeg);
+    }
+    article:nth-child(9){
+        grid-area: b6;
+        background-image: url(../img/imagen6.jpg);
+    }
+    button{
+        grid-area: d1;
+        background-color: #ffffff;
+        font-family:'Courier New', Courier, monospace;
+        font-size: 25px;
+        font-weight: 600;
+        box-shadow: 5px 10px 10px rgb(0, 0, 0);
+        color: black;
+    }
+    button:active{
+        background-color: #c2c2c2;
+        box-shadow: 2px 4px 4px rgb(0, 0, 0);
+    }
+}

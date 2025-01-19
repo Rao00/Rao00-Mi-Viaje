@@ -1,0 +1,130 @@
+:root {
+    --color-letra: white;
+    --fuente-letra: Verdana, Geneva, Tahoma, sans-serif;
+    --separaciones-header: 10px;
+    --tamaño-header: calc(70px + var(--separaciones-header));
+    --nav-separacion-lateral: 50px;
+    --nav-altura: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    color: var(--color-letra);
+    font-family: var(--fuente-letra);
+    border: none;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 463px;
+}
+
+header, footer {
+    width: 80%;
+}
+
+iframe {
+    width: 100%;
+}
+
+#nav {
+    height: 37px;
+}
+
+#header {
+    height: var(--tamaño-header);
+}
+
+#footer {
+    height: var(--tamaño-header);
+    position: absolute;
+    bottom: -40px;
+}
+
+#logo {
+    width: auto;
+    height: var(--tamaño-header);
+    padding: 0;
+    img {
+        width: auto;
+        height: calc(var(--tamaño-header) - 5px);
+    }
+}
+
+nav {
+    display: flex;
+    align-self: flex-end;
+    gap: var(--nav-separacion-lateral);
+    margin: var(--nav-altura) var(--nav-separacion-lateral);
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#back-image {
+    margin-top: calc(var(--nav-altura) + 2em);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+}
+
+header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: var(--separaciones-header);
+    img {
+        width: 50px;
+        margin-right: var(--separaciones-header);
+    }
+    article {
+        display: flex;
+        justify-content: flex-end;
+        width: 500px;
+    }
+    button, select, a {
+        background-color: transparent;
+    }
+    button, a {
+        padding: var(--separaciones-header);
+        color: white;
+    }
+    #btnHeaderEmpezar {
+        background-color: #c81b04;
+        padding: var(--separaciones-header);
+        margin-right: var(--separaciones-header);
+    }
+    #btnHeaderSesion {
+        display: flex;
+        align-items: center;
+        border: solid;
+        border-radius: 5px;
+        padding: var(--separaciones-header);
+        img {
+            width: 20px;
+            margin-right: var(--separaciones-header);
+        }
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    p {
+        width: 150px;
+    }
+    img {
+        max-width: 100px;
+        min-width: 50px;
+        height: auto;
+        margin-left: 5%;
+    }
+}
