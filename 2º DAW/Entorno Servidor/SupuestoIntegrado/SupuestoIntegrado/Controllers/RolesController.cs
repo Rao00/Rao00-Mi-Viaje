@@ -33,7 +33,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron usuarios
         public ActionResult<RolesController> GetRol(string rol = "%")
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult) 
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult) 
             { return Unauthorized(); };
 
             List<Roles> consulta =
@@ -62,7 +62,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: El rol ya existe
         public ActionResult<RolesController> CrearRol([FromBody] Roles rol) //Crear Rol
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             { return Unauthorized(); };
 
             if (_context.Roles.Where(role => role.DescripcionRol == rol.DescripcionRol).Count() > 0)
@@ -90,7 +90,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: El rol no existe
         public ActionResult<RolesController> BorrarRol([FromBody] string nombre) //Borrar Rol
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             { return Unauthorized(); };
 
             if (_context.Roles.Where(role => role.DescripcionRol == nombre).Count() == 0)
@@ -116,7 +116,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: El usuario ya tiene un rol asignado o el rol no existe
         public ActionResult<RolesController> AsignarRol([FromBody] Static.PlantillaAsignarDeasignarRol datos) //Asignar Rol
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             { return Unauthorized(); };
 
             List<Usuarios> user = _context.Usuarios.Where(p => p.Name == datos.NombreUsuario).ToList();       
@@ -156,7 +156,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: El usuario no tiene un rol asignado o no existe
         public ActionResult<RolesController> DesasignarRol([FromBody] string NombreUsuario) //Desasignar Rol
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             { return Unauthorized(); };
 
             List<Usuarios> user = _context.Usuarios.Where(p => p.Name == NombreUsuario).ToList();

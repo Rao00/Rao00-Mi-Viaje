@@ -31,7 +31,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron usuarios
         public ActionResult<UsuariosController> GetUsuario([FromQuery] string nombre = "%", [FromQuery] string correo = "%") //Conseguir Datos
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             { 
                 return Unauthorized(); 
             };
@@ -67,7 +67,7 @@ namespace SupuestoIntegrado.Controllers
         public ActionResult<UsuariosController> CrearCuenta([FromBody]Usuarios usuario)
         {
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "3") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "3") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -110,7 +110,7 @@ namespace SupuestoIntegrado.Controllers
         public ActionResult<UsuariosController> BorrarCuenta([FromBody] Usuarios usuario)
         {
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -149,7 +149,7 @@ namespace SupuestoIntegrado.Controllers
         public ActionResult<UsuariosController> EditarCuenta([FromBody] Usuarios usuario)
         {
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             {
                 return Unauthorized();
             }

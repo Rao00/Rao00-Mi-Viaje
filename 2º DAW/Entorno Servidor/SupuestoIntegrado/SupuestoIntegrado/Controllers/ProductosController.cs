@@ -32,7 +32,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron productos
         public ActionResult<ProductosController> GetProductos([FromQuery] string nombre = "%")
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2", "3") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2", "3") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -62,7 +62,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Producto ya existe
         public ActionResult<ProductosController> CrearProductos([FromBody] Productos producto)
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -90,7 +90,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Producto no existe
         public ActionResult<ProductosController> BorrarProductos([FromBody] int id)
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -120,7 +120,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Conflicto en la edición del producto
         public ActionResult<ProductosController> EditarProducto([FromQuery] int id, [FromBody] Productos producto)
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }

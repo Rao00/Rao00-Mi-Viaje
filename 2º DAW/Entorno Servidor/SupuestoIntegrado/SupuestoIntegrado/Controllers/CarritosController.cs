@@ -31,7 +31,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Carrito o usuario no existe
         public ActionResult<CarritosController> LeerCarrito([FromQuery] string token, [FromQuery] int idCarrito = -1) //Leer Carrito
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             { 
                 return Unauthorized(); 
             };
@@ -85,7 +85,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Usuario o carrito no existe
         public ActionResult<CarritosController> AñadirProductoCarrito([FromBody] string token, [FromBody] int idProducto, [FromBody] int cantidad = 1) //Añadir Carrito
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             { return Unauthorized(); };
 
             List<Usuarios> user = _context.Usuarios.Where(p => p.Token == token).ToList();
@@ -137,7 +137,7 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Usuario, carrito o producto no existe
         public ActionResult<CarritosController> EliminarProductoCarrito([FromBody] string token, [FromBody] int idProducto, [FromBody] int cantidad = 1) //Añadir Carrito
         {
-            if (new Cookies(_context).ComprobarRol(Request.Headers["Authorization"], "1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
             { return Unauthorized(); };
 
             List<Usuarios> user = _context.Usuarios.Where(p => p.Token == token).ToList();
