@@ -12,6 +12,8 @@ namespace SupuestoIntegrado.Models
 
         public int? Cantidad { get; set; }
 
+        public string? Estado { get; set; }
+
         [JsonIgnore]
         private Usuarios Usuarios { get; set; }
 

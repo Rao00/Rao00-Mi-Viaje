@@ -22,14 +22,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    c.AddSecurityDefinition("Token", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
+        Type = SecuritySchemeType.ApiKey,
         Name = "Authorization",
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        Description = "Bearer Token"
+        Description = "Token del usuario"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -40,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
+                    Id = "Token"
                 }
             },
             Array.Empty<string>()

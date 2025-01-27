@@ -9,6 +9,7 @@ using SupuestoIntegrado.Static;
 namespace SupuestoIntegrado.Controllers
 {
     [ApiController]
+    [Route("api/users")]
     public class UsuariosController : Controller
     {
         readonly internal ApplicationDbContext _context;
@@ -25,13 +26,13 @@ namespace SupuestoIntegrado.Controllers
         /// <param name="correo">El correo electrónico del usuario. Valor por defecto: "%" (coincidencia parcial).</param>
         /// <returns>Una lista de usuarios que coinciden con los filtros.</returns>
         [HttpGet]
-        [Route("api/users")]
         [ProducesResponseType(typeof(List<Usuarios>), StatusCodes.Status200OK)]  // 200 OK: Usuarios encontrados
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: Usuario no autorizado
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron usuarios
         public ActionResult<UsuariosController> GetUsuario([FromQuery] string nombre = "%", [FromQuery] string correo = "%") //Conseguir Datos
         {
-            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
+            string token = Request.Headers["Authorization"];
+            if (new Cookies(_context).ComprobarRol(token, "1", "2") is UnauthorizedResult)
             { 
                 return Unauthorized(); 
             };
@@ -60,14 +61,14 @@ namespace SupuestoIntegrado.Controllers
         /// <param name="usuario">Objeto que contiene los datos del nuevo usuario.</param>
         /// <returns>Un mensaje de éxito o conflicto dependiendo de si el usuario ya existe o el correo ya está en uso.</returns>
         [HttpPost]
-        [Route("api/users/new")]
         [ProducesResponseType(typeof(Usuarios), StatusCodes.Status200OK)] // 200 OK: Usuario creado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: El usuario no tiene permisos
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Usuario o correo ya existe
         public ActionResult<UsuariosController> CrearCuenta([FromBody]Usuarios usuario)
         {
+            string tokenAuth = Request.Headers["Authorization"];
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol("1", "3") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol(tokenAuth, "1", "3") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -102,15 +103,15 @@ namespace SupuestoIntegrado.Controllers
         /// </summary>
         /// <param name="usuario">Objeto que contiene los datos del usuario a eliminar.</param>
         /// <returns>Un mensaje de éxito o conflicto si no se encuentra el usuario o la contraseña es incorrecta.</returns>
-        [HttpPost]
-        [Route("api/users/delete")]
+        [HttpDelete]
         [ProducesResponseType(typeof(Usuarios), StatusCodes.Status200OK)] // 200 OK: Usuario eliminado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: El usuario no tiene permisos
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Usuario no existe o contraseña incorrecta
         public ActionResult<UsuariosController> BorrarCuenta([FromBody] Usuarios usuario)
         {
+            string token = Request.Headers["Authorization"];
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol(token, "1", "2") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -141,15 +142,15 @@ namespace SupuestoIntegrado.Controllers
         /// </summary>
         /// <param name="usuario">Objeto que contiene los datos del usuario a editar.</param>
         /// <returns>Un mensaje de éxito o conflicto si no hay cambios o el usuario no está disponible.</returns>
-        [HttpPost]
-        [Route("api/users/edit")]
+        [HttpPut]
         [ProducesResponseType(typeof(Usuarios), StatusCodes.Status200OK)] // 200 OK: Usuario actualizado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: El usuario no tiene permisos
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: No hay cambios a realizar o el usuario ya está en uso
         public ActionResult<UsuariosController> EditarCuenta([FromBody] Usuarios usuario)
         {
+            string token = Request.Headers["Authorization"];
             // Verificar permisos de rol
-            if (new Cookies(_context).ComprobarRol("1", "2") is UnauthorizedResult)
+            if (new Cookies(_context).ComprobarRol(token, "1", "2") is UnauthorizedResult)
             {
                 return Unauthorized();
             }

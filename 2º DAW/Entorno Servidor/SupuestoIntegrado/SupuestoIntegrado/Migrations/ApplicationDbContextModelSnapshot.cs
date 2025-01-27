@@ -32,12 +32,13 @@ namespace SupuestoIntegrado.Migrations
                     b.Property<int?>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("ProductosId", "UsuariosId");
-
-                    b.HasIndex("UsuariosId");
 
                     b.ToTable("Carritos");
                 });
@@ -56,6 +57,9 @@ namespace SupuestoIntegrado.Migrations
                     b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductosId")
+                        .HasColumnType("int");
+
                     b.Property<string>("url")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -64,7 +68,7 @@ namespace SupuestoIntegrado.Migrations
 
                     b.HasAlternateKey("url");
 
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("ProductosId");
 
                     b.ToTable("ImagenesProductos");
                 });
@@ -136,46 +140,14 @@ namespace SupuestoIntegrado.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RolesId");
-
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("SupuestoIntegrado.Models.Carritos", b =>
-                {
-                    b.HasOne("SupuestoIntegrado.Models.Productos", "Productos")
-                        .WithMany()
-                        .HasForeignKey("ProductosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SupuestoIntegrado.Models.Usuarios", "Usuarios")
-                        .WithMany()
-                        .HasForeignKey("UsuariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Productos");
-
-                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("SupuestoIntegrado.Models.Imagenes", b =>
                 {
-                    b.HasOne("SupuestoIntegrado.Models.Productos", "Producto")
+                    b.HasOne("SupuestoIntegrado.Models.Productos", null)
                         .WithMany("ImagenesProducto")
-                        .HasForeignKey("ProductoId");
-
-                    b.Navigation("Producto");
-                });
-
-            modelBuilder.Entity("SupuestoIntegrado.Models.Usuarios", b =>
-                {
-                    b.HasOne("SupuestoIntegrado.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId");
-
-                    b.Navigation("Roles");
+                        .HasForeignKey("ProductosId");
                 });
 
             modelBuilder.Entity("SupuestoIntegrado.Models.Productos", b =>

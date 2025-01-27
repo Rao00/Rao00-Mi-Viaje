@@ -23,23 +23,20 @@ namespace SupuestoIntegrado.Static
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string GetSesionToken()
+        public string GetSesionToken(string token)
         {
             Usuarios? user = null;
-            string token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString();
 
-            if (token.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-            {
-                user = _context.Usuarios.FirstOrDefault(u => u.Token == token.Substring("Bearer ".Length).Trim());
-                if (user == null) { return "Usuario no encontrado"; }
-            }
+            user = _context.Usuarios.FirstOrDefault(u => u.Token == token);
+            if (user == null) { return "Usuario no encontrado"; }
 
+            Console.WriteLine(token);
             return user.RolesId.ToString();
         }
 
-        public IActionResult ComprobarRol(params string[] roles)
+        public IActionResult ComprobarRol(string token, params string[] roles)
         {
-            if (Array.IndexOf(roles, GetSesionToken()) != -1)
+            if (Array.IndexOf(roles, GetSesionToken(token)) != -1)
             {
                 return Ok();
             }

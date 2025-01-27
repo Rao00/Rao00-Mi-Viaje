@@ -32,7 +32,8 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron productos
         public ActionResult<ProductosController> GetProductos([FromQuery] string nombre = "%")
         {
-            if (new Cookies(_context).ComprobarRol("1", "2", "3") is UnauthorizedResult)
+            string token = Request.Headers["Authorization"];
+            if (new Cookies(_context).ComprobarRol(token, "1", "2", "3") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -56,13 +57,13 @@ namespace SupuestoIntegrado.Controllers
         /// <param name="producto">Objeto que contiene los datos del nuevo producto.</param>
         /// <returns>El producto creado o un mensaje de conflicto si ya existe.</returns>
         [HttpPost]
-        [Route("new")]
         [ProducesResponseType(typeof(Productos), StatusCodes.Status200OK)] // 200 OK: Producto creado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: Usuario no autorizado
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Producto ya existe
         public ActionResult<ProductosController> CrearProductos([FromBody] Productos producto)
         {
-            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
+            string token = Request.Headers["Authorization"];
+            if (new Cookies(_context).ComprobarRol(token, "1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -83,14 +84,14 @@ namespace SupuestoIntegrado.Controllers
         /// </summary>
         /// <param name="id">ID del producto a eliminar.</param>
         /// <returns>El producto eliminado o un mensaje de conflicto si no existe.</returns>
-        [HttpPost]
-        [Route("delete")]
+        [HttpDelete]
         [ProducesResponseType(typeof(Productos), StatusCodes.Status200OK)] // 200 OK: Producto eliminado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: Usuario no autorizado
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Producto no existe
         public ActionResult<ProductosController> BorrarProductos([FromBody] int id)
         {
-            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
+            string token = Request.Headers["Authorization"];
+            if (new Cookies(_context).ComprobarRol(token, "1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
@@ -113,14 +114,14 @@ namespace SupuestoIntegrado.Controllers
         /// <param name="id">ID del producto a editar.</param>
         /// <param name="producto">Objeto que contiene los nuevos datos del producto.</param>
         /// <returns>El producto actualizado o un mensaje de conflicto si hay errores.</returns>
-        [HttpPost]
-        [Route("edit")]
+        [HttpPut]
         [ProducesResponseType(typeof(Productos), StatusCodes.Status200OK)] // 200 OK: Producto actualizado con éxito
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 401 Unauthorized: Usuario no autorizado
         [ProducesResponseType(StatusCodes.Status409Conflict)] // 409 Conflict: Conflicto en la edición del producto
         public ActionResult<ProductosController> EditarProducto([FromQuery] int id, [FromBody] Productos producto)
         {
-            if (new Cookies(_context).ComprobarRol("1") is UnauthorizedResult)
+            string token = Request.Headers["Authorization"];
+            if (new Cookies(_context).ComprobarRol(token, "1") is UnauthorizedResult)
             {
                 return Unauthorized();
             }
