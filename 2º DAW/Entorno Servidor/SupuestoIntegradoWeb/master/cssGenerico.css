@@ -15,6 +15,9 @@ body {
 .btn-primary:hover {
     background-color: #3700b3;
 }
+.btn-carrito:hover svg{
+    fill: #C7C7C7;
+}
 #fondo{
     position: absolute;
     z-index: -1;
