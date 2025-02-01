@@ -32,12 +32,12 @@ namespace SupuestoIntegrado.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404 Not Found: No se encontraron productos
         public ActionResult<ProductosController> GetProductos([FromQuery] string nombre = "%")
         {
-            string token = Request.Headers["Authorization"];
-            if (new Cookies(_context).ComprobarRol(token, "1", "2", "3") is UnauthorizedResult)
-            {
-                return Unauthorized();
-            }
-
+            //string token = Request.Headers["Authorization"];
+            //if (new Cookies(_context).ComprobarRol(token, "1", "2", "3") is UnauthorizedResult)
+            //{
+            //    return Unauthorized();
+            //}
+                
             List<Productos> consulta = _context.Productos.FromSqlRaw(
                 $"SELECT * FROM Productos WHERE Nombre LIKE @nombre",
                 new SqlParameter("@nombre", nombre)).ToList();
