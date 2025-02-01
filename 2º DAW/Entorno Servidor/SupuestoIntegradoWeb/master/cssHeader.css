@@ -1,0 +1,40 @@
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #1f1f1f, #333);
+    padding: 25px;
+}
+.navbar-brand {
+    color: #fff;
+    transition: color 0.3s;
+    font-weight: bold; 
+    font-size: 1.5rem;
+}
+.navbar-brand:hover {
+    color: #C7C7C7;
+}
+.nav-link {
+    color: #ddd;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+.nav-link:hover {
+    color: #fff;
+}
+.btn-carrito svg {
+    transition: fill 0.3s;
+}
+.btn-carrito:hover svg {
+    fill: #1f1f1f;
+}
+.btn-outline-light {
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn-outline-light:hover {
+    background-color: #C7C7C7;
+    color: #1f1f1f;
+    border-color: transparent;
+}
+.btn-sesion{
+    padding: 0.5rem 1rem;
+}

@@ -11,24 +11,26 @@ async function CargarPlantilla(){
     }
 }
 
-async function CargarProductosEscaparate() {
+async function CargarProductosEscaparate(pagina) {
     let escaparate = document.getElementsByTagName('articulosEscaparate')[0];
     if (escaparate){
         let plantillaProducto = await(await fetch('../master/productoEscaparate.html')).text();
         let datosProductos = await(await fetch('https://localhost:7200/api/productos')).json();
-        // * (10 * pagina) pagina
-        for (let i = 1; i < datosProductos.value.length; i++){
-            let productoHTML = plantillaProducto;
-            // let img = plantillaProducto.getElementById('img');
-            productoHTML = productoHTML.replace('NOMBRE', datosProductos.value[i]['nombre']);
-            productoHTML = productoHTML.replace('PRECIO', datosProductos.value[i]['precio']);
-            escaparate.innerHTML += productoHTML;
-        }
+        let paginas = ContarPaginasMax(datosProductos);
+
+        if (pagina < paginas){
+            for (let i = 1 * (10 * pagina); i < datosProductos.value.length; i++){
+                let productoHTML = plantillaProducto;
+                // let img = plantillaProducto.getElementById('img');
+                productoHTML = productoHTML.replace('NOMBRE', datosProductos.value[i]['nombre']);
+                productoHTML = productoHTML.replace('PRECIO', datosProductos.value[i]['precio']);
+                escaparate.innerHTML += productoHTML;
+            }
+        }      
     }
 }
 
-async function ContarPaginasMax(){
-    let datosProductos = await(await fetch('https://localhost:7200/api/productos')).json();
+async function ContarPaginasMax(datosProductos){
     return datosProductos.value.length;
 }
 
