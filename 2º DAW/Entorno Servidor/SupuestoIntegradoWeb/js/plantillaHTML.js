@@ -13,15 +13,13 @@ async function CargarPlantilla(){
 
 async function CargarProductosEscaparate() {
     let escaparate = document.getElementsByTagName('articulosEscaparate')[0];
-    escaparate.innerHTML = "";
-
-    let pagina = document.getElementsByClassName('page-counter');
 
     if (escaparate){
         let plantillaProducto = await(await fetch('../master/productoEscaparate.html')).text();
+        let plantillaLista = new DOMParser(await(await fetch('../master/listaMaster.html')).text());
         let datosProductos = await(await fetch('https://localhost:7200/api/productos')).json();
-        
-        console.log(pagina);
+        let pagina = plantillaLista.getElementById('numPag').text();    
+
         if (ContarPaginasMax(datosProductos) < pagina){
             pagina = 0;
             pagina.innerHTML = pagina;
@@ -33,8 +31,9 @@ async function CargarProductosEscaparate() {
             // let img = plantillaProducto.getElementById('img');
             productoHTML = productoHTML.replace('NOMBRE', datosProductos.value[i]['nombre']);
             productoHTML = productoHTML.replace('PRECIO', datosProductos.value[i]['precio']);
-            escaparate.innerHTML += productoHTML;
-        }      
+            plantillaLista.getElementByClassName('items-counter')[0].innerHTML += productoHTML;
+        }
+        escaparate.innerHTML = plantillaLista;
     }
 }
 
